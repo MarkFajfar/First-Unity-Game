@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e976c10fcbe1a34da44ec6b82377de8, type: 3}
+  m_Name: Broken
+  m_EditorClassIdentifier: 
+  Name: Broken
+  LongTitle: A Broken Country
+  AP: 3
+  CP: 12
+  MP: 7
+  Ferocity: 4
+  Morale: 7
+  IsActiveFamilyA: 1
+  IsActiveFamilyB: 1
+  IsActiveFamilyC: 1
+  IsActiveFamilyD: 1
+  IsActiveFamilyE: 0
+  IsActiveFamilyF: 0
+  Setup:
+  - 'Place Active Event: Place card #45, Mexican Independence face-up along the top
+    edge of the map. It is in-play.'
+  - 'Place Starting Families In Play: A, B, C, & D (any Ferocity) in any Area of
+    Shiprock, San Juan Valley, Zuni Mountains, and Hopi Land. Place a man, woman,
+    and child counter in each Family''s Family Box. Place all remaining Family Counters
+    into the holding spaces of each Family Box.'
+  - 'Place Starting Elders In Play: Place 1 elder counter into each of the 3 leftmost
+    boxes of the Elder Display.'
+  - 'Place Drought Counters: Place 1 drought counter into each Territory.'
+  - 'Subjugation of New Mexico: Place all 3 red cubes in the Subjugation of New Mexico
+    box.'
+  - 'Prepare Draw Cups: Place all Corn counters into a clean empty container from
+    which they can be drawn during play. Do the same with the Intruder counters.'
+  - 'Prepare Raid Pool: Prepare the Raid Pool by placing 3 black, 4 brown, 4 white,
+    2 yellow, and 3 green cube into the draw bag; return all other cubes to the game
+    box.'
+  - 'Prepare Cultural Development Cards: Select 1 set of 3 Cultural Development Cards
+    to be available for use in the game. Collect the remaining 7 Level 1 Cultural
+    Development Cards and shuffle them. Draw three Cultural Development Cards and
+    set them along with the Level 2 and 3 cards from their set back into the box.'
+  - "General Records Track: \nMilitary Points: 7 \nEnemy Ferocity: 4 \nCulture Points:
+    12 \nDin\xE9 APs: 3 \nMorale: 7"
+  - 'Remove Trade Goods & Harass Counters: Set 6 Trade Goods and 2 Harass counters
+    off to the side. They are neither in play, nor available. They become available
+    when a Weaving or the Masters of the Mesas Level 2 Cultural Development Card
+    is purchased.'
+  - 'Set Up Resources: Place 3 Horse and 3 Sheep counters into the Resources Box.
+    Place all remaining Population counters, animals, Trade Goods, Harass counters,
+    and the Firearms counter in the Out of Play Box.'
+  - 'Set Up Enemy Instruction Display: Place all Mexican (green) Instruction counters
+    into a cup and randomly draw 2 of them out. Place the 2 drawn counters back in
+    the box; they will not be used this game. Next, place all remaining Mexican Instruction
+    counters face-up (capital letter id) on to the Active and Standby columns of
+    the Enemy Instruction Display in alphabetical order, from top to bottom, filling
+    the Active Column first.'
+  - 'Set Up Enemy Pieces: Place all Rancho Outpost counters, Enemy AP counters, and
+    Tribal Raid counters in the Enemy Out of Play box.'
+  - 'Collect Starting Cultural Development Card: Purchase up to 4 available Cultural
+    Development Cards one at a time. Place purchased cards face-up along the top
+    edge of the map, signifying that its effects are in play for the rest of the
+    game.'
+  - "Note Victory Conditions: If the game does not end before hand, determine victory
+    or defeat after card #50 Army of the West is resolved: For each black cube in
+    Subjugation of New Mexico box, add +1 Enemy Morale. Next, subtract the number
+    of Enemy Morale from Military Points and compare the difference on the table
+    below. \n3 or higher Major Victory \n1 or 2 Minor Victory \n0, \u20131, or \u20132
+    Minor Defeat \n\u20133 or less Major Defeat."
+  - "To prepare the deck for this scenario: \n1. Shuffle all Operations & Ceremony
+    Cards together. \n2. Find cards #46 through #50 and arrange in numerical order
+    from left to right (with #46 on the far left and #50 on the far right). Cards46-49
+    are Historical Event cards, card #50 is a Transitional Event. \n3. Flip these
+    5 cards over so they are face-down and deal 8 Operations/Ceremony cards (face-down)
+    to each. \n4. Individually shuffle all five 9-card stacks, but don\u2019t combine.
+    \n5. Starting with the left stack (the stack containing card #46), place each
+    stack on top of the other\u2014moving from left to right. So the final 45-card
+    deck will have the 9-card set containing card #46 on top, and the 9-card set
+    containing card #50 on the bottom. And within each set the cards are shuffled."
+  - END

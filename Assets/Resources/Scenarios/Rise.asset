@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e976c10fcbe1a34da44ec6b82377de8, type: 3}
+  m_Name: Rise
+  m_EditorClassIdentifier: 
+  Name: Rise
+  LongTitle: Rise of the People
+  AP: 3
+  CP: 9
+  MP: 5
+  Ferocity: 4
+  Morale: 5
+  IsActiveFamilyA: 1
+  IsActiveFamilyB: 1
+  IsActiveFamilyC: 1
+  IsActiveFamilyD: 0
+  IsActiveFamilyE: 0
+  IsActiveFamilyF: 0
+  Setup:
+  - 'Place Starting Families In Play: A, B, C (any Ferocity) in any Area of Shiprock,
+    San Juan Valley, and Canyon de Chelly. Place a man, woman, and child counter
+    in each Family''s Family Box. Place all remaining Family Counters into the holding
+    spaces of each Family Box.'
+  - 'Place Starting Elders In Play: Place 1 elder counter into each of the 3 leftmost
+    boxes of the Elder Display.'
+  - 'Prepare Draw Cups: Place all Corn counters into a clean empty container from
+    which they can be drawn during play. Do the same with the Intruder counters.'
+  - 'Prepare Raid Pool: Prepare the Raid Pool by placing 3 black, 3 brown, 3 red,
+    3 white, 2 yellow, and 1 green cube into the draw bag; return all other cubes
+    to the game box.'
+  - 'Prepare Cultural Development Cards: Select 1 set of 3 Cultural Development Cards
+    to be available for use in the game. Collect the remaining 7 Level 1 Cultural
+    Development Cards and shuffle them. Draw three Cultural Development Cards and
+    set them along with the Level 2 and 3 cards from their set back into the box.'
+  - "General Records Track: \nMilitary Points: 5 \nEnemy Ferocity: 4 \nCulture Points:
+    9 \nDin\xE9 APs: 3 \nMorale: 5"
+  - 'Remove Trade Goods & Harass Counters: Set 6 Trade Goods and 2 Harass counters
+    off to the side. They are neither in play, nor available. They become available
+    when a Weaving or the Masters of the Mesas Cultural Development Card is purchased.'
+  - 'Set Up Resources: Place all remaining Population counters, animals, Trade Goods,
+    Harass counters, and the Firearms counter in the Out of Play Box.'
+  - 'Set Up Enemy Instruction Display: Place all Spanish (yellow) Instruction counters
+    into a cup and randomly draw 2 of them out. Return the 2 drawn counters to the
+    box; they will not be used this game. Next, place all remaining Spanish Instruction
+    counters face-up (capital letter id) on to the Active and Standby columns of
+    the Enemy Instruction Display in alphabetical order, from top to bottom, filling
+    the Active Column first.'
+  - 'Set Up Enemy Pieces: Place all Mission Outpost counters, Enemy AP counters,
+    and Tribal Raid counters in the Enemy Out of Play box.'
+  - 'Collect Starting Cultural Development Card: Collect one available Level 1 Cultural
+    Development Card and place it face-up along the bottom edge of the map, signifying
+    that its effects are in play for the rest of the game (note that this is Free
+    and does NOT cost any Culture Points).'
+  - "Note Victory Conditions: If the game does not end in defeat beforehand, determine
+    victory or defeat after card #42 Franciscan Faction Ascendant is resolved: For
+    each black cube in Subjugation of New Mexico box, add +1 Enemy Morale. Next,
+    subtract the number of Enemy Morale from Military Points and compare the difference
+    on the table below. \n3 or higher: Major Victory. \n1 or 2 Minor Victory. \n0,
+    \u20131, or \u20132 Minor Defeat. \n\u20133 or less Major Defeat."
+  - "To prepare the deck for this scenario: \n1. Shuffle all Operations & Ceremony
+    Cards together. \n2.Deal two stacks of 8 cards. The remaining cards are set aside
+    and not used. \n3. Place Historical Event Card #41 in one stack and place card
+    #42 in the other. Shuffle both stacks\u2014but don\u2019t combine. \n4. Place
+    the 9-card stack containing card #41 on top of the card #42 stack. This forms
+    the 18-card deck."
+  - END
