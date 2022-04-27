@@ -1,0 +1,9 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainStyles.uss?fileID=7433441132597879392&amp;guid=5c28875138ec85a48a15204caaad60cc&amp;type=3#MainStyles" />
+    <ui:VisualElement name="Root" style="flex-grow: 1; align-items: center;">
+        <ui:Label text="Draw a Card" display-tooltip-when-elided="true" name="Headline" class="Headline" style="top: 3%; flex-wrap: wrap;" />
+        <ui:TextField label="Enter Card Number" name="CardNumInput" max-length="2" is-delayed="true" style="position: absolute; top: 20%; width: 75%; height: 15%; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); font-size: 84px; white-space: normal; -unity-text-align: middle-center; color: rgb(151, 64, 27); justify-content: center; align-items: stretch; flex-direction: column;" />
+        <ui:Button text="Confirm" display-tooltip-when-elided="true" name="Confirm" tooltip="Start Card Action" class="BackNext" style="left: auto; bottom: 45%; width: 30%;" />
+        <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="BackNext ButtonQuit" />
+    </ui:VisualElement>
+</ui:UXML>
