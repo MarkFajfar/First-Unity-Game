@@ -26,64 +26,70 @@ MonoBehaviour:
   IsActiveFamilyE: 1
   IsActiveFamilyF: 0
   Setup:
-  - "Place Active Event: Place cards #50 Army of the West, #51 Death of Henry Linn
-    Dodge, #53 Manuelito\u2019s War, and #54 The American Civil War face-up along
-    the bottom edge of the map. They are in-play."
-  - "Place Starting Families In Play: A, B, C, D, & E (Ferocity 0) in any Area of
-    Shiprock, San Juan Valley, Zuni Mountains, Hopi Land and Canyon de Chelly. Place
-    all remaining Family Counters into the holding spaces of each Family Box. Next,
-    place any two counters into each Family\u2019s Family Box. To determine which
-    population counter is not placed, roll a die for each family and consult the
-    numeric values placed over the population counter spaces. Place the Manuelito
+  - "Place Active Event: \nPlace cards \n#50 Army of the West, \n#51 Death of Henry
+    Linn Dodge, \n#53 Manuelito\u2019s War, and \n#54 The American Civil War face-up
+    along the bottom edge of the map. \nThey are in-play."
+  - "Place Starting Families In Play: \nA, B, C, D, & E (Ferocity 0) in any Area
+    of Shiprock, San Juan Valley, Zuni Mountains, Hopi Land and Canyon de Chelly.
+    \nPlace all remaining Family Counters into the holding spaces of each Family
+    Box. "
+  - "Next, place any two counters into each Family\u2019s Family Box. \nTo determine
+    which population counter is not placed, roll a die for each family and consult
+    the numeric values placed over the population counter spaces. \nPlace the Manuelito
     counter with any on-map Family."
-  - 'Place Starting Elders In Play: Place 1 elder counter into each of the 3 leftmost
-    boxes of the Elder Display.'
-  - 'Place Drought Counters: Place 1 drought counter into each Territory.'
-  - 'Subjugation of New Mexico: No cubes.'
-  - 'Prepare Draw Cups: Place all Corn counters into a clean empty container from
-    which they can be drawn during play. Do the same with the Intruder counters.'
-  - 'Prepare Raid Pool: Prepare the Raid Pool by placing 3 red, 3 black, 4 brown,
+  - "Place Starting Elders In Play: \nPlace 1 elder counter into each of the 3 leftmost
+    boxes of the Elder Display."
+  - "Place Drought Counters: \nPlace 1 drought counter into each Territory."
+  - "Subjugation of New Mexico: \nNo cubes."
+  - "Prepare Draw Cups: \nPlace all Corn counters into a clean empty container from
+    which they can be drawn during play. Do the same with the Intruder counters."
+  - "Prepare Raid Pool: \nPrepare the Raid Pool by placing 3 red, 3 black, 4 brown,
     4 white, 2 yellow, 1 green, and 1 blue cube into the draw bag; return all other
-    cubes to the game box.'
-  - 'Prepare Cultural Development Cards: Select 1 set of 3 Cultural Development Cards
-    to be available for use in the game. Collect the remaining 7 Level 1 Cultural
-    Development Cards and shuffle them. Draw three Cultural Development Cards and
-    set them along with the Level 2 and 3 cards from their set back into the box.'
+    cubes to the game box."
+  - "Prepare Cultural Development Cards: \nSelect 1 set of 3 Cultural Development
+    Cards to be available for use in the game. \nCollect the remaining 7 Level 1
+    Cultural Development Cards and shuffle them. \nDraw three Cultural Development
+    Cards and set them along with the Level 2 and 3 cards from their set back into
+    the box."
   - "General Records Track: \nMilitary Points: 5 \nEnemy Ferocity: 5 \nCulture Points:
     5 \nDin\xE9 APs: 0 \nMorale: 5"
-  - 'Remove Trade Goods & Harass Counters: Set 6 Trade Goods and 2 Harass counters
+  - "Remove Trade Goods & Harass Counters: \nSet 6 Trade Goods and 2 Harass counters
     off to the side. They are neither in play, nor available. They become available
     when a Weaving or the Masters of the Mesas Level 2 Cultural Development Card
-    is purchased.'
-  - 'Set Up Resources: Place 4 Horse, 4 Sheep and 1 Firearms counter into the Resources
-    Box. Place all remaining Population and animal counters in the Out of Play Box.'
-  - 'Set Up Enemy Instruction Display: Place all American (blue) Instruction counters
-    into a cup. Draw counters randomly from this cup one at a time and place into
+    is purchased."
+  - "Set Up Resources: \nPlace 4 Horse, 4 Sheep and 1 Firearms counter into the Resources
+    Box. \nPlace all remaining Population and animal counters in the Out of Play
+    Box."
+  - "Set Up Enemy Instruction Display: \nPlace all American (blue) Instruction counters
+    into a cup. \nDraw counters randomly from this cup one at a time and place into
     an empty space on the Enemy Instruction Display. Fill Active column first from
-    top to bottom, then the Standby column from top to bottom.'
-  - 'Set Up Enemy Pieces: Place a Fort in Area #1 of Zuni Mountains and Hopi Land.
-    Place one Rancho Outpost counter into Area #1 of Shiprock and San Juan Valley.
-    Place all remaining Rancho Outpost counters, Enemy AP counters, and Tribal Raid
-    counters in the Enemy Out of Play box.'
-  - 'Collect Starting Cultural Development Card: collect and put into play four of
-    the five remaining sets of Cultural Development Cards. Return the one of the
-    five sets to the box; these three cards will not be used in the game.'
-  - "Note Victory Conditions: If the game does not end beforehand, determine victory
-    or defeat after card #55 Kit Carson is resolved: For each black cube in Subjugation
-    of New Mexico box, add +1 Enemy Morale. Next, subtract the number of Enemy Morale
-    from Military Points and compare the difference on the table below. \nMilitary
-    Pts > Enemy Morale: Major Victory \n1+ Military Pt and Military Pts = Enemy Morale:
-    Minor Victory \n1+ Military Pt and Military Pts < Enemy Morale: Minor Defeat
-    [Historical] \n0 Military Pts and 0 Enemy Morale: Minor Defeat \n0 Military Pts
-    and 1+ Enemy Morale: Major Defeat"
+    top to bottom, then the Standby column from top to bottom."
+  - "Set Up Enemy Pieces: \nPlace a Fort in Area #1 of Zuni Mountains and Hopi Land.
+    \nPlace one Rancho Outpost counter into Area #1 of Shiprock and San Juan Valley.
+    \nPlace all remaining Rancho Outpost counters, Enemy AP counters, and Tribal
+    Raid counters in the Enemy Out of Play box."
+  - "Collect Starting Cultural Development Card: \nCollect and put into play four
+    of the five remaining sets of Cultural Development Cards. \nReturn the one of
+    the five sets to the box; these three cards will not be used in the game."
+  - "Note Victory Conditions: \nIf the game does not end beforehand, determine victory
+    or defeat after card #55 Kit Carson is resolved. \nFor each black cube in Subjugation
+    of New Mexico box, add +1 Enemy Morale. \nNext, subtract the number of Enemy
+    Morale from Military Points and compare the difference on the table on the next
+    screen. "
+  - "Major Victory: Military Pts > Enemy Morale\r\nMinor Victory: 1+ Military Pt
+    and Military Pts = Enemy Morale \r\nMinor Defeat:  1+ Military Pt and Military
+    Pts < Enemy Morale [Historical] \r\nMinor Defeat:  0 Military Pts and 0 Enemy
+    Morale \r\nMajor Defeat:  0 Military Pts and 1+ Enemy Morale"
   - "To prepare the deck for this scenario: \n1. Shuffle all Operations Cards (no
     Ceremony Cards). \n2. Deal 3 Operations Cards face-down to form the bottom of
     the deck. \n3.Shuffle Transitional Event Card #55 Rope Thrower: Kit Carson into
-    these 3 cards. \n4. Deal 5 more Operations Cards face-down on top of the deck.
-    DO NOT LOOK AT REMAINING OPERATIONS CARDS; PUT THEM BACK INTO THE BOX! \n5. Shuffle
-    all 12 Ceremony Cards. \n6.Draw 1 Ceremony Card and add 1 population counter
-    to the Passage of Time Box as directed by Ceremony Card step 3. If you have no
-    cards in hand, you may take the card into his hand as directed by the Ceremony
-    Card step 3, otherwise discard the card. If there are < 3 population counters
-    in the Passage of Time box, repeat this step. Ignore Enemy Way Effects."
+    these 3 cards. "
+  - "4. Deal 5 more Operations Cards face-down on top of the deck. DO NOT LOOK AT
+    REMAINING OPERATIONS CARDS; PUT THEM BACK INTO THE BOX! \n5. Shuffle all 12 Ceremony
+    Cards. "
+  - 6. Draw 1 Ceremony Card and add 1 population counter to the Passage of Time Box
+    as directed by Ceremony Card step 3. If you have no cards in hand, you may take
+    the card into his hand as directed by the Ceremony Card step 3, otherwise discard
+    the card. If there are < 3 population counters in the Passage of Time box, repeat
+    this step. Ignore Enemy Way Effects.
   - END

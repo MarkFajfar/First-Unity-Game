@@ -9,95 +9,123 @@ namespace NavajoWars
     public class CardDrawUIScript : MonoBehaviour, IsUIScript
     {
         GameManager GameManager;
+        GameState gs;
 
-        public Label headline;
+        Label headline;
+        //Label message;
         Button confirm;
+        //Button reDraw;
+        //Button reopen;
+        Button back;
         Button quit;
+        
         TextField cardNumInput;
 
-        string inputText;
-        TouchScreenKeyboard keyboard;
+        //TouchScreenKeyboard keyboard;
+        //string inputText;
         //TouchScreenKeyboard.Status status;
         // bool keyboardDone = false;
 
         void Awake()
         {
-            GameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+            var gmobj = GameObject.FindWithTag("GameController");
+            GameManager = gmobj.GetComponent<GameManager>();
+            gs = gmobj.GetComponent<GameState>();
             getVisualElements();
-        }
-
-        void Start()
-        {
-            openKeyboard();
-        }
-
-        void openKeyboard()
-        {
-            keyboard = TouchScreenKeyboard.Open(inputText, TouchScreenKeyboardType.NumberPad, false, false, false, true);
-            keyboard.characterLimit = 2;
-            //TouchScreenKeyboard.hideInput = true;
-        }
-
-        void Update()
-        {
-            if (keyboard != null && keyboard.status == TouchScreenKeyboard.Status.Done) 
-            { 
-                confirmClicked(); //headline.text = "Card is " + inputText; 
-            }
         }
 
         public void getVisualElements()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             headline = root.Q<Label>("Headline");
+            //message = root.Q<Label>("Message");
 
             cardNumInput = root.Q<TextField>("CardNumInput");
-            cardNumInput.visible = false;
-
 
             confirm = root.Q<Button>("Confirm");
-            confirm.visible = false;
             confirm.clicked += confirmClicked;
 
+            /*reDraw = root.Q<Button>("ReDraw");
+            reDraw.clicked += reDrawClicked;
+
+            reopen = root.Q<Button>("Reopen");
+            reopen.clicked += reopenClicked;*/
+            
+            back = root.Q<Button>("Back");
+            back.clicked += backClicked;
+
             quit = root.Q<Button>("Quit");
-            quit.visible = true;
             quit.clicked += quitClicked;
-        }
-        
-        internal void showKeyboard()
-        {
-            print("keyboard active");
+
+            TouchScreenKeyboard.hideInput = true;
         }
 
-        void confirmClicked()
+        void Start()
         {
-            //try
-            //{
-                int num = int.Parse(inputText);
-                byte number = byte.Parse(inputText);//Convert.ToByte(inputText); //(cardNumInput.text);
-                if(num != 0 && num < 56)
-                { 
-                    GameManager.CardNumInput(num);
-                    //cardNumInput.visible = false;
-                    //confirm.visible = false;
-                    headline.text = "Card is " + inputText; //cardNumInput.text;
+            //openKeyboard();
+        }
+
+        /*void openKeyboard()
+        {
+            confirm.visible = false;
+            reDraw.visible = false;
+            reopen.visible = false;
+            message.visible = true;
+            message.text = "Enter Card Number";
+            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumberPad);
+            keyboard.characterLimit = 2;
+                //, false, false, false, false, "Enter Card Number", 2);
+            TouchScreenKeyboard.hideInput = true;
+        }
+
+        void Update()
+        {
+            if (keyboard.status == TouchScreenKeyboard.Status.Visible)
+            {
+                headline.text = "Visible";
+                if (keyboard.text == "")
+                { message.text = "Enter Card Number"; }
+                else
+                { message.text = keyboard.text; }
+            }
+            else
+            {
+                if (keyboard.status == TouchScreenKeyboard.Status.Done)
+                { closeKeyboard(); }
+                else
+                {
+                    if (keyboard.status == TouchScreenKeyboard.Status.Canceled && confirm.visible != true)
+                    { reopen.visible = true; }
+                }
+            }
+        }*/
+
+        void confirmClicked()
+        { 
+            int num = int.Parse(cardNumInput.text);
+            if (num != 0 && num < 56)
+            {
+                if (gs.PlayedCards.Contains(num))
+                {
+                    headline.text = "That Card Has Already Been Played";
                 }
                 else
-                { 
-                    headline.text = "Number Not Valid";
-                    openKeyboard();
+                {
+                    print($"Card Number {num} Selected");
+                    gs.CurrentCardNum = num;
+                    GameManager.CardNumInput();
+                    // gs.PlayedCards.Add(num); //add to played cards when completed
                 }
-            /*}
-            catch (FormatException)
-            {
-                headline.text = "Number Not Valid";
-                openKeyboard();
             }
-            catch (OverflowException)
+            else
             {
                 headline.text = "Number Not Valid";
-                openKeyboard();
-            }*/
+            }
+        }
+
+        void backClicked()
+        {
+            GameManager.PrevScene();
         }
 
         void quitClicked()

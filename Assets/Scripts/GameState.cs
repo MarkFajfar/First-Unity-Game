@@ -29,10 +29,10 @@ namespace NavajoWars
         [SerializeField] int currentCardNum;
 
         public List<int> PlayedCards = new();
-
-        //public Card CurrentCard
-        //{ get => currentCard; set => currentCard = value; }
-        //[SerializeField] Card currentCard;
+ 
+        public Card CurrentCard
+        { get => currentCard; set => currentCard = value; }
+        [SerializeField] Card currentCard;
 
         //public List<Card> CeremonyCardsInHand = new();
         //public List<Card> EventCardsInPlay = new();

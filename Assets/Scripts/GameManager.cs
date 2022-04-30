@@ -33,24 +33,22 @@ namespace NavajoWars
             Instance = this;
             DontDestroyOnLoad(gameObject);
             gs = GetComponent<GameState>();
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
 
         void Start()
         {
-            SceneManager.sceneLoaded += OnSceneLoaded;
             checkForSavedGame();
         }
-
         
         // initialize main menu
-        void checkForSavedGame()
+        internal void checkForSavedGame()
         {
-            mainMenuUIScript = GameObject.Find("MainMenuUI").GetComponent<MainMenuUIScript>();
             string path = Application.persistentDataPath + "/savefile.json";
             if (File.Exists(path))
-            { mainMenuUIScript.showLoadPanel(); }
+            { currentGameObjectUI.SendMessage("showLoadPanel"); }
             else
-            { mainMenuUIScript.showScenarios(); }
+            { currentGameObjectUI.SendMessage("showScenarios"); }
         }
 
         // call from main menu to start a new game
@@ -98,7 +96,6 @@ namespace NavajoWars
         public void ExitGame()
         {
             SaveGame();
-            // no save in MainMenu because game not yet initialized
 #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
 #else
@@ -122,35 +119,43 @@ namespace NavajoWars
             currentUIScript = currentGameObjectUI.GetComponent<IsUIScript>();
             // use IsUIScript to call any method in interface
             // can also use:  
-            currentGameObjectUI.SendMessage("SayHello");
+            // currentGameObjectUI.SendMessage("SayHello");
             
+            /* initialization is in each UI script's Start()
+            // use switch for anything that the game manager needs to do when scene loads
             switch (scene.name)
             {
                 case "CardDraw":
                     currentGameObjectUI.SendMessage("showKeyboard");
                     cardDrawUIScript = currentGameObjectUI.GetComponent<CardDrawUIScript>();
                     break;
-            }
+            }*/
         }
-        
-        //card draw
-        internal void CardNumInput(int number) //(byte number)
+        internal void PrevScene()
         {
-            if (gs.PlayedCards.Contains(number))
+            string newScene;
+            if (gs.PriorSceneName == "MainMenu")
             {
-                cardDrawUIScript.headline.text = "That Card Has Already Been Played"; return;
+                newScene = "MainMenu";
             }
             else
             {
-                gs.PlayedCards.Add(number);
-                gs.CurrentCardNum = number;
-
-                print("Saved: " + gs.CurrentCardNum.ToString("D2"));
-                // Card currentCard = Resources.Load<Card>("Cards/Card" + gs.CurrentCardNum.ToString("D2")));
-                // gs.CurrentCard = currentCard;
-                // currentCard.StepOne(Card currentCard);
-                // StepOne on each card starts one or more methods ending in call back to NewScene
+                newScene = gs.PriorSceneName;
+                gs.PriorSceneName = SceneManager.GetActiveScene().name;
+                gs.CurrentSceneName = newScene;
             }
+            SaveGame();
+            SceneManager.LoadScene(newScene);
+        }
+
+        //card draw
+        internal void CardNumInput() 
+        {
+            Card currentCard = Resources.Load<Card>("Cards/cardTest");
+            //Card currentCard = Resources.Load<Card>("Cards/card" + gs.CurrentCardNum.ToString("D2"));
+            gs.CurrentCard = currentCard;
+            currentCard.StepOne(currentCard);
+            // StepOne on each card starts one or more methods ending in call back to NewScene
         }
 
         public void EventCardTest(Card currentCard)

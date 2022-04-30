@@ -26,50 +26,52 @@ MonoBehaviour:
   IsActiveFamilyE: 0
   IsActiveFamilyF: 0
   Setup:
-  - 'Place Starting Families In Play: A, B, C (any Ferocity) in any Area of Shiprock,
-    San Juan Valley, and Canyon de Chelly. Place a man, woman, and child counter
-    in each Family''s Family Box. Place all remaining Family Counters into the holding
-    spaces of each Family Box.'
-  - 'Place Starting Elders In Play: Place 1 elder counter into each of the 3 leftmost
-    boxes of the Elder Display.'
-  - 'Prepare Draw Cups: Place all Corn counters into a clean empty container from
-    which they can be drawn during play. Do the same with the Intruder counters.'
-  - 'Prepare Raid Pool: Prepare the Raid Pool by placing 3 black, 3 brown, 3 red,
+  - "Place Starting Families In Play: \nA, B, C (any Ferocity) in any Area of Shiprock,
+    San Juan Valley, and Canyon de Chelly. \nPlace a man, woman, and child counter
+    in each Family's Family Box. \nPlace all remaining Family Counters into the holding
+    spaces of each Family Box."
+  - "Place Starting Elders In Play: \nPlace 1 elder counter into each of the 3 leftmost
+    boxes of the Elder Display."
+  - "Prepare Draw Cups: \nPlace all Corn counters into a clean empty container from
+    which they can be drawn during play. \nDo the same with the Intruder counters."
+  - "Prepare Raid Pool: \nPrepare the Raid Pool by placing 3 black, 3 brown, 3 red,
     3 white, 2 yellow, and 1 green cube into the draw bag; return all other cubes
-    to the game box.'
-  - 'Prepare Cultural Development Cards: Select 1 set of 3 Cultural Development Cards
-    to be available for use in the game. Collect the remaining 7 Level 1 Cultural
-    Development Cards and shuffle them. Draw three Cultural Development Cards and
-    set them along with the Level 2 and 3 cards from their set back into the box.'
+    to the game box."
+  - "Prepare Cultural Development Cards: \nSelect 1 set of 3 Cultural Development
+    Cards to be available for use in the game. \nCollect the remaining 7 Level 1
+    Cultural Development Cards and shuffle them. \nDraw three Cultural Development
+    Cards and set them along with the Level 2 and 3 cards from their set back into
+    the box."
   - "General Records Track: \nMilitary Points: 5 \nEnemy Ferocity: 4 \nCulture Points:
     9 \nDin\xE9 APs: 3 \nMorale: 5"
-  - 'Remove Trade Goods & Harass Counters: Set 6 Trade Goods and 2 Harass counters
+  - "Remove Trade Goods & Harass Counters: \nSet 6 Trade Goods and 2 Harass counters
     off to the side. They are neither in play, nor available. They become available
-    when a Weaving or the Masters of the Mesas Cultural Development Card is purchased.'
-  - 'Set Up Resources: Place all remaining Population counters, animals, Trade Goods,
-    Harass counters, and the Firearms counter in the Out of Play Box.'
-  - 'Set Up Enemy Instruction Display: Place all Spanish (yellow) Instruction counters
-    into a cup and randomly draw 2 of them out. Return the 2 drawn counters to the
-    box; they will not be used this game. Next, place all remaining Spanish Instruction
-    counters face-up (capital letter id) on to the Active and Standby columns of
-    the Enemy Instruction Display in alphabetical order, from top to bottom, filling
-    the Active Column first.'
-  - 'Set Up Enemy Pieces: Place all Mission Outpost counters, Enemy AP counters,
-    and Tribal Raid counters in the Enemy Out of Play box.'
-  - 'Collect Starting Cultural Development Card: Collect one available Level 1 Cultural
-    Development Card and place it face-up along the bottom edge of the map, signifying
-    that its effects are in play for the rest of the game (note that this is Free
-    and does NOT cost any Culture Points).'
-  - "Note Victory Conditions: If the game does not end in defeat beforehand, determine
-    victory or defeat after card #42 Franciscan Faction Ascendant is resolved: For
-    each black cube in Subjugation of New Mexico box, add +1 Enemy Morale. Next,
+    when a Weaving or the Masters of the Mesas Cultural Development Card is purchased."
+  - "Set Up Resources: \nPlace all remaining Population counters, animals, Trade
+    Goods, Harass counters, and the Firearms counter in the Out of Play Box."
+  - "Set Up Enemy Instruction Display: \nPlace all Spanish (yellow) Instruction counters
+    into a cup and randomly draw 2 of them out. \nReturn the 2 drawn counters to
+    the box; they will not be used this game. \n"
+  - Next, place all remaining Spanish Instruction counters face-up (capital letter
+    id) on to the Active and Standby columns of the Enemy Instruction Display in
+    alphabetical order, from top to bottom, filling the Active Column first.
+  - "Set Up Enemy Pieces: \nPlace all Mission Outpost counters, Enemy AP counters,
+    and Tribal Raid counters in the Enemy Out of Play box."
+  - "Collect Starting Cultural Development Card: \nCollect one available Level 1
+    Cultural Development Card and place it face-up along the bottom edge of the map,
+    signifying that its effects are in play for the rest of the game (note that this
+    is Free and does NOT cost any Culture Points)."
+  - "Note Victory Conditions: \nIf the game does not end in defeat beforehand, determine
+    victory or defeat after card #42 Franciscan Faction Ascendant is resolved. \nFor
+    each black cube in Subjugation of New Mexico box, add +1 Enemy Morale. \nNext,
     subtract the number of Enemy Morale from Military Points and compare the difference
-    on the table below. \n3 or higher: Major Victory. \n1 or 2 Minor Victory. \n0,
-    \u20131, or \u20132 Minor Defeat. \n\u20133 or less Major Defeat."
+    on the table on the next screen. "
+  - "Major Victory:  3 or higher  \r\nMinor Victory:  1 or 2             \r\nMinor
+    Defeat:   0, \u20131, or \u20132  \r\nMajor Defeat:   \u20133 or less"
   - "To prepare the deck for this scenario: \n1. Shuffle all Operations & Ceremony
     Cards together. \n2.Deal two stacks of 8 cards. The remaining cards are set aside
     and not used. \n3. Place Historical Event Card #41 in one stack and place card
-    #42 in the other. Shuffle both stacks\u2014but don\u2019t combine. \n4. Place
-    the 9-card stack containing card #41 on top of the card #42 stack. This forms
-    the 18-card deck."
+    #42 in the other. Shuffle both stacks\u2014but don\u2019t combine. "
+  - 4. Place the 9-card stack containing card #41 on top of the card #42 stack. This
+    forms the 18-card deck.
   - END

@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-//using gs = NavajoWars.GameState;
 
 namespace NavajoWars
 {
@@ -22,6 +19,7 @@ namespace NavajoWars
         public bool IsActiveFamilyE;
         public bool IsActiveFamilyF;
 
+        [TextArea (0,10)]
         public string[] Setup;
     }
 }

@@ -10,6 +10,7 @@ namespace NavajoWars
     public class MainMenuUIScript : MonoBehaviour, IsUIScript
     {
         GameManager GameManager;
+        GameState gs;
 
         Label headline;
         VisualElement buttonPanel;
@@ -29,8 +30,15 @@ namespace NavajoWars
 
         void Awake()
         {
-            GameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
+            var gmobj = GameObject.FindWithTag("GameController");
+            GameManager = gmobj.GetComponent<GameManager>();
+            gs = gmobj.GetComponent<GameState>();
             getVisualElements();
+        }
+
+        void Start()
+        {
+            GameManager.checkForSavedGame();
         }
 
         public void getVisualElements()
@@ -169,7 +177,7 @@ namespace NavajoWars
             viewSetup.visible = false;
             initializeLoadButtons();
         }
-        private void initializeLoadButtons()
+        void initializeLoadButtons()
         {
             Button[] buttons = { loadSave, newGame, loadBack, loadConfirm };
             foreach (Button button in buttons)

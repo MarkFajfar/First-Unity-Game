@@ -8,20 +8,20 @@ namespace NavajoWars
     public class Card : ScriptableObject
     {
         public CardType ThisCardType;
-        public byte CardNumber;
+        public int CardNumber;
 
         //Ceremony Cards
         public Person AddToPassage;
         public int BlessingWayRoll;
-        public Scenario TestAddSO; //EnemyWay SO
+        public EnemyWay ThisCardEnemyWay;
 
         //Operations Cards
         public int[] Points;
         public Person ThisCardPerson;
-        //public MajorEvent ThisCardMajorEvent;
-        //public MinorEvent ThisCardMinorEvent;
+        public MajorEvent ThisCardMajorEvent;
+        public MinorEvent ThisCardMinorEvent;
 
-        public static void StepOne(Card currentCard)
+        public void StepOne(Card currentCard)
         {
             GameManager gm = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
             switch (currentCard.ThisCardType)

@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c0b52683609a364db20be9f56367521, type: 3}
   m_Name: cardTest
   m_EditorClassIdentifier: 
-  ThisCardType: 2
+  ThisCardType: 1
   CardNumber: 8
   AddToPassage: 0
   BlessingWayRoll: 1
-  TestAddSO: {fileID: 11400000, guid: 86adda13640b7a04f9974cf840a2eadb, type: 2}
+  ThisCardEnemyWay: {fileID: 0}
   Points: 
   ThisCardPerson: 0
+  ThisCardMajorEvent: {fileID: 0}
+  ThisCardMinorEvent: {fileID: 0}
