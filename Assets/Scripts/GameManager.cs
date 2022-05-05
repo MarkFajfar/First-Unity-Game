@@ -38,7 +38,9 @@ namespace NavajoWars
 
         void Start()
         {
-            checkForSavedGame();
+            print("Start Game Manager");
+            //called only when game is loaded
+            //checkForSavedGame();
         }
         
         // initialize main menu
@@ -62,11 +64,17 @@ namespace NavajoWars
         gs.Morale = scenario.Morale;
             
         gs.FamilyA.IsActive = scenario.IsActiveFamilyA;
+            if (gs.FamilyA.IsActive) gs.Families.Add(gs.FamilyA);
         gs.FamilyB.IsActive = scenario.IsActiveFamilyB;
+            if (gs.FamilyB.IsActive) gs.Families.Add(gs.FamilyB);
         gs.FamilyC.IsActive = scenario.IsActiveFamilyC;
+            if (gs.FamilyC.IsActive) gs.Families.Add(gs.FamilyC);
         gs.FamilyD.IsActive = scenario.IsActiveFamilyD;
+            if (gs.FamilyD.IsActive) gs.Families.Add(gs.FamilyD);
         gs.FamilyE.IsActive = scenario.IsActiveFamilyE;
+            if (gs.FamilyE.IsActive) gs.Families.Add(gs.FamilyE);
         gs.FamilyF.IsActive = scenario.IsActiveFamilyF;
+            if (gs.FamilyF.IsActive) gs.Families.Add(gs.FamilyF);
         LoadNewScene("CardDraw");
         }
 
@@ -81,8 +89,8 @@ namespace NavajoWars
         public void LoadSave()
         {
             string sd = File.ReadAllText(Application.persistentDataPath + "/savefile.json");
-            JsonUtility.FromJsonOverwrite(sd, gs);            
-            LoadNewScene(gs.CurrentSceneName);
+            JsonUtility.FromJsonOverwrite(sd, gs);
+            SceneManager.LoadScene(gs.CurrentSceneName);
         }
 
         internal void DeleteSaveAndStartNew()
@@ -104,7 +112,7 @@ namespace NavajoWars
         }
 
         // scene management
-        void LoadNewScene(string newScene)
+        public void LoadNewScene(string newScene)
         {
             gs.PriorSceneName = SceneManager.GetActiveScene().name;
             gs.CurrentSceneName = newScene;
@@ -115,7 +123,7 @@ namespace NavajoWars
         void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
         {
             currentScene = scene;
-            currentGameObjectUI = GameObject.Find(currentScene.name + "UI");
+            currentGameObjectUI = GameObject.FindWithTag("UI"); 
             currentUIScript = currentGameObjectUI.GetComponent<IsUIScript>();
             // use IsUIScript to call any method in interface
             // can also use:  
@@ -134,13 +142,10 @@ namespace NavajoWars
         internal void PrevScene()
         {
             string newScene;
-            if (gs.PriorSceneName == "MainMenu")
+            newScene = gs.PriorSceneName;
+            // except if returning to MainMenu, swap prior and current scene names
+            if (newScene != "MainMenu")
             {
-                newScene = "MainMenu";
-            }
-            else
-            {
-                newScene = gs.PriorSceneName;
                 gs.PriorSceneName = SceneManager.GetActiveScene().name;
                 gs.CurrentSceneName = newScene;
             }
@@ -149,13 +154,11 @@ namespace NavajoWars
         }
 
         //card draw
-        internal void CardNumInput() 
+        internal void CardNumInput()
         {
-            Card currentCard = Resources.Load<Card>("Cards/cardTest");
-            //Card currentCard = Resources.Load<Card>("Cards/card" + gs.CurrentCardNum.ToString("D2"));
+            Card currentCard = Resources.Load<Card>("Cards/card" + gs.CurrentCardNum.ToString("D2"));
             gs.CurrentCard = currentCard;
-            currentCard.StepOne(currentCard);
-            // StepOne on each card starts one or more methods ending in call back to NewScene
+            LoadNewScene(currentCard.ThisCardType.ToString());
         }
 
         public void EventCardTest(Card currentCard)

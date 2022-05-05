@@ -14,5 +14,14 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/CardDraw.unity
     guid: e19d6a8de82022e4bbf06cf52dd6a59e
+  - enabled: 1
+    path: Assets/_Scenes/Ceremony.unity
+    guid: 8db51b1f86d85b24b851b9843b3ecc51
+  - enabled: 1
+    path: Assets/_Scenes/Event.unity
+    guid: 8d26de361151e334d8cb5edaf0abf32c
+  - enabled: 1
+    path: Assets/_Scenes/Operations.unity
+    guid: 39cdf735869cfff4a8a60ceaf0bf2904
   m_configObjects:
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 269140ac8eb45584aa7bf588d8c8eaf7, type: 2}

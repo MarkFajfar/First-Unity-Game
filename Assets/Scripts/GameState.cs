@@ -34,8 +34,10 @@ namespace NavajoWars
         { get => currentCard; set => currentCard = value; }
         [SerializeField] Card currentCard;
 
-        //public List<Card> CeremonyCardsInHand = new();
-        //public List<Card> EventCardsInPlay = new();
+        public List<Card> CeremonyCardsInHand = new();
+        public List<Card> EventCardsInPlay = new();
+        public List<Person> PersonsInPassage = new();
+        public int[] ElderDisplay = { 1, 1, 1, 0, 0, 0, 0 };
 
         public int AP
         { get => ap; set => ap = value; }
@@ -97,7 +99,7 @@ namespace NavajoWars
 
         public List<Family> Families = new();
        
-        // create list of families in Awake?
+        // add to list of families when starting scenario
         //{ FamilyA, FamilyB, FamilyC, FamilyD, FamilyE, FamilyF };
     }
 }

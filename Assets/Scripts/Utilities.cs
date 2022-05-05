@@ -22,9 +22,9 @@ namespace NavajoWars
         }
 
 
-/*
+
         //comment out menu items for build
-        [MenuItem("Utilities/RunTest")]
+        //[MenuItem("Utilities/RunTest")]
         public static void RunTest()
         {
             print("Test function:\n");
@@ -49,19 +49,20 @@ namespace NavajoWars
             print(shortTest2);
         }
 
-        [MenuItem("Utilities/SceneName")]
+        //[MenuItem("Utilities/SceneName")]
         public static void SceneName()
         {
             print(SceneManager.GetActiveScene().name);
         }
 
+        [MenuItem("Utilities/CreateSO")]
         public static void CreateSO()
         {
-            Card cardTest = ScriptableObject.CreateInstance("Card") as Card;
-            AssetDatabase.CreateAsset(cardTest, "Assets/Resources/Cards/cardTest.asset");
+            Card cardEvent = ScriptableObject.CreateInstance("Card") as Card;
+            AssetDatabase.CreateAsset(cardEvent, "Assets/Resources/Cards/cardEvent.asset");
         }
 
-        [MenuItem("Utilities/TestSO")]
+        //[MenuItem("Utilities/TestSO")]
         public static void TestSO()
         {
             var testName = "Test";
@@ -71,7 +72,7 @@ namespace NavajoWars
             //print(currentCard.TestAddSO.Name);
             //Card.StepOne(currentCard); 
             //call to method uses class name, specific card info is in parameter
-        }*/
+        }
 
 
     }

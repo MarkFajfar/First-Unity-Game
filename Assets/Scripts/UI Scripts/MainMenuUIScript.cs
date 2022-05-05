@@ -9,7 +9,7 @@ namespace NavajoWars
 {
     public class MainMenuUIScript : MonoBehaviour, IsUIScript
     {
-        GameManager GameManager;
+        GameManager gm;
         GameState gs;
 
         Label headline;
@@ -30,15 +30,23 @@ namespace NavajoWars
 
         void Awake()
         {
+            //""The Awake function is called for each object in the scene at the time when the scene loads. All the Awakes will have finished before the first Start is called. Code in a Start function can make use of other initializations previously carried out in the Awake phase."
             var gmobj = GameObject.FindWithTag("GameController");
-            GameManager = gmobj.GetComponent<GameManager>();
+            gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
+        }
+
+        void OnEnable()
+        {
+            //queries in OnEnable not Awake?
             getVisualElements();
         }
 
         void Start()
         {
-            GameManager.checkForSavedGame();
+            // called if Scene is reloaded
+            print("Start Main Menu");
+            gm.checkForSavedGame();
         }
 
         public void getVisualElements()
@@ -153,7 +161,7 @@ namespace NavajoWars
         void confirmClicked()
         {
             deInitializeButtons();
-            GameManager.StartNewGame(ChosenScenario); 
+            gm.StartNewGame(ChosenScenario); 
         }
 
         void deInitializeButtons() // what happens to buttons when scene changes?
@@ -196,7 +204,7 @@ namespace NavajoWars
             {
                 case "LoadSave":
                     viewSetup.text = "Loading Saved Game";
-                    GameManager.LoadSave();
+                    gm.LoadSave();
                     break;
                 case "NewGame":
                     viewSetup.text = "This will delete the saved game. Press Confirm to continue.";
@@ -213,7 +221,7 @@ namespace NavajoWars
                     loadBack.visible = false;
                     loadConfirm.visible = false;
                     viewSetup.visible = false;
-                    GameManager.DeleteSaveAndStartNew();
+                    gm.DeleteSaveAndStartNew();
                     break;
                 default:
                     loadBack.visible = false;

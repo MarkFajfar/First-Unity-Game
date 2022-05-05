@@ -1,0 +1,13 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainStyles.uss?fileID=7433441132597879392&amp;guid=5c28875138ec85a48a15204caaad60cc&amp;type=3#MainStyles" />
+    <ui:VisualElement name="Root" picking-mode="Ignore" style="flex-grow: 0.75; justify-content: center; bottom: auto; position: relative; top: 25%; opacity: 1;">
+        <ui:VisualElement name="ChoicePanel" picking-mode="Ignore" style="align-items: center; justify-content: center; visibility: visible; flex-grow: 1; display: flex;">
+            <ui:Button text="choice0" display-tooltip-when-elided="true" name="choice0" class="ButtonMenu" style="display: none;" />
+            <ui:Button text="choice1" display-tooltip-when-elided="true" name="choice1" class="ButtonMenu" style="display: none;" />
+            <ui:Button text="choice2" display-tooltip-when-elided="true" name="choice2" class="ButtonMenu" style="display: none; visibility: visible;" />
+            <ui:Button text="choice3" display-tooltip-when-elided="true" name="choice3" class="ButtonMenu" style="display: none;" />
+            <ui:Button text="choice4" display-tooltip-when-elided="true" name="choice4" class="ButtonMenu" style="display: none;" />
+            <ui:Button text="choice5" display-tooltip-when-elided="true" name="choice5" class="ButtonMenu" style="display: none;" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

@@ -2,10 +2,11 @@
     -unity-font: resource('Fonts/EBGaramond-Medium');
     -unity-font-definition: resource('Fonts/EBGaramond-Medium SDF');
     color: rgb(179, 51, 40);
-    -unity-text-align: middle-center;
+    -unity-text-align: upper-center;
     font-size: 100px;
     flex-wrap: wrap;
-    top: 11%;
+    top: 5%;
+    position: absolute;
 }
 
 .ButtonMenu {
@@ -176,6 +177,8 @@
     border-bottom-left-radius: 8px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
+    color: rgb(151, 64, 27);
+    background-color: rgb(71, 36, 16);
 }
 
 .ButtonQuit:hover {
