@@ -1,10 +1,10 @@
 Using pre-set license
-Built from '2021.3/staging' branch; Version is '2021.3.1f1 (3b70a0754835) revision 3895456'; Using compiler version '192829333'; Build Type 'Release'
+Built from '2021.3/staging' branch; Version is '2021.3.2f1 (d6360bedb9a0) revision 14038539'; Using compiler version '192829333'; Build Type 'Release'
 OS: 'Windows 10  (10.0.19043) 64bit Professional' Language: 'en' Physical Memory: 16280 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
-C:\Projects\Unity\Hub\Editor\2021.3.1f1\Editor\Unity.exe
+C:\Projects\Unity\Hub\Editor\2021.3.2f1\Editor\Unity.exe
 -adb2
 -batchMode
 -noUpm
@@ -15,7 +15,7 @@ C:/Projects/Unity/First-Unity-Game
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-65113
+55620
 Successfully changed project path to: C:/Projects/Unity/First-Unity-Game
 C:/Projects/Unity/First-Unity-Game
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,10 +47,10 @@ C:/Projects/Unity/First-Unity-Game
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 221.71 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 229.27 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Initialize engine version: 2021.3.1f1 (3b70a0754835)
-[Subsystems] Discovering subsystems at path C:/Projects/Unity/Hub/Editor/2021.3.1f1/Editor/Data/Resources/UnitySubsystems
+Initialize engine version: 2021.3.2f1 (d6360bedb9a0)
+[Subsystems] Discovering subsystems at path C:/Projects/Unity/Hub/Editor/2021.3.2f1/Editor/Data/Resources/UnitySubsystems
 [Subsystems] Discovering subsystems at path C:/Projects/Unity/First-Unity-Game/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
@@ -60,99 +60,99 @@ Direct3D:
     VRAM:     4052 MB
     Driver:   23.21.13.9077
 Initialize mono
-Mono path[0] = 'C:/Projects/Unity/Hub/Editor/2021.3.1f1/Editor/Data/Managed'
-Mono path[1] = 'C:/Projects/Unity/Hub/Editor/2021.3.1f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
-Mono config path = 'C:/Projects/Unity/Hub/Editor/2021.3.1f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56956
+Mono path[0] = 'C:/Projects/Unity/Hub/Editor/2021.3.2f1/Editor/Data/Managed'
+Mono path[1] = 'C:/Projects/Unity/Hub/Editor/2021.3.2f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
+Mono config path = 'C:/Projects/Unity/Hub/Editor/2021.3.2f1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56380
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Projects/Unity/Hub/Editor/2021.3.1f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
-Register platform support module: C:/Projects/Unity/Hub/Editor/2021.3.1f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Register platform support module: C:/Projects/Unity/Hub/Editor/2021.3.1f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
-Registered in 0.030105 seconds.
+Register platform support module: C:/Projects/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/AndroidPlayer/UnityEditor.Android.Extensions.dll
+Register platform support module: C:/Projects/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Register platform support module: C:/Projects/Unity/Hub/Editor/2021.3.2f1/Editor/Data/PlaybackEngines/MetroSupport/UnityEditor.UWP.Extensions.dll
+Registered in 0.040576 seconds.
 Native extension for UWP target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 317.16 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 273.07 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  1.693 seconds
+- Completed reload, in  1.671 seconds
 Domain Reload Profiling:
-	ReloadAssembly (1695ms)
-		BeginReloadAssembly (154ms)
+	ReloadAssembly (1673ms)
+		BeginReloadAssembly (176ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (1309ms)
-			LoadAssemblies (149ms)
+		EndReloadAssembly (1192ms)
+			LoadAssemblies (172ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (188ms)
+			SetupTypeCache (262ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (68ms)
-			SetupLoadedEditorAssemblies (943ms)
+			RebuildScriptCaches (52ms)
+			SetupLoadedEditorAssemblies (752ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (200ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (318ms)
-				BeforeProcessingInitializeOnLoad (7ms)
-				ProcessInitializeOnLoadAttributes (254ms)
-				ProcessInitializeOnLoadMethodAttributes (163ms)
+				InitializePlatformSupportModulesInManaged (115ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (273ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (259ms)
+				ProcessInitializeOnLoadMethodAttributes (102ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.038007 seconds.
+Registered in 0.024303 seconds.
 Begin MonoManager ReloadAssembly
 Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
 Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
 Native extension for UWP target not found
 Native extension for WindowsStandalone target not found
 Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 318.32 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 264.20 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
 Package Manager log level set to [2]
-- Completed reload, in  3.849 seconds
+- Completed reload, in  3.396 seconds
 Domain Reload Profiling:
-	ReloadAssembly (3851ms)
-		BeginReloadAssembly (474ms)
+	ReloadAssembly (3397ms)
+		BeginReloadAssembly (339ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (17ms)
+			DisableScriptedObjects (10ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (160ms)
-		EndReloadAssembly (2989ms)
-			LoadAssemblies (314ms)
+			CreateAndSetChildDomain (146ms)
+		EndReloadAssembly (2791ms)
+			LoadAssemblies (196ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (824ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (202ms)
-			SetupLoadedEditorAssemblies (1522ms)
+			SetupTypeCache (561ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (155ms)
+			SetupLoadedEditorAssemblies (1754ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (58ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (318ms)
-				BeforeProcessingInitializeOnLoad (341ms)
-				ProcessInitializeOnLoadAttributes (668ms)
-				ProcessInitializeOnLoadMethodAttributes (99ms)
-				AfterProcessingInitializeOnLoad (36ms)
-				EditorAssembliesLoaded (0ms)
+				InitializePlatformSupportModulesInManaged (41ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (264ms)
+				BeforeProcessingInitializeOnLoad (308ms)
+				ProcessInitializeOnLoadAttributes (1004ms)
+				ProcessInitializeOnLoadMethodAttributes (108ms)
+				AfterProcessingInitializeOnLoad (27ms)
+				EditorAssembliesLoaded (1ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (13ms)
+			AwakeInstancesAfterBackupRestoration (15ms)
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
-Refreshing native plugins compatible for Editor in 1.37 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 1.15 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4403 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 57 unused Assets / (225.5 KB). Loaded Objects now: 4842.
-Memory consumption went from 161.3 MB to 161.1 MB.
-Total: 6.461700 ms (FindLiveObjects: 0.512700 ms CreateObjectMapping: 0.610100 ms MarkObjects: 5.082700 ms  DeleteObjects: 0.253700 ms)
+Unloading 4538 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 60 unused Assets / (225.5 KB). Loaded Objects now: 4975.
+Memory consumption went from 165.1 MB to 164.9 MB.
+Total: 13.188600 ms (FindLiveObjects: 0.886300 ms CreateObjectMapping: 0.523300 ms MarkObjects: 11.287500 ms  DeleteObjects: 0.489300 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -166,881 +166,1131 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 690059.429912 seconds.
-  path: Assets/Scripts/UI Scripts/OperationsUIScript.cs
-  artifactKey: Guid(46736256def65ba42af2733fba6e587f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scripts/UI Scripts/OperationsUIScript.cs using Guid(46736256def65ba42af2733fba6e587f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8dbfe4710dee9ae0c451e807f91fea35') in 0.094800 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.018710 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.10 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.814 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1815ms)
-		BeginReloadAssembly (277ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (13ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (76ms)
-		EndReloadAssembly (1334ms)
-			LoadAssemblies (186ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (386ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (81ms)
-			SetupLoadedEditorAssemblies (615ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (43ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (159ms)
-				ProcessInitializeOnLoadAttributes (326ms)
-				ProcessInitializeOnLoadMethodAttributes (58ms)
-				AfterProcessingInitializeOnLoad (27ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (14ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 11.69 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.5 KB). Loaded Objects now: 4845.
-Memory consumption went from 161.3 MB to 161.1 MB.
-Total: 4.677100 ms (FindLiveObjects: 0.364500 ms CreateObjectMapping: 0.196600 ms MarkObjects: 3.913000 ms  DeleteObjects: 0.200900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.019432 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.24 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.319 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2320ms)
-		BeginReloadAssembly (251ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (12ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (55ms)
-		EndReloadAssembly (1825ms)
-			LoadAssemblies (225ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (541ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (80ms)
-			SetupLoadedEditorAssemblies (874ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (47ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (221ms)
-				ProcessInitializeOnLoadAttributes (484ms)
-				ProcessInitializeOnLoadMethodAttributes (88ms)
-				AfterProcessingInitializeOnLoad (32ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (23ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 11.39 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.4 KB). Loaded Objects now: 4848.
-Memory consumption went from 161.3 MB to 161.1 MB.
-Total: 6.478400 ms (FindLiveObjects: 0.754400 ms CreateObjectMapping: 0.462400 ms MarkObjects: 4.913800 ms  DeleteObjects: 0.345000 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.019769 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.17 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.974 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1975ms)
-		BeginReloadAssembly (271ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (13ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (64ms)
-		EndReloadAssembly (1489ms)
-			LoadAssemblies (214ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (417ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (81ms)
-			SetupLoadedEditorAssemblies (708ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (45ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (193ms)
-				ProcessInitializeOnLoadAttributes (382ms)
-				ProcessInitializeOnLoadMethodAttributes (62ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (13ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 8.51 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.7 KB). Loaded Objects now: 4851.
-Memory consumption went from 161.3 MB to 161.1 MB.
-Total: 5.019000 ms (FindLiveObjects: 0.379100 ms CreateObjectMapping: 0.409100 ms MarkObjects: 4.031000 ms  DeleteObjects: 0.197900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.021042 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.56 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.401 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2403ms)
-		BeginReloadAssembly (252ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (15ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (60ms)
-		EndReloadAssembly (1911ms)
-			LoadAssemblies (197ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (598ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (107ms)
-			SetupLoadedEditorAssemblies (857ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (61ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (237ms)
-				ProcessInitializeOnLoadAttributes (442ms)
-				ProcessInitializeOnLoadMethodAttributes (81ms)
-				AfterProcessingInitializeOnLoad (33ms)
-				EditorAssembliesLoaded (1ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (21ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 11.93 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.6 KB). Loaded Objects now: 4854.
-Memory consumption went from 161.3 MB to 161.1 MB.
-Total: 6.984400 ms (FindLiveObjects: 0.767400 ms CreateObjectMapping: 0.726400 ms MarkObjects: 5.186100 ms  DeleteObjects: 0.301800 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.019685 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.28 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.416 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2417ms)
-		BeginReloadAssembly (257ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (13ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (51ms)
-		EndReloadAssembly (1935ms)
-			LoadAssemblies (197ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (612ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (117ms)
-			SetupLoadedEditorAssemblies (853ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (55ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (226ms)
-				ProcessInitializeOnLoadAttributes (456ms)
-				ProcessInitializeOnLoadMethodAttributes (81ms)
-				AfterProcessingInitializeOnLoad (31ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (20ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 12.77 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.3 KB). Loaded Objects now: 4857.
-Memory consumption went from 161.3 MB to 161.2 MB.
-Total: 6.954200 ms (FindLiveObjects: 0.458500 ms CreateObjectMapping: 0.687200 ms MarkObjects: 5.545600 ms  DeleteObjects: 0.261100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023293 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.41 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.801 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2802ms)
-		BeginReloadAssembly (303ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (16ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (59ms)
-		EndReloadAssembly (2226ms)
-			LoadAssemblies (227ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (681ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (152ms)
-			SetupLoadedEditorAssemblies (995ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (67ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (311ms)
-				ProcessInitializeOnLoadAttributes (501ms)
-				ProcessInitializeOnLoadMethodAttributes (83ms)
-				AfterProcessingInitializeOnLoad (31ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (24ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 14.59 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.3 KB). Loaded Objects now: 4860.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 6.592400 ms (FindLiveObjects: 0.438900 ms CreateObjectMapping: 0.480200 ms MarkObjects: 5.428600 ms  DeleteObjects: 0.242500 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023530 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.72 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.822 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2824ms)
-		BeginReloadAssembly (317ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (16ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (73ms)
-		EndReloadAssembly (2226ms)
-			LoadAssemblies (253ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (640ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (108ms)
-			SetupLoadedEditorAssemblies (1084ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (73ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (277ms)
-				ProcessInitializeOnLoadAttributes (597ms)
-				ProcessInitializeOnLoadMethodAttributes (93ms)
-				AfterProcessingInitializeOnLoad (40ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (22ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 15.60 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.3 KB). Loaded Objects now: 4863.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 8.444500 ms (FindLiveObjects: 0.475900 ms CreateObjectMapping: 0.600200 ms MarkObjects: 7.083200 ms  DeleteObjects: 0.282700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.020808 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.23 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.136 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2138ms)
-		BeginReloadAssembly (319ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (22ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (65ms)
-		EndReloadAssembly (1555ms)
-			LoadAssemblies (252ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (469ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (89ms)
-			SetupLoadedEditorAssemblies (703ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (50ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (174ms)
-				ProcessInitializeOnLoadAttributes (383ms)
-				ProcessInitializeOnLoadMethodAttributes (64ms)
-				AfterProcessingInitializeOnLoad (29ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (17ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 11.91 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.4 KB). Loaded Objects now: 4866.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 6.224800 ms (FindLiveObjects: 0.404100 ms CreateObjectMapping: 0.437500 ms MarkObjects: 5.142900 ms  DeleteObjects: 0.238600 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.020399 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 3.28 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.678 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2679ms)
-		BeginReloadAssembly (274ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (16ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (61ms)
-		EndReloadAssembly (2164ms)
-			LoadAssemblies (214ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (682ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (130ms)
-			SetupLoadedEditorAssemblies (975ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (74ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (4ms)
-				BeforeProcessingInitializeOnLoad (263ms)
-				ProcessInitializeOnLoadAttributes (490ms)
-				ProcessInitializeOnLoadMethodAttributes (103ms)
-				AfterProcessingInitializeOnLoad (40ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (22ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 11.60 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.5 KB). Loaded Objects now: 4869.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 8.663000 ms (FindLiveObjects: 0.498900 ms CreateObjectMapping: 0.616700 ms MarkObjects: 7.272900 ms  DeleteObjects: 0.272300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.023804 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.23 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.951 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1952ms)
-		BeginReloadAssembly (256ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (15ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (50ms)
-		EndReloadAssembly (1471ms)
-			LoadAssemblies (200ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (429ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (92ms)
-			SetupLoadedEditorAssemblies (690ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (57ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (187ms)
-				ProcessInitializeOnLoadAttributes (359ms)
-				ProcessInitializeOnLoadMethodAttributes (56ms)
-				AfterProcessingInitializeOnLoad (28ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (13ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 10.17 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.3 KB). Loaded Objects now: 4872.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 5.024400 ms (FindLiveObjects: 0.404800 ms CreateObjectMapping: 0.413000 ms MarkObjects: 4.000700 ms  DeleteObjects: 0.204100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.020609 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.22 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.429 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2430ms)
-		BeginReloadAssembly (304ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (15ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (72ms)
-		EndReloadAssembly (1885ms)
-			LoadAssemblies (233ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (598ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (114ms)
-			SetupLoadedEditorAssemblies (829ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (53ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (199ms)
-				ProcessInitializeOnLoadAttributes (458ms)
-				ProcessInitializeOnLoadMethodAttributes (81ms)
-				AfterProcessingInitializeOnLoad (35ms)
-				EditorAssembliesLoaded (1ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (20ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 11.94 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.3 KB). Loaded Objects now: 4875.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 7.197600 ms (FindLiveObjects: 0.435100 ms CreateObjectMapping: 0.278300 ms MarkObjects: 5.993000 ms  DeleteObjects: 0.488900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.024392 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.28 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.165 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2167ms)
-		BeginReloadAssembly (283ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (14ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (61ms)
-		EndReloadAssembly (1669ms)
-			LoadAssemblies (212ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (508ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (111ms)
-			SetupLoadedEditorAssemblies (747ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (53ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (205ms)
-				ProcessInitializeOnLoadAttributes (391ms)
-				ProcessInitializeOnLoadMethodAttributes (70ms)
-				AfterProcessingInitializeOnLoad (26ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (17ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 20.83 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.3 KB). Loaded Objects now: 4878.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 9.855100 ms (FindLiveObjects: 1.055500 ms CreateObjectMapping: 0.519800 ms MarkObjects: 7.995800 ms  DeleteObjects: 0.281700 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.017493 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.70 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.783 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1784ms)
-		BeginReloadAssembly (217ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (11ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (47ms)
-		EndReloadAssembly (1376ms)
-			LoadAssemblies (160ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (413ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (82ms)
-			SetupLoadedEditorAssemblies (637ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (47ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (185ms)
-				ProcessInitializeOnLoadAttributes (317ms)
-				ProcessInitializeOnLoadMethodAttributes (61ms)
-				AfterProcessingInitializeOnLoad (24ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (12ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 8.68 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.5 KB). Loaded Objects now: 4881.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 6.402200 ms (FindLiveObjects: 0.618900 ms CreateObjectMapping: 0.336700 ms MarkObjects: 5.203500 ms  DeleteObjects: 0.240900 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  Time since last request: 347180.825284 seconds.
+  path: Assets/Scripts/GameManager.cs
+  artifactKey: Guid(6a8c3ec52ab6cf547be949fb899d8b72) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/GameManager.cs using Guid(6a8c3ec52ab6cf547be949fb899d8b72) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'c7bc35cdfc926ea2017b4b04f2742815') in 0.114004 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 2895.081033 seconds.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Scripts/UI Scripts/IMethodReceiver.cs
+  artifactKey: Guid(902be53e4e18278478042f4b154dec72) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/UI Scripts/IMethodReceiver.cs using Guid(902be53e4e18278478042f4b154dec72) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ff4b528422a1659bf330229467616284') in 0.083929 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
   path: Assets/UI Toolkit/Choice.uxml
-  artifactKey: Guid(3a9312811c1e8b6488cb2f7662530fe6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI Toolkit/Choice.uxml using Guid(3a9312811c1e8b6488cb2f7662530fe6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6c155f4541b23777b4cbea7ba605f054') in 0.035090 seconds 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.018741 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.83 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.151 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2152ms)
-		BeginReloadAssembly (275ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (16ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (68ms)
-		EndReloadAssembly (1660ms)
-			LoadAssemblies (182ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (499ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (81ms)
-			SetupLoadedEditorAssemblies (795ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (51ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (194ms)
-				ProcessInitializeOnLoadAttributes (443ms)
-				ProcessInitializeOnLoadMethodAttributes (74ms)
-				AfterProcessingInitializeOnLoad (31ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (17ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 10.43 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.4 KB). Loaded Objects now: 4884.
-Memory consumption went from 161.4 MB to 161.2 MB.
-Total: 6.306000 ms (FindLiveObjects: 0.806900 ms CreateObjectMapping: 0.264700 ms MarkObjects: 4.955200 ms  DeleteObjects: 0.276300 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  artifactKey: Guid(3a9312811c1e8b6488cb2f7662530fe6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/UI Toolkit/Choice.uxml using Guid(3a9312811c1e8b6488cb2f7662530fe6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ece0a7debca55fe6f3d7c140bcece204') in 0.025046 seconds 
 ========================================================================
 Received Import Request.
-  Time since last request: 703.589667 seconds.
-  path: Assets/UI Toolkit/Choice.uxml
-  artifactKey: Guid(3a9312811c1e8b6488cb2f7662530fe6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/UI Toolkit/Choice.uxml using Guid(3a9312811c1e8b6488cb2f7662530fe6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1aa9e422e41cb340d3c6ffbe2dc20ef0') in 0.042642 seconds 
+  Time since last request: 0.000032 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/LoadModule.cs
+  artifactKey: Guid(90b319234a9a342b6a8649eef72352fd) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/LoadModule.cs using Guid(90b319234a9a342b6a8649eef72352fd) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '9221dcc45748687dab60ac558ecd1f84') in 0.009498 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/UI Toolkit/Template.uxml
+  artifactKey: Guid(a479873bb2de8b04ca1786ffab91f1b2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/UI Toolkit/Template.uxml using Guid(a479873bb2de8b04ca1786ffab91f1b2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'efdfe473f48f6cb62690971ddc86fcc5') in 0.015541 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Plugins/MoonSharp/Debugger/SDK/Utilities.cs
+  artifactKey: Guid(91853d42160014ebd843ee4e1a4f676e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Debugger/SDK/Utilities.cs using Guid(91853d42160014ebd843ee4e1a4f676e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '314d2a73f2e7eaf0ae16fc06bed4fc8a') in 0.058015 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss
+  artifactKey: Guid(858376d8f65f76c479e0c70061314f72) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/UI Toolkit/UnityThemes/UnityDefaultRuntimeTheme.tss using Guid(858376d8f65f76c479e0c70061314f72) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '48860d4d227e9aca0880cb9ea4ca2015') in 0.181528 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Resources/Textures/Msg Bkgd.png
+  artifactKey: Guid(f8c1a55ecc98c994899f12b062cd6cb7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Textures/Msg Bkgd.png using Guid(f8c1a55ecc98c994899f12b062cd6cb7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '71721489fed4ee52152757cf082b63c7') in 0.407434 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Compatibility/Attributes.cs
+  artifactKey: Guid(24be313cbb7a91d42bb1de866ca88289) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Compatibility/Attributes.cs using Guid(24be313cbb7a91d42bb1de866ca88289) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '8917c14f102adf8ca1244b1b46dd0bc8') in 0.008232 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/NameSpace_XmlHelp.cs
+  artifactKey: Guid(ce2e5bd5d0b2b49fe99dbc8fc4aec9bb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/NameSpace_XmlHelp.cs using Guid(ce2e5bd5d0b2b49fe99dbc8fc4aec9bb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '97a7fae83c1daff613a5a0a4782f72eb') in 0.008610 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Scripts/Scriptable Objects/Cards/EnemyWay.cs
+  artifactKey: Guid(061a5569cd62ae84081ff5908b7969f8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/Scriptable Objects/Cards/EnemyWay.cs using Guid(061a5569cd62ae84081ff5908b7969f8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '786248d5f1dd0837a1cb569aa8c8ba79') in 0.007356 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/DataTypes/SymbolRefType.cs
+  artifactKey: Guid(3be185a345f9749c89fabf1ebbc303b3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/DataTypes/SymbolRefType.cs using Guid(3be185a345f9749c89fabf1ebbc303b3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b96d7c0d846a7438be76f5aaeaefc157') in 0.010263 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/UI Toolkit/CardDraw.uxml
+  artifactKey: Guid(cae2c2fbfa0f8794b8a322e93fcebfe7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/UI Toolkit/CardDraw.uxml using Guid(cae2c2fbfa0f8794b8a322e93fcebfe7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'df4f074b3c01cfa52cb392b5d1c4d821') in 0.017190 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/_Scenes/Template.scenetemplate
+  artifactKey: Guid(8607ef64bcebe404a9f6a98b5591015e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/_Scenes/Template.scenetemplate using Guid(8607ef64bcebe404a9f6a98b5591015e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3f436e4a6a52730122a045a77bb020ca') in 0.484872 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Resources/Fonts/Arvo-Regular.ttf
+  artifactKey: Guid(8d4e14472c6c16a4fbd191bc77094318) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Fonts/Arvo-Regular.ttf using Guid(8d4e14472c6c16a4fbd191bc77094318) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6e7b0b587909775ea1e39b49ac856552') in 0.256992 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/Resources/Fonts/EBGaramond-Medium SDF.asset
+  artifactKey: Guid(f59875113df021643a804bade0f7d34d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Fonts/EBGaramond-Medium SDF.asset using Guid(f59875113df021643a804bade0f7d34d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'd119f4259804544d59bfcf60de6aefa3') in 0.039482 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Scripts/Logic Scripts/SetupLogic.cs
+  artifactKey: Guid(3fb5aa20034d44941afab2c50651f3cb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/Logic Scripts/SetupLogic.cs using Guid(3fb5aa20034d44941afab2c50651f3cb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '9a3f82d317dae2827d9014a812bc2d4a') in 0.006467 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Resources/Fonts/EBGaramond-Medium.ttf
+  artifactKey: Guid(d3079cada6e693d478be7cc3e192738b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Fonts/EBGaramond-Medium.ttf using Guid(d3079cada6e693d478be7cc3e192738b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'aa97d3326b8803837140fce37ac1274e') in 0.008403 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/DataTypes/IScriptPrivateResource.cs
+  artifactKey: Guid(3a91440692a5f477cbbcda0519a017e2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/DataTypes/IScriptPrivateResource.cs using Guid(3a91440692a5f477cbbcda0519a017e2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '74381ea76b6617ab983c4ac2c359779a') in 0.006248 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Resources/Textures/Rock Texture 6 hd.png
+  artifactKey: Guid(3807932c4e74e39438545f648ecebba7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Textures/Rock Texture 6 hd.png using Guid(3807932c4e74e39438545f648ecebba7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'c9ee4bc4a177a6b1cd65d56fc6c20c18') in 0.192189 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/Bit32Module.cs
+  artifactKey: Guid(c71b14e2cd41a4f70a45ea70cab3e2c7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/Bit32Module.cs using Guid(c71b14e2cd41a4f70a45ea70cab3e2c7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '432876d7425d84d7b4595b4e51f58ba4') in 0.006880 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/CoroutineModule.cs
+  artifactKey: Guid(c160220c9253a4031baa523b549ea9e4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/CoroutineModule.cs using Guid(c160220c9253a4031baa523b549ea9e4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5888c9c10ead0936dfe0519927338404') in 0.007393 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/MetaTableModule.cs
+  artifactKey: Guid(b3b971ba440d24e91a6ff0bc9e306d59) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/MetaTableModule.cs using Guid(b3b971ba440d24e91a6ff0bc9e306d59) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '34459e23837e3bec695e9e7610be5436') in 0.008099 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Errors/InternalErrorException.cs
+  artifactKey: Guid(13de1d70141a34d4b8bf573b8e34141e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Errors/InternalErrorException.cs using Guid(13de1d70141a34d4b8bf573b8e34141e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ff3414c4982739122627c916d3ac9b8d') in 0.068230 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Debugging/SourceRef.cs
+  artifactKey: Guid(c5d1e04c4f0624d3992544d4cd95f0ca) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Debugging/SourceRef.cs using Guid(c5d1e04c4f0624d3992544d4cd95f0ca) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '7ac11d015c896f9d07d756c7f094b55b') in 0.008016 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Debugging/SourceCode.cs
+  artifactKey: Guid(6e0338b248bf246018c51f627e19316d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Debugging/SourceCode.cs using Guid(6e0338b248bf246018c51f627e19316d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'e30212c50211b9b392b0ed35f750e972') in 0.008065 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Debugging/WatchType.cs
+  artifactKey: Guid(860273ba9b80a4a1593d49aa6f635dc5) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Debugging/WatchType.cs using Guid(860273ba9b80a4a1593d49aa6f635dc5) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6bd2e8a47a6220610ff9114a56ed7695') in 0.009898 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/ScriptExecutionContext.cs
+  artifactKey: Guid(e996c955797e0411581fa95c1a6292f4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/ScriptExecutionContext.cs using Guid(e996c955797e0411581fa95c1a6292f4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ba431922abb7770b3a516edc331d516c') in 0.010595 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/IUserDataDescriptor.cs
+  artifactKey: Guid(5125e07adbc5b4d03a354736ba7d3d5b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/IUserDataDescriptor.cs using Guid(5125e07adbc5b4d03a354736ba7d3d5b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ae4bd5800008e1b58277bab2ed4f9331') in 0.032220 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000169 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/PropertyTableAssigner.cs
+  artifactKey: Guid(29adf7e98b14849d3bf021d9978d0d8b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/PropertyTableAssigner.cs using Guid(29adf7e98b14849d3bf021d9978d0d8b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '9f5f2484587e44de97d798cd6b40f00a') in 0.009211 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Resources/Textures/Rock Texture 2.png
+  artifactKey: Guid(2d8cee979219b1e46a59739e941419da) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Textures/Rock Texture 2.png using Guid(2d8cee979219b1e46a59739e941419da) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ab2ba1fbd3b0013aa0184dde5baafcb1') in 0.068059 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/StringModule.cs
+  artifactKey: Guid(b3eb3848b53e142a483d14eb6b5b0484) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/StringModule.cs using Guid(b3eb3848b53e142a483d14eb6b5b0484) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'e339306f92cc726ed77bcff262657808') in 0.009756 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Modules/ModuleRegister.cs
+  artifactKey: Guid(36c2ca3cd92354d37a71219519c65c84) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Modules/ModuleRegister.cs using Guid(36c2ca3cd92354d37a71219519c65c84) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6a615b2fc381579c8e12c9476164234d') in 0.008601 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/DataTypes/WellKnownSymbols.cs
+  artifactKey: Guid(e13b2437cd7bb41ffbc4dc15747f72b4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/DataTypes/WellKnownSymbols.cs using Guid(e13b2437cd7bb41ffbc4dc15747f72b4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '8fb215b9911232ad9d3969fd0db5cf39') in 0.009767 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Loaders/FileSystemScriptLoader.cs
+  artifactKey: Guid(5265cb278419c4704996e50cd50d1da2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Loaders/FileSystemScriptLoader.cs using Guid(5265cb278419c4704996e50cd50d1da2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '05772860dd25113dbf987b55a66bad7a') in 0.008786 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/IoModule.cs
+  artifactKey: Guid(5209e5cca6a8f4dbc888ed4b7e061d55) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/IoModule.cs using Guid(5209e5cca6a8f4dbc888ed4b7e061d55) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '1431f8eb2e350953651d88ac3618896c') in 0.008105 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000125 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/LinqHelpers.cs
+  artifactKey: Guid(b04c0dc1a035c460fa89f603876c6db9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/LinqHelpers.cs using Guid(b04c0dc1a035c460fa89f603876c6db9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '96a00886dabbb9ba8b104a222d92abfc') in 0.009247 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Diagnostics/PerformanceCounter.cs
+  artifactKey: Guid(3459463391c5b44c2887e430b71fe6ad) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Diagnostics/PerformanceCounter.cs using Guid(3459463391c5b44c2887e430b71fe6ad) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '80cf180e365fcca8cb1b2dd100842e55') in 0.010266 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Platforms/StandardPlatformAccessor.cs
+  artifactKey: Guid(f4a9977fe0bfc48959d1b05c17c8549f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Platforms/StandardPlatformAccessor.cs using Guid(f4a9977fe0bfc48959d1b05c17c8549f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5a1dc9b8c4fef27e26c98e20da94303e') in 0.120369 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Modules/MoonSharpModuleMethodAttribute.cs
+  artifactKey: Guid(616cf146f24304ea9a82d1f9178a7268) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Modules/MoonSharpModuleMethodAttribute.cs using Guid(616cf146f24304ea9a82d1f9178a7268) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '0f88cdb74ddf5b0bfcc13a1ddb4ff66f') in 0.009862 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Serialization/SerializationExtensions.cs
+  artifactKey: Guid(0f17c5a72ff1c431380cf0baea989b83) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Serialization/SerializationExtensions.cs using Guid(0f17c5a72ff1c431380cf0baea989b83) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'da10ec8ddca36361b9af0eab7ddbf5ac') in 0.007273 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Loop.cs
+  artifactKey: Guid(b96a843097755462eaa09a5418609431) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Loop.cs using Guid(b96a843097755462eaa09a5418609431) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '7daf6e88dfdf1c8eac37a2897a9e593f') in 0.008702 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Expression_.cs
+  artifactKey: Guid(917ffb77be09c4bc3ad9735a663b7de8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Expression_.cs using Guid(917ffb77be09c4bc3ad9735a663b7de8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3ff2962e5c91caafebf57d30b44187c3') in 0.008676 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Serialization/ObjectValueConverter.cs
+  artifactKey: Guid(99653e9435d7e458aa2f9b83455d0a61) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Serialization/ObjectValueConverter.cs using Guid(99653e9435d7e458aa2f9b83455d0a61) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'e092e8cec1d45e84ee27efb42104592b') in 0.009194 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Assets/_Scenes/CardDraw.unity
+  artifactKey: Guid(e19d6a8de82022e4bbf06cf52dd6a59e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/_Scenes/CardDraw.unity using Guid(e19d6a8de82022e4bbf06cf52dd6a59e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ebb9be794b8ca764f91e247b1cff869b') in 0.009859 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Resources/Cards/card03.asset
+  artifactKey: Guid(9859faa3c90ea4047ae78e6732d16b4a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Cards/card03.asset using Guid(9859faa3c90ea4047ae78e6732d16b4a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b043fdb38d152bebf8fb64067e6423ea') in 0.009314 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000064 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/IO/BinDumpBinaryWriter.cs
+  artifactKey: Guid(ca91469c26113477bb1e415a258455a1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/IO/BinDumpBinaryWriter.cs using Guid(ca91469c26113477bb1e415a258455a1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '4a876a4aeb45e620a2a0b35f1fd96b92') in 0.011838 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/DataStructs/FastStackDynamic.cs
+  artifactKey: Guid(ae0613a18d7ac40a9a347eb3a7f035bf) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/DataStructs/FastStackDynamic.cs using Guid(ae0613a18d7ac40a9a347eb3a7f035bf) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5a4db39966371bff90526657eb003345') in 0.010594 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/IO/StandardIOFileUserDataBase.cs
+  artifactKey: Guid(c1fccf4c28e9a4667a0a6984cb2c736d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/IO/StandardIOFileUserDataBase.cs using Guid(c1fccf4c28e9a4667a0a6984cb2c736d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '55f0be1c04060bb489c64c4e510dfb4a') in 0.018752 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/InteropAccessMode.cs
+  artifactKey: Guid(ddbbc4d0ce9bf46e4b917c7822227382) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/InteropAccessMode.cs using Guid(ddbbc4d0ce9bf46e4b917c7822227382) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '7fa726046bb85bb0bc949ee4e75aa7ba') in 0.006405 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/_Scenes/Operations.unity
+  artifactKey: Guid(39cdf735869cfff4a8a60ceaf0bf2904) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/_Scenes/Operations.unity using Guid(39cdf735869cfff4a8a60ceaf0bf2904) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '525e74fd2eb09e49d08c77d99656295a') in 0.006467 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Platforms/DotNetCorePlatformAccessor.cs
+  artifactKey: Guid(16eaeaa203bc1df4eb279ad911bba358) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Platforms/DotNetCorePlatformAccessor.cs using Guid(16eaeaa203bc1df4eb279ad911bba358) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'c7f85c4a98734eb2c33d14b64b8aef4e') in 0.006634 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/DataStructs/Extension_Methods.cs
+  artifactKey: Guid(0546d50186dae45b188cb90769f531fb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/DataStructs/Extension_Methods.cs using Guid(0546d50186dae45b188cb90769f531fb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '03451aeef665d990d8001894e018d14e') in 0.009199 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Scripts/Scriptable Objects/Cards/Card.cs
+  artifactKey: Guid(9c0b52683609a364db20be9f56367521) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/Scriptable Objects/Cards/Card.cs using Guid(9c0b52683609a364db20be9f56367521) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ad42fad140f770a4cf5d941dcbef5890') in 0.006599 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Errors/SyntaxErrorException.cs
+  artifactKey: Guid(2b67a9ceda4da4d3db59ddd83f429de0) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Errors/SyntaxErrorException.cs using Guid(2b67a9ceda4da4d3db59ddd83f429de0) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'de175dcb73762a48e328f310517176d4') in 0.007685 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/InteropRegistrationPolicy.cs
+  artifactKey: Guid(afe3b2b1b8cd14f27a728db1c45eedee) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/InteropRegistrationPolicy.cs using Guid(afe3b2b1b8cd14f27a728db1c45eedee) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f164bc07a1875e6699342bd4334ec522') in 0.006844 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/REPL/ReplHistoryNavigator.cs
+  artifactKey: Guid(b54be6e9e41364e02968550fb2cf7c4d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/REPL/ReplHistoryNavigator.cs using Guid(b54be6e9e41364e02968550fb2cf7c4d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'db7708d1d1fc4c2e14fd56741741e972') in 0.007578 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/TableIteratorsModule.cs
+  artifactKey: Guid(8fb696693dc174ef7b58af6c5943ee38) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/TableIteratorsModule.cs using Guid(8fb696693dc174ef7b58af6c5943ee38) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'e8f5fafd6f7055ad1073a27355ee8387') in 0.006547 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/_Scenes/Ceremony.unity
+  artifactKey: Guid(8db51b1f86d85b24b851b9843b3ecc51) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/_Scenes/Ceremony.unity using Guid(8db51b1f86d85b24b851b9843b3ecc51) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'd5501e5a98d6f111baa583ec2f3676f5') in 0.006404 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/_Scenes/MainMenu.unity
+  artifactKey: Guid(da48d7641ba1df8449218b97f536f3ee) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/_Scenes/MainMenu.unity using Guid(da48d7641ba1df8449218b97f536f3ee) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '0a637ef776b774b3dad1abc63e326d48') in 0.006388 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/DataTypes/UserData.cs
+  artifactKey: Guid(03de1779812bd4d91ad1a727814c4b44) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/DataTypes/UserData.cs using Guid(03de1779812bd4d91ad1a727814c4b44) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'eb83a4a11d2bb048d8c4606690b357aa') in 0.007375 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Debugging/DebugService.cs
+  artifactKey: Guid(379514bc3987a421bbe8212078c44357) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Debugging/DebugService.cs using Guid(379514bc3987a421bbe8212078c44357) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '898b2540ad3b12f5f5ae34fdf1e9e7c8') in 0.007266 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Scripts/GameState.cs
+  artifactKey: Guid(76348cd46bbaf934086fec28db57694d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/GameState.cs using Guid(76348cd46bbaf934086fec28db57694d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6958805bb9e8a966e48201df32bed5e4') in 0.007626 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/DataTypes/CallbackArguments.cs
+  artifactKey: Guid(a0cb95a447d5e4c3fa38eac099c683f7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/DataTypes/CallbackArguments.cs using Guid(a0cb95a447d5e4c3fa38eac099c683f7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '8c3dc27fbb2d412591ee676df3c17f46') in 0.007682 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/REPL/ReplInterpreter.cs
+  artifactKey: Guid(cf481bf6781294381b77d6aadecbd712) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/REPL/ReplInterpreter.cs using Guid(cf481bf6781294381b77d6aadecbd712) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'a4b0d0a1d7bbba1e17830262496a5c1a') in 0.026467 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Script.cs
+  artifactKey: Guid(6af9aaf13dfaa46648711a12b5f9abe0) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Script.cs using Guid(6af9aaf13dfaa46648711a12b5f9abe0) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3d76925c602cc3057e1ace0359e2b928') in 0.007272 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Assets/Scripts/Scriptable Objects/Scenario.cs
+  artifactKey: Guid(8e976c10fcbe1a34da44ec6b82377de8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/Scriptable Objects/Scenario.cs using Guid(8e976c10fcbe1a34da44ec6b82377de8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '58ae9f1ea125aafe912cf911d5cb36ff') in 0.006313 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Compatibility/Framework.cs
+  artifactKey: Guid(96e3b35563b935d4c8baa02b06f40965) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Compatibility/Framework.cs using Guid(96e3b35563b935d4c8baa02b06f40965) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '7b3b6038791cdd44f025cddf68c10430') in 0.008842 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/ScriptGlobalOptions.cs
+  artifactKey: Guid(019755db0735e4261a6d88f4cc170256) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/ScriptGlobalOptions.cs using Guid(019755db0735e4261a6d88f4cc170256) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f9ee590b5545a37882045b3267f3a6b6') in 0.006310 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Scripts/UI Scripts/TemplateUIScript.cs
+  artifactKey: Guid(4b52a1a72cce9f543afe7047da99561f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/UI Scripts/TemplateUIScript.cs using Guid(4b52a1a72cce9f543afe7047da99561f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'edb40732df6e7ad66de6c7b36d31b9a5') in 0.006657 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/MathModule.cs
+  artifactKey: Guid(38103786f8d984326b5123cab6ca4b47) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/MathModule.cs using Guid(38103786f8d984326b5123cab6ca4b47) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f125b11250eff98a9330c0d1554226a2') in 0.006870 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Resources/Scenarios/Broken.asset
+  artifactKey: Guid(5f67151f3cde014408063bc30632e042) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Scenarios/Broken.asset using Guid(5f67151f3cde014408063bc30632e042) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '002f03c886148854b5e9c8090e114e97') in 0.006420 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Compatibility/Frameworks/FrameworkWin8.cs
+  artifactKey: Guid(11ab1e37f96fc08418f4794c17e8be0c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Compatibility/Frameworks/FrameworkWin8.cs using Guid(11ab1e37f96fc08418f4794c17e8be0c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'c2f97a34b4fb2e9c23dcb9c100a86e8d') in 0.013806 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/StringLib/KopiLua_StrLib.cs
+  artifactKey: Guid(d921f217918ee4c0e97d5ad218c273ab) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/StringLib/KopiLua_StrLib.cs using Guid(d921f217918ee4c0e97d5ad218c273ab) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'a28e32839f4a1546b0a4bb9269cd41fa') in 0.043419 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/Attributes/MoonSharpUserDataMetamethodAttribute.cs
+  artifactKey: Guid(8137a8eb2596340f189b48bf22075d30) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/Attributes/MoonSharpUserDataMetamethodAttribute.cs using Guid(8137a8eb2596340f189b48bf22075d30) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'fe3a4c8ac222d3c9e0f35a81afd45048') in 0.008560 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/Attributes/MoonSharpUserDataAttribute.cs
+  artifactKey: Guid(0cdbe535e00374a92b3399423847bb6d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/Attributes/MoonSharpUserDataAttribute.cs using Guid(0cdbe535e00374a92b3399423847bb6d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'bad5862daf76905a0b7d143f15002481') in 0.009460 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/VM/ExecutionState.cs
+  artifactKey: Guid(d70c5c3749f0b41f483627ce2739c3a9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/VM/ExecutionState.cs using Guid(d70c5c3749f0b41f483627ce2739c3a9) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'a97faab2f67e6ed22b96ff16cb09b0c5') in 0.007263 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/VM/OpCodeMetadataType.cs
+  artifactKey: Guid(12ca7d7e7076c4ba4b4b00de453dc302) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/VM/OpCodeMetadataType.cs using Guid(12ca7d7e7076c4ba4b4b00de453dc302) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '83e69695ee099186f1109f31d64ed221') in 0.009523 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/BasicDescriptors/IOverloadableMemberDescriptor.cs
+  artifactKey: Guid(472ef7b45723a40b3be9a09a1956855d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/BasicDescriptors/IOverloadableMemberDescriptor.cs using Guid(472ef7b45723a40b3be9a09a1956855d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '09649d8d3b51f8294f1bc38063077272') in 0.010385 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000052 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/PredefinedUserData/EnumerableWrapper.cs
+  artifactKey: Guid(f476b461a5ed4435db657147a9c73395) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/PredefinedUserData/EnumerableWrapper.cs using Guid(f476b461a5ed4435db657147a9c73395) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '821bfa6b3c306c3905dab26ec6364304') in 0.011457 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/Attributes/MoonSharpVisibleAttribute.cs
+  artifactKey: Guid(7f68fd7d7efa94e8797afbe18c9611ff) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/Attributes/MoonSharpVisibleAttribute.cs using Guid(7f68fd7d7efa94e8797afbe18c9611ff) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f11b04a7847160cae97bb9fa8671aa08') in 0.009205 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/ClosureContext.cs
+  artifactKey: Guid(72b8addb6dc01451c9f00b9e3fa6e99c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/ClosureContext.cs using Guid(72b8addb6dc01451c9f00b9e3fa6e99c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6aafb5f49c2bc1a392c37b1b2f91214a') in 0.008791 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/CompositeUserDataDescriptor.cs
+  artifactKey: Guid(f5dd2e97a42ab4fa2a71abc2d46f59a4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/CompositeUserDataDescriptor.cs using Guid(f5dd2e97a42ab4fa2a71abc2d46f59a4) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '0ae5b1b9f958479d29f1033f97ff20a0') in 0.010707 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/RuntimeScopeFrame.cs
+  artifactKey: Guid(326d78bb223bf4da9ab216b6e6dca845) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/RuntimeScopeFrame.cs using Guid(326d78bb223bf4da9ab216b6e6dca845) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ced0aaa4578c6bbd5ee4462569ec0ced') in 0.069850 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/LuaStateInterop/LuaState.cs
+  artifactKey: Guid(affc833f5facd456cb7f3c1c877e016b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/LuaStateInterop/LuaState.cs using Guid(affc833f5facd456cb7f3c1c877e016b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '16ff025dae3bc52e9469f0845d593ed2') in 0.007962 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Diagnostics/PerformanceCounters/PerformanceStopwatch.cs
+  artifactKey: Guid(9412c984a07ac419ebfe125e10587369) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Diagnostics/PerformanceCounters/PerformanceStopwatch.cs using Guid(9412c984a07ac419ebfe125e10587369) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '7d7d50192e1bd8170322f9f00b1e2a4f') in 0.008530 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/BasicDescriptors/IMemberDescriptor.cs
+  artifactKey: Guid(f537e8782afd64f3cb92fde721e22630) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/BasicDescriptors/IMemberDescriptor.cs using Guid(f537e8782afd64f3cb92fde721e22630) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '2503d9607b729f8c72acb9778d45371a') in 0.008087 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/LuaStateInterop/CharPtr.cs
+  artifactKey: Guid(f2985effb32c74d16bb8c4fbbc607c19) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/LuaStateInterop/CharPtr.cs using Guid(f2985effb32c74d16bb8c4fbbc607c19) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'a3c0963153d5aa3172cdec2bccf4e676') in 0.055791 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/Converters/StringConversions.cs
+  artifactKey: Guid(bc8e3e17185184a2dbc2b6f6b4a6ab6b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/Converters/StringConversions.cs using Guid(bc8e3e17185184a2dbc2b6f6b4a6ab6b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '855079f56d1b2774fd39af2fd564f5f5') in 0.011579 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Expressions/LiteralExpression.cs
+  artifactKey: Guid(5b79e917718e94fc2ad0c27697cb8f72) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Expressions/LiteralExpression.cs using Guid(5b79e917718e94fc2ad0c27697cb8f72) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '05bbae9a9abdb31853718bced3054c28') in 0.046340 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Expressions/BinaryOperatorExpression.cs
+  artifactKey: Guid(1e429a1e253ff48d494ae2f4082bf9e5) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Expressions/BinaryOperatorExpression.cs using Guid(1e429a1e253ff48d494ae2f4082bf9e5) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b33f997a35f955347c628a147fbde39c') in 0.030812 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/EmptyStatement.cs
+  artifactKey: Guid(1bb5f717a1d224a8984924a6567831c8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/EmptyStatement.cs using Guid(1bb5f717a1d224a8984924a6567831c8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '2b92249d59a8da6b7669589b3dbb0621') in 0.028768 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/StandardEnumUserDataDescriptor.cs
+  artifactKey: Guid(3ad85406d968d4e16b8f8bbb261c515e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/StandardEnumUserDataDescriptor.cs using Guid(3ad85406d968d4e16b8f8bbb261c515e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '7a2ef1e2992529e88c12fd7de209fafa') in 0.007208 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/AssignmentStatement.cs
+  artifactKey: Guid(984d08ac2d2c649f0937d1a8e239ef6a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/AssignmentStatement.cs using Guid(984d08ac2d2c649f0937d1a8e239ef6a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '41295e8f27ac8b78e438f7605ae87547') in 0.007744 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000094 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Serialization/Json/JsonNull.cs
+  artifactKey: Guid(eb11cd56d51474a3a9ee3d63f52c7e3d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Serialization/Json/JsonNull.cs using Guid(eb11cd56d51474a3a9ee3d63f52c7e3d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '014d0ff0e95e723b37c246d3238c45b4') in 0.008046 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/RegistrationPolicies/PermanentRegistrationPolicy.cs
+  artifactKey: Guid(3158077890b1545c0b603ef17da60db1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/RegistrationPolicies/PermanentRegistrationPolicy.cs using Guid(3158077890b1545c0b603ef17da60db1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'cc641020479edf934eaa46bb1211da3f') in 0.008545 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000059 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/WhileStatement.cs
+  artifactKey: Guid(3857a0c186ff6400896fe8d16e00c457) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/WhileStatement.cs using Guid(3857a0c186ff6400896fe8d16e00c457) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'cc6cfe4d2846d520ecec0391a0f9e12e') in 0.142090 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/GotoStatement.cs
+  artifactKey: Guid(3292cfca00390432290faa3fa7f8e387) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/GotoStatement.cs using Guid(3292cfca00390432290faa3fa7f8e387) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '78ab3db8dbc985ac4e73ef893f837f0e') in 0.009595 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/LabelStatement.cs
+  artifactKey: Guid(e6b59b6847c944bbcbff9891ed73131b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/LabelStatement.cs using Guid(e6b59b6847c944bbcbff9891ed73131b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '4ed1b010c49d923c997285dfce9f37df') in 0.009978 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Compatibility/Frameworks/Base/FrameworkClrBase.cs
+  artifactKey: Guid(0bbb9dec367acb94dbebde49d3745c4d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Compatibility/Frameworks/Base/FrameworkClrBase.cs using Guid(0bbb9dec367acb94dbebde49d3745c4d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'd81bd3a31082481f614d2fa94aa1e6e5') in 0.009758 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/IClosureBuilder.cs
+  artifactKey: Guid(2aa6722808ba44d63ae56df721463389) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/IClosureBuilder.cs using Guid(2aa6722808ba44d63ae56df721463389) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '28f81a61296a56af30d718557d319ed3') in 0.012302 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Serialization/Json/JsonTableConverter.cs
+  artifactKey: Guid(e090b4783b83443f7959adaeebbd831c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Serialization/Json/JsonTableConverter.cs using Guid(e090b4783b83443f7959adaeebbd831c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '2d0e31d977648464a90d3ba02f84d043') in 0.008944 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/Converters/ScriptToClrConversions.cs
+  artifactKey: Guid(1ab7d32bef2374608a4029d5dc7d6d0f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/Converters/ScriptToClrConversions.cs using Guid(1ab7d32bef2374608a4029d5dc7d6d0f) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '3847e99003d78a19589d092fadaaae3a') in 0.009775 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/AutoDescribingUserDataDescriptor.cs
+  artifactKey: Guid(352d20f0b03db4824871ccc4ff8c616a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/AutoDescribingUserDataDescriptor.cs using Guid(352d20f0b03db4824871ccc4ff8c616a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '5c034aca133fad0466e7392204754cec') in 0.015546 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000033 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Diagnostics/PerformanceCounters/IPerformanceStopwatch.cs
+  artifactKey: Guid(5d40047edee4d41299107f0971437a01) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Diagnostics/PerformanceCounters/IPerformanceStopwatch.cs using Guid(5d40047edee4d41299107f0971437a01) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b12471a6070149ac0ea312cc3009446b') in 0.010811 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/RegistrationPolicies/IRegistrationPolicy.cs
+  artifactKey: Guid(90c78875ddfdf453aacf15d5c1bddf77) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/RegistrationPolicies/IRegistrationPolicy.cs using Guid(90c78875ddfdf453aacf15d5c1bddf77) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '267f482273f964fdd65c4105597e2934') in 0.010175 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/ForLoopStatement.cs
+  artifactKey: Guid(b8997b2af29c946b5831782aa877fe8c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/ForLoopStatement.cs using Guid(b8997b2af29c946b5831782aa877fe8c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'd361a32fec7d33cd45a428d719699ccc') in 0.007821 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/MemberDescriptors/FunctionMemberDescriptorBase.cs
+  artifactKey: Guid(89a6426ea6fe947ae99733cb677468d2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/MemberDescriptors/FunctionMemberDescriptorBase.cs using Guid(89a6426ea6fe947ae99733cb677468d2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '28ba65c54438fdcefe651a0bbdb87541') in 0.008370 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/VM/Processor/Processor.cs
+  artifactKey: Guid(ba54b0d11328c46bca41774da91778ac) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/VM/Processor/Processor.cs using Guid(ba54b0d11328c46bca41774da91778ac) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'cdec62f61aeedea015a5112dc55e233a') in 0.007536 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/VM/Processor/Processor_UtilityFunctions.cs
+  artifactKey: Guid(206de72702bb94beabc11fba6fdd4909) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/VM/Processor/Processor_UtilityFunctions.cs using Guid(206de72702bb94beabc11fba6fdd4909) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'd8eb7dbdbe341e0fb3a2e876b23317ec') in 0.008768 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/HardwiredDescriptors/HardwiredMemberDescriptor.cs
+  artifactKey: Guid(9e219ae3995f14bca923411ed343be4c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/HardwiredDescriptors/HardwiredMemberDescriptor.cs using Guid(9e219ae3995f14bca923411ed343be4c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'bd5c062a44a7ceb59a82b354bfecb05b') in 0.009872 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000041 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/MemberDescriptors/ArrayMemberDescriptor.cs
+  artifactKey: Guid(16ace6782aaff42ef925471de4da3385) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/MemberDescriptors/ArrayMemberDescriptor.cs using Guid(16ace6782aaff42ef925471de4da3385) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '060df7de49d02d9906d01f7bca0c98d8') in 0.011161 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/VM/Processor/Processor_Coroutines.cs
+  artifactKey: Guid(aaa97e004216b41329c5edcecff9dd06) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/VM/Processor/Processor_Coroutines.cs using Guid(aaa97e004216b41329c5edcecff9dd06) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '319a3a4a2857d5d897d2bc9c012379fd') in 0.009544 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000049 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/HardwiredDescriptors/DefaultValue.cs
+  artifactKey: Guid(4488f26dceb7a4be786386e8fd64cf9d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/HardwiredDescriptors/DefaultValue.cs using Guid(4488f26dceb7a4be786386e8fd64cf9d) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b2963d6e94babe17ddcbf401726cebf1') in 0.009791 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Lexer/Lexer.cs
+  artifactKey: Guid(36f7acbfc89a742ae98ca7798c9fa46c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Lexer/Lexer.cs using Guid(36f7acbfc89a742ae98ca7798c9fa46c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'b9572744b498e12d0e58cafa18640e25') in 0.008052 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/RuntimeScopeBlock.cs
+  artifactKey: Guid(c7ad49968dc9f47e2b9659c891f4ce64) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/RuntimeScopeBlock.cs using Guid(c7ad49968dc9f47e2b9659c891f4ce64) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'cb13fce02a7a04930c1d782802688866') in 0.009088 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Expressions/UnaryOperatorExpression.cs
+  artifactKey: Guid(cea61ff404d734620ac74f0d77cbf723) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Expressions/UnaryOperatorExpression.cs using Guid(cea61ff404d734620ac74f0d77cbf723) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f178ef5c10148649a6eb3f89b3a72802') in 0.006782 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000024 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/LoopTracker.cs
+  artifactKey: Guid(c68a60d7d69aa43a0b61e842816f8628) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/Scopes/LoopTracker.cs using Guid(c68a60d7d69aa43a0b61e842816f8628) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '441db924032c709d931713257e916b32') in 0.007870 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/StandardGenericsUserDataDescriptor.cs
+  artifactKey: Guid(89ded8cbedd28423587da705e814718b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/StandardGenericsUserDataDescriptor.cs using Guid(89ded8cbedd28423587da705e814718b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'd4069a95b63cc4878f56f87a630587a6') in 0.007610 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/BasicDescriptors/ParameterDescriptor.cs
+  artifactKey: Guid(bfdea66115b9243f7a6d6ff5f668ca12) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/BasicDescriptors/ParameterDescriptor.cs using Guid(bfdea66115b9243f7a6d6ff5f668ca12) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ebba12f24197b747ed46ea6af7e40424') in 0.007129 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/VM/CallStackItemFlags.cs
+  artifactKey: Guid(878e867c5978449e69be8ab4ea0dcfd3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/VM/CallStackItemFlags.cs using Guid(878e867c5978449e69be8ab4ea0dcfd3) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'c507ce49d3d1053be1ca00bbfc287dd8') in 0.007942 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/ReflectionMemberDescriptors/PropertyMemberDescriptor.cs
+  artifactKey: Guid(1751047691c3846a7ade184baf0c247c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/ReflectionMemberDescriptors/PropertyMemberDescriptor.cs using Guid(1751047691c3846a7ade184baf0c247c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'c42e6499cbeadefac150eaf0e9c20eb0') in 0.007451 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000047 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/ReflectionMemberDescriptors/FieldMemberDescriptor.cs
+  artifactKey: Guid(d4e7bfec90fd646a39c733281c5c9a11) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/ReflectionMemberDescriptors/FieldMemberDescriptor.cs using Guid(d4e7bfec90fd646a39c733281c5c9a11) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '234d6c94a7e47652fc4882d37828530d') in 0.008323 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/IGeneratorUserDataDescriptor.cs
+  artifactKey: Guid(3f7c9c3c7e52b445aa477098fba7292b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/IGeneratorUserDataDescriptor.cs using Guid(3f7c9c3c7e52b445aa477098fba7292b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'a5ff4dea36649fdbb898d4798ac06ec4') in 0.009458 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/LuaStateInterop/LuaBase_CLib.cs
+  artifactKey: Guid(922b575dd83cc46739a020c8abe4849c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/LuaStateInterop/LuaBase_CLib.cs using Guid(922b575dd83cc46739a020c8abe4849c) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '54a2298bbb99de498a3cc2085456e698') in 0.041226 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Plugins/MoonSharp/Debugger/SDK/DebugSession.cs
+  artifactKey: Guid(41359a96dff8e497abb39aab280e3dcf) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Debugger/SDK/DebugSession.cs using Guid(41359a96dff8e497abb39aab280e3dcf) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'df6be9930db9514c2b1f7f247d165e16') in 0.009177 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/DebugModule.cs
+  artifactKey: Guid(9b3743855cdb543c88b2320c61f28424) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/DebugModule.cs using Guid(9b3743855cdb543c88b2320c61f28424) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '131bb6d83f2767946c5bf3a3ad36fd52') in 0.009000 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Compatibility/Frameworks/FrameworkPCL.cs
+  artifactKey: Guid(bac0f6f9dc5d85f41af33f3b83dbee01) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Compatibility/Frameworks/FrameworkPCL.cs using Guid(bac0f6f9dc5d85f41af33f3b83dbee01) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '9af4e0cb7c8bdb081dc3d2e228bb05dc') in 0.010301 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000050 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/LuaStateInterop/Tools.cs
+  artifactKey: Guid(7fe8355bb2687470dabdf9f53cebcb53) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/LuaStateInterop/Tools.cs using Guid(7fe8355bb2687470dabdf9f53cebcb53) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ff38c5cb00c42b162085dc9504a92c55') in 0.058404 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/DataTypes/ScriptFunctionDelegate.cs
+  artifactKey: Guid(e8ceff9083490405a894c3449e6ba298) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/DataTypes/ScriptFunctionDelegate.cs using Guid(e8ceff9083490405a894c3449e6ba298) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '23f8cf94b59fcf6222089c5e49a03752') in 0.008682 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/REPL/ReplInterpreterScriptLoader.cs
+  artifactKey: Guid(8c6efcf1ce8064e5087b1afbbd9d592e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/REPL/ReplInterpreterScriptLoader.cs using Guid(8c6efcf1ce8064e5087b1afbbd9d592e) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '81d4a2a7a1f4ccfeada363c4d3b1d751') in 0.086473 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/IWireableDescriptor.cs
+  artifactKey: Guid(ed0502d7d281c4d02b2a73333e63b2e8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/IWireableDescriptor.cs using Guid(ed0502d7d281c4d02b2a73333e63b2e8) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '0ef2c33586b2d73b87d128f9ac8b8060') in 0.010273 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/UserDataMemberType.cs
+  artifactKey: Guid(4e7d6d5b090694ba99789897e23621e1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/UserDataMemberType.cs using Guid(4e7d6d5b090694ba99789897e23621e1) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '86abe4d43e15c0bd2a82d8d8dbc02858') in 0.009469 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/HardwiredDescriptors/HardwiredUserDataDescriptor.cs
+  artifactKey: Guid(e68a6f21a26414d3593a07cf99936209) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/HardwiredDescriptors/HardwiredUserDataDescriptor.cs using Guid(e68a6f21a26414d3593a07cf99936209) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '0c0a20e37e6185927a8c2a4f97c61c7c') in 0.011371 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Modules/CoreModules.cs
+  artifactKey: Guid(ea0b736032491445383db1568b651959) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Modules/CoreModules.cs using Guid(ea0b736032491445383db1568b651959) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'cf8352c64efbf2f66e2ff164f7085483') in 0.008899 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000063 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/ErrorHandlingModule.cs
+  artifactKey: Guid(25a48a75173cc44959f158f5aed1fc00) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/ErrorHandlingModule.cs using Guid(25a48a75173cc44959f158f5aed1fc00) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '8dfa4eef3ef3ddfe4ebc0f3a32a43546') in 0.009967 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000081 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Expressions/FunctionDefinitionExpression.cs
+  artifactKey: Guid(818d56204214b495cac1759ba69e62cc) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Expressions/FunctionDefinitionExpression.cs using Guid(818d56204214b495cac1759ba69e62cc) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '55d86820800dda12b089264c1103d82f') in 0.010201 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/BreakStatement.cs
+  artifactKey: Guid(d931c98bfed744a40a11ce008f739485) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/BreakStatement.cs using Guid(d931c98bfed744a40a11ce008f739485) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '48be1e7656c0a7d4b803ac1ac18c13f1') in 0.011529 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Resources/Textures/Cover Cropped.png
+  artifactKey: Guid(55501b42a8993e9439a0997230179d0b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Textures/Cover Cropped.png using Guid(55501b42a8993e9439a0997230179d0b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '03b4be03d0fe8435410a2a0608d790fc') in 0.045768 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000029 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Platforms/PlatformAutoDetector.cs
+  artifactKey: Guid(6155c702b863d4de6b65e3661d34dc44) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Platforms/PlatformAutoDetector.cs using Guid(6155c702b863d4de6b65e3661d34dc44) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'ffbd71b639d5cea60951e591fbddc128') in 0.007773 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Lexer/Token.cs
+  artifactKey: Guid(28db96375f67f40a0977eb0e231b87df) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Lexer/Token.cs using Guid(28db96375f67f40a0977eb0e231b87df) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f4187fef0304be0df2eb443de4612970') in 0.009561 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000053 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/IUserDataType.cs
+  artifactKey: Guid(e6e50fc9f2a8442a9b64c98c5d5bfefa) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/IUserDataType.cs using Guid(e6e50fc9f2a8442a9b64c98c5d5bfefa) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '12e1bb5b8d738a8806f928e49d7fc79c') in 0.007665 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000031 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Execution/VM/Processor/Processor_Errors.cs
+  artifactKey: Guid(2c4f89d27a6dc4f6c9b4b047b14ad0ae) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Execution/VM/Processor/Processor_Errors.cs using Guid(2c4f89d27a6dc4f6c9b4b047b14ad0ae) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '0cae45dd56575165ae5a4a8a80dd6843') in 0.008265 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/MemberDescriptors/ObjectCallbackMemberDescriptor.cs
+  artifactKey: Guid(caf88b714be7b4cf39d668ad94a2cdbf) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/StandardDescriptors/MemberDescriptors/ObjectCallbackMemberDescriptor.cs using Guid(caf88b714be7b4cf39d668ad94a2cdbf) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'febfa2fbb31d58d1529bbd00c7ddc501') in 0.008441 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/ChunkStatement.cs
+  artifactKey: Guid(467e042a564454047a5215038dce40d6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/ChunkStatement.cs using Guid(467e042a564454047a5215038dce40d6) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6af973b824c370291c0a355aadcb59e0') in 0.008557 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Resources/Scenarios/Navajo.asset
+  artifactKey: Guid(86adda13640b7a04f9974cf840a2eadb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Resources/Scenarios/Navajo.asset using Guid(86adda13640b7a04f9974cf840a2eadb) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '7f3d59a42c1c6a950e419b046995b8c7') in 0.010232 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Diagnostics/PerformanceResult.cs
+  artifactKey: Guid(4a35566b08a4648eb8fc450a2f474ab5) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Diagnostics/PerformanceResult.cs using Guid(4a35566b08a4648eb8fc450a2f474ab5) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '531e2dd0d6de47ca5d3213995d16e73a') in 0.009451 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000039 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Interop/Attributes/MoonSharpHideMemberAttribute.cs
+  artifactKey: Guid(9324d060638ed4b6fbd5c758f73a7860) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Interop/Attributes/MoonSharpHideMemberAttribute.cs using Guid(9324d060638ed4b6fbd5c758f73a7860) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '6fe9a1c28ce151c95c1a2df328bb5f23') in 0.009871 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Scripts/UI Scripts/EventUIScript.cs
+  artifactKey: Guid(7eddaeccbef755a49a5d6eefba6314f7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Scripts/UI Scripts/EventUIScript.cs using Guid(7eddaeccbef755a49a5d6eefba6314f7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '28d87bb811a2191d8d7684093e4fe88d') in 0.403268 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/ScriptOptions.cs
+  artifactKey: Guid(76e1b875ac6f54131b71043d3a9e1c0b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/ScriptOptions.cs using Guid(76e1b875ac6f54131b71043d3a9e1c0b) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'fa1567f8eb0e5fc49a7eed9ca2687f44') in 0.010799 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000044 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/CompositeStatement.cs
+  artifactKey: Guid(6e1daf24800e444e98cb1fbd9d7853b2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/CompositeStatement.cs using Guid(6e1daf24800e444e98cb1fbd9d7853b2) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f13c9cdc831c6ed5561938ba37351aaf') in 0.009501 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/ScopeBlockStatement.cs
+  artifactKey: Guid(908e6665aa8a94114b90c8061da39a21) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Tree/Statements/ScopeBlockStatement.cs using Guid(908e6665aa8a94114b90c8061da39a21) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'f2e1c99d8efb6ceb2d75fdaf8e436ec0') in 0.008252 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000051 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/CoreLib/JsonModule.cs
+  artifactKey: Guid(df9d3ec3d79f5431c88af4ab97b6f18a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/CoreLib/JsonModule.cs using Guid(df9d3ec3d79f5431c88af4ab97b6f18a) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: 'd1bc02057899418383846bfc4282c4bb') in 0.009200 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000036 seconds.
+  path: Assets/Plugins/MoonSharp/Debugger/DebuggerLogic/MoonSharpDebugSession.cs
+  artifactKey: Guid(8e5d177091ab64f8fbd15ad5f48d06ae) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Debugger/DebuggerLogic/MoonSharpDebugSession.cs using Guid(8e5d177091ab64f8fbd15ad5f48d06ae) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '9be5383ed460fdc2dcf6ecc77c185a8a') in 0.010713 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000034 seconds.
+  path: Assets/_Scenes/Template.unity
+  artifactKey: Guid(806cd571483d35e4aac3414e1572b809) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/_Scenes/Template.unity using Guid(806cd571483d35e4aac3414e1572b809) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '63841a1d791fa9cfacbe5ccbd12e6f97') in 0.032923 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000032 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Compatibility/Frameworks/Base/FrameworkReflectionBase.cs
+  artifactKey: Guid(f03cffebd263dcb4ab8680ce8d152968) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Compatibility/Frameworks/Base/FrameworkReflectionBase.cs using Guid(f03cffebd263dcb4ab8680ce8d152968) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '501273ea4b5186f2ec1acb1b2511c341') in 0.008969 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Loaders/InvalidScriptLoader.cs
+  artifactKey: Guid(920af4d96074142d1bc72d3d5a672d20) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Loaders/InvalidScriptLoader.cs using Guid(920af4d96074142d1bc72d3d5a672d20) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '933d75a955c6387ae9f05f787ced0bea') in 0.008883 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Compatibility/Stopwatch.cs
+  artifactKey: Guid(23ea8da0a506c1444af1949fa30dd149) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Compatibility/Stopwatch.cs using Guid(23ea8da0a506c1444af1949fa30dd149) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '2f41354d85b48d7330c25cbb999c4778') in 0.063544 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Assets/Plugins/MoonSharp/Interpreter/Modules/MoonSharpModuleAttribute.cs
+  artifactKey: Guid(647ec1caf30824863bf83c0c674b64b7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5)
+Start importing Assets/Plugins/MoonSharp/Interpreter/Modules/MoonSharpModuleAttribute.cs using Guid(647ec1caf30824863bf83c0c674b64b7) Importer(2089858483,934ff659095e30574adcf32a4c2f97b5) Generated GUIDs only implemented for interfaces!
+ -> (artifact id: '76d62b75b828e980beec98323b77205a') in 0.025261 seconds 
+========================================================================
+Received Import Request.
+  Time since last request: 174.626669 seconds.
+  path: Assets/Scripts/Logic Scripts/PlanningLogic.cs
+  artifactKey: Guid(2fa1ce1bd23f3f74485b8b6876542b29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scripts/Logic Scripts/PlanningLogic.cs using Guid(2fa1ce1bd23f3f74485b8b6876542b29) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '77a0559c242860ce3e4ad271349fa3a8') in 0.003550 seconds 
 ========================================================================
 Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.018210 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.22 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 16.67 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.234 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2235ms)
-		BeginReloadAssembly (230ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (12ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (49ms)
-		EndReloadAssembly (1789ms)
-			LoadAssemblies (177ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (574ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (104ms)
-			SetupLoadedEditorAssemblies (796ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (59ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (1ms)
-				BeforeProcessingInitializeOnLoad (210ms)
-				ProcessInitializeOnLoadAttributes (424ms)
-				ProcessInitializeOnLoadMethodAttributes (71ms)
-				AfterProcessingInitializeOnLoad (30ms)
-				EditorAssembliesLoaded (1ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (19ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 9.83 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.3 KB). Loaded Objects now: 4887.
-Memory consumption went from 161.4 MB to 161.3 MB.
-Total: 6.226500 ms (FindLiveObjects: 0.736000 ms CreateObjectMapping: 0.460800 ms MarkObjects: 4.723100 ms  DeleteObjects: 0.304300 ms)
+Unloading 47 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 48 unused Assets / (218.1 KB). Loaded Objects now: 4976.
+Memory consumption went from 75.6 MB to 75.4 MB.
+Total: 5.659500 ms (FindLiveObjects: 0.420400 ms CreateObjectMapping: 0.203800 ms MarkObjects: 4.814400 ms  DeleteObjects: 0.219700 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
@@ -1049,180 +1299,7 @@ AssetImportParameters requested are different than current active one (requested
   custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
   custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.024152 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.43 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.764 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2766ms)
-		BeginReloadAssembly (310ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (15ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (61ms)
-		EndReloadAssembly (2179ms)
-			LoadAssemblies (270ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (629ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (121ms)
-			SetupLoadedEditorAssemblies (1017ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (74ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (279ms)
-				ProcessInitializeOnLoadAttributes (524ms)
-				ProcessInitializeOnLoadMethodAttributes (101ms)
-				AfterProcessingInitializeOnLoad (36ms)
-				EditorAssembliesLoaded (1ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (23ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 13.32 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.5 KB). Loaded Objects now: 4890.
-Memory consumption went from 161.5 MB to 161.3 MB.
-Total: 6.447900 ms (FindLiveObjects: 0.447900 ms CreateObjectMapping: 0.267300 ms MarkObjects: 5.476000 ms  DeleteObjects: 0.254400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.020364 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.51 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.712 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2714ms)
-		BeginReloadAssembly (274ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (18ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (52ms)
-		EndReloadAssembly (2179ms)
-			LoadAssemblies (212ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (656ms)
-			ReleaseScriptCaches (3ms)
-			RebuildScriptCaches (136ms)
-			SetupLoadedEditorAssemblies (1014ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (73ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (252ms)
-				ProcessInitializeOnLoadAttributes (558ms)
-				ProcessInitializeOnLoadMethodAttributes (90ms)
-				AfterProcessingInitializeOnLoad (38ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (22ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 15.80 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.6 KB). Loaded Objects now: 4893.
-Memory consumption went from 161.5 MB to 161.3 MB.
-Total: 9.643200 ms (FindLiveObjects: 0.464300 ms CreateObjectMapping: 0.288000 ms MarkObjects: 8.499300 ms  DeleteObjects: 0.389200 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Prepare
-Registering precompiled user dll's ...
-Registered in 0.021954 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Projects\Unity\First-Unity-Game\Library\PackageCache\com.unity.visualscripting@1.7.7\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for UWP target not found
-Native extension for WindowsStandalone target not found
-Native extension for Android target not found
-Refreshing native plugins compatible for Editor in 1.40 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  2.606 seconds
-Domain Reload Profiling:
-	ReloadAssembly (2608ms)
-		BeginReloadAssembly (281ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (16ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (55ms)
-		EndReloadAssembly (2061ms)
-			LoadAssemblies (225ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (620ms)
-			ReleaseScriptCaches (2ms)
-			RebuildScriptCaches (118ms)
-			SetupLoadedEditorAssemblies (968ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (67ms)
-				SetLoadedEditorAssemblies (1ms)
-				RefreshPlugins (2ms)
-				BeforeProcessingInitializeOnLoad (245ms)
-				ProcessInitializeOnLoadAttributes (527ms)
-				ProcessInitializeOnLoadMethodAttributes (95ms)
-				AfterProcessingInitializeOnLoad (32ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (18ms)
-Platform modules already initialized, skipping
-Refreshing native plugins compatible for Editor in 14.78 ms, found 4 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 4398 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 44 unused Assets / (192.5 KB). Loaded Objects now: 4896.
-Memory consumption went from 161.5 MB to 161.3 MB.
-Total: 7.565000 ms (FindLiveObjects: 0.650900 ms CreateObjectMapping: 0.352800 ms MarkObjects: 6.164700 ms  DeleteObjects: 0.394400 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
   custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 

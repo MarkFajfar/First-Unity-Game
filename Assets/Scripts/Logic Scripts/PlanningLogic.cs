@@ -1,6 +1,8 @@
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +10,14 @@ using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class PlanningLogic : MonoBehaviour
+    public class PlanningLogic : MonoBehaviour, IMethodReceiver
     {
         GameManager gm;
         GameState gs;
         OperationsUIScript ui;
         ChoiceUIScript choice;
-        List<Action> planningSteps = new List<Action>();
+        ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
+        List<Action> planningSteps;
         List<bool> stepDone; 
 
         void Awake()
@@ -28,6 +31,7 @@ namespace NavajoWars
 
         void Start()
         {
+            planningSteps = new ();
             planningSteps.Add(clickedPlanning);
             planningSteps.Add(StepOne);
             planningSteps.Add(StepTwo);
@@ -37,32 +41,12 @@ namespace NavajoWars
             planningSteps.Add(StepSix);
             stepDone = new () { false, false, false, false, false, false };
         }
-
-        void OnEnable()
-        {
-            choice.OnChoiceMade += choiceManager;
-            // dice.OnDieRolled += diceManager;
-        }
-
-        void OnDisable()
-        {
-            choice.OnChoiceMade -= choiceManager;
-            // dice.OnDieRolled -= diceManager;
-        }
-
-        void choiceManager(string choiceText)
-        {
-            choiceText = "clicked" + choiceText.Replace(" ", "");
-            Type thisType = GetType();
-            MethodInfo chosenMethod = thisType.GetMethod(choiceText);
-            chosenMethod?.Invoke(this, null);
-        }
-
+               
         bool isDieRolled = false;
         bool isDieRollSucceeded = false;
         void diceManager(bool isDieRollSuccess)
         {
-
+            //if (isDieRollSuccess) do something ...
             isDieRolled = true;
         }
 
@@ -82,16 +66,18 @@ namespace NavajoWars
             if (!stepDone[1])
             {
                 gs.PersonsInPassage.Add(gs.CurrentCard.ThisCardPerson);
-                stepDone[1] = true; 
+                stepDone[1] = true;
+                gm.SaveGame();
             }
         }
 
         void StepTwo()
         {
             ui.headline.text = "Planning\nStep Two";
-            ui.message.text = $"Collect {gs.ElderDisplay.Sum()} AP for Elders, so now there are {gs.AP + gs.ElderDisplay.Sum()} AP. Advance each Elder one box to the right. Elders in the right-most box stay put.";
+            ui.message.text = "Advance each Elder one box to the right. Elders in the right-most box stay put.";
             if (!stepDone[2])
             {
+                ui.message.text += $"Collect {gs.ElderDisplay.Sum()} AP for Elders, so now there are {gs.AP + gs.ElderDisplay.Sum()} AP."; 
                 gs.AP += gs.ElderDisplay.Sum();
                 for (int i = 6; i > 0; i--)
                 {
@@ -99,7 +85,10 @@ namespace NavajoWars
                     gs.ElderDisplay[i - 1] = 0;
                 }
                 stepDone[2] = true;
+                gm.SaveGame();
             }
+            else
+            { ui.message.text += "Collect one AP for each Elder."; }
         }
 
         void StepThree()
@@ -125,7 +114,7 @@ namespace NavajoWars
         IEnumerator elderActionCoroutine()
         {
             ui.hideBackNext();
-            ui.message.text = " ";
+            ui.message.text = "";
             for (int i = 1; i < gs.ElderDisplay.Length; i++)
             {
                 if (gs.ElderDisplay[i] > 0)
@@ -133,21 +122,22 @@ namespace NavajoWars
                     int j = 0;
                     while (j < gs.ElderDisplay[i])
                     {
-                        int[] targetRoll = { 0, 1, 2, 2, 3, 4, 5 };
                         ui.headline.text = $"{gs.ElderDisplay[i] - j} Elder Action(s) in\nSlot {i}. Roll Die.";
-                        ui.message.text = $"You need a {targetRoll[i]} or less.";
+                        if (!isDieRollSucceeded) ui.message.text = ""; // no need to save message if roll failed
+                        ui.message.text += $"For this roll you need a {gs.ElderTarget[i]} or less.";
                         isDieRolled = false;
                         isDieRollSucceeded = false;
-                        choice.DisplayChoices(new List<string> { "Roll Succeeded", "Roll Failed" });
+                        choice.DisplayChoices(this, new List<string> {"Roll Succeeded", "Roll Failed" });
                         yield return new WaitUntil(() => isDieRolled);
                         if (isDieRollSucceeded)
                         {
+                            ui.message.text = " ";
                             ui.headline.text = $"{gs.ElderDisplay[i] - j} Elder Action(s) in\nSlot {i}.  Choose Action."; 
                             isElderActionComplete = false;
                             List<string> elderChoices = new() { "Add 1 AP", "Change Family Ferocity" };
                             if (gs.CP > gs.MP) elderChoices.Add("Add 1 MP for 1 CP");
                             if (gs.MP > gs.CP) elderChoices.Add("Add 1 CP for 1 MP");
-                            choice.DisplayChoices(elderChoices);
+                            choice.DisplayChoices(this, elderChoices);
                             yield return new WaitUntil(() => isElderActionComplete);
                         }
                         j++;
@@ -157,6 +147,7 @@ namespace NavajoWars
             ui.headline.text = "Elder Actions Completed";
             stepDone[3] = true;
             ui.showBackNext();
+            gm.SaveGame();
         }
 
         IEnumerator dieRollCoroutine(Action<bool> onFinish)
@@ -183,20 +174,82 @@ namespace NavajoWars
 
         public void clickedAdd1AP()
         {
-            ui.message.text = "Adding 1 AP";
+            ui.message.text = "Adding 1 AP\n";
             gs.AP++;
             isElderActionComplete = true;
         }
 
-        public void clickedChangeFamilyFerocity()
+        List<string> selectedF = new ();
+        GameState.Family selectedFamily;
+        int selectedIndex;
+        List<string> listFerocityNames = new ();
+        public async void clickedChangeFamilyFerocity()
         {
-            ui.message.text = "Another Coroutine to change ferocity??";
+            ui.message.text = "Change one Family +/- 1. If no Man, not over 0. If increased and MP<5, add 1 MP. If decreased and CP<5, add 1 CP. Select Family.";
+            listFerocityNames = gs.Families.Where(f => f.IsActive && f.HasMan && !selectedF.Contains(f.Name)).Select(f => f.Name).ToList();
+
+                var result = new TaskCompletionSource<string>();
+                // redefine the event handler to refer to this specific task
+                // this code is the same every time, it just refers to a new instance of result?
+                choiceEventHandler = (s,e) =>
+                {
+                    result.SetResult(e.ChoiceText); 
+                    choice.ChoiceMadeEvent -= choiceEventHandler;
+                };
+                //choice.ChoiceMadeEvent += (s, e) => result.SetResult(e.ChoiceText);
+                choice.ChoiceMadeEvent += choiceEventHandler;
+                choice.DisplayChoicesEvent(listFerocityNames);
+                await result.Task;
+                string choiceText = result.Task.Result;
+
+            // convert back to family name and add to end of list
+            choiceText = choiceText.Replace("clicked", "");//.Insert(6, " ");  // choiceText still has space
+            selectedF.Add(choiceText);
+            //selectedIndex = gs.Families.FindIndex(f => f.Name == choiceText);
+            selectedFamily = gs.Families.First(f => f.Name == choiceText);
+            string MPremind = gs.MP < 5 ? "Increase will add 1 MP. " : "Increase will not add MP. ";
+            string CPremind = gs.CP < 5 ? "Decrease will add 1 CP. " : "Decrease will not add CP.";
+            if (selectedFamily.Ferocity == 3)
+            {
+                ui.message.text = CPremind;
+                choice.DisplayChoices(new List<string> { "Decrease" });
+            }
+            else if (selectedFamily.Ferocity == 0)
+            {
+                ui.message.text = MPremind;
+                choice.DisplayChoices(new List<string> { "Increase" });
+            }
+            else
+            {
+                ui.message.text = $"Increase or Decrease Ferocity for {choiceText}? " + MPremind + CPremind;
+                choice.DisplayChoices(new List<string> { "Increase", "Decrease" }); 
+            }
+        }
+
+        public void clickedIncrease()
+        {
+            selectedFamily.Ferocity++; // gs.Families[selectedIndex].Ferocity++;
+            gs.MP += gs.MP < 5 ? 1 : 0;
+            ui.message.text = $"{selectedFamily.Name} Ferocity is now {selectedFamily.Ferocity} and there are {gs.MP} MP.\n";
+            print($"Ferocity A: {gs.Families[0].Ferocity} B: {gs.Families[1].Ferocity} C: {gs.Families[2].Ferocity}");
+            print($"Evasion A: {gs.Families[0].Evasion} B: {gs.Families[1].Evasion} C: {gs.Families[2].Evasion}");
             isElderActionComplete = true;
         }
 
+        public void clickedDecrease()
+        {
+            selectedFamily.Ferocity--;
+            gs.CP += gs.CP < 5 ? 1 : 0;
+            ui.message.text = $"{gs.Families[selectedIndex].Name} Ferocity is now {gs.Families[selectedIndex].Ferocity} and there are {gs.CP} CP.\n";
+            print($"Ferocity A: {gs.Families[0].Ferocity} B: {gs.Families[1].Ferocity} C: {gs.Families[2].Ferocity}");
+            print($"Evasion A: {gs.Families[0].Evasion} B: {gs.Families[1].Evasion} C: {gs.Families[2].Evasion}");
+            isElderActionComplete = true;
+        }
+
+
         public void clickedAdd1MPfor1CP()
         {
-            ui.message.text = "Adding 1 MP and Reducing CP by 1";
+            ui.message.text = "Adding 1 MP and Reducing CP by 1\n";
             gs.MP++;
             gs.CP--;
             isElderActionComplete = true;
@@ -204,16 +257,31 @@ namespace NavajoWars
 
         public void clickedAdd1CPfor1MP()
         {
-            ui.headline.text = "Adding 1 CP and Reducing MP by 1";
+            ui.message.text = "Adding 1 CP and Reducing MP by 1\n";
             gs.CP++;
             gs.MP--;
             isElderActionComplete = true;
         }
 
-        void StepFour()
+        async void StepFour()
         {
+            gs.TradeGoodsMax = 3; // delete after testing
             ui.headline.text = "Planning\nStep Four";
-            ui.message.text = "Step Four";
+            int tgAvailable = gs.TradeGoodsMax - gs.TradeGoodsHeld;
+            if (gs.CP <= 0 || gs.AP <= 0 || tgAvailable <= 0)
+            {
+                ui.message.text = "Not possible to use CP to buy Trade Goods.";
+                stepDone[4] = true;
+            }
+            else
+            {
+                int toSpend = Math.Max(gs.Families.Where(f => f.HasWoman).Count(), tgAvailable);
+                ui.hideBackNext();
+                ui.message.text = $"You may spend up to {toSpend} AP to purchase Trade Goods. How many?";
+                List<string> buttonsSpend = new();
+                for (int i = 0; i < (toSpend + 1); i++) buttonsSpend.Add((i).ToString());
+                choice.DisplayChoices(buttonsSpend);
+            }
         }
 
         void StepFive()

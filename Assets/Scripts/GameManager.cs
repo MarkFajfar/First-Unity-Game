@@ -16,20 +16,13 @@ namespace NavajoWars
         GameState gs;
 
         Scene currentScene;
-        IsUIScript currentUIScript;
+        //IsUIScript currentUIScript;
         GameObject currentGameObjectUI;
-
-        // probably don't need references to all the scripts
-        MainMenuUIScript mainMenuUIScript;
-        CardDrawUIScript cardDrawUIScript;       
-
+   
         void Awake()
         {
             if (Instance)
-            {
-                Destroy(gameObject);
-                return;
-            }
+            { Destroy(gameObject); return; }
             Instance = this;
             DontDestroyOnLoad(gameObject);
             gs = GetComponent<GameState>();
@@ -44,39 +37,16 @@ namespace NavajoWars
         }
         
         // initialize main menu
-        internal void checkForSavedGame()
+        internal void checkForSavedGame(MainMenuUIScript mainMenu)
         {
+            
             string path = Application.persistentDataPath + "/savefile.json";
             if (File.Exists(path))
-            { currentGameObjectUI.SendMessage("showLoadPanel"); }
+            { mainMenu.showLoadPanel(); }
             else
-            { currentGameObjectUI.SendMessage("showScenarios"); }
+            { mainMenu.showScenarios(); }
         }
 
-        // call from main menu to start a new game
-        public void StartNewGame(Scenario scenario)
-        {
-        gs.ChosenScenario = scenario;
-        gs.AP = scenario.AP;
-        gs.CP = scenario.CP;
-        gs.MP = scenario.MP;
-        gs.Ferocity = scenario.Ferocity;
-        gs.Morale = scenario.Morale;
-            
-        gs.FamilyA.IsActive = scenario.IsActiveFamilyA;
-            if (gs.FamilyA.IsActive) gs.Families.Add(gs.FamilyA);
-        gs.FamilyB.IsActive = scenario.IsActiveFamilyB;
-            if (gs.FamilyB.IsActive) gs.Families.Add(gs.FamilyB);
-        gs.FamilyC.IsActive = scenario.IsActiveFamilyC;
-            if (gs.FamilyC.IsActive) gs.Families.Add(gs.FamilyC);
-        gs.FamilyD.IsActive = scenario.IsActiveFamilyD;
-            if (gs.FamilyD.IsActive) gs.Families.Add(gs.FamilyD);
-        gs.FamilyE.IsActive = scenario.IsActiveFamilyE;
-            if (gs.FamilyE.IsActive) gs.Families.Add(gs.FamilyE);
-        gs.FamilyF.IsActive = scenario.IsActiveFamilyF;
-            if (gs.FamilyF.IsActive) gs.Families.Add(gs.FamilyF);
-        LoadNewScene("CardDraw");
-        }
 
         // save and load functions
         public void SaveGame()
@@ -98,7 +68,7 @@ namespace NavajoWars
             string path = Application.persistentDataPath + "/savefile.json";
             File.Copy(path, Application.persistentDataPath + "/savefile.bak", true);
             if (File.Exists(path)) File.Delete(path); 
-            checkForSavedGame();
+            checkForSavedGame(GameObject.Find("MainMenuUI").GetComponent<MainMenuUIScript>());
         }
 
         public void ExitGame()
@@ -122,10 +92,11 @@ namespace NavajoWars
 
         void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
         {
-            currentScene = scene;
-            currentGameObjectUI = GameObject.FindWithTag("UI"); 
-            currentUIScript = currentGameObjectUI.GetComponent<IsUIScript>();
-            // use IsUIScript to call any method in interface
+            // wait to see which of this is necessary
+            //currentScene = scene; // stored in gs
+            //currentGameObjectUI = GameObject.FindWithTag("UI"); 
+            //currentUIScript = currentGameObjectUI.GetComponent<IsUIScript>();
+            // use IsUIScript or IsMethodReceiver to call any method in interface
             // can also use:  
             // currentGameObjectUI.SendMessage("SayHello");
             

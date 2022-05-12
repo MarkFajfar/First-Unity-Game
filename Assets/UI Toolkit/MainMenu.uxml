@@ -2,7 +2,7 @@
     <Style src="project://database/Assets/UI%20Toolkit/MainStyles.uss?fileID=7433441132597879392&amp;guid=5c28875138ec85a48a15204caaad60cc&amp;type=3#MainStyles" />
     <ui:VisualElement name="Root" style="flex-grow: 1; align-items: center;">
         <ui:Label text="Choose a Scenario" display-tooltip-when-elided="true" name="Headline" class="Headline" style="top: 3%; flex-wrap: wrap;" />
-        <ui:VisualElement name="ButtonPanel" style="align-items: center; justify-content: center; visibility: visible; width: 100%; height: 55%; position: absolute; top: 12%; transition-timing-function: ease-in-out-bounce;">
+        <ui:VisualElement name="ButtonPanel" style="align-items: center; justify-content: center; visibility: hidden; width: 100%; height: 55%; position: absolute; top: 12%; transition-timing-function: ease-in-out-bounce;">
             <ui:Button text="Rise of the People" display-tooltip-when-elided="true" name="Rise" class="ButtonMenu" />
             <ui:Button text="Los Dueños Del Mundo" display-tooltip-when-elided="true" name="Mundo" class="ButtonMenu" />
             <ui:Button text="A Broken Country" display-tooltip-when-elided="true" name="Broken" class="ButtonMenu" />
@@ -14,12 +14,14 @@
             <ui:Button text="Load Saved Game" display-tooltip-when-elided="true" name="LoadSave" class="ButtonMenu" />
             <ui:Button text="Start New Game" display-tooltip-when-elided="true" name="NewGame" class="ButtonMenu" />
         </ui:VisualElement>
-        <ui:Label text="Place Starting Families In Play: A, B, C (any Ferocity) in any Area of Shiprock, San Juan Valley, and Canyon de Chelly. Place a man, woman, and child counter in each Family&apos;s Family Box. Place all remaining Family Counters into the holding spaces of each Family Box." display-tooltip-when-elided="true" name="viewSetup" style="justify-content: flex-start; align-items: flex-start; flex-wrap: wrap; width: 95%; height: 75%; bottom: 0; position: absolute; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); background-color: rgb(199, 171, 159); -unity-text-align: upper-left; font-size: 72px; border-top-left-radius: 24px; border-bottom-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; padding-left: 12px; padding-right: 12px; padding-top: 12px; padding-bottom: 12px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; visibility: hidden; white-space: normal;">
+        <ui:Label text="Select the Family&apos;s&#10;Location and Ferocity" display-tooltip-when-elided="true" name="viewSetup" style="justify-content: flex-start; align-items: flex-start; flex-wrap: wrap; width: 95%; height: 75%; bottom: 0; position: absolute; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); background-color: rgb(199, 171, 159); -unity-text-align: upper-left; font-size: 72px; border-top-left-radius: 24px; border-bottom-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; padding-left: 12px; padding-right: 12px; padding-top: 12px; padding-bottom: 12px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; visibility: visible; white-space: normal; color: rgb(0, 0, 0);">
             <ui:Button text="Back" display-tooltip-when-elided="true" name="Back" class="BackNext" style="visibility: hidden;" />
             <ui:Button text="Next" display-tooltip-when-elided="true" name="Next" class="BackNext" style="left: auto; right: 5%; visibility: hidden;" />
             <ui:Button text="Confirm" display-tooltip-when-elided="true" name="Confirm" class="BackNext" style="left: auto; right: 5%; width: 30%; visibility: hidden;" />
             <ui:Button text="Back" display-tooltip-when-elided="true" name="LoadBack" class="BackNext" style="visibility: hidden;" />
             <ui:Button text="Confirm" display-tooltip-when-elided="true" name="LoadConfirm" class="BackNext" style="left: auto; right: 5%; width: 30%; visibility: hidden;" />
+            <ui:RadioButtonGroup value="-1" name="Locations" style="position: absolute; top: 20%; left: 5%; height: 55%; width: 40%; flex-direction: column; align-items: flex-start; justify-content: space-around; font-size: 60px; -unity-text-align: middle-left; visibility: hidden;" />
+            <ui:RadioButtonGroup value="-1" name="Ferocities" style="position: absolute; top: 20%; left: auto; height: 55%; width: 35%; flex-direction: column; align-items: flex-end; justify-content: space-around; font-size: 60px; -unity-text-align: middle-left; visibility: hidden; right: 10%;" />
         </ui:Label>
         <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="BackNext ButtonQuit" />
     </ui:VisualElement>

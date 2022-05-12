@@ -55,7 +55,7 @@ namespace NavajoWars
             print(SceneManager.GetActiveScene().name);
         }
 
-        [MenuItem("Utilities/CreateSO")]
+        //[MenuItem("Utilities/CreateSO")]
         public static void CreateSO()
         {
             Card cardEvent = ScriptableObject.CreateInstance("Card") as Card;

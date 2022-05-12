@@ -11,18 +11,21 @@ namespace NavajoWars
     {
         GameManager gm;
         GameState gs;
+        SetupLogic setup;
 
-        Label headline;
+        public Label headline;
         VisualElement buttonPanel;
         VisualElement loadPanel;
         Button loadSave;
         Button newGame;
-        Label viewSetup;
-        Button back;
-        Button next;
+        public Label viewSetup;
+        public Button back;
+        public Button next;
         Button confirm;
         Button loadBack;
         Button loadConfirm;
+        public RadioButtonGroup locations;
+        public RadioButtonGroup ferocities;
         Button quit;
 
         Scenario ChosenScenario;
@@ -30,10 +33,11 @@ namespace NavajoWars
 
         void Awake()
         {
-            //""The Awake function is called for each object in the scene at the time when the scene loads. All the Awakes will have finished before the first Start is called. Code in a Start function can make use of other initializations previously carried out in the Awake phase."
+            //"The Awake function is called for each object in the scene at the time when the scene loads. All the Awakes will have finished before the first Start is called. Code in a Start function can make use of other initializations previously carried out in the Awake phase."
             var gmobj = GameObject.FindWithTag("GameController");
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
+            setup = gameObject.GetComponent<SetupLogic>();
         }
 
         void OnEnable()
@@ -46,7 +50,7 @@ namespace NavajoWars
         {
             // called if Scene is reloaded
             print("Start Main Menu");
-            gm.checkForSavedGame();
+            gm.checkForSavedGame(this);
         }
 
         public void getVisualElements()
@@ -62,6 +66,9 @@ namespace NavajoWars
             confirm = root.Q<Button>("Confirm");
             loadBack = root.Q<Button>("LoadBack");
             loadConfirm = root.Q<Button>("LoadConfirm");
+
+            locations = root.Q<RadioButtonGroup>("Locations");
+            ferocities = root.Q<RadioButtonGroup>("Ferocities");
 
             loadPanel = root.Q<VisualElement>("LoadPanel");
             loadSave = root.Q<Button>("LoadSave");
@@ -160,9 +167,17 @@ namespace NavajoWars
 
         void confirmClicked()
         {
-            deInitializeButtons();
-            gm.StartNewGame(ChosenScenario); 
-        }
+            //deInitializeButtons();
+            //show setup selection buttons
+            //new back and confirm functions
+            confirm.visible = false;
+            next.visible = true;
+            back.clicked -= backClicked;
+            next.clicked -= nextClicked;
+            back.clicked += setup.backFamily;
+            next.clicked += setup.nextFamily;
+            setup.SetupNewGame(ChosenScenario); 
+        }       
 
         void deInitializeButtons() // what happens to buttons when scene changes?
         {

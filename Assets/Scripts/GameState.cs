@@ -10,13 +10,13 @@ namespace NavajoWars
     public enum CardType { Operations, Ceremony, Event }
 
     [Serializable]
-    public class GameState : MonoBehaviour
-    {
+    public class GameState : MonoBehaviour 
+    {       
         //public string chosenScenarioName;
         public Scenario ChosenScenario
         { get => chosenScenario; set => chosenScenario = value; }
         [SerializeField] Scenario chosenScenario;
-        
+
         public string CurrentSceneName
         { get => currentSceneName; set => currentSceneName = value; }
         [SerializeField] string currentSceneName;
@@ -29,7 +29,7 @@ namespace NavajoWars
         [SerializeField] int currentCardNum;
 
         public List<int> PlayedCards = new();
- 
+
         public Card CurrentCard
         { get => currentCard; set => currentCard = value; }
         [SerializeField] Card currentCard;
@@ -38,15 +38,16 @@ namespace NavajoWars
         public List<Card> EventCardsInPlay = new();
         public List<Person> PersonsInPassage = new();
         public int[] ElderDisplay = { 1, 1, 1, 0, 0, 0, 0 };
+        public readonly int[] ElderTarget = { 0, 1, 2, 2, 3, 4, 5 };
 
         public int AP
-        { get => ap; set => ap = value; }
-        [SerializeField] int ap; 
+        { get => ap; set => ap = Math.Clamp(value, 0, 19); }
+        [SerializeField] int ap;
         public int CP
-        { get => cp; set => cp = value; }
+        { get => cp; set => cp = Math.Clamp(value, 0, 19); }
         [SerializeField] int cp;
         public int MP
-        { get => mp; set => mp = value; }
+        { get => mp; set => mp = Math.Clamp(value, 0, 19); }
         [SerializeField] int mp;
         public int Morale
         { get => morale; set => morale = value; }
@@ -60,14 +61,22 @@ namespace NavajoWars
         public int EnemyRaid
         { get => enemyRaid; set => enemyRaid = value; }
         [SerializeField] int enemyRaid;
+
+        // Game has 9 TradeGoods tokens, and 2 more from intruders; each scenario starts with 3
         public int TradeGoodsHeld
-        { get => tradeGoodsHeld; set => tradeGoodsHeld = value; }
+        { get => tradeGoodsHeld; set => tradeGoodsHeld = Math.Clamp(value, 0, 11); }
         [SerializeField] int tradeGoodsHeld;
+        public int TradeGoodsMax // is this the same in every scenario?
+        { get => tradeGoodsMax; set => tradeGoodsMax = Math.Clamp(value, 0, 11); }
+        [SerializeField] int tradeGoodsMax;
+
+        // Game has 1 Firearms token, and 4 more from intruders
         public int Firearms
-        { get => firearms; set => firearms = value; }
+        { get => firearms; set => firearms = Math.Clamp(value, 0, 5); }
         [SerializeField] int firearms;
 
-        //cubes?
+        // sheep and horses in resources; some scenarios start with resources
+        // cubes
 
         [Serializable]
         public class Family
@@ -88,19 +97,22 @@ namespace NavajoWars
             [SerializeField] Territory isWhere = Territory.Splitrock;
             public int Ferocity { get => ferocity; set => ferocity = value; }
             [SerializeField] int ferocity = 0;
+
+            int[] evReference = { 2, 1, 0, -1 };
+            public int Evasion
+            { get { return evReference[Ferocity]; } }
+            //public int Evasion { get => evasion; set => evasion = value; }
+            //[SerializeField] int evasion = 0;
         }
 
-        public Family FamilyA = new() { Name = "A" };
-        public Family FamilyB = new() { Name = "B" };
-        public Family FamilyC = new() { Name = "C" };
-        public Family FamilyD = new() { Name = "D" };
-        public Family FamilyE = new() { Name = "E" };
-        public Family FamilyF = new() { Name = "F" };
+        [HideInInspector] public Family FamilyA;
+        [HideInInspector] public Family FamilyB;
+        [HideInInspector] public Family FamilyC;
+        [HideInInspector] public Family FamilyD;
+        [HideInInspector] public Family FamilyE;
+        [HideInInspector] public Family FamilyF;
 
         public List<Family> Families = new();
-       
-        // add to list of families when starting scenario
-        //{ FamilyA, FamilyB, FamilyC, FamilyD, FamilyE, FamilyF };
     }
 }
  

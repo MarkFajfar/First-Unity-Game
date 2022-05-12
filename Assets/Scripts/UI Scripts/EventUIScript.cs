@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class EventUIScript : MonoBehaviour, IsUIScript
+    public class EventUIScript : MonoBehaviour, IsUIScript, IMethodReceiver
     {
         GameManager gm;
         GameState gs;

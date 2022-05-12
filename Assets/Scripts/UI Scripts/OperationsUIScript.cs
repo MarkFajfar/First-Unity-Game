@@ -6,11 +6,12 @@ using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class OperationsUIScript : MonoBehaviour, IsUIScript
+    public class OperationsUIScript : MonoBehaviour, IsUIScript, IMethodReceiver
     {
         GameManager gm;
         GameState gs;
         ChoiceUIScript choice;
+        ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
         PlanningLogic planning;
 
         void Awake()
@@ -24,13 +25,7 @@ namespace NavajoWars
 
         void OnEnable()
         {
-            choice.OnChoiceMade += choiceManager;
             getVisualElements();
-        }
-
-        void OnDisable()
-        {
-            choice.OnChoiceMade -= choiceManager;
         }
 
         public Label headline;
@@ -60,15 +55,6 @@ namespace NavajoWars
             quit.clicked += quitClicked;
         }
 
-        void choiceManager(string choiceText)
-        {
-            choiceText = "clicked" + choiceText.Replace(" ", "");
-            Type thisType = GetType();
-            MethodInfo chosenMethod = thisType.GetMethod(choiceText);
-            //must be a public method - to be called from another script
-            chosenMethod?.Invoke(this, null);
-        }
-
         void Start()
         {
             // reset UI for reload
@@ -87,7 +73,8 @@ namespace NavajoWars
             if (gs.AP >= gs.CurrentCard.Points[0])
             {
                 headline.text = $"Preempt for {gs.CurrentCard.Points[0]} AP?";
-                choice.DisplayChoices(new List<string> { "Yes Preempt", "Do Not Preempt" });
+                choice.DisplayChoices(this, new List<string> { "Yes Preempt", "Do Not Preempt" });
+                // with "this" could use "Yes" or "No" if not used elsewhere in this script
             }
             else
             {
@@ -101,6 +88,7 @@ namespace NavajoWars
             gs.AP -= gs.CurrentCard.Points[0];
             headline.text = $"Subtracted {gs.CurrentCard.Points[0]} AP.\nSelect One Operation";
             choice.DisplayChoices(new List<string> { "Planning", "Take Actions", "Passage of Time" });
+            // cannot use "this" because response back to different scripts
         }
 
         public void clickedDoNotPreempt() => EnemyOperation();

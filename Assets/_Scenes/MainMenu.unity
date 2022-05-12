@@ -266,6 +266,7 @@ GameObject:
   - component: {fileID: 944805875}
   - component: {fileID: 944805874}
   - component: {fileID: 944805873}
+  - component: {fileID: 944805876}
   m_Layer: 5
   m_Name: MainMenuUI
   m_TagString: UI
@@ -316,6 +317,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &944805876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944805872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb5aa20034d44941afab2c50651f3cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1151835579
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,6 +392,11 @@ MonoBehaviour:
   currentCardNum: 0
   PlayedCards: 
   currentCard: {fileID: 0}
+  CeremonyCardsInHand: []
+  EventCardsInPlay: []
+  PersonsInPassage: 
+  ElderDisplay: 01000000010000000100000000000000000000000000000000000000
+  ElderTarget: 01000000010000000100000001000000010000000100000001000000
   ap: 0
   cp: 0
   mp: 0
@@ -387,6 +405,7 @@ MonoBehaviour:
   enemyAP: 0
   enemyRaid: 0
   tradeGoodsHeld: 0
+  tradeGoodsMax: 0
   firearms: 0
   FamilyA:
     name: A
@@ -397,6 +416,7 @@ MonoBehaviour:
     hasHorse: 0
     isWhere: 1
     ferocity: 0
+    evasion: 0
   FamilyB:
     name: B
     isActive: 0
@@ -406,6 +426,7 @@ MonoBehaviour:
     hasHorse: 0
     isWhere: 1
     ferocity: 0
+    evasion: 0
   FamilyC:
     name: C
     isActive: 0
@@ -415,6 +436,7 @@ MonoBehaviour:
     hasHorse: 0
     isWhere: 1
     ferocity: 0
+    evasion: 0
   FamilyD:
     name: D
     isActive: 0
@@ -424,6 +446,7 @@ MonoBehaviour:
     hasHorse: 0
     isWhere: 1
     ferocity: 0
+    evasion: 0
   FamilyE:
     name: E
     isActive: 0
@@ -433,6 +456,7 @@ MonoBehaviour:
     hasHorse: 0
     isWhere: 1
     ferocity: 0
+    evasion: 0
   FamilyF:
     name: F
     isActive: 0
@@ -442,6 +466,7 @@ MonoBehaviour:
     hasHorse: 0
     isWhere: 1
     ferocity: 0
+    evasion: 0
   Families: []
 --- !u!1 &1920526825
 GameObject:
