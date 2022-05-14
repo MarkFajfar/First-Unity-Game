@@ -40,13 +40,10 @@ namespace NavajoWars
 
             // resources
 
-           /* gs.fams.Add(gs.famA);
-            gs.fams.Add(gs.famB);
-            gs.famA.IsWhere = Territory.Splitrock;
-            gs.famB.IsWhere = Territory.SanJuan;
-            gs.famA.Ferocity = 1;
-            gs.famB.Ferocity = 2;
-           */
+            gs.CeremonyCardsInHand = new();
+            gs.EventCardsInPlay = new();
+            gs.PersonsInPassage = new();
+            gs.ElderDisplay = new int[7] { 1, 1, 1, 0, 0, 0, 0 };
 
             gs.FamilyA = new() { Name = "Family A" };
             gs.FamilyB = new() { Name = "Family B" };
@@ -54,6 +51,8 @@ namespace NavajoWars
             gs.FamilyD = new() { Name = "Family D" };
             gs.FamilyE = new() { Name = "Family E" };
             gs.FamilyF = new() { Name = "Family F" };
+
+            gs.Families = new();
 
             gs.FamilyA.IsActive = scenario.IsActiveFamilyA;
             if (gs.FamilyA.IsActive) gs.Families.Add(gs.FamilyA);
@@ -112,6 +111,7 @@ namespace NavajoWars
         {
             fNum--;
             if (fNum < 0) ui.viewSetup.text = "To select a new scenario, restart the game.";
+            // call ui.Start(); ?
             else assignFamilyValues();
         }
     }

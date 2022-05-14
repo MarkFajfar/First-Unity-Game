@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class PlanningLogic : MonoBehaviour, IMethodReceiver
+    public class PlanningLogic : MonoBehaviour, IReceive
     {
         GameManager gm;
         GameState gs;
@@ -181,31 +181,17 @@ namespace NavajoWars
 
         List<string> selectedF = new ();
         GameState.Family selectedFamily;
-        int selectedIndex;
         List<string> listFerocityNames = new ();
         public async void clickedChangeFamilyFerocity()
         {
             ui.message.text = "Change one Family +/- 1. If no Man, not over 0. If increased and MP<5, add 1 MP. If decreased and CP<5, add 1 CP. Select Family.";
             listFerocityNames = gs.Families.Where(f => f.IsActive && f.HasMan && !selectedF.Contains(f.Name)).Select(f => f.Name).ToList();
 
-                var result = new TaskCompletionSource<string>();
-                // redefine the event handler to refer to this specific task
-                // this code is the same every time, it just refers to a new instance of result?
-                choiceEventHandler = (s,e) =>
-                {
-                    result.SetResult(e.ChoiceText); 
-                    choice.ChoiceMadeEvent -= choiceEventHandler;
-                };
-                //choice.ChoiceMadeEvent += (s, e) => result.SetResult(e.ChoiceText);
-                choice.ChoiceMadeEvent += choiceEventHandler;
-                choice.DisplayChoicesEvent(listFerocityNames);
-                await result.Task;
-                string choiceText = result.Task.Result;
+            (int choiceIndex, string choiceText) result = await IReceive.GetChoiceAsync(listFerocityNames);
 
             // convert back to family name and add to end of list
-            choiceText = choiceText.Replace("clicked", "");//.Insert(6, " ");  // choiceText still has space
+            string choiceText = result.choiceText.Replace("clicked", "");//.Insert(6, " ");  // choiceText still has space
             selectedF.Add(choiceText);
-            //selectedIndex = gs.Families.FindIndex(f => f.Name == choiceText);
             selectedFamily = gs.Families.First(f => f.Name == choiceText);
             string MPremind = gs.MP < 5 ? "Increase will add 1 MP. " : "Increase will not add MP. ";
             string CPremind = gs.CP < 5 ? "Decrease will add 1 CP. " : "Decrease will not add CP.";
@@ -240,7 +226,7 @@ namespace NavajoWars
         {
             selectedFamily.Ferocity--;
             gs.CP += gs.CP < 5 ? 1 : 0;
-            ui.message.text = $"{gs.Families[selectedIndex].Name} Ferocity is now {gs.Families[selectedIndex].Ferocity} and there are {gs.CP} CP.\n";
+            ui.message.text = $"{selectedFamily.Name} Ferocity is now {selectedFamily.Ferocity} and there are {gs.CP} CP.\n";
             print($"Ferocity A: {gs.Families[0].Ferocity} B: {gs.Families[1].Ferocity} C: {gs.Families[2].Ferocity}");
             print($"Evasion A: {gs.Families[0].Evasion} B: {gs.Families[1].Evasion} C: {gs.Families[2].Evasion}");
             isElderActionComplete = true;
@@ -265,29 +251,84 @@ namespace NavajoWars
 
         async void StepFour()
         {
-            gs.TradeGoodsMax = 3; // delete after testing
             ui.headline.text = "Planning\nStep Four";
             int tgAvailable = gs.TradeGoodsMax - gs.TradeGoodsHeld;
-            if (gs.CP <= 0 || gs.AP <= 0 || tgAvailable <= 0)
+            if (gs.CP <= 0 || gs.AP <= 0 || tgAvailable <= 0 || stepDone[4])
             {
                 ui.message.text = "Not possible to use CP to buy Trade Goods.";
                 stepDone[4] = true;
             }
             else
             {
-                int toSpend = Math.Max(gs.Families.Where(f => f.HasWoman).Count(), tgAvailable);
+                int toSpend = Math.Min(gs.Families.Where(f => f.HasWoman).Count(), tgAvailable);
                 ui.hideBackNext();
                 ui.message.text = $"You may spend up to {toSpend} AP to purchase Trade Goods. How many?";
-                List<string> buttonsSpend = new();
-                for (int i = 0; i < (toSpend + 1); i++) buttonsSpend.Add((i).ToString());
-                choice.DisplayChoices(buttonsSpend);
+
+                List<string> choices = new();
+                for (int i = 0; i < (toSpend + 1); i++) choices.Add((i).ToString());
+
+                (int choiceIndex, string choiceText) result = await IReceive.GetChoiceAsync(choices);
+
+                gs.AP -= result.choiceIndex;
+                gs.TradeGoodsHeld += result.choiceIndex;
+                ui.message.text = $"Spending {result.choiceIndex} AP leaves {gs.AP} AP.\n{gs.TradeGoodsHeld} Trade Goods Held.";
+                stepDone[4] = true;
+                ui.showBackNext();
+                gm.SaveGame();
             }
         }
 
-        void StepFive()
+        async void StepFive()
         {
             ui.headline.text = "Planning\nStep Five";
-            ui.message.text = "Step Five";
+            bool isWarInstr = true;
+            bool isDipInstr = true;
+            // check if any needed Instruction is on the Active Column
+            if (gs.AP <= 0 || (gs.MP <= 0 && gs.TradeGoodsHeld <= 0) || (!isWarInstr && !isDipInstr) || stepDone[5])
+            {
+                ui.message.text = "Not possible to conduct Tribal Warfare or Tribal Diplomacy. (Requires at least 1 AP and either 1 MP or 1 Trade Good. Also requires Ute or Comanche Instruction in Active Column.)";
+                stepDone[5] = true;
+            }
+            else 
+            {
+                ui.hideBackNext();
+                // if used in loop, needs to be declared before loop, even if just tuple
+                (int choiceIndex, string choiceText) result;
+                var i = -1;
+                foreach (var family in gs.Families.Where(f => f.HasMan))
+                {
+                    if (gs.AP > 0 && (gs.MP > 0 || gs.TradeGoodsHeld > 0))
+                    {
+                        i++;
+                        print("loop " + i);
+                        bool canWar = gs.MP > 0 && isWarInstr;
+                        bool canDip = gs.TradeGoodsHeld > 0 && isDipInstr;
+                        string askWar = canWar? "spend 1 MP to conduct Tribal Warfare" : "";
+                        string askDip = canDip? "spend 1 Trade Good to conduct Tribal Diplomacy" : "";
+                        string or = (canWar && canDip) ? ", or " : "";
+                        ui.message.text = $"For {family.Name}, " + askWar + or + askDip + "?";
+
+                        List<string> choices = new() { "No" };
+                        if (canWar) choices.Add("Tribal Warfare");
+                        if (canDip) choices.Add("Tribal Diplomacy");
+
+                        result = await IReceive.GetChoiceAsync(choices); 
+                        
+                        if (result.choiceText == "clickedTribal Warfare")
+                        { gs.AP--; gs.MP--; };
+                        if (result.choiceText == "clickedTribal Diplomacy")
+                        { gs.AP--; gs.TradeGoodsHeld--; };
+                        print($"{gs.AP} AP, {gs.MP} MP, {gs.TradeGoodsHeld} Trade Goods");
+                    }
+                    else
+                    {
+                        ui.message.text = "Insufficient resources available.";
+                        break;
+                    }
+                }
+                stepDone[5] = true;
+                ui.showBackNext();
+            }
         }
 
         void StepSix()

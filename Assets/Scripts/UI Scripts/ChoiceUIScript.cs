@@ -8,11 +8,13 @@ namespace NavajoWars
 {
     public class ChoiceMade : EventArgs
     {
-        public ChoiceMade(string choiceText)
+        public ChoiceMade(int choiceIndex, string choiceText)
         { 
             ChoiceText = choiceText;
+            ChoiceIndex = choiceIndex;
         }
         public string ChoiceText { get; set; }
+        public int ChoiceIndex { get; set; }
     }
 
     public class ChoiceUIScript : MonoBehaviour, IsUIScript
@@ -27,26 +29,28 @@ namespace NavajoWars
             if (raiseEvent != null) raiseEvent(this, e);
         }
 
-        IMethodReceiver sender = null;
-        List<IMethodReceiver> Receivers;
+        IReceive sender = null;
+        List<IReceive> Receivers;
 
         void Awake()
         {
             // make list of all receivers in the scene
             // necessary only to "broadcast" method calls
-            Receivers = new List<IMethodReceiver>();
+            Receivers = new List<IReceive>();
             
-            var Scripts = FindObjectsOfType<MonoBehaviour>().Where(obj => obj is IMethodReceiver);
+            var Scripts = FindObjectsOfType<MonoBehaviour>().Where(obj => obj is IReceive);
 
             foreach (var script in Scripts)
-            {   foreach (IMethodReceiver receiver in 
-                    script.gameObject.GetComponents<IMethodReceiver>().Where(r => !Receivers.Contains(r)))
+            {   foreach (IReceive receiver in 
+                    script.gameObject.GetComponents<IReceive>().Where(r => !Receivers.Contains(r)))
                 { Receivers.Add(receiver); }
             }
         }
 
         VisualElement choicePanel;
         List<Button> buttons;
+        List<string> choicesList;
+
         void OnEnable()
         {
             getVisualElements();
@@ -67,6 +71,7 @@ namespace NavajoWars
         // use this where button click goes back to another script, or multiple scripts in scene
         public void DisplayChoices(List<string> choices)
         {
+            choicesList = choices;
             isEvent = false;
             sender = null;
             for (int i = 0; i < choices.Count; i++)
@@ -76,8 +81,9 @@ namespace NavajoWars
             }
         }
 
-        public void DisplayChoices(IMethodReceiver senderobj, List<string> choices)
+        public void DisplayChoices(IReceive senderobj, List<string> choices)
         {
+            choicesList = choices;
             isEvent = false;
             sender = senderobj;
             for (int i = 0; i < choices.Count; i++)
@@ -89,6 +95,7 @@ namespace NavajoWars
 
         public void DisplayChoicesEvent(List<string> choices)
         {
+            choicesList = choices;
             isEvent = true;
             sender = null;
             for (int i = 0; i < choices.Count; i++)
@@ -105,16 +112,17 @@ namespace NavajoWars
                 button.style.display = DisplayStyle.None;
             }
             var clickedButton = evt.target as Button;
+            int choiceIndex = choicesList.IndexOf(clickedButton.text); 
             string choiceText = "clicked" + clickedButton.text;
             if (sender != null)
             {
                 sender.methodManager(choiceText);
-                sender = null; // reset so only this call
+                //sender = null; // reset in display
             }
             else if (isEvent)
             {
-                OnChoiceMade(new ChoiceMade(choiceText));
-                isEvent = false;
+                OnChoiceMade(new ChoiceMade(choiceIndex, choiceText));
+                //isEvent = false;
             }
             else
             {

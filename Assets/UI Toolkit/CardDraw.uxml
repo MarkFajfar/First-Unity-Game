@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainStyles.uss?fileID=7433441132597879392&amp;guid=5c28875138ec85a48a15204caaad60cc&amp;type=3#MainStyles" />
-    <ui:VisualElement name="Root" style="flex-grow: 1; align-items: center;">
-        <ui:Label text="Draw a Card" display-tooltip-when-elided="true" name="Headline" class="Headline" style="top: 12%; flex-wrap: wrap;" />
+    <ui:VisualElement name="Root" picking-mode="Ignore" style="flex-grow: 1; align-items: center;">
+        <ui:Label text="Draw a Card" display-tooltip-when-elided="true" name="Headline" picking-mode="Ignore" class="Headline" style="top: 12%; flex-wrap: wrap;" />
         <ui:TextField name="CardNumInput" max-length="2" is-delayed="false" label="Enter Card Number" style="top: 22%; width: 554px; -unity-text-align: upper-left; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); color: rgb(151, 64, 27); font-size: 67px; height: 196px; background-color: rgba(255, 255, 255, 0); flex-direction: column; align-items: stretch; justify-content: center;" />
         <ui:Button text="Back" display-tooltip-when-elided="true" name="Back" class="BackNext ButtonQuit" style="right: auto; left: 1%;" />
         <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="BackNext ButtonQuit" />

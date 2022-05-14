@@ -31,7 +31,7 @@ namespace NavajoWars
 
         void Start()
         {
-            print("Start Game Manager");
+            print("Start Game Manager");   
             //called only when game is loaded
             //checkForSavedGame();
         }
@@ -39,12 +39,9 @@ namespace NavajoWars
         // initialize main menu
         internal void checkForSavedGame(MainMenuUIScript mainMenu)
         {
-            
             string path = Application.persistentDataPath + "/savefile.json";
-            if (File.Exists(path))
-            { mainMenu.showLoadPanel(); }
-            else
-            { mainMenu.showScenarios(); }
+            if (File.Exists(path)) mainMenu.showLoadPanel(); 
+            else mainMenu.showScenarios();
         }
 
 

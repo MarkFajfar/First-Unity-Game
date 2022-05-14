@@ -1,8 +1,8 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainStyles.uss?fileID=7433441132597879392&amp;guid=5c28875138ec85a48a15204caaad60cc&amp;type=3#MainStyles" />
-    <ui:VisualElement name="Root" style="flex-grow: 1; align-items: center;">
-        <ui:Label text="Choose a Scenario" display-tooltip-when-elided="true" name="Headline" class="Headline" style="top: 3%; flex-wrap: wrap;" />
-        <ui:VisualElement name="ButtonPanel" style="align-items: center; justify-content: center; visibility: hidden; width: 100%; height: 55%; position: absolute; top: 12%; transition-timing-function: ease-in-out-bounce;">
+    <ui:VisualElement name="Root" picking-mode="Ignore" style="flex-grow: 1; align-items: center;">
+        <ui:Label text="Choose a Scenario" display-tooltip-when-elided="true" name="Headline" picking-mode="Ignore" class="Headline" style="top: 3%; flex-wrap: wrap;" />
+        <ui:VisualElement name="ButtonPanel" picking-mode="Ignore" style="align-items: center; justify-content: center; visibility: hidden; width: 100%; height: 55%; position: absolute; top: 12%; transition-timing-function: ease-in-out-bounce;">
             <ui:Button text="Rise of the People" display-tooltip-when-elided="true" name="Rise" class="ButtonMenu" />
             <ui:Button text="Los Dueños Del Mundo" display-tooltip-when-elided="true" name="Mundo" class="ButtonMenu" />
             <ui:Button text="A Broken Country" display-tooltip-when-elided="true" name="Broken" class="ButtonMenu" />
@@ -10,11 +10,11 @@
             <ui:Button text="The Rope Thrower" display-tooltip-when-elided="true" name="Rope" class="ButtonMenu" />
             <ui:Button text="The Navajo Wars" display-tooltip-when-elided="true" name="Navajo" class="ButtonMenu" />
         </ui:VisualElement>
-        <ui:VisualElement name="LoadPanel" style="width: 100%; height: 55%; position: absolute; top: 12%; align-items: center; justify-content: center; visibility: hidden;">
+        <ui:VisualElement name="LoadPanel" picking-mode="Ignore" style="width: 100%; height: 55%; position: absolute; top: 12%; align-items: center; justify-content: center; visibility: hidden;">
             <ui:Button text="Load Saved Game" display-tooltip-when-elided="true" name="LoadSave" class="ButtonMenu" />
             <ui:Button text="Start New Game" display-tooltip-when-elided="true" name="NewGame" class="ButtonMenu" />
         </ui:VisualElement>
-        <ui:Label text="Select the Family&apos;s&#10;Location and Ferocity" display-tooltip-when-elided="true" name="viewSetup" style="justify-content: flex-start; align-items: flex-start; flex-wrap: wrap; width: 95%; height: 75%; bottom: 0; position: absolute; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); background-color: rgb(199, 171, 159); -unity-text-align: upper-left; font-size: 72px; border-top-left-radius: 24px; border-bottom-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; padding-left: 12px; padding-right: 12px; padding-top: 12px; padding-bottom: 12px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; visibility: visible; white-space: normal; color: rgb(0, 0, 0);">
+        <ui:Label text="Select the Family&apos;s&#10;Location and Ferocity" display-tooltip-when-elided="true" name="viewSetup" picking-mode="Ignore" style="justify-content: flex-start; align-items: flex-start; flex-wrap: wrap; width: 95%; height: 75%; bottom: 0; position: absolute; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); background-color: rgba(199, 171, 159, 0.73); -unity-text-align: upper-left; font-size: 72px; border-top-left-radius: 24px; border-bottom-left-radius: 24px; border-top-right-radius: 24px; border-bottom-right-radius: 24px; padding-left: 12px; padding-right: 12px; padding-top: 12px; padding-bottom: 12px; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; visibility: visible; white-space: normal; color: rgb(0, 0, 0);">
             <ui:Button text="Back" display-tooltip-when-elided="true" name="Back" class="BackNext" style="visibility: hidden;" />
             <ui:Button text="Next" display-tooltip-when-elided="true" name="Next" class="BackNext" style="left: auto; right: 5%; visibility: hidden;" />
             <ui:Button text="Confirm" display-tooltip-when-elided="true" name="Confirm" class="BackNext" style="left: auto; right: 5%; width: 30%; visibility: hidden;" />

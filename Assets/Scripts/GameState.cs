@@ -34,10 +34,10 @@ namespace NavajoWars
         { get => currentCard; set => currentCard = value; }
         [SerializeField] Card currentCard;
 
-        public List<Card> CeremonyCardsInHand = new();
-        public List<Card> EventCardsInPlay = new();
-        public List<Person> PersonsInPassage = new();
-        public int[] ElderDisplay = { 1, 1, 1, 0, 0, 0, 0 };
+        public List<Card> CeremonyCardsInHand;
+        public List<Card> EventCardsInPlay;
+        public List<Person> PersonsInPassage;
+        public int[] ElderDisplay;
         public readonly int[] ElderTarget = { 0, 1, 2, 2, 3, 4, 5 };
 
         public int AP
@@ -112,7 +112,7 @@ namespace NavajoWars
         [HideInInspector] public Family FamilyE;
         [HideInInspector] public Family FamilyF;
 
-        public List<Family> Families = new();
+        public List<Family> Families;
     }
 }
  

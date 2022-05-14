@@ -6,13 +6,14 @@ using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class OperationsUIScript : MonoBehaviour, IsUIScript, IMethodReceiver
+    public class OperationsUIScript : MonoBehaviour, IsUIScript, IReceive
     {
         GameManager gm;
         GameState gs;
         ChoiceUIScript choice;
         ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
         PlanningLogic planning;
+        PassageLogic passage;
 
         void Awake()
         {
@@ -21,6 +22,7 @@ namespace NavajoWars
             gs = gmobj.GetComponent<GameState>();
             choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
             planning = gameObject.GetComponent<PlanningLogic>();
+            passage = gameObject.GetComponent<PassageLogic>();
         }
 
         void OnEnable()
@@ -46,7 +48,7 @@ namespace NavajoWars
             back.clicked += backClicked;
             
             next = root.Q<Button>("Next");
-            next.clicked += nextClicked;
+            next.clicked += nextClicked; 
             
             prev = root.Q<Button>("Prev");
             prev.clicked += prevClicked;
@@ -61,9 +63,9 @@ namespace NavajoWars
             headline.visible = true;
             message.visible = false;
             back.visible = false;
-            next.visible = false;
+            next.visible = false; 
             prev.visible = false;
-            quit.visible = false;
+            quit.visible = true;
 
             questionPreempt();
         }
@@ -106,6 +108,19 @@ namespace NavajoWars
             isPlanning = true;
         }
 
+        int passageStepNum;
+        bool isPassage;
+        public void InitializePassage()
+        {
+            quit.visible = false;
+            prev.visible = false;
+            back.visible = true;
+            next.visible = true;
+            message.visible = true;
+            passageStepNum = 1;
+            isPassage = true;
+        }
+
         public void hideBackNext()
         {
             back.visible = false;
@@ -140,6 +155,11 @@ namespace NavajoWars
                 planningStepNum++;
                 planning.doStep(planningStepNum);
             }
+            if (isPassage)
+            {
+                passageStepNum++;
+                passage.doStep(passageStepNum);
+            }
         }
 
         void backClicked()
@@ -148,6 +168,11 @@ namespace NavajoWars
             {
                 planningStepNum--;
                 planning.doStep(planningStepNum);
+            }
+            if (isPassage)
+            {
+                passageStepNum--;
+                passage.doStep(passageStepNum);
             }
         }
 

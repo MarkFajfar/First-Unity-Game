@@ -10,7 +10,7 @@ namespace NavajoWars
 {
     public class Utilities : MonoBehaviour
     {
-        GameManager GameManager;
+        /*GameManager GameManager;
         GameState gs;
 
         void Awake()
@@ -72,7 +72,7 @@ namespace NavajoWars
             //print(currentCard.TestAddSO.Name);
             //Card.StepOne(currentCard); 
             //call to method uses class name, specific card info is in parameter
-        }
+        }*/
 
 
     }
