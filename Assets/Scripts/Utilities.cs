@@ -72,6 +72,15 @@ namespace NavajoWars
             //print(currentCard.TestAddSO.Name);
             //Card.StepOne(currentCard); 
             //call to method uses class name, specific card info is in parameter
+        }
+
+        [MenuItem("Utilities/UpdateSO")]
+        public static void UpdateSO()
+        {
+            var testName = "Fearing";
+            Scenario scenario = Resources.Load<Scenario>("Scenarios/" + testName);
+            scenario.Subjugation.Red = 3;
+            print(testName + " Red is " + scenario.Subjugation.Red);
         }*/
 
 

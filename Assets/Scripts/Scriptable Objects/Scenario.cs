@@ -1,3 +1,5 @@
+
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace NavajoWars
@@ -11,6 +13,13 @@ namespace NavajoWars
         public int MP;
         public int Ferocity;
         public int Morale;
+
+        public int Sheep;
+        public int SheepMax;
+        public int Horses;
+        public int HorsesMax;
+
+        public List<Territory> HasDrought;
 
         public bool IsActiveFamilyA;
         public bool IsActiveFamilyB;

@@ -19,6 +19,11 @@ MonoBehaviour:
   MP: 5
   Ferocity: 4
   Morale: 5
+  Sheep: 4
+  SheepMax: 8
+  Horses: 4
+  HorsesMax: 8
+  HasDrought: 010000000200000003000000040000000500000006000000
   IsActiveFamilyA: 1
   IsActiveFamilyB: 1
   IsActiveFamilyC: 1
@@ -69,8 +74,8 @@ MonoBehaviour:
   - "Collect Starting Cultural Development Card: \nCollect and put into play 8 available
     Cultural Development Cards. \nThe player collects these for free, but must meet
     all other requirements of each Cultural Development Card in order to collect
-    it (i.e. the player cannot collect Horsemanship Level 3 unless he\u2019s collected
-    Horsemanship Level 2, etc)."
+    it (i.e. the player cannot collect Horsemanship Level 3 before collecting Horsemanship
+    Level 2, etc)."
   - "Note Victory Conditions: \nIf the game does not end beforehand, determine victory
     or defeat after card #55 Kit Carson is resolved.\nFor each black cube in Subjugation
     of New Mexico box, add +1 Enemy Morale. \nNext, subtract the number of Enemy

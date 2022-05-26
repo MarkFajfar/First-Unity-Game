@@ -16,6 +16,7 @@ namespace NavajoWars
         public Label headline;
         VisualElement buttonPanel;
         VisualElement loadPanel;
+        VisualElement hideTitle;
         Button loadSave;
         Button newGame;
         public Label viewSetup;
@@ -57,7 +58,7 @@ namespace NavajoWars
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
             headline = root.Q<Label>("Headline");
-
+            hideTitle = root.Q<VisualElement>("HideTitle");
             buttonPanel = root.Q<VisualElement>("ButtonPanel");
 
             viewSetup = root.Q<Label>("viewSetup");
@@ -86,6 +87,7 @@ namespace NavajoWars
             buttonPanel.visible = true;            
             loadPanel.visible = false;
             viewSetup.visible = false;
+            hideTitle.visible = false;
             initializeScenarioButtons();
         }
 
@@ -106,6 +108,7 @@ namespace NavajoWars
             loadBack.visible = false;
             loadConfirm.visible = false;
 
+            hideTitle.visible = true;
             viewSetup.visible = true;
             back.visible = true;
             next.visible = true;
@@ -141,6 +144,7 @@ namespace NavajoWars
             {
                 viewSetup.text = "";
                 viewSetup.visible = false;
+                hideTitle.visible = false;
                 back.visible = false;
                 next.visible = false;
                 confirm.visible = false;
@@ -189,6 +193,7 @@ namespace NavajoWars
             next.visible = false;
             confirm.visible = false;
             viewSetup.visible = false;
+            hideTitle.visible = false;
         }
 
         internal void showLoadPanel()
@@ -198,6 +203,7 @@ namespace NavajoWars
             buttonPanel.visible = false;
             loadPanel.visible = true;
             viewSetup.visible = false;
+            hideTitle.visible = false;
             initializeLoadButtons();
         }
         void initializeLoadButtons()
@@ -213,6 +219,7 @@ namespace NavajoWars
         {
             loadPanel.visible = false;
             viewSetup.visible = true;
+            hideTitle.visible = true;
             var clickedButton = evt.target as Button;
             string action = clickedButton.name;
             switch (action)

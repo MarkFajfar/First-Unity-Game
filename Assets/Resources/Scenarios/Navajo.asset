@@ -19,6 +19,11 @@ MonoBehaviour:
   MP: 5
   Ferocity: 4
   Morale: 5
+  Sheep: 0
+  SheepMax: 8
+  Horses: 0
+  HorsesMax: 8
+  HasDrought: 
   IsActiveFamilyA: 1
   IsActiveFamilyB: 1
   IsActiveFamilyC: 1

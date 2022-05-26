@@ -35,10 +35,14 @@ namespace NavajoWars
             gs.Ferocity = scenario.Ferocity;
             gs.Morale = scenario.Morale;
 
+            gs.HorsesHeld = scenario.Horses;
+            gs.HorsesMax = scenario.HorsesMax;
+            gs.SheepHeld = scenario.Sheep;
+            gs.SheepMax = scenario.SheepMax; 
             gs.TradeGoodsMax = 3;
             gs.Firearms = 0;
 
-            // resources
+            gs.HasDrought = scenario.HasDrought;
 
             gs.CeremonyCardsInHand = new();
             gs.EventCardsInPlay = new();
@@ -66,6 +70,9 @@ namespace NavajoWars
             if (gs.FamilyE.IsActive) gs.Families.Add(gs.FamilyE);
             gs.FamilyF.IsActive = scenario.IsActiveFamilyF;
             if (gs.FamilyF.IsActive) gs.Families.Add(gs.FamilyF);
+
+            if (scenario.Name == "Broken" || scenario.Name == "Fearing")
+                gs.Subjugation.Red = 3;
 
             if (scenario.Name == "Rope") 
             { 

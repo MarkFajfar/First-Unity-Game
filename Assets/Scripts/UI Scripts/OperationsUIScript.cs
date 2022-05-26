@@ -12,8 +12,9 @@ namespace NavajoWars
         GameState gs;
         ChoiceUIScript choice;
         ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
-        PlanningLogic planning;
-        PassageLogic passage;
+        //PlanningLogic planning;
+        //PassageLogic passage;
+        //PlayerActionLogic player;
 
         void Awake()
         {
@@ -21,13 +22,9 @@ namespace NavajoWars
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
             choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
-            planning = gameObject.GetComponent<PlanningLogic>();
-            passage = gameObject.GetComponent<PassageLogic>();
-        }
-
-        void OnEnable()
-        {
-            getVisualElements();
+            //planning = gameObject.GetComponent<PlanningLogic>();
+            //passage = gameObject.GetComponent<PassageLogic>();
+            //player = gameObject.GetComponent<PlayerActionLogic>();
         }
 
         public Label headline;
@@ -36,6 +33,11 @@ namespace NavajoWars
         Button quit;
         public Button back;
         public Button next;
+
+        void OnEnable()
+        {
+            getVisualElements();
+        }
 
         public void getVisualElements()
         {
@@ -81,7 +83,7 @@ namespace NavajoWars
             else
             {
                 headline.text = "Insufficient AP to Preempt. Starting Enemy Action Phase.";
-                EnemyOperation();
+                EnemyOperation(); 
             }
         }
 
@@ -93,10 +95,25 @@ namespace NavajoWars
             // cannot use "this" because response back to different scripts
         }
 
+        int StepNum;
+        public void Initialize()
+        {
+            quit.visible = false;
+            prev.visible = false;
+            back.visible = true;
+            next.visible = true;
+            message.visible = true;
+            StepNum = 1;
+        }
+
+        public delegate void ChangeStep(int stepNum);
+        public event ChangeStep OnChangeStep;
+
         public void clickedDoNotPreempt() => EnemyOperation();
 
-        int planningStepNum;
+/*       int planningStepNum;
         bool isPlanning;
+
         public void InitializePlanning() 
         {
             quit.visible = false;
@@ -121,6 +138,19 @@ namespace NavajoWars
             isPassage = true;
         }
 
+        int actionStepNum;
+        bool isAction;
+        public void InitializeAction()
+        {
+            quit.visible = false;
+            prev.visible = false;
+            back.visible = true;
+            next.visible = true;
+            message.visible = true;
+            actionStepNum = 1;
+            isAction = true;
+            headline.text = "Player Actions";
+        }*/
         public void hideBackNext()
         {
             back.visible = false;
@@ -133,24 +163,17 @@ namespace NavajoWars
             next.visible = true;
         }
 
-        public void clickedTakeActions()
-        { 
-            headline.text = "Take Actions"; 
-        }
-
-        public void clickedPassageofTime()
-        { 
-            headline.text = "Passage of Time"; 
-        }
-
         void EnemyOperation()
         {
             print("Enemy Ops");
         }
 
-        void nextClicked()
+        public void nextClicked()
         {
-            if (isPlanning)
+            StepNum++;
+            OnChangeStep?.Invoke(StepNum);
+
+            /*if (isPlanning)
             {
                 planningStepNum++;
                 planning.doStep(planningStepNum);
@@ -160,11 +183,19 @@ namespace NavajoWars
                 passageStepNum++;
                 passage.doStep(passageStepNum);
             }
+            if (isAction)
+            {
+                actionStepNum++;
+                player.doStep(actionStepNum);
+            }*/
         }
 
-        void backClicked()
+        public void backClicked()
         {
-            if (isPlanning)
+            StepNum--;
+            OnChangeStep?.Invoke(StepNum);
+
+            /*if (isPlanning)
             {
                 planningStepNum--;
                 planning.doStep(planningStepNum);
@@ -174,6 +205,11 @@ namespace NavajoWars
                 passageStepNum--;
                 passage.doStep(passageStepNum);
             }
+            if (isAction)
+            {
+                actionStepNum--;
+                player.doStep(actionStepNum);
+            }*/
         }
 
         void prevClicked() 

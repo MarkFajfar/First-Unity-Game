@@ -1,49 +1,37 @@
 using System;
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace NavajoWars
 {
-    public class PassageLogic : MonoBehaviour, IReceive
+    public class PassageLogic : OperationsLogic
     {
-        GameManager gm;
-        GameState gs;
-        OperationsUIScript ui;
-        ChoiceUIScript choice;
-        ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
-        List<Action> passageSteps;
-        List<bool> stepDone;
-
-
-        void Awake()
-        {
-            var gmobj = GameObject.FindWithTag("GameController");
-            gm = gmobj.GetComponent<GameManager>();
-            gs = gmobj.GetComponent<GameState>();
-            ui = gameObject.GetComponent<OperationsUIScript>();
-            choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
-        }
         void Start()
         {
-            passageSteps = new();
-            passageSteps.Add(clickedPassage);
-            passageSteps.Add(StepOne);
+            Steps = new();
+            Steps.Add(clickedPassage);
+            Steps.Add(StepOne);
             stepDone = new() { false, false, false, false, false, false };
         }
 
         public void clickedPassage()
         {
-            ui.InitializePlanning();
+            ui.Initialize();
+            ui.OnChangeStep += doStep;
             stepDone[0] = true;
             StepOne();
         }
 
-        public void doStep(int passageStepNum) => passageSteps[passageStepNum]();
-
         void StepOne()
         {
+            int numChildInPassage = gs.PersonsInPassage.FindAll(p => p==Person.Child).Count();
+            int numChildInFamilies = gs.Families.Where(f => f.HasChild).Count();
+            int numManInPassage = gs.PersonsInPassage.FindAll(p => p == Person.Man).Count();
+            int numManInFamilies = gs.Families.Where(f => f.HasMan).Count();
+            int numWomanInPassage = gs.PersonsInPassage.FindAll(p => p == Person.Woman).Count();
+            int numWomanInFamilies = gs.Families.Where(f => f.HasWoman).Count();
+            //if (numChildInPassage + numChildInFamilies > 0) 
         }
     }
 }

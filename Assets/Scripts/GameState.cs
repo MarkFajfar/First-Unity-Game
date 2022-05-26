@@ -36,7 +36,9 @@ namespace NavajoWars
 
         public List<Card> CeremonyCardsInHand;
         public List<Card> EventCardsInPlay;
+
         public List<Person> PersonsInPassage;
+
         public int[] ElderDisplay;
         public readonly int[] ElderTarget = { 0, 1, 2, 2, 3, 4, 5 };
 
@@ -70,13 +72,108 @@ namespace NavajoWars
         { get => tradeGoodsMax; set => tradeGoodsMax = Math.Clamp(value, 0, 11); }
         [SerializeField] int tradeGoodsMax;
 
+        // Game has 8 sheep tokens; each scenario starts with 3
+        public int SheepHeld
+        { get => sheepHeld; set => sheepHeld = Math.Clamp(value, 0, 8); }
+        [SerializeField] int sheepHeld;
+        public int SheepMax 
+        { get => sheepMax; set => sheepMax = Math.Clamp(value, 0, 8); }
+        [SerializeField] int sheepMax;
+
+        // Game has 8 horses tokens; each scenario starts with 3
+        public int HorsesHeld
+        { get => horsesHeld; set => horsesHeld = Math.Clamp(value, 0, 8); }
+        [SerializeField] int horsesHeld;
+        public int HorsesMax 
+        { get => horsesMax; set => horsesMax = Math.Clamp(value, 0, 8); }
+        [SerializeField] int horsesMax;
+
         // Game has 1 Firearms token, and 4 more from intruders
         public int Firearms
         { get => firearms; set => firearms = Math.Clamp(value, 0, 5); }
         [SerializeField] int firearms;
 
-        // sheep and horses in resources; some scenarios start with resources
-        // cubes
+        public List<Territory> HasDrought;
+        public List<Territory> HasOutpost;
+        public List<Territory> HasFort;
+
+        [Serializable]
+        public struct raided
+        {
+            public int Black
+            { get => black; set => black = value; }
+            [SerializeField] int black;
+            public int White
+            { get => white; set => white = value; }
+            [SerializeField] int white;
+            public int Brown
+            { get => brown; set => brown = value; }
+            [SerializeField] int brown;
+            public int Yellow
+            { get => yellow; set => yellow = value; }
+            [SerializeField] int yellow;
+            public int Red
+            { get => red; set => red = value; }
+            [SerializeField] int red;
+            public int Green
+            { get => green; set => green = value; }
+            [SerializeField] int green;
+            public int Blue
+            { get => blue; set => blue = value; }
+            [SerializeField] int blue;
+        }
+
+        [Serializable]
+        public struct recovery
+        {
+            public int Black
+            { get => black; set => black = value; }
+            [SerializeField] int black;
+            public int White
+            { get => white; set => white = value; }
+            [SerializeField] int white;
+            public int Brown
+            { get => brown; set => brown = value; }
+            [SerializeField] int brown;
+            public int Yellow
+            { get => yellow; set => yellow = value; }
+            [SerializeField] int yellow;
+            public int Red
+            { get => red; set => red = value; }
+            [SerializeField] int red;
+            public int Green
+            { get => green; set => green = value; }
+            [SerializeField] int green;
+            public int Blue
+            { get => blue; set => blue = value; }
+            [SerializeField] int blue;
+        }
+
+        [Serializable]
+        public struct subjugation
+        {
+            public int Black
+            { get => black; set => black = value; }
+            [SerializeField] int black;
+            public int White
+            { get => white; set => white = value; }
+            [SerializeField] int white;
+            public int Brown
+            { get => brown; set => brown = value; }
+            [SerializeField] int brown;
+            public int Yellow
+            { get => yellow; set => yellow = value; }
+            [SerializeField] int yellow;
+            public int Red
+            { get => red; set => red = value; }
+            [SerializeField] int red;
+            public int Green
+            { get => green; set => green = value; }
+            [SerializeField] int green;
+            public int Blue
+            { get => blue; set => blue = value; }
+            [SerializeField] int blue;
+        }
 
         [Serializable]
         public class Family
@@ -111,6 +208,10 @@ namespace NavajoWars
         [HideInInspector] public Family FamilyD;
         [HideInInspector] public Family FamilyE;
         [HideInInspector] public Family FamilyF;
+
+        public raided Raided;
+        public recovery Recovery;
+        public subjugation Subjugation;
 
         public List<Family> Families;
     }

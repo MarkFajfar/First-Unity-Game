@@ -1,44 +1,23 @@
 using System;
 using System.Linq;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class PlanningLogic : MonoBehaviour, IReceive
+    public class PlanningLogic : OperationsLogic
     {
-        GameManager gm;
-        GameState gs;
-        OperationsUIScript ui;
-        ChoiceUIScript choice;
-        ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
-        List<Action> planningSteps;
-        List<bool> stepDone; 
-
-        void Awake()
-        {
-            var gmobj = GameObject.FindWithTag("GameController");
-            gm = gmobj.GetComponent<GameManager>();
-            gs = gmobj.GetComponent<GameState>();
-            ui = gameObject.GetComponent<OperationsUIScript>();
-            choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
-        }
-
         void Start()
         {
-            planningSteps = new ();
-            planningSteps.Add(clickedPlanning);
-            planningSteps.Add(StepOne);
-            planningSteps.Add(StepTwo);
-            planningSteps.Add(StepThree);
-            planningSteps.Add(StepFour);
-            planningSteps.Add(StepFive);
-            planningSteps.Add(StepSix);
+            Steps = new ();
+            Steps.Add(clickedPlanning);
+            Steps.Add(StepOne);
+            Steps.Add(StepTwo);
+            Steps.Add(StepThree);
+            Steps.Add(StepFour);
+            Steps.Add(StepFive);
+            Steps.Add(StepSix);
             stepDone = new () { false, false, false, false, false, false };
         }
                
@@ -50,14 +29,14 @@ namespace NavajoWars
             isDieRolled = true;
         }
 
+        // called from ChoiceUI when planning button clicked
         public void clickedPlanning()
         {
-            ui.InitializePlanning();
+            ui.Initialize();
+            ui.OnChangeStep += doStep;
             stepDone[0] = true;
             StepOne();
         }
-
-        public void doStep(int planningStepNum) => planningSteps[planningStepNum]();
 
         void StepOne()
         {
@@ -217,8 +196,8 @@ namespace NavajoWars
             selectedFamily.Ferocity++; // gs.Families[selectedIndex].Ferocity++;
             gs.MP += gs.MP < 5 ? 1 : 0;
             ui.message.text = $"{selectedFamily.Name} Ferocity is now {selectedFamily.Ferocity} and there are {gs.MP} MP.\n";
-            print($"Ferocity A: {gs.Families[0].Ferocity} B: {gs.Families[1].Ferocity} C: {gs.Families[2].Ferocity}");
-            print($"Evasion A: {gs.Families[0].Evasion} B: {gs.Families[1].Evasion} C: {gs.Families[2].Evasion}");
+            /*print($"Ferocity A: {gs.Families[0].Ferocity} B: {gs.Families[1].Ferocity} C: {gs.Families[2].Ferocity}");
+            print($"Evasion A: {gs.Families[0].Evasion} B: {gs.Families[1].Evasion} C: {gs.Families[2].Evasion}");*/
             isElderActionComplete = true;
         }
 
@@ -227,8 +206,8 @@ namespace NavajoWars
             selectedFamily.Ferocity--;
             gs.CP += gs.CP < 5 ? 1 : 0;
             ui.message.text = $"{selectedFamily.Name} Ferocity is now {selectedFamily.Ferocity} and there are {gs.CP} CP.\n";
-            print($"Ferocity A: {gs.Families[0].Ferocity} B: {gs.Families[1].Ferocity} C: {gs.Families[2].Ferocity}");
-            print($"Evasion A: {gs.Families[0].Evasion} B: {gs.Families[1].Evasion} C: {gs.Families[2].Evasion}");
+            /*print($"Ferocity A: {gs.Families[0].Ferocity} B: {gs.Families[1].Ferocity} C: {gs.Families[2].Ferocity}");
+            print($"Evasion A: {gs.Families[0].Evasion} B: {gs.Families[1].Evasion} C: {gs.Families[2].Evasion}");*/
             isElderActionComplete = true;
         }
 
@@ -292,7 +271,7 @@ namespace NavajoWars
             else 
             {
                 ui.hideBackNext();
-                // if used in loop, needs to be declared before loop, even if just tuple
+                // if used in loop, result needs to be declared before loop, even if just tuple
                 (int choiceIndex, string choiceText) result;
                 var i = -1;
                 foreach (var family in gs.Families.Where(f => f.HasMan))
@@ -335,6 +314,7 @@ namespace NavajoWars
         {
             ui.headline.text = "Planning\nStep Six";
             ui.message.text = "Step Six";
+            ui.OnChangeStep -= doStep;
         }
     }
 }
