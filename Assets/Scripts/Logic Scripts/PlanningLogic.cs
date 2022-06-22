@@ -18,7 +18,8 @@ namespace NavajoWars
             Steps.Add(StepFour);
             Steps.Add(StepFive);
             Steps.Add(StepSix);
-            stepDone = new () { false, false, false, false, false, false };
+            Steps.Add(StepSeven);
+            stepDone = new () { false, false, false, false, false, false, false };
         }
                
         bool isDieRolled = false;
@@ -33,8 +34,10 @@ namespace NavajoWars
         public void clickedPlanning()
         {
             ui.Initialize();
-            ui.OnChangeStep += doStep;
+            ui.OnOpsNextClick += nextStep;
+            ui.OnOpsBackClick += backStep;
             stepDone[0] = true;
+            step = 0;
             StepOne();
         }
 
@@ -313,8 +316,14 @@ namespace NavajoWars
         void StepSix()
         {
             ui.headline.text = "Planning\nStep Six";
-            ui.message.text = "Step Six";
-            ui.OnChangeStep -= doStep;
+            ui.message.text = "Reset Cubes";
+        }
+
+        void StepSeven()
+        {
+            ui.OnOpsNextClick -= nextStep;
+            ui.OnOpsBackClick -= backStep;
+            ui.PlayerOpsDone();
         }
     }
 }

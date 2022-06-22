@@ -13,7 +13,7 @@ namespace NavajoWars
         {
             // remove spaces just to be sure
             methodText = methodText.Replace(" ", "");
-            //Debug.Log("received method: " + methodText);
+            Debug.Log("received method: " + methodText);
             Type thisType = GetType();
             MethodInfo chosenMethod = thisType.GetMethod(methodText);
             //must be a public method, to be called from another script

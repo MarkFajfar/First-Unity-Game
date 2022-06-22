@@ -8,6 +8,7 @@
             <ui:Button text="choice3" display-tooltip-when-elided="true" name="choice3" class="ButtonMenu" style="display: none;" />
             <ui:Button text="choice4" display-tooltip-when-elided="true" name="choice4" class="ButtonMenu" style="display: none;" />
             <ui:Button text="choice5" display-tooltip-when-elided="true" name="choice5" class="ButtonMenu" style="display: none;" />
+            <ui:RadioButtonGroup value="-1" name="Locations" class="RadioButtons" style="-unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); color: rgb(0, 0, 0); visibility: visible; display: none;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

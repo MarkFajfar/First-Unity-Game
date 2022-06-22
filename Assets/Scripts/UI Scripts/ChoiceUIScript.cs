@@ -45,11 +45,13 @@ namespace NavajoWars
                     script.gameObject.GetComponents<IReceive>().Where(r => !Receivers.Contains(r)))
                 { Receivers.Add(receiver); }
             }
+            print("No. of Receivers = " + Receivers.Count());
         }
 
         VisualElement choicePanel;
         List<Button> buttons;
         List<string> choicesList;
+        public RadioButtonGroup locations;
 
         void OnEnable()
         {
@@ -66,6 +68,8 @@ namespace NavajoWars
             {
                 buttons[i].RegisterCallback<ClickEvent>(buttonClicked);
             }
+
+            locations = root.Q<RadioButtonGroup>("Locations");
         }
 
         // use this where button click goes back to another script, or multiple scripts in scene
@@ -105,30 +109,49 @@ namespace NavajoWars
             }
         }
 
+        public void CloseChoices()
+        { 
+            foreach (var button in buttons) button.style.display = DisplayStyle.None; 
+        }
+
         void buttonClicked(ClickEvent evt)
         {
-            foreach (var button in buttons)
-            {
-                button.style.display = DisplayStyle.None;
-            }
+            CloseChoices();
             var clickedButton = evt.target as Button;
             int choiceIndex = choicesList.IndexOf(clickedButton.text); 
             string choiceText = "clicked" + clickedButton.text;
             if (sender != null)
             {
+                print("Choice sender: " + choiceText);
                 sender.methodManager(choiceText);
                 //sender = null; // reset in display
             }
             else if (isEvent)
             {
+                print("Choice event: " + choiceText);
                 OnChoiceMade(new ChoiceMade(choiceIndex, choiceText));
                 //isEvent = false;
             }
             else
             {
+                print("Choice broadcast: " + choiceText); 
                 foreach (var receiver in Receivers)
                     receiver.methodManager(choiceText);
             }
-        }        
+        }
+
+        public void DisplayLocations()
+        {
+            List<string> locationNames = new()
+            { " Splitrock", " San Juan", " Zuni", " Monument", " Hopi", " Black Mesa", " C. de Chelly" };
+            isEvent = false;
+            sender = null;
+            locations.style.display = DisplayStyle.Flex;
+            locations.choices = locationNames;
+        }
+
+        public void CloseLocations() 
+            { locations.style.display = DisplayStyle.None; }
+
     }
 }

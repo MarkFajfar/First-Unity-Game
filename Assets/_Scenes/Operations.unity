@@ -193,6 +193,7 @@ GameObject:
   - component: {fileID: 1347587260}
   - component: {fileID: 1347587261}
   - component: {fileID: 1347587262}
+  - component: {fileID: 1347587263}
   m_Layer: 5
   m_Name: OperationsUI
   m_TagString: UI
@@ -265,6 +266,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe2acbc91397722408d3ff3345dcb21b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1347587263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347587257}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 61df3a2811a8cb74d85a19670320ff16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1701290543

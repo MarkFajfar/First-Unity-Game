@@ -17,9 +17,12 @@ namespace NavajoWars
 
         public void clickedPassage()
         {
+            print("Clicked Passage");
             ui.Initialize();
-            ui.OnChangeStep += doStep;
+            ui.OnOpsNextClick += nextStep;
+            ui.OnOpsBackClick += backStep;
             stepDone[0] = true;
+            step = 0;
             StepOne();
         }
 
@@ -32,6 +35,13 @@ namespace NavajoWars
             int numWomanInPassage = gs.PersonsInPassage.FindAll(p => p == Person.Woman).Count();
             int numWomanInFamilies = gs.Families.Where(f => f.HasWoman).Count();
             //if (numChildInPassage + numChildInFamilies > 0) 
+        }
+
+        void StepSeven()
+        {
+            ui.OnOpsNextClick -= nextStep;
+            ui.OnOpsBackClick -= backStep;
+            ui.PlayerOpsDone();
         }
     }
 }

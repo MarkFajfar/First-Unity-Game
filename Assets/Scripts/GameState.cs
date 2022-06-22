@@ -94,7 +94,9 @@ namespace NavajoWars
         [SerializeField] int firearms;
 
         public List<Territory> HasDrought;
-        public List<Territory> HasOutpost;
+        public List<Territory> HasCorn;
+        public List<Territory> HasMission;
+        public List<Territory> HasRancho;
         public List<Territory> HasFort;
 
         [Serializable]

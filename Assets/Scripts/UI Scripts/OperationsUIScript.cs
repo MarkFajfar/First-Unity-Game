@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Reflection;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,20 +10,6 @@ namespace NavajoWars
         GameState gs;
         ChoiceUIScript choice;
         ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
-        //PlanningLogic planning;
-        //PassageLogic passage;
-        //PlayerActionLogic player;
-
-        void Awake()
-        {
-            var gmobj = GameObject.FindWithTag("GameController");
-            gm = gmobj.GetComponent<GameManager>();
-            gs = gmobj.GetComponent<GameState>();
-            choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
-            //planning = gameObject.GetComponent<PlanningLogic>();
-            //passage = gameObject.GetComponent<PassageLogic>();
-            //player = gameObject.GetComponent<PlayerActionLogic>();
-        }
 
         public Label headline;
         public Label message;
@@ -33,6 +17,22 @@ namespace NavajoWars
         Button quit;
         public Button back;
         public Button next;
+
+        public delegate void ClickNext();
+        public event ClickNext OnOpsNextClick;
+        public delegate void ClickBack();
+        public event ClickBack OnOpsBackClick;
+
+        bool isPlayerOpsDone;
+        bool isEnemyOpsDone;
+
+        void Awake()
+        {
+            var gmobj = GameObject.FindWithTag("GameController");
+            gm = gmobj.GetComponent<GameManager>();
+            gs = gmobj.GetComponent<GameState>();
+            choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
+        }
 
         void OnEnable()
         {
@@ -59,13 +59,26 @@ namespace NavajoWars
             quit.clicked += quitClicked;
         }
 
+        public void nextClicked()
+        { OnOpsNextClick?.Invoke(); }
+
+        public void backClicked()
+        { OnOpsBackClick?.Invoke(); }
+
+        void prevClicked()
+        { gm.PrevScene(); }
+
+        void quitClicked()
+        { gm.ExitGame(); }
+
         void Start()
         {
+            // called when scene "Operations" is loaded, called from gm  
             // reset UI for reload
             headline.visible = true;
             message.visible = false;
-            back.visible = false;
-            next.visible = false; 
+            back.visible = true;
+            next.visible = true; 
             prev.visible = false;
             quit.visible = true;
 
@@ -74,6 +87,8 @@ namespace NavajoWars
 
         void questionPreempt()
         {
+            unsubBack();
+            OnOpsBackClick += prevClicked;
             if (gs.AP >= gs.CurrentCard.Points[0])
             {
                 headline.text = $"Preempt for {gs.CurrentCard.Points[0]} AP?";
@@ -90,12 +105,41 @@ namespace NavajoWars
         public void clickedYesPreempt()
         {
             gs.AP -= gs.CurrentCard.Points[0];
-            headline.text = $"Subtracted {gs.CurrentCard.Points[0]} AP.\nSelect One Operation";
+            headline.text = $"Subtracted {gs.CurrentCard.Points[0]} AP\n";
+            unsubBack();
+            OnOpsBackClick += backYesPreempt;
+            PlayerOperation();
+        }
+
+        void backYesPreempt()
+        {
+            print("backYesPreempt");
+            gs.AP += gs.CurrentCard.Points[0];
+            //headline.text = $"Adding back {gs.CurrentCard.Points[0]} AP\n";
+            questionPreempt(); 
+            // only way to get here is through questionPreempt; headline text replaced there
+        }
+
+        public void PlayerOperation()
+        {
+            headline.text += "Select a Player Operation";
             choice.DisplayChoices(new List<string> { "Planning", "Take Actions", "Passage of Time" });
+            unsubBack();
             // cannot use "this" because response back to different scripts
         }
 
-        int StepNum;
+        public void clickedDoNotPreempt()
+        {
+            unsubBack();
+            OnOpsBackClick += questionPreempt; 
+            EnemyOperation();
+        }
+
+        void EnemyOperation()
+        {
+            headline.text = "Enemy Ops";
+        }
+
         public void Initialize()
         {
             quit.visible = false;
@@ -103,54 +147,8 @@ namespace NavajoWars
             back.visible = true;
             next.visible = true;
             message.visible = true;
-            StepNum = 1;
         }
 
-        public delegate void ChangeStep(int stepNum);
-        public event ChangeStep OnChangeStep;
-
-        public void clickedDoNotPreempt() => EnemyOperation();
-
-/*       int planningStepNum;
-        bool isPlanning;
-
-        public void InitializePlanning() 
-        {
-            quit.visible = false;
-            prev.visible = false;
-            back.visible = true;
-            next.visible = true;
-            message.visible = true;
-            planningStepNum = 1;
-            isPlanning = true;
-        }
-
-        int passageStepNum;
-        bool isPassage;
-        public void InitializePassage()
-        {
-            quit.visible = false;
-            prev.visible = false;
-            back.visible = true;
-            next.visible = true;
-            message.visible = true;
-            passageStepNum = 1;
-            isPassage = true;
-        }
-
-        int actionStepNum;
-        bool isAction;
-        public void InitializeAction()
-        {
-            quit.visible = false;
-            prev.visible = false;
-            back.visible = true;
-            next.visible = true;
-            message.visible = true;
-            actionStepNum = 1;
-            isAction = true;
-            headline.text = "Player Actions";
-        }*/
         public void hideBackNext()
         {
             back.visible = false;
@@ -163,63 +161,42 @@ namespace NavajoWars
             next.visible = true;
         }
 
-        void EnemyOperation()
+        public void PlayerOpsDone()
         {
-            print("Enemy Ops");
+            print("Finished with Player Operations"); 
+            OnOpsNextClick -= PlayerOpsDone;
+            isPlayerOpsDone = true;
+            if (isEnemyOpsDone) OpsDone();
+            else EnemyOperation();
+            //ADD BACK FUNCTION??
         }
 
-        public void nextClicked()
+        public void EnemyOpsDone()
         {
-            StepNum++;
-            OnChangeStep?.Invoke(StepNum);
-
-            /*if (isPlanning)
-            {
-                planningStepNum++;
-                planning.doStep(planningStepNum);
-            }
-            if (isPassage)
-            {
-                passageStepNum++;
-                passage.doStep(passageStepNum);
-            }
-            if (isAction)
-            {
-                actionStepNum++;
-                player.doStep(actionStepNum);
-            }*/
+            print("Finished with Player Operations");
+            OnOpsNextClick -= EnemyOpsDone;
+            isEnemyOpsDone = true;
+            if (isPlayerOpsDone) OpsDone();
+            else PlayerOperation();
+            //ADD BACK FUNCTION??
         }
 
-        public void backClicked()
+        public void OpsDone()
         {
-            StepNum--;
-            OnChangeStep?.Invoke(StepNum);
-
-            /*if (isPlanning)
-            {
-                planningStepNum--;
-                planning.doStep(planningStepNum);
-            }
-            if (isPassage)
-            {
-                passageStepNum--;
-                passage.doStep(passageStepNum);
-            }
-            if (isAction)
-            {
-                actionStepNum--;
-                player.doStep(actionStepNum);
-            }*/
+            print("Finished with Operations Card");
+            gm.LoadNewScene("CardDraw");
+            //ADD BACK FUNCTION??
         }
 
-        void prevClicked() 
+        public void unsubBack()
         {
-            gm.PrevScene();
-        }
-
-        void quitClicked()
-        {
-            gm.ExitGame();
+            if (OnOpsBackClick != null)
+            {
+                foreach (ClickBack subscriber in OnOpsBackClick.GetInvocationList())
+                {
+                    OnOpsBackClick -= subscriber;
+                }
+            }
         }
     }
 }

@@ -121,7 +121,7 @@ namespace NavajoWars
             SceneManager.LoadScene(newScene);
         }
 
-        //card draw
+        //card draw, then call to card type scene
         internal void CardNumInput()
         {
             Card currentCard = Resources.Load<Card>("Cards/card" + gs.CurrentCardNum.ToString("D2"));

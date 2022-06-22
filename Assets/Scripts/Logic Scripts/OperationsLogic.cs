@@ -13,6 +13,7 @@ namespace NavajoWars
         protected ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
         protected List<Action> Steps;
         protected List<bool> stepDone;
+        protected int step;
 
         protected void Awake()
         {
@@ -25,5 +26,16 @@ namespace NavajoWars
 
         protected void doStep(int StepNum) => Steps[StepNum]();
 
+        protected void nextStep()
+        {
+            step++;
+            doStep(step);
+        }
+
+        protected void backStep()
+        {
+            step--;
+            doStep(step);
+        }
     }
 }
