@@ -19,6 +19,7 @@ namespace NavajoWars
         VisualElement hideTitle;
         Button loadSave;
         Button newGame;
+        ScrollView scrollView;
         public Label viewSetup;
         public Button back;
         public Button next;
@@ -61,6 +62,7 @@ namespace NavajoWars
             hideTitle = root.Q<VisualElement>("HideTitle");
             buttonPanel = root.Q<VisualElement>("ButtonPanel");
 
+            scrollView = root.Q<ScrollView>("ScrollView");
             viewSetup = root.Q<Label>("viewSetup");
             back = root.Q<Button>("Back");
             next = root.Q<Button>("Next");
@@ -86,6 +88,7 @@ namespace NavajoWars
             headline.text = "Choose a Scenario";
             buttonPanel.visible = true;            
             loadPanel.visible = false;
+            scrollView.visible = false;
             viewSetup.visible = false;
             hideTitle.visible = false;
             initializeScenarioButtons();
@@ -109,6 +112,7 @@ namespace NavajoWars
             loadConfirm.visible = false;
 
             hideTitle.visible = true;
+            scrollView.visible = true;
             viewSetup.visible = true;
             back.visible = true;
             next.visible = true;
@@ -193,6 +197,7 @@ namespace NavajoWars
             next.visible = false;
             confirm.visible = false;
             viewSetup.visible = false;
+            scrollView.visible = false;
             hideTitle.visible = false;
         }
 

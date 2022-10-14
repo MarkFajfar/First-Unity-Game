@@ -18,6 +18,9 @@ namespace NavajoWars
         public Button back;
         public Button next;
 
+        public ScrollView passagePanel;
+        public List<Foldout> foldouts;
+
         public delegate void ClickNext();
         public event ClickNext OnOpsNextClick;
         public delegate void ClickBack();
@@ -25,6 +28,7 @@ namespace NavajoWars
 
         bool isPlayerOpsDone;
         bool isEnemyOpsDone;
+        bool isPassageDone;
 
         void Awake()
         {
@@ -57,6 +61,9 @@ namespace NavajoWars
             
             quit = root.Q<Button>("Quit");
             quit.clicked += quitClicked;
+
+            passagePanel = root.Q<ScrollView>("PassagePanel");
+            foldouts = passagePanel.Query<Foldout>().ToList();
         }
 
         public void nextClicked()
@@ -77,6 +84,7 @@ namespace NavajoWars
             // reset UI for reload
             headline.visible = true;
             message.visible = false;
+            passagePanel.visible = false;
             back.visible = true;
             next.visible = true; 
             prev.visible = false;
@@ -147,6 +155,7 @@ namespace NavajoWars
             back.visible = true;
             next.visible = true;
             message.visible = true;
+            passagePanel.visible = false;
         }
 
         public void hideBackNext()

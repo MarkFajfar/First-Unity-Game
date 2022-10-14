@@ -133,5 +133,10 @@ namespace NavajoWars
         {
             print("Running Event for Card: " + currentCard.CardNumber.ToString("D2"));
         }
+
+        public void OnApplicationFocus(bool focus)
+        {
+            if (!focus) SaveGame();
+        }
     }
 }

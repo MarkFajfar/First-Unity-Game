@@ -167,7 +167,9 @@ namespace NavajoWars
         public async void clickedChangeFamilyFerocity()
         {
             ui.message.text = "Change one Family +/- 1. If no Man, not over 0. If increased and MP<5, add 1 MP. If decreased and CP<5, add 1 CP. Select Family.";
-            listFerocityNames = gs.Families.Where(f => f.IsActive && f.HasMan && !selectedF.Contains(f.Name)).Select(f => f.Name).ToList();
+            listFerocityNames = gs.Families.Where(f => f.IsActive && f.HasMan && !selectedF.Contains(f.Name))
+                                           .Select(f => f.Name)
+                                           .ToList();
 
             (int choiceIndex, string choiceText) result = await IReceive.GetChoiceAsync(listFerocityNames);
 

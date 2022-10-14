@@ -1,10 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Template name="Template" src="project://database/Assets/UI%20Toolkit/Template.uxml?fileID=9197481963319205126&amp;guid=a479873bb2de8b04ca1786ffab91f1b2&amp;type=3#Template" />
     <Style src="project://database/Assets/UI%20Toolkit/MainStyles.uss?fileID=7433441132597879392&amp;guid=5c28875138ec85a48a15204caaad60cc&amp;type=3#MainStyles" />
     <ui:VisualElement name="Root" picking-mode="Ignore" style="align-items: center; justify-content: center; flex-grow: 1; flex-wrap: wrap;">
-        <ui:Instance template="Template" name="Template" style="flex-grow: 1; width: 100%;">
-            <AttributeOverrides element-name="Root" picking-mode="Ignore" />
-        </ui:Instance>
         <ui:Label text="Ceremony Card" display-tooltip-when-elided="true" name="Headline" picking-mode="Ignore" class="Headline" style="width: 100%; height: 15%;" />
+        <ui:Label text="Place Starting Families In Play: &#10;A, B, C, &amp; D (any Ferocity) in any Area of Shiprock, San Juan Valley, Zuni Mountains, and Hopi Land. &#10;Place a man, woman, and child counter in each Family&apos;s Family Box. &#10;Place all remaining Family Counters into the holding spaces of each Family Box." display-tooltip-when-elided="true" name="FitTest" picking-mode="Ignore" style="font-size: 96px; -unity-font: resource(&apos;Fonts/Arvo-Regular&apos;); -unity-font-definition: resource(&apos;Fonts/Arvo-Regular SDF&apos;); -unity-text-align: upper-left; white-space: normal;" />
     </ui:VisualElement>
 </ui:UXML>

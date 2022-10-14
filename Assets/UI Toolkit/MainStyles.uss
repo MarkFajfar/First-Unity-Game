@@ -216,3 +216,11 @@
     -unity-text-align: middle-left;
     visibility: hidden;
 }
+
+.FoldoutChild {
+    -unity-font: resource('Fonts/Arvo-Regular');
+    -unity-font-definition: resource('Fonts/Arvo-Regular SDF');
+    background-image: resource('Textures/Counters/Counter Child');
+    -unity-background-scale-mode: scale-to-fit;
+    font-size: 76px;
+}
