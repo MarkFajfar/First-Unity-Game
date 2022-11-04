@@ -32,7 +32,7 @@ namespace NavajoWars
                 result.SetResult((e.ChoiceIndex, e.ChoiceText));
             };
             choice.ChoiceMadeEvent += choiceEventHandler;
-            choice.DisplayChoicesEvent(choices);
+            choice.DisplayChoiceButtonsEvent(choices);
             Debug.Log("Task Status Before: " + result.Task.Status.ToString());
             await result.Task;
             choice.ChoiceMadeEvent -= choiceEventHandler;

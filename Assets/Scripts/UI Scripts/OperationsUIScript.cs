@@ -100,7 +100,9 @@ namespace NavajoWars
             if (gs.AP >= gs.CurrentCard.Points[0])
             {
                 headline.text = $"Preempt for {gs.CurrentCard.Points[0]} AP?";
-                choice.DisplayChoices(this, new List<string> { "Yes Preempt", "Do Not Preempt" });
+                choice.CloseChoiceButtons(); 
+                // TODO: decide if CloseCB should be part of DisplayCB or separate; always together?
+                choice.DisplayChoiceButtons(this, new List<string> { "Yes Preempt", "Do Not Preempt" });
                 // with "this" could use "Yes" or "No" if not used elsewhere in this script
             }
             else
@@ -131,7 +133,8 @@ namespace NavajoWars
         public void PlayerOperation()
         {
             headline.text += "Select a Player Operation";
-            choice.DisplayChoices(new List<string> { "Planning", "Take Actions", "Passage of Time" });
+            choice.CloseChoiceButtons();
+            choice.DisplayChoiceButtons(new List<string> { "Planning", "Take Actions", "Passage of Time" });
             unsubBack();
             // cannot use "this" because response back to different scripts
         }

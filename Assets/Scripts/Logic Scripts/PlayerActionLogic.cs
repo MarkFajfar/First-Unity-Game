@@ -10,17 +10,17 @@ namespace NavajoWars
     public class PlayerActionLogic : OperationsLogic
     {
         GameState.Family selectedFamily;
-        Actions selectedAction;
         List<string> completedFamilies; 
-        List<Actions> completedActions;
-
+        
         int numFamEligible;
 
         public enum Actions
         { clickedTakeActions, chooseFamily, undoChooseFamily, chooseAction, undoChooseAction, chooseAnotherAction, undoChooseAnotherAction, completeAction, completeFamily, clickedMove, resolveMove, undoMove, newTerritorySelected, clickedFindWater, removeDrought, undoRemoveDrought, clickedPlantorHarvestCorn, clickedTribalCouncil, undoTribalCouncil, clickedRaid, clickedTradeatFort, undoTradeatFort, doneActions }
         List<Actions> actionList;
+        Actions selectedAction;
         Actions nextAction;
         Actions backAction;
+        List<Actions> completedActions;
 
         Territory priorLocation;
         int priorTradeGoods;
@@ -118,7 +118,7 @@ namespace NavajoWars
             print("undoChooseFamily");
             ui.message.text = "";
             ui.headline.text = "";
-            choice.CloseChoices();
+            choice.CloseChoiceButtons();
             if (completedActions.Count() == 0)
             {
                 ui.PlayerOperation();
@@ -149,14 +149,14 @@ namespace NavajoWars
             if (selectedFamily.HasMan && gs.MP > 0) validActions.Add("Raid");
             if (gs.HasDrought.Contains(selectedFamily.IsWhere)) validActions.Add("Find Water");
             if (gs.HasFort.Contains(selectedFamily.IsWhere) && gs.CP > 0 && (gs.TradeGoodsMax - gs.TradeGoodsHeld) > 0) validActions.Add("Trade at Fort");
-            choice.DisplayChoices(this, validActions);
+            choice.DisplayChoiceButtons(this, validActions);
         }
 
         public void undoChooseAction()
         {
             ui.message.text = "";
             ui.headline.text = "";
-            choice.CloseChoices();
+            choice.CloseChoiceButtons();
             if (completedActions.Count() == 0) chooseFamily();
             else chooseAnotherAction();
             // can get to chooseAction only from chooseFamily, or from chooseAnotherAction
@@ -188,7 +188,7 @@ namespace NavajoWars
             print("undoChooseAnotherAction");
             ui.message.text = "";
             ui.headline.text = "";
-            choice.CloseChoices();
+            choice.CloseChoiceButtons();
             completedActions.RemoveAt(completedActions.Count() - 1);
             Actions penultAction = actionList[actionList.Count() - 2];
             callActionFunc(penultAction);
@@ -208,7 +208,7 @@ namespace NavajoWars
             //display text info about move and wait for next or back click
             selectedAction = Actions.clickedMove;
             actionList.Add(Actions.clickedMove); // include, so return here
-            choice.CloseChoices(); // if coming back from resolveMove
+            choice.CloseChoiceButtons(); // if coming back from resolveMove
             bool horse = selectedFamily.HasHorse;
             bool fortInGame = gs.HasFort.Count() > 0;
             bool fortInTerritory = gs.HasFort.Contains(selectedFamily.IsWhere);

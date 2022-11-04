@@ -38,7 +38,8 @@ namespace NavajoWars
             ui.OnOpsBackClick += backStep;
             stepDone[0] = true;
             step = 0;
-            StepOne();
+            choice.MakeChoiceButtons(new List<string> { "Choice One", "Choice Two", "Choice Three" });
+            //StepOne();
         }
 
         void StepOne()
@@ -109,7 +110,7 @@ namespace NavajoWars
                         ui.message.text += $"For this roll you need a {gs.ElderTarget[i]} or less.";
                         isDieRolled = false;
                         isDieRollSucceeded = false;
-                        choice.DisplayChoices(this, new List<string> {"Roll Succeeded", "Roll Failed" });
+                        choice.DisplayChoiceButtons(this, new List<string> {"Roll Succeeded", "Roll Failed" });
                         yield return new WaitUntil(() => isDieRolled);
                         if (isDieRollSucceeded)
                         {
@@ -119,7 +120,7 @@ namespace NavajoWars
                             List<string> elderChoices = new() { "Add 1 AP", "Change Family Ferocity" };
                             if (gs.CP > gs.MP) elderChoices.Add("Add 1 MP for 1 CP");
                             if (gs.MP > gs.CP) elderChoices.Add("Add 1 CP for 1 MP");
-                            choice.DisplayChoices(this, elderChoices);
+                            choice.DisplayChoiceButtons(this, elderChoices);
                             yield return new WaitUntil(() => isElderActionComplete);
                         }
                         j++;
@@ -182,17 +183,17 @@ namespace NavajoWars
             if (selectedFamily.Ferocity == 3)
             {
                 ui.message.text = CPremind;
-                choice.DisplayChoices(new List<string> { "Decrease" });
+                choice.DisplayChoiceButtons(new List<string> { "Decrease" });
             }
             else if (selectedFamily.Ferocity == 0)
             {
                 ui.message.text = MPremind;
-                choice.DisplayChoices(new List<string> { "Increase" });
+                choice.DisplayChoiceButtons(new List<string> { "Increase" });
             }
             else
             {
                 ui.message.text = $"Increase or Decrease Ferocity for {choiceText}? " + MPremind + CPremind;
-                choice.DisplayChoices(new List<string> { "Increase", "Decrease" }); 
+                choice.DisplayChoiceButtons(new List<string> { "Increase", "Decrease" }); 
             }
         }
 

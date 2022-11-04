@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
+
+// DO NOT USE -- passage of time ui is part of operations
+
+
+
 namespace NavajoWars
 {
     public class PassageUIScript : MonoBehaviour, IsUIScript, IReceive
