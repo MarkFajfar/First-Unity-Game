@@ -14,13 +14,13 @@ namespace NavajoWars
         
         int numFamEligible;
 
-        public enum Actions
+        public enum GameSteps
         { clickedTakeActions, chooseFamily, undoChooseFamily, chooseAction, undoChooseAction, chooseAnotherAction, undoChooseAnotherAction, completeAction, completeFamily, clickedMove, resolveMove, undoMove, newTerritorySelected, clickedFindWater, removeDrought, undoRemoveDrought, clickedPlantorHarvestCorn, clickedTribalCouncil, undoTribalCouncil, clickedRaid, clickedTradeatFort, undoTradeatFort, doneActions }
-        List<Actions> actionList;
-        Actions selectedAction;
-        Actions nextAction;
-        Actions backAction;
-        List<Actions> completedActions;
+        List<GameSteps> actionList;
+        GameSteps selectedAction;
+        GameSteps nextAction;
+        GameSteps backAction;
+        List<GameSteps> completedActions;
 
         Territory priorLocation;
         int priorTradeGoods;
@@ -44,7 +44,7 @@ namespace NavajoWars
             chosenMethod?.Invoke(this, null);
         }
 
-        void callActionFunc(Actions action)
+        void callActionFunc(GameSteps action)
         {
             print("called Action is " + action.ToString());
             Type thisType = GetType();
@@ -55,14 +55,14 @@ namespace NavajoWars
         void Start()
         {
             print("Player Action Logic Start");
-            actionList = new List<Actions>();
+            actionList = new List<GameSteps>();
         }
 
         public void clickedTakeActions()
         {
             // initialize values then go to chooseFamily
             print("Take Actions");
-            actionList.Add(Actions.clickedTakeActions);
+            actionList.Add(GameSteps.clickedTakeActions);
             ui.Initialize();
             ui.showBackNext();
             ui.OnOpsNextClick += nextActionFunc;
@@ -80,12 +80,12 @@ namespace NavajoWars
         public async void chooseFamily()
         {
             print("chooseFamily");
-            actionList.Add(Actions.chooseFamily);
+            actionList.Add(GameSteps.chooseFamily);
             // choose family to activate
             // ADD POPUP FOR ACTION COSTS???
             ui.headline.text = "Player Actions";
-            nextAction = Actions.doneActions;
-            backAction = Actions.undoChooseFamily;
+            nextAction = GameSteps.doneActions;
+            backAction = GameSteps.undoChooseFamily;
             if (numFamEligible > 0)
             {
                 ui.message.text = $"{numFamEligible} {(numFamEligible > 1 ? "families" : "family")} can be activated.\nEach family has 6 MP";
@@ -127,7 +127,7 @@ namespace NavajoWars
             {
                 completedFamilies.Remove(selectedFamily.Name);
                 numFamEligible++;
-                Actions penultAction = actionList[actionList.Count() - 2];
+                GameSteps penultAction = actionList[actionList.Count() - 2];
                 callActionFunc(penultAction);
             };
             // can get to chooseFamily only initially, from completeFamily or from undoChooseAction
@@ -137,9 +137,9 @@ namespace NavajoWars
 
         public void chooseAction()
         {
-            actionList.Add(Actions.chooseAction);
-            backAction = Actions.undoChooseAction;
-            nextAction = Actions.chooseAction;
+            actionList.Add(GameSteps.chooseAction);
+            backAction = GameSteps.undoChooseAction;
+            nextAction = GameSteps.chooseAction;
             // next button just cycles back, need to choose action or press back
             // choose from list of valid actions 
             ui.showBackNext();
@@ -173,9 +173,9 @@ namespace NavajoWars
 
         public async void chooseAnotherAction()
         {
-            actionList.Add(Actions.chooseAnotherAction);
-            nextAction = Actions.chooseAnotherAction;
-            backAction = Actions.undoChooseAnotherAction;
+            actionList.Add(GameSteps.chooseAnotherAction);
+            nextAction = GameSteps.chooseAnotherAction;
+            backAction = GameSteps.undoChooseAnotherAction;
             ui.message.text += "If family has MPs remaining, you may select another Action. Otherwise, you may select another family to activate (or choose to end family actions). ";
             (int choiceIndex, string choiceText) result = await IReceive.GetChoiceAsync(new List<string> { "Action for Same Family", "Another Family or End" });
             string choiceText = result.choiceText.Replace("clicked", "");
@@ -190,7 +190,7 @@ namespace NavajoWars
             ui.headline.text = "";
             choice.CloseChoiceButtons();
             completedActions.RemoveAt(completedActions.Count() - 1);
-            Actions penultAction = actionList[actionList.Count() - 2];
+            GameSteps penultAction = actionList[actionList.Count() - 2];
             callActionFunc(penultAction);
         }
 
@@ -206,8 +206,8 @@ namespace NavajoWars
         public void clickedMove()
         {
             //display text info about move and wait for next or back click
-            selectedAction = Actions.clickedMove;
-            actionList.Add(Actions.clickedMove); // include, so return here
+            selectedAction = GameSteps.clickedMove;
+            actionList.Add(GameSteps.clickedMove); // include, so return here
             choice.CloseChoiceButtons(); // if coming back from resolveMove
             bool horse = selectedFamily.HasHorse;
             bool fortInGame = gs.HasFort.Count() > 0;
@@ -220,15 +220,15 @@ namespace NavajoWars
             string fortMsg = (fortInGame && selectedFamily.Ferocity > 1) ? "A family with Ferocity > 1 that ends it activation in the same Area as a Fort must disband. " : ""; 
             if (fortInTerritory) fortMsg += isFirstAction ? "If currently in the same Area as a Fort, move only on first action and cost is increased by die roll." : "Move from same Area as a Fort only in first action.";            
             ui.message.text += chellyMsg + fortMsg;
-            backAction = Actions.chooseAction; 
-            nextAction = Actions.resolveMove;
+            backAction = GameSteps.chooseAction; 
+            nextAction = GameSteps.resolveMove;
         }
 
         public async void resolveMove()
         {
-            actionList.Add(Actions.resolveMove); 
-            backAction = Actions.clickedMove;
-            nextAction = Actions.resolveMove;
+            actionList.Add(GameSteps.resolveMove); 
+            backAction = GameSteps.clickedMove;
+            nextAction = GameSteps.resolveMove;
             // next button just cycles, need to choose action or press back
             priorLocation = selectedFamily.IsWhere;
             bool isFirstAction = completedActions.Count() == 0;
@@ -239,33 +239,33 @@ namespace NavajoWars
 
             string choiceText = result.choiceText.Replace("clicked", "");
             print("resolveMove: " + choiceText);
-            backAction = Actions.resolveMove;
+            backAction = GameSteps.resolveMove;
             if (choiceText == "No Same Territory")
             {
                 ui.message.text = "Move completed. Press Next to continue. ";
                 bool fortInTerritory = gs.HasFort.Contains(selectedFamily.IsWhere);
                 if (selectedFamily.Ferocity > 1 && fortInTerritory) ui.message.text += "Reminder: a Family with Ferocity > 1 that ends it activation in the same Area as a Fort must disband.";
-                nextAction = Actions.completeAction;
+                nextAction = GameSteps.completeAction;
             }
             if (choiceText == "Yes New Territory")
             {
                 ui.message.text = $"Select {selectedFamily.Name}'s new Territory and click Next to proceed.";
                 choice.DisplayLocations();
-                nextAction = Actions.newTerritorySelected;
+                nextAction = GameSteps.newTerritorySelected;
             }
             if (choiceText == "Yes to Canyon de Chelly")
             {
                 ui.message.text = "Move to Canyon de Chelly completed. Click Next to proceed.";
                 selectedFamily.IsWhere = Territory.Canyon;
                 completedActions.Add(selectedAction);
-                backAction = Actions.undoMove;
-                nextAction = Actions.completeFamily;                
+                backAction = GameSteps.undoMove;
+                nextAction = GameSteps.completeFamily;                
             }            
         }
 
         public void newTerritorySelected()
         {
-            actionList.Add(Actions.undoMove); // will go back there from choose Action
+            actionList.Add(GameSteps.undoMove); // will go back there from choose Action
             ui.message.text = "";
             selectedFamily.IsWhere = (Territory)choice.locations.value + 1;
             choice.CloseLocations();
@@ -286,9 +286,9 @@ namespace NavajoWars
         
         public void clickedFindWater()
         {
-            actionList.Add(Actions.clickedFindWater);
-            selectedAction = Actions.clickedFindWater;
-            backAction = Actions.chooseAction;
+            actionList.Add(GameSteps.clickedFindWater);
+            selectedAction = GameSteps.clickedFindWater;
+            backAction = GameSteps.chooseAction;
             // bool drought = gs.HasDrought.Contains(selectedFamily.IsWhere); //action not available if no drought
             bool horse = selectedFamily.HasHorse;
             int missing = numMissing(selectedFamily);
@@ -304,13 +304,13 @@ namespace NavajoWars
                 ui.message.text = $"{selectedFamily.Name} has {6 - missing} MP{(isFirstAction ? "" : ", minus points already spent")}. Remove one Drought counter at cost of MPs equal to 9 minus value of current Area";
                 ui.message.text += horse ? ", or parenthesized value if lower. " : ". ";
                 ui.message.text += "Press Back if insufficient MP, or Next to remove Drought.";
-                nextAction = Actions.removeDrought;
+                nextAction = GameSteps.removeDrought;
             //}
         }
 
         public void removeDrought()
         {
-            actionList.Add(Actions.undoRemoveDrought); // will go back there from choose Action
+            actionList.Add(GameSteps.undoRemoveDrought); // will go back there from choose Action
             gs.HasDrought.Remove(selectedFamily.IsWhere);
             completeAction();
         }
@@ -324,8 +324,8 @@ namespace NavajoWars
 
         public void clickedPlantorHarvestCorn()
         {
-            actionList.Add(Actions.clickedPlantorHarvestCorn);
-            selectedAction = Actions.clickedPlantorHarvestCorn;
+            actionList.Add(GameSteps.clickedPlantorHarvestCorn);
+            selectedAction = GameSteps.clickedPlantorHarvestCorn;
             bool drought = gs.HasDrought.Contains(selectedFamily.IsWhere); 
             bool rancho = gs.HasRancho.Contains(selectedFamily.IsWhere);
             int missing = numMissing(selectedFamily);
@@ -335,16 +335,16 @@ namespace NavajoWars
             ui.message.text += drought || rancho ? "Harvest requires die roll > number of drought and rancho counters in Territory. " : "Harvest does not require a die roll. ";
             ui.message.text += "To harvest, reveal Corn counter and place it in resources. Press Next to continue.";
             // NECESSARY TO RECORD PLANT OR HARVEST?
-            backAction = Actions.chooseAction;
-            nextAction = Actions.completeAction;
+            backAction = GameSteps.chooseAction;
+            nextAction = GameSteps.completeAction;
         }
 
         public async void clickedTribalCouncil()
         {
-            actionList.Add(Actions.clickedTribalCouncil);
-            selectedAction = Actions.clickedTribalCouncil;
-            backAction = Actions.chooseAction; 
-            nextAction = Actions.clickedTribalCouncil;
+            actionList.Add(GameSteps.clickedTribalCouncil);
+            selectedAction = GameSteps.clickedTribalCouncil;
+            backAction = GameSteps.chooseAction; 
+            nextAction = GameSteps.clickedTribalCouncil;
             // next action recycles back if clicked inadvertently
             ui.headline.text = $"{selectedFamily.Name} Calls Tribal Council";
             ui.message.text = $"This must be {selectedFamily.Name}'s only action. If die roll is > = the family's current Area, collect 1 AP. Otherwise there is no effect. Was the die roll successful?";
@@ -361,9 +361,9 @@ namespace NavajoWars
             }
             ui.message.text += "Press Next to Continue. ";
             completedActions.Add(selectedAction);
-            actionList.Add(Actions.undoTribalCouncil);
-            backAction = Actions.undoTribalCouncil;
-            nextAction = Actions.completeFamily;
+            actionList.Add(GameSteps.undoTribalCouncil);
+            backAction = GameSteps.undoTribalCouncil;
+            nextAction = GameSteps.completeFamily;
         }
 
         public void undoTribalCouncil()
@@ -375,23 +375,23 @@ namespace NavajoWars
 
         public void clickedRaid()
         {
-            actionList.Add(Actions.clickedRaid);
-            selectedAction = Actions.clickedRaid;
-            backAction = Actions.chooseAction;
-            nextAction = Actions.clickedRaid; 
+            actionList.Add(GameSteps.clickedRaid);
+            selectedAction = GameSteps.clickedRaid;
+            backAction = GameSteps.chooseAction;
+            nextAction = GameSteps.clickedRaid; 
             ui.headline.text = $"{selectedFamily.Name} Raids New Mexico";
             ui.message.text = "Placeholder for raid. ";
             ui.message.text += "Press Next to Continue.";
             completedActions.Add(selectedAction);
-            nextAction = Actions.completeAction;
+            nextAction = GameSteps.completeAction;
         }
 
         public async void clickedTradeatFort()
         {
-            actionList.Add(Actions.clickedTradeatFort);
-            selectedAction = Actions.clickedTradeatFort;
-            backAction = Actions.chooseAction;
-            nextAction = Actions.clickedTradeatFort;
+            actionList.Add(GameSteps.clickedTradeatFort);
+            selectedAction = GameSteps.clickedTradeatFort;
+            backAction = GameSteps.chooseAction;
+            nextAction = GameSteps.clickedTradeatFort;
             int tradeGoodsAvail = gs.TradeGoodsMax - gs.TradeGoodsHeld;
             ui.headline.text = $"{selectedFamily.Name} Trades at Fort";
             ui.message.text = $"This action costs all remaining MP and 1 CP, will reduce {selectedFamily.Name}'s ferocity to zero, and {selectedFamily.Name} must be in the Fort. {(tradeGoodsAvail == 1 ? "One trade good is" : $"{tradeGoodsAvail} trade goods are")} available. Do you wish to trade?";
@@ -402,9 +402,9 @@ namespace NavajoWars
             if (choiceText == "Yes Trade")
             {
                 completedActions.Add(selectedAction); 
-                actionList.Add(Actions.undoTradeatFort); // back from completeFamily will go there
-                backAction = Actions.undoTradeatFort;
-                nextAction = Actions.completeFamily;
+                actionList.Add(GameSteps.undoTradeatFort); // back from completeFamily will go there
+                backAction = GameSteps.undoTradeatFort;
+                nextAction = GameSteps.completeFamily;
                 priorTradeGoods = gs.TradeGoodsHeld;
                 priorFerocity = selectedFamily.Ferocity;
                 gs.TradeGoodsHeld = gs.TradeGoodsMax;
@@ -414,8 +414,8 @@ namespace NavajoWars
             }
             else
             {
-                backAction = Actions.clickedTradeatFort;
-                nextAction = Actions.chooseAction;
+                backAction = GameSteps.clickedTradeatFort;
+                nextAction = GameSteps.chooseAction;
             }
             ui.message.text += "Press Next to Continue. ";
         }
@@ -428,8 +428,8 @@ namespace NavajoWars
             gs.CP++;
             ui.message.text = $"You have {gs.CP} CP and {gs.TradeGoodsHeld} trade goods. {selectedFamily.Name}'s ferocity is {selectedFamily.Ferocity}";
             ui.message.text += "Press Next to Continue. ";
-            backAction = Actions.clickedTradeatFort;
-            nextAction = Actions.chooseAction;
+            backAction = GameSteps.clickedTradeatFort;
+            nextAction = GameSteps.chooseAction;
         }
 
         int numMissing(GameState.Family family)

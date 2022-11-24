@@ -18,8 +18,8 @@ namespace NavajoWars
         public Button back;
         public Button next;
 
-        public ScrollView passagePanel;
-        public List<Foldout> foldouts;
+        public ScrollView choicePanel;
+        public List<Foldout> foldouts; // move to ChoiceUIScript ?
 
         public delegate void ClickNext();
         public event ClickNext OnOpsNextClick;
@@ -36,6 +36,7 @@ namespace NavajoWars
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
             choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
+            // choice = GetComponent<ChoiceUIScript>();
         }
 
         void OnEnable()
@@ -46,6 +47,7 @@ namespace NavajoWars
         public void getVisualElements()
         {
             var root = GetComponent<UIDocument>().rootVisualElement;
+
             headline = root.Q<Label>("Headline");
 
             message = root.Q<Label>("Message");
@@ -62,8 +64,10 @@ namespace NavajoWars
             quit = root.Q<Button>("Quit");
             quit.clicked += quitClicked;
 
-            passagePanel = root.Q<ScrollView>("PassagePanel");
-            foldouts = passagePanel.Query<Foldout>().ToList();
+            //TODO:  move choicePanel to ChoiceUIScript ?
+            
+            choicePanel = root.Q<ScrollView>("ChoicePanel");
+            foldouts = choicePanel.Query<Foldout>().ToList();
         }
 
         public void nextClicked()
@@ -84,7 +88,7 @@ namespace NavajoWars
             // reset UI for reload
             headline.visible = true;
             message.visible = false;
-            passagePanel.visible = false;
+            choicePanel.visible = false;
             back.visible = true;
             next.visible = true; 
             prev.visible = false;
@@ -100,7 +104,7 @@ namespace NavajoWars
             if (gs.AP >= gs.CurrentCard.Points[0])
             {
                 headline.text = $"Preempt for {gs.CurrentCard.Points[0]} AP?";
-                choice.CloseChoiceButtons(); 
+                // choice.CloseChoiceButtons(); 
                 // TODO: decide if CloseCB should be part of DisplayCB or separate; always together?
                 choice.DisplayChoiceButtons(this, new List<string> { "Yes Preempt", "Do Not Preempt" });
                 // with "this" could use "Yes" or "No" if not used elsewhere in this script
@@ -158,7 +162,7 @@ namespace NavajoWars
             back.visible = true;
             next.visible = true;
             message.visible = true;
-            passagePanel.visible = false;
+            choicePanel.visible = false;
         }
 
         public void hideBackNext()

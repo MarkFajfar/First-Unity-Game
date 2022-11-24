@@ -50,7 +50,7 @@ namespace NavajoWars
         {
             string sd = JsonUtility.ToJson(gs);
             print("Saving Data: " + sd);
-            File.WriteAllText(Application.persistentDataPath + "/savefile.json", sd);
+            //File.WriteAllText(Application.persistentDataPath + "/savefile.json", sd);
         }
 
         public void LoadSave()

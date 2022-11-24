@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
+using System.Reflection;
 
 namespace NavajoWars
 {
@@ -10,7 +12,8 @@ namespace NavajoWars
     {
         void Start()
         {
-            Steps = new ();
+            print("PlanningLogic Start");
+            Steps = new();
             Steps.Add(clickedPlanning);
             Steps.Add(StepOne);
             Steps.Add(StepTwo);
@@ -19,9 +22,9 @@ namespace NavajoWars
             Steps.Add(StepFive);
             Steps.Add(StepSix);
             Steps.Add(StepSeven);
-            stepDone = new () { false, false, false, false, false, false, false };
+            stepDone = new() { false, false, false, false, false, false, false };
         }
-               
+
         bool isDieRolled = false;
         bool isDieRollSucceeded = false;
         void diceManager(bool isDieRollSuccess)
@@ -30,16 +33,71 @@ namespace NavajoWars
             isDieRolled = true;
         }
 
+        public struct buttonParams
+        {
+            public string name;
+            public string text;
+            public string style;
+            public int tabIndex;
+        }
+
+        Button makeButton(string name, string text, string style, int i)
+        {
+            Button button = new()
+            {
+                name = name,
+                text = text
+            };
+            button.AddToClassList(style);
+            button.tabIndex = i;
+            return button;
+        }
+
         // called from ChoiceUI when planning button clicked
         public void clickedPlanning()
         {
+            print("Planning Button clicked");
             ui.Initialize();
             ui.OnOpsNextClick += nextStep;
             ui.OnOpsBackClick += backStep;
             stepDone[0] = true;
             step = 0;
-            choice.MakeChoiceButtons(new List<string> { "Choice One", "Choice Two", "Choice Three" });
-            //StepOne();
+
+            //This Works!!
+            //tPlanningOne tStepOne = gameObject.AddComponent<tPlanningOne>();
+            //tStepOne.LoadGameState("loaded");
+
+            //Button testButton = makeButton("test", "Test Button", "ButtonMenu", 1);
+            //testButton.AddToClassList("ButtonMenu");
+            //testButton.text = "Test Button";
+            for (int i = 0; i < 3; i++)
+            {
+                tPlanningOne tStep = gameObject.AddComponent<tPlanningOne>();
+                // send info "into object"
+                tStep.tIndex = (i +1) * 10;
+
+                bParams testButton = new()
+                {
+                    name = $"test{i}",
+                    text = $"Test Button {i+1}",
+                    style = "ButtonMenu",
+                    tabIndex = i + 1,
+                    userData = tStep  //(PlayerActionLogic.GameSteps)i + 4
+                };
+                choice.showButton(testButton);
+
+/*                            buttonParams buttonP = new()
+                            {
+                                name = "test",
+                                text = "Second Button",
+                                style = "ButtonMenu",
+                                tabIndex = 1
+                            };
+                            choice.showButton(buttonP);*/
+
+                //choice.MakeChoiceButtons(new List<string> { "Choice One", "Choice Two", "Choice Three" });
+                //StepOne();
+            }
         }
 
         void StepOne()

@@ -10,6 +10,7 @@ namespace NavajoWars
     {
         void Start()
         {
+            print("PassageLogic Start");
             Steps = new();
             Steps.Add(clickedPassageofTime);
             Steps.Add(StepOne);
@@ -47,9 +48,10 @@ namespace NavajoWars
             }
         }
 
+        // TODO:  move this display function to ChoiceUIScript 
         void displayChildren(List<Person> childrenInPassage, List<GameState.Family> childrenInFamilies)
         {
-            ui.passagePanel.visible = true;
+            ui.choicePanel.visible = true;
             
             int countPassage = 0;
             int countFamilies = 0;

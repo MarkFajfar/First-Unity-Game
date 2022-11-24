@@ -22,6 +22,7 @@ namespace NavajoWars
             gs = gmobj.GetComponent<GameState>();
             ui = gameObject.GetComponent<OperationsUIScript>();
             choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
+            // choice = GetComponent<ChoiceUIScript>();
         }
 
         protected void doStep(int StepNum) => Steps[StepNum]();
