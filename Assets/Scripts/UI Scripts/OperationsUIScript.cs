@@ -1,46 +1,30 @@
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class OperationsUIScript : MonoBehaviour, IsUIScript, IReceive
+    public class OperationsUIScript : UIScript, IReceive
     {
-        GameManager gm;
-        GameState gs;
-        ChoiceUIScript choice;
-        ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
-
         public Label headline;
         public Label message;
         Button prev;
         Button quit;
-        public Button back;
-        public Button next;
+        Button back;
+        Button next;
+        public string[] choiceButtonStyles;
 
         public ScrollView choicePanel;
-        public List<Foldout> foldouts; // move to ChoiceUIScript ?
+        public List<Foldout> foldouts;
 
-        public delegate void ClickNext();
-        public event ClickNext OnOpsNextClick;
-        public delegate void ClickBack();
-        public event ClickBack OnOpsBackClick;
-
-        bool isPlayerOpsDone;
-        bool isEnemyOpsDone;
-        bool isPassageDone;
-
-        void Awake()
-        {
-            var gmobj = GameObject.FindWithTag("GameController");
-            gm = gmobj.GetComponent<GameManager>();
-            gs = gmobj.GetComponent<GameState>();
-            choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
-            // choice = GetComponent<ChoiceUIScript>();
-        }
+        public RadioButtonGroup locations;
 
         void OnEnable()
         {
+            //choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
+            //choice = GetComponent<ChoiceUIScript>();
             getVisualElements();
         }
 
@@ -63,155 +47,202 @@ namespace NavajoWars
             
             quit = root.Q<Button>("Quit");
             quit.clicked += quitClicked;
-
-            //TODO:  move choicePanel to ChoiceUIScript ?
-            
+                        
             choicePanel = root.Q<ScrollView>("ChoicePanel");
-            foldouts = choicePanel.Query<Foldout>().ToList();
+            //foldouts = choicePanel.Query<Foldout>().ToList();
         }
 
-        public void nextClicked()
-        { OnOpsNextClick?.Invoke(); }
+        public override void nextClicked() 
+        { 
+            base.nextClicked();
+        }
 
-        public void backClicked()
-        { OnOpsBackClick?.Invoke(); }
-
-        void prevClicked()
-        { gm.PrevScene(); }
-
-        void quitClicked()
-        { gm.ExitGame(); }
+        public override void backClicked()
+        {
+            // check first if any step in stack; if not, go to subscribers to backClicked
+            if (gs.stepStack.Count > 0) gs.stepStack.Pop().Undo(); 
+            else base.backClicked();
+        }
 
         void Start()
         {
-            // called when scene "Operations" is loaded, called from gm  
+            // called when scene "Operations" is loaded, called from gm
+            // no previous button
+            prev.visible = false;
             // reset UI for reload
+            headline.text = "Operations";
             headline.visible = true;
-            message.visible = false;
-            choicePanel.visible = false;
-            back.visible = true;
-            next.visible = true; 
+            message.visible = true;
+            choicePanel.visible = true;
+            back.visible = false;
+            next.visible = false;
+            quit.visible = true;
+        }
+
+        public override void Initialize()
+        {
             prev.visible = false;
             quit.visible = true;
-
-            questionPreempt();
-        }
-
-        void questionPreempt()
-        {
-            unsubBack();
-            OnOpsBackClick += prevClicked;
-            if (gs.AP >= gs.CurrentCard.Points[0])
-            {
-                headline.text = $"Preempt for {gs.CurrentCard.Points[0]} AP?";
-                // choice.CloseChoiceButtons(); 
-                // TODO: decide if CloseCB should be part of DisplayCB or separate; always together?
-                choice.DisplayChoiceButtons(this, new List<string> { "Yes Preempt", "Do Not Preempt" });
-                // with "this" could use "Yes" or "No" if not used elsewhere in this script
-            }
-            else
-            {
-                headline.text = "Insufficient AP to Preempt. Starting Enemy Action Phase.";
-                EnemyOperation(); 
-            }
-        }
-
-        public void clickedYesPreempt()
-        {
-            gs.AP -= gs.CurrentCard.Points[0];
-            headline.text = $"Subtracted {gs.CurrentCard.Points[0]} AP\n";
-            unsubBack();
-            OnOpsBackClick += backYesPreempt;
-            PlayerOperation();
-        }
-
-        void backYesPreempt()
-        {
-            print("backYesPreempt");
-            gs.AP += gs.CurrentCard.Points[0];
-            //headline.text = $"Adding back {gs.CurrentCard.Points[0]} AP\n";
-            questionPreempt(); 
-            // only way to get here is through questionPreempt; headline text replaced there
-        }
-
-        public void PlayerOperation()
-        {
-            headline.text += "Select a Player Operation";
-            choice.CloseChoiceButtons();
-            choice.DisplayChoiceButtons(new List<string> { "Planning", "Take Actions", "Passage of Time" });
-            unsubBack();
-            // cannot use "this" because response back to different scripts
-        }
-
-        public void clickedDoNotPreempt()
-        {
-            unsubBack();
-            OnOpsBackClick += questionPreempt; 
-            EnemyOperation();
-        }
-
-        void EnemyOperation()
-        {
-            headline.text = "Enemy Ops";
-        }
-
-        public void Initialize()
-        {
-            quit.visible = false;
-            prev.visible = false;
             back.visible = true;
             next.visible = true;
+            headline.visible = true;
             message.visible = true;
             choicePanel.visible = false;
         }
 
-        public void hideBackNext()
+        public override void displayText(string text)
+        {
+            message.visible = true;
+            message.text = text;   
+        }
+
+        public override void addText(string text)
+        {
+            message.visible = true;
+            message.text += text;
+        }
+
+        public override void displayHeadline(string text)
+        {
+            headline.visible = true;
+            headline.text = text;
+        }
+
+        public override void addHeadline(string text)
+        {
+            headline.visible = true;
+            headline.text += text;
+        }
+
+        public override void showBackNext()
+        {
+            back.visible = true;
+            next.visible = true;
+        }
+        
+        public override void hideBackNext()
         {
             back.visible = false;
             next.visible = false;
         }
 
-        public void showBackNext()
-        {
-            back.visible = true;
-            next.visible = true;
-        }
+        public override void showPrev()
+        // no previous button
+        { prev.visible = false; }
+        
+        public override void hidePrev()
+        { prev.visible = false; }
 
-        public void PlayerOpsDone()
+        protected override void MakeChoiceButtons(List<bParams> choices)
         {
-            print("Finished with Player Operations"); 
-            OnOpsNextClick -= PlayerOpsDone;
-            isPlayerOpsDone = true;
-            if (isEnemyOpsDone) OpsDone();
-            else EnemyOperation();
-            //ADD BACK FUNCTION??
-        }
-
-        public void EnemyOpsDone()
-        {
-            print("Finished with Player Operations");
-            OnOpsNextClick -= EnemyOpsDone;
-            isEnemyOpsDone = true;
-            if (isPlayerOpsDone) OpsDone();
-            else PlayerOperation();
-            //ADD BACK FUNCTION??
-        }
-
-        public void OpsDone()
-        {
-            print("Finished with Operations Card");
-            gm.LoadNewScene("CardDraw");
-            //ADD BACK FUNCTION??
-        }
-
-        public void unsubBack()
-        {
-            if (OnOpsBackClick != null)
+            ClearChoicePanel();
+            choicePanel.style.display = DisplayStyle.Flex;
+            choicePanel.visible = true;
+            foreach (bParams choice in choices)
             {
-                foreach (ClickBack subscriber in OnOpsBackClick.GetInvocationList())
+                var choiceButton = new Button();
+                choiceButton.RegisterCallback<ClickEvent>(buttonClicked);
+                choiceButton.AddToClassList(choice.style);
+                //foreach (string style in choiceButtonStyles) choiceButton.AddToClassList(style);
+                choiceButton.name = choice.name;
+                choiceButton.text = choice.text;
+                choiceButton.tabIndex = choice.tabIndex;
+                choiceButton.userData = choice.userData;
+                choicePanel.Add(choiceButton);
+                choiceButton.style.display = DisplayStyle.Flex;
+            }
+        }
+
+        public override void showButton(Button button)
+        {
+            choicePanel.style.display = DisplayStyle.Flex;
+            choicePanel.visible = true;
+            button.RegisterCallback<ClickEvent>(buttonClicked);
+            button.style.display = DisplayStyle.Flex;
+            choicePanel.Add(button);
+        }
+        
+        public override void showButton(bParams bparams)
+        {
+            choicePanel.style.display = DisplayStyle.Flex;
+            choicePanel.visible = true;
+            Button choiceButton = new();
+            choiceButton.RegisterCallback<ClickEvent>(buttonClicked);
+            choiceButton.AddToClassList(bparams.style);
+            //foreach (string style in choiceButtonStyles) choiceButton.AddToClassList(style);
+            choiceButton.name = bparams.name;
+            choiceButton.text = bparams.text;
+            choiceButton.tabIndex = bparams.tabIndex;
+            choiceButton.userData = bparams.userData;
+            choiceButton.style.display = DisplayStyle.Flex;
+            choicePanel.Add(choiceButton);
+        }
+
+        public override void MakeFamilyFoldouts(Dictionary<Person, GameState.Family> foldouts)
+        // (List<Person> childrenInPassage, List<GameState.Family> childrenInFamilies)
+        {
+            // TODO: make this function generic ?? "MakeFoldouts"
+
+            ClearChoicePanel();
+
+            choicePanel.style.display = DisplayStyle.Flex;
+
+            foreach (KeyValuePair<Person, GameState.Family> foldout in foldouts)
+            // for (int i = 0; i < (childrenInPassage.Count() + childrenInFamilies.Count()); i++)
+            {
+                // Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+
+                var choiceFoldout = new Foldout();
+                choiceFoldout.AddToClassList("FoldoutChild");
+                choiceFoldout.value = false;
+                choiceFoldout.style.display = DisplayStyle.Flex;
+                choiceFoldout.text = foldout.Key.ToString(); // child? family name?
+
+                // each child can be converted into a man, woman or elder
+
+                List<Person> foldoutPersons = new() { Person.Man, Person.Woman, Person.Elder };
+                int n = 0;
+                foreach (var person in foldoutPersons)
                 {
-                    OnOpsBackClick -= subscriber;
+                    var foldoutButton = new Button();
+                    foldoutButton.RegisterCallback<ClickEvent>(foldoutClicked);
+                    foldoutButton.AddToClassList("ButtonFoldout");  // create this style
+                    foldoutButton.text = person.ToString();
+                    n++;
+                    foldoutButton.tabIndex = n;
+                    foldoutButton.userData = person;
+                    choiceFoldout.Add(foldoutButton);
+                    foldoutButton.style.display = DisplayStyle.Flex;
                 }
+            }
+        }
+
+        public override void DisplayLocations()
+        {
+            List<string> locationNames = new()
+            { " Splitrock", " San Juan", " Zuni", " Monument", " Hopi", " Black Mesa", " C. de Chelly" };
+            isEvent = false;
+            sender = null;
+            locations.style.display = DisplayStyle.Flex;
+            locations.choices = locationNames;
+        }
+    
+        public override void CloseLocations()
+        { locations.style.display = DisplayStyle.None; }
+
+        public override void ClearChoicePanel()
+        {
+            List<VisualElement> choiceElements = new();
+            //List<Button> buttons = choicePanel.Query<Button>().ToList();
+            choiceElements.AddRange(choicePanel.Query<Button>().ToList());
+            choiceElements.AddRange(choicePanel.Query<Foldout>().ToList());
+            choiceElements.AddRange(choicePanel.Query<RadioButtonGroup>().ToList());
+            // IEnumerable<VisualElement> choiceElements = new[] { buttons, foldouts, radios };
+
+            foreach (var element in choiceElements)
+            {
+                element.style.display = DisplayStyle.None;
+                element.RemoveFromHierarchy();
             }
         }
     }

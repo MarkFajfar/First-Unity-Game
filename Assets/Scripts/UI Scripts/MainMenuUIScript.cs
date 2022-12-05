@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class MainMenuUIScript : MonoBehaviour, IsUIScript
+    public class MainMenuUIScript : MonoBehaviour //, IsUIScript
     {
         GameManager gm;
         GameState gs;

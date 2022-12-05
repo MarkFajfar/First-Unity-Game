@@ -8,7 +8,6 @@ namespace NavajoWars
 {
     public interface IReceive
     {
-
         void methodManager(string methodText)
         {
             // remove spaces just to be sure
@@ -20,24 +19,52 @@ namespace NavajoWars
             chosenMethod?.Invoke(this, null);
         }
 
-        async static Task<(int choiceIndex, string choiceText)> GetChoiceAsync(List<string> choices)
+        /*async static Task<(int choiceIndex, string choiceText)> GetChoiceAsync(List<string> choices)
         {
             ChoiceUIScript choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
             ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
             var result = new TaskCompletionSource<(int choiceIndex, string choiceText)>();
-            Debug.Log("New Task ID: " + result.Task.Id.ToString());
             choiceEventHandler = (s, e) =>
             {
-                Debug.Log("received " + e.ChoiceText);
                 result.SetResult((e.ChoiceIndex, e.ChoiceText));
             };
             choice.ChoiceMadeEvent += choiceEventHandler;
             choice.DisplayChoiceButtonsEvent(choices);
-            Debug.Log("Task Status Before: " + result.Task.Status.ToString());
             await result.Task;
             choice.ChoiceMadeEvent -= choiceEventHandler;
-            Debug.Log("Task Status After: " + result.Task.Status.ToString());
             return (result.Task.Result.choiceIndex, result.Task.Result.choiceText);
+        }*/
+
+        async static Task<(int choiceIndex, string choiceText)> GetChoiceAsync(List<bParams> choices)
+        {
+            //UIScript ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>();
+            UIScript.ChoiceMadeEventHandler choiceEventHandler = null;
+            var result = new TaskCompletionSource<(int choiceIndex, string choiceText)>();
+            choiceEventHandler = (s, e) =>
+            {
+                result.SetResult((e.ChoiceIndex, e.ChoiceText));
+            };
+            UIScript.ChoiceMadeEvent += choiceEventHandler;
+            //ui.DisplayChoiceButtonsEvent(choices);
+            await result.Task;
+            UIScript.ChoiceMadeEvent -= choiceEventHandler;
+            return (result.Task.Result.choiceIndex, result.Task.Result.choiceText);
+        }
+
+        async static Task<GameStep> GetChoiceAsyncObject(List<bParams> choices)
+        {
+            //UIScript ui = GameObject.FindGameObjectWithTag("UI").GetComponent<UIScript>();
+            UIScript.ChoiceMadeObjectEventHandler choiceEventHandler = null;
+            var result = new TaskCompletionSource<GameStep>();
+            choiceEventHandler = (s, e) =>
+            {
+                result.SetResult(e.cGameStep);
+            };
+            UIScript.ChoiceMadeObjectEvent += choiceEventHandler;
+            //ui.DisplayChoiceButtonsEvent(choices);
+            await result.Task;
+            UIScript.ChoiceMadeObjectEvent -= choiceEventHandler;
+            return result.Task.Result;
         }
     }
 }

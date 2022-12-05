@@ -177,6 +177,10 @@ namespace NavajoWars
             [SerializeField] int blue;
         }
 
+        public raided Raided;
+        public recovery Recovery;
+        public subjugation Subjugation;
+
         [Serializable]
         public class Family
         {
@@ -211,11 +215,29 @@ namespace NavajoWars
         [HideInInspector] public Family FamilyE;
         [HideInInspector] public Family FamilyF;
 
-        public raided Raided;
-        public recovery Recovery;
-        public subjugation Subjugation;
-
         public List<Family> Families;
+
+        // variables used in Operations script
+        public Family selectedFamily;
+        public List<Family> completedFamilies;
+        public List<GameStep> completedActions;
+        public Stack<GameStep> stepStack;
+        
+        public bool canBackToDraw
+        { get => canbackToDraw; set => canbackToDraw = value; }
+        [SerializeField] bool canbackToDraw;
+
+        public bool isPreempt
+        { get => ispreempt; set => ispreempt = value; }
+        [SerializeField] bool ispreempt;
+
+        public bool isPlayerOpsDone
+        { get => isplayerOpsDone; set => isplayerOpsDone = value; }
+        [SerializeField] bool isplayerOpsDone;
+    
+        public bool isEnemyOpsDone
+        { get => isenemyOpsDone; set => isenemyOpsDone = value; }
+        [SerializeField] bool isenemyOpsDone;
     }
 }
  

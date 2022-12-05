@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class EventUIScript : MonoBehaviour, IsUIScript, IReceive
+    public class EventUIScript : MonoBehaviour, IReceive //, IsUIScript
     {
         GameManager gm;
         GameState gs;
@@ -52,6 +52,31 @@ namespace NavajoWars
         void quitClicked()
         {
             gm.ExitGame();
+        }
+
+        public void Initialize()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void displayHeadline(string text)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void addHeadline(string text)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void displayText(string text)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void addText(string text)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

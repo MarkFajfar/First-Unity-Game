@@ -2,35 +2,16 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using UnityEditor.Search;
+using System.Net.Security;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class ChoiceMade : EventArgs
+    
+    public class ChoiceUIScript : MonoBehaviour
     {
-        public ChoiceMade(int choiceIndex, string choiceText)
-        { 
-            ChoiceText = choiceText;
-            ChoiceIndex = choiceIndex;
-        }
-        public string ChoiceText { get; set; }
-        public int ChoiceIndex { get; set; }
-    }
-
-    public class ChoiceUIScript : MonoBehaviour, IsUIScript
-    {
-        public delegate void ChoiceMadeEventHandler(object sender, ChoiceMade args);
-        public event ChoiceMadeEventHandler ChoiceMadeEvent;
-        bool isEvent = false;
-
-        protected virtual void OnChoiceMade(ChoiceMade e)
-        {
-            // use this same OnChoiceMade method whether by button, foldout, etc.
-            ChoiceMadeEventHandler raiseEvent = ChoiceMadeEvent;
-            if (raiseEvent != null) raiseEvent(this, e);
-        }
+        public bool isEvent;
 
         IReceive sender = null;
         List<IReceive> Receivers;
@@ -79,7 +60,7 @@ namespace NavajoWars
         }
 
         // use this where button click goes back to another script, or multiple scripts in scene
-        public void DisplayChoiceButtons(List<string> choices)
+        public void DisplayChoiceButtons(List<bParams> choices)
         {
             isEvent = false;
             sender = null;
@@ -91,21 +72,47 @@ namespace NavajoWars
             }*/
         }
 
-        public void DisplayChoiceButtons(IReceive senderobj, List<string> choices)
+        public void DisplayChoiceButtons(IReceive senderobj, List<bParams> choices)
         {
             isEvent = false;
             sender = senderobj;
             MakeChoiceButtons(choices);
         }
 
-        public void DisplayChoiceButtonsEvent(List<string> choices)
+        /*public void DisplayChoiceButtonsEvent(List<string> choices)
+        {
+            isEvent = true;
+            sender = null;
+            MakeChoiceButtons(choices);
+        }
+*/
+        public void DisplayChoiceButtonsEvent(List<bParams> choices)
         {
             isEvent = true;
             sender = null;
             MakeChoiceButtons(choices);
         }
 
-        public void MakeChoiceButtons(List<string> choices)
+        public void MakeChoiceButtons(List<bParams> choices)
+        {
+            choicePanel.style.display = DisplayStyle.Flex;
+            choicePanel.visible = true;
+            foreach (bParams choice in choices)
+            {
+                var choiceButton = new Button();
+                choiceButton.RegisterCallback<ClickEvent>(buttonClicked);
+                choiceButton.AddToClassList(choice.style);
+                //foreach (string style in choiceButtonStyles) choiceButton.AddToClassList(style);
+                choiceButton.name = choice.name;
+                choiceButton.text = choice.text;
+                choiceButton.tabIndex = choice.tabIndex;
+                choiceButton.userData = choice.userData;
+                choicePanel.Add(choiceButton);
+                choiceButton.style.display = DisplayStyle.Flex;
+            }
+        }
+
+        /*public void MakeChoiceButtons(List<string> choices)
         {
             choicesList = choices;
             // TODO: fix so separate variable for choicesList not necessary
@@ -120,11 +127,11 @@ namespace NavajoWars
                 choiceButton.text = choices[i];
                 choiceButton.tabIndex = i;
                 int n = i + 5;
-                choiceButton.userData = (PlayerActionLogic.GameSteps)n;
+                choiceButton.userData = (PlayerActionLogic.oldGameSteps)n;
                 choicePanel.Add(choiceButton);
                 choiceButton.style.display = DisplayStyle.Flex;
             }
-        }
+        }*/
 
         public void CloseChoiceButtons()
         {
@@ -142,16 +149,11 @@ namespace NavajoWars
         void buttonClicked(ClickEvent evt)
         {
             var clickedButton = evt.target as Button;
-            int choiceIndex = clickedButton.tabIndex; // choicesList.IndexOf(clickedButton.text); 
-            string choiceText = "clicked" + clickedButton.text;
-
-            print("Parent: " + clickedButton.parent);
-            print("Data: " + clickedButton.userData);
-            print("Index: "+ clickedButton.tabIndex);
-            print("Name: " + clickedButton.name);
-
-            // if we know the userData is a Game Step
-            //tGameStep clickedStep = (tGameStep)clickedButton.userData;
+            int choiceIndex = clickedButton.tabIndex; // default is 0
+            //if (clickedButton.name == "") clickedButton.name = "clicked" + clickedButton.text.Replace(" ", "");
+            //following does not work because blank string, not null
+            //clickedButton.name ??= "clicked" + clickedButton.text.Replace(" ", "");
+            string choiceText = clickedButton.name;
 
             CloseChoiceButtons();
 
@@ -164,7 +166,15 @@ namespace NavajoWars
             else if (isEvent)
             {
                 print("Choice event: " + choiceText);
-                OnChoiceMade(new ChoiceMade(choiceIndex, choiceText));
+                if (clickedButton.userData as GameStep)
+                {
+                    GameStep gamestep = (GameStep)clickedButton.userData;
+                    //OnChoiceMadeObject(new ChoiceMadeObject(gamestep));
+                }
+                else
+                {
+                    //OnChoiceMade(new ChoiceMade(choiceIndex, choiceText));
+                }
                 //isEvent = false;
             }
             else
@@ -173,11 +183,11 @@ namespace NavajoWars
                 // how to test if cast is valid
                 //var clickedStep = clickedButton.userData as tGameStep;
                 //if (clickedStep != null)
-                if (clickedButton.userData as tGameStep)
+                if (clickedButton.userData as GameStep)
                 {
                     // can successfully cast
-                    tGameStep clickedStep = (tGameStep)clickedButton.userData;
-                    clickedStep.Begin("loaded " + clickedButton.name);
+                    GameStep clickedStep = (GameStep)clickedButton.userData;
+                    clickedStep.Begin();
                 }
                 else
                 {
@@ -293,15 +303,5 @@ namespace NavajoWars
             choiceButton.userData = buttonParams;
             choicePanel.Add(choiceButton);
         }*/
-    }
-
-    public class bParams
-    {
-        public string name;
-        public string text;
-        public string style;
-        public int tabIndex;
-        //public PlayerActionLogic.GameSteps userData;
-        public tGameStep userData;
     }
 }

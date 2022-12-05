@@ -18,7 +18,9 @@ namespace NavajoWars
         Scene currentScene;
         //IsUIScript currentUIScript;
         GameObject currentGameObjectUI;
-   
+
+        string savePath;
+
         void Awake()
         {
             if (Instance)
@@ -27,20 +29,20 @@ namespace NavajoWars
             DontDestroyOnLoad(gameObject);
             gs = GetComponent<GameState>();
             SceneManager.sceneLoaded += OnSceneLoaded;
+            savePath = Application.persistentDataPath + "/savefile.json";
         }
 
         void Start()
         {
-            print("Start Game Manager");   
+            print("Start Game Manager");
             //called only when game is loaded
-            //checkForSavedGame();
+            checkForSavedGame(GameObject.Find("MainMenuUI").GetComponent<MainMenuUIScript>());
         }
         
         // initialize main menu
         internal void checkForSavedGame(MainMenuUIScript mainMenu)
         {
-            string path = Application.persistentDataPath + "/savefile.json";
-            if (File.Exists(path)) mainMenu.showLoadPanel(); 
+            if (File.Exists(savePath)) mainMenu.showLoadPanel(); 
             else mainMenu.showScenarios();
         }
 
@@ -50,21 +52,34 @@ namespace NavajoWars
         {
             string sd = JsonUtility.ToJson(gs);
             print("Saving Data: " + sd);
-            //File.WriteAllText(Application.persistentDataPath + "/savefile.json", sd);
+            File.WriteAllText(savePath, sd);
+        }
+
+        public void tSaveGame()
+        {
+            string sd = JsonUtility.ToJson(gs);
+            print("Test Saving Data: " + sd);
+            File.WriteAllText(savePath, sd);
+        }
+
+        public void tLoadGame()
+        {
+            string sd = File.ReadAllText(savePath);
+            print("Test Loading Data");
+            JsonUtility.FromJsonOverwrite(sd, gs);
         }
 
         public void LoadSave()
         {
-            string sd = File.ReadAllText(Application.persistentDataPath + "/savefile.json");
+            string sd = File.ReadAllText(savePath);
             JsonUtility.FromJsonOverwrite(sd, gs);
             SceneManager.LoadScene(gs.CurrentSceneName);
         }
 
         internal void DeleteSaveAndStartNew()
         {
-            string path = Application.persistentDataPath + "/savefile.json";
-            File.Copy(path, Application.persistentDataPath + "/savefile.bak", true);
-            if (File.Exists(path)) File.Delete(path); 
+            File.Copy(savePath, Application.persistentDataPath + "/savefile.bak", true);
+            if (File.Exists(savePath)) File.Delete(savePath); 
             checkForSavedGame(GameObject.Find("MainMenuUI").GetComponent<MainMenuUIScript>());
         }
 
