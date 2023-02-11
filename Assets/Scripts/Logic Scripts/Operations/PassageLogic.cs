@@ -37,13 +37,13 @@ namespace NavajoWars
             int numWomanInPassage = gs.PersonsInPassage.FindAll(p => p == Person.Woman).Count();
             int numWomanInFamilies = gs.Families.Where(f => f.HasWoman).Count();
 
-            //ui.headline.text = "Passage of Time\nStep One";
+            //ui.displayHeadline("Passage of Time\nStep One";
             //if (stepDone[1])
             //{ return; }  
             // add what to do if already done
             if (childrenInPassage.Count() + childrenInFamilies.Count() > 0)
             {
-                //ui.message.text = $"Each Child in a Family or the Passage of Time Box may be converted into an Adult or Elder. Select below and place new counters into Passage of Time Box.";
+                //ui.displayText($"Each Child in a Family or the Passage of Time Box may be converted into an Adult or Elder. Select below and place new counters into Passage of Time Box.";
                 displayChildren(childrenInPassage, childrenInFamilies);
             }
         }

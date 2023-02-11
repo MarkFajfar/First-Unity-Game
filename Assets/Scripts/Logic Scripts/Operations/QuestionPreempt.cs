@@ -14,7 +14,7 @@ namespace NavajoWars
 
         public override async void Begin()
         {
-            //use Begin only if coming "down" the right way
+            /*//use Begin only if coming "down" the right way
             //initialUndo not necessary because previous button goes to prior scene
             //tInitialUndo tinitialUndo = gameObject.AddComponent<tInitialUndo>();
             //logic.setUndo(this, tinitialUndo);
@@ -51,12 +51,12 @@ namespace NavajoWars
             {
                 ui.displayText("Calling Enemy Ops");
                 //EnemyOperation();
-            }
+            }*/
         }
 
         async void PlayerOperation()
         {
-            // no new undo point, just go back to initial question
+            /*// no new undo point, just go back to initial question
             ui.displayHeadline("Select a Player Operation");
             ChooseFamily chooseFamily = gameObject.GetComponent<ChooseFamily>();
             // add gamestep objects to buttons to call directly chooseFamily?.Begin(chooseFamily); 
@@ -64,7 +64,7 @@ namespace NavajoWars
             bParams actions = new("Take Actions", chooseFamily);
             bParams passage = new("Passage of Time");
             GameStep result = await IReceive.GetChoiceAsyncObject(new List<bParams> { planning, actions, passage });
-            result.Begin();
+            result.Begin();*/
         }
 
         public override void Undo()

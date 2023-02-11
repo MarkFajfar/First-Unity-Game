@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,9 @@ namespace NavajoWars
         public string text;
         public int tabIndex;
         public string style;
-        public GameStep userData;
+        public GameStep gameStep = null;
+        public Action call = null;
+        public bool waiting = false;
 
         public bParams()
         {
@@ -18,7 +21,6 @@ namespace NavajoWars
             text = "Button";
             style = "ButtonMenu";
             tabIndex = 0;
-            userData = null;
         }
 
         public bParams(string text)
@@ -27,7 +29,6 @@ namespace NavajoWars
             this.text = text;
             style = "ButtonMenu";
             tabIndex = 0;
-            userData = null;
         }
 
         public bParams(string text, int tabIndex)
@@ -36,16 +37,25 @@ namespace NavajoWars
             this.text = text;
             style = "ButtonMenu";
             this.tabIndex = tabIndex;
-            userData = null;
         }
-        public bParams(string text, GameStep userData)
+        public bParams(string text, GameStep gameStep)
         {
             name = text.Replace(" ", "");
             this.text = text;
             style = "ButtonMenu";
             tabIndex = 0;
-            this.userData = userData;
+            this.gameStep = gameStep;
         }
+
+        public bParams(string text, Action call)
+        {
+            name = text.Replace(" ", "");
+            this.text = text;
+            style = "ButtonMenu";
+            tabIndex = 0;
+            this.call = call;
+        }
+
 
         public bParams(string name, string text, int tabIndex)
         {
@@ -53,16 +63,26 @@ namespace NavajoWars
             this.text = text;
             style = "ButtonMenu";
             this.tabIndex = tabIndex;
-            userData = null;
         }
 
-        public bParams(string name, string text, int tabIndex, GameStep userData)
+        public bParams(string name, string text, int tabIndex, GameStep gameStep, Action call)
         {
             this.name = name;
             this.text = text;
             style = "ButtonMenu";
             this.tabIndex = tabIndex;
-            this.userData = userData;
+            this.gameStep = gameStep;
+            this.call = call;
         }
+    }
+
+    public class bParamsEventArgs : EventArgs
+    {
+        public bParamsEventArgs(List<bParams> choices)
+        {
+            eParams = choices;
+        }
+
+        public List<bParams> eParams { get; set; }
     }
 }

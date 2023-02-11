@@ -206,6 +206,12 @@ namespace NavajoWars
             { get { return evReference[Ferocity]; } }
             //public int Evasion { get => evasion; set => evasion = value; }
             //[SerializeField] int evasion = 0;
+
+            public bool isSelectedOps { get => isselectedops; set => isselectedops = value; }
+            [SerializeField] bool isselectedops = false;
+
+            public bool isCompletedOps { get => iscompletedops; set => iscompletedops = value; }
+            [SerializeField] bool iscompletedops = false;
         }
 
         [HideInInspector] public Family FamilyA;
@@ -218,9 +224,11 @@ namespace NavajoWars
         public List<Family> Families;
 
         // variables used in Operations script
-        public Family selectedFamily;
-        public List<Family> completedFamilies;
-        public List<GameStep> completedActions;
+        //public Family selectedFamily;
+        //public List<Family> completedFamilies;
+        //public List<GameStep> completedActions;
+        public int completedFamilies;
+        public int completedActions;
         public Stack<GameStep> stepStack;
         
         public bool canBackToDraw

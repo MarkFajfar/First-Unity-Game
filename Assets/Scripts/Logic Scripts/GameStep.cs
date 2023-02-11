@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NavajoWars
@@ -14,6 +15,17 @@ namespace NavajoWars
 
         public abstract string stepName { get; }
 
+        public bool isCompleted = false;
+
+        public Action clearCompleted;
+
+        /*public event Action<List<bParams>> tCreateButtons;
+
+        protected virtual void calltCB(List<bParams> choices) 
+        { 
+            tCreateButtons?.Invoke(choices);
+        }*/
+
         void Awake()
         {
             var gmobj = GameObject.FindWithTag("GameController");
@@ -23,6 +35,12 @@ namespace NavajoWars
             logic = LogicObj.GetComponent<LogicScript>();
             var UIObj = GameObject.FindWithTag("UI");
             ui = UIObj.GetComponent<UIScript>();
+            clearCompleted = () => isCompleted = false; 
+        }
+
+        void OnDisable()
+        {
+            clearCompleted = null;    
         }
 
         /*public virtual void Begin(GameStep caller)
@@ -39,5 +57,14 @@ namespace NavajoWars
         }*/
 
         public abstract void Undo();
+
+        protected virtual void actionComplete()
+        {
+            ui.OnNextClick -= actionComplete;
+            isCompleted = true;
+            gs.completedActions++;
+            gs.stepStack.Push(this);
+            //logic.instructFromStep(this, "ChooseAnotherAction");
+        }
     }
 }

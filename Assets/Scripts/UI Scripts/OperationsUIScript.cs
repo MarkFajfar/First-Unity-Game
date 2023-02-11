@@ -127,13 +127,12 @@ namespace NavajoWars
         }
 
         public override void showPrev()
-        // no previous button
         { prev.visible = false; }
         
         public override void hidePrev()
         { prev.visible = false; }
 
-        protected override void MakeChoiceButtons(List<bParams> choices)
+        public override void MakeChoiceButtons(List<bParams> choices)
         {
             ClearChoicePanel();
             choicePanel.style.display = DisplayStyle.Flex;
@@ -147,7 +146,7 @@ namespace NavajoWars
                 choiceButton.name = choice.name;
                 choiceButton.text = choice.text;
                 choiceButton.tabIndex = choice.tabIndex;
-                choiceButton.userData = choice.userData;
+                choiceButton.userData = choice;
                 choicePanel.Add(choiceButton);
                 choiceButton.style.display = DisplayStyle.Flex;
             }
@@ -173,7 +172,7 @@ namespace NavajoWars
             choiceButton.name = bparams.name;
             choiceButton.text = bparams.text;
             choiceButton.tabIndex = bparams.tabIndex;
-            choiceButton.userData = bparams.userData;
+            choiceButton.userData = bparams;
             choiceButton.style.display = DisplayStyle.Flex;
             choicePanel.Add(choiceButton);
         }
@@ -219,14 +218,16 @@ namespace NavajoWars
 
         public override void DisplayLocations()
         {
+            ClearChoicePanel();
             List<string> locationNames = new()
             { " Splitrock", " San Juan", " Zuni", " Monument", " Hopi", " Black Mesa", " C. de Chelly" };
-            isEvent = false;
-            sender = null;
+            //choicePanel.Add(locations); // is this necessary?
             locations.style.display = DisplayStyle.Flex;
             locations.choices = locationNames;
         }
-    
+
+        public override Territory ReturnLocation() => (Territory)locations.value + 1;
+
         public override void CloseLocations()
         { locations.style.display = DisplayStyle.None; }
 

@@ -29,7 +29,7 @@ namespace NavajoWars
             DontDestroyOnLoad(gameObject);
             gs = GetComponent<GameState>();
             SceneManager.sceneLoaded += OnSceneLoaded;
-            savePath = Application.persistentDataPath + "/savefile.json";
+            savePath = Application.persistentDataPath + "/";
         }
 
         void Start()
@@ -42,7 +42,7 @@ namespace NavajoWars
         // initialize main menu
         internal void checkForSavedGame(MainMenuUIScript mainMenu)
         {
-            if (File.Exists(savePath)) mainMenu.showLoadPanel(); 
+            if (File.Exists(savePath + "savefile.json")) mainMenu.showLoadPanel(); 
             else mainMenu.showScenarios();
         }
 
@@ -52,39 +52,44 @@ namespace NavajoWars
         {
             string sd = JsonUtility.ToJson(gs);
             print("Saving Data: " + sd);
-            File.WriteAllText(savePath, sd);
-        }
-
-        public void tSaveGame()
-        {
-            string sd = JsonUtility.ToJson(gs);
-            print("Test Saving Data: " + sd);
-            File.WriteAllText(savePath, sd);
-        }
-
-        public void tLoadGame()
-        {
-            string sd = File.ReadAllText(savePath);
-            print("Test Loading Data");
-            JsonUtility.FromJsonOverwrite(sd, gs);
+            File.WriteAllText(savePath + "savefile.json", sd);
         }
 
         public void LoadSave()
         {
-            string sd = File.ReadAllText(savePath);
+            string sd = File.ReadAllText(savePath + "savefile.json");
             JsonUtility.FromJsonOverwrite(sd, gs);
             SceneManager.LoadScene(gs.CurrentSceneName);
         }
 
         internal void DeleteSaveAndStartNew()
         {
-            File.Copy(savePath, Application.persistentDataPath + "/savefile.bak", true);
-            if (File.Exists(savePath)) File.Delete(savePath); 
+            File.Copy(savePath + "savefile.json", savePath + "savefile.bak", true);
+            if (File.Exists(savePath + "savefile.json")) File.Delete(savePath + "savefile.json"); 
             checkForSavedGame(GameObject.Find("MainMenuUI").GetComponent<MainMenuUIScript>());
+        }
+
+        public void SaveUndo(GameStep step)
+        {
+            string sd = JsonUtility.ToJson(gs);
+            print("Saving Undo Data: " + sd);
+            if (!Directory.Exists(savePath + gs.CurrentSceneName)) Directory.CreateDirectory(savePath + gs.CurrentSceneName);
+            File.WriteAllText(savePath + gs.CurrentSceneName + "/" + step.stepName, sd);
+        }
+
+        public void LoadUndo(GameStep step)
+        {
+            if (File.Exists(savePath + gs.CurrentSceneName + "/" + step.stepName))
+            {
+                print("Loading Undo Data: " + step.stepName);
+                string sd = File.ReadAllText(savePath + gs.CurrentSceneName + "/" + step.stepName);
+                JsonUtility.FromJsonOverwrite(sd, gs);
+            }
         }
 
         public void ExitGame()
         {
+            if (Directory.Exists(savePath + gs.CurrentSceneName)) FileUtil.DeleteFileOrDirectory(savePath + gs.CurrentSceneName);
             SaveGame();
 #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();

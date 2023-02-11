@@ -47,11 +47,12 @@ namespace NavajoWars
             //queries in OnEnable not Awake?
             getVisualElements();
         }
-
+        
         void Start()
         {
             // called if Scene is reloaded
             print("Start Main Menu");
+
             gm.checkForSavedGame(this);
         }
 

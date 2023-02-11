@@ -91,7 +91,7 @@ namespace NavajoWars
         void assignFamilyValues()
         {
             GameState.Family family = gs.Families[fNum];
-            ui.headline.text = family.Name;
+            //ui.displayHeadline(family.Name);
             ui.viewSetup.text = $"Select {family.Name}'s\nLocation and Ferocity";
             ui.locations.visible = true;
             ui.locations.choices = locationNames;

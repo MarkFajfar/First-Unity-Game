@@ -10,32 +10,39 @@ namespace NavajoWars
     {
         public override string stepName { get => "ChooseFamily"; }
 
-        string saveState;
-        
         int numFamEligible;
         int numFamilies;
         int numElders;
         int numFamInCan;
         ChooseAction chooseAction;
 
+        /*public event EventHandler<bParamsEventArgs> CreateButtonsEvent;
+
+        protected virtual void CreateButtons(bParamsEventArgs e)
+        {
+            EventHandler<bParamsEventArgs> raiseEvent = CreateButtonsEvent;
+            raiseEvent?.Invoke(this, e);
+        }*/
+
         public override void Begin()
         {
-            //if (caller.stepName == "InitialUndo" || caller.stepName == "ChooseFamily") // if coming from choose player operation or from chooseFamily (below) or from player ops done
-            // should this be for all cases? only undo point and completed families are different?
-            //{ 
-                // set first undo target to caller
-                // so pressing "back" before first button sends back to prior undo point
-                // allows chain of undo ??
-                // or set undo or back button in caller?  or set undo after family selected?
-                //logic.setUndo(this, caller);
-                
-                // reset list of completed families only if coming from choose player operation 
-            GameStep caller = gs.stepStack.Peek();
-            if (caller.stepName == "PlayerOperation") gs.completedFamilies = new();
+            // reset completed families only if coming from choose player operation 
+            GameStep caller = null;
+            if (gs.stepStack.Count > 0) caller = gs.stepStack.Peek();
+            if (caller != null && caller.stepName == "PlayerOperation")
+            {
+                gs.completedFamilies = 0;
+                gs.completedActions = 0;
+                foreach (var family in gs.Families)
+                {
+                    family.isSelectedOps = false;
+                    family.isCompletedOps = false;
+                }
+                clearCompleted?.Invoke();
+            }
             // saveState immediately before calling action
-            saveState = JsonUtility.ToJson(gs);
+            gm.SaveUndo(this);
             chooseFamily();
-            //}
         }
 
         async void chooseFamily()
@@ -48,17 +55,17 @@ namespace NavajoWars
             numElders = gs.ElderDisplay.Sum();
             numFamInCan = gs.Families.Where(f => f.IsWhere == Territory.Canyon).Count();
             numFamEligible = Math.Min(numFamilies, numElders + Math.Max(numFamInCan, 1));
-            numFamEligible -= gs.completedFamilies.Count;
+            numFamEligible -= gs.completedFamilies;
             if (numFamEligible > 0)
             {
                 ui.displayText($"{numFamEligible} {(numFamEligible > 1 ? "families" : "family")} can be activated.\nEach family has 6 MP");
-                bool isFamMissing = gs.Families.Where(f => !gs.completedFamilies.Contains(f) && (!f.HasMan || !f.HasWoman || !f.HasChild)).Any();
+                bool isFamMissing = gs.Families.Where(f => !f.isCompletedOps && (!f.HasMan || !f.HasWoman || !f.HasChild)).Any();
                 if (isFamMissing)
                 {
                     ui.addText(", except:");
-                    foreach (var family in gs.Families.Where(f => !gs.completedFamilies.Contains(f)))
+                    foreach (var family in gs.Families.Where(f => !f.isCompletedOps))
                     {
-                        int missing = numMissing(family);
+                        int missing = OperationsLogic.numMissing(family);
                         if (missing > 0)
                         {
                             ui.addText($"\n{family.Name} has {6 - missing} MP");
@@ -66,10 +73,10 @@ namespace NavajoWars
                     }
                 }
                 ui.addText(".\nChoose a family to activate");
-                if (gs.completedFamilies.Count >0) 
+                if (gs.completedFamilies > 0) 
                 {
                     ui.addText(", or press Next to end Player Actions.\"");
-                    ui.OnOpsNextClick += playerOpsDone;
+                    ui.OnNextClick += playerOpsDone;
                 }
                 else
                 {
@@ -78,60 +85,51 @@ namespace NavajoWars
                 }
                 //create list of eligible families
                 //List<string> listFamilyNames = gs.Families.Where(f => !gs.completedFamilies.Contains(f)).Select(f => f.Name).ToList();
-                List<GameState.Family> listFamEligible = gs.Families.Where(f => !gs.completedFamilies.Contains(f)).ToList();
+                List<GameState.Family> listFamEligible = gs.Families.Where(f => !f.isCompletedOps).ToList();
                 //initialize list of buttons
                 List<bParams> bFamEligible = new List<bParams>();
-                //for each elibible family, create button using family name and index
+                //for each eligible family, create button using family name and index
                 for (int i = 0; i < listFamEligible.Count; i++)
                 {
                     bParams bFamilyName = new(listFamEligible[i].Name, i);
                     bFamEligible.Add(bFamilyName);
                 }
-                /*foreach (GameState.Family family in listFamEligible)
-                {
-                    bParams bFamilyName = new(family.Name);
-                }*/
+                /*// TEST CREATE BUTTON EVENT
+                CreateButtons(new bParamsEventArgs(bFamEligible));
+                calltCB(bFamEligible);*/
+                // use async because logic to apply to result
+                ui.MakeChoiceButtonsAsync(bFamEligible);
+                bParams result = await IReceive.GetChoiceAsync();
 
-                ui.DisplayChoiceButtonsEvent(bFamEligible);
-                (int choiceIndex, string choiceText) result = await IReceive.GetChoiceAsync(bFamEligible);
-
-                gs.selectedFamily = listFamEligible[result.choiceIndex];
-                //gs.selectedFamily = gs.Families.First(f => f.Name == result.choiceText);
+                listFamEligible[result.tabIndex].isSelectedOps = true;
+                
                 chooseAction = GetComponent<ChooseAction>();
-                // push to stepStack immediately before calling enxt action
+                // push to stepStack immediately before calling next action
                 gs.stepStack.Push(this);
                 chooseAction.Begin();
             }
             else
             {
-                ui.OnOpsNextClick += playerOpsDone;
-                ui.displayText("No more families may be activated. Click Next to continue.");
+                ui.OnNextClick += playerOpsDone;
+                ui.displayText("No more families may be activated. Press Next to continue.");
             }
         }
 
         void playerOpsDone() 
         {
-            ui.OnOpsNextClick -= playerOpsDone;
+            ui.OnNextClick -= playerOpsDone;
             // is it necessary to cancel task?
             // push to stepStack immediately before calling next action
             gs.stepStack.Push(this);
             logic.instructFromStep(this, "PlayerOpsDone");
         }
 
-        int numMissing(GameState.Family family)
-        {
-            int missing = 0;
-            if (!family.HasMan) missing++;
-            if (!family.HasWoman) missing++;
-            if (!family.HasChild) missing++;
-            return missing;
-        }
-
         public override void Undo()
         {
             // stuff to do on undo
             // overwrite saveState immediately before calling action
-            JsonUtility.FromJsonOverwrite(saveState, gs);
+            //JsonUtility.FromJsonOverwrite(saveState, gs);
+            gm.LoadUndo(this);
             chooseFamily();
         }
     }

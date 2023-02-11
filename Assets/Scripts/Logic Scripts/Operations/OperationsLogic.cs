@@ -7,38 +7,20 @@ namespace NavajoWars
 {
     public class OperationsLogic : LogicScript, IReceive
     {
-        /*public GameObject ChoiceManager; // CHANGE to interface
-        //protected ChoiceUIScript choice;
-        protected ChoiceMade.ChoiceMadeEventHandler choiceEventHandler = null;
-        protected ChoiceMadeObject.ChoiceMadeObjectEventHandler choiceMadeObjectEventHandler = null;
-*/
-        // Player Action GameSteps
-        // public because assigned in inspector?
         protected InitialUndo initialUndo;
+        public GameObject PlayerActionSteps;
+        public GameObject PlanningSteps;
         public PlayerOperation playerOperation;
-        public ChooseFamily chooseFamily;
-        public ChooseAction chooseAction;
-        public FindWater findWater;
-        //public QuestionPreempt questionPreempt;
+        
+        public static string[] PlayerActionStepNames = {"FindWater", "Move", "Plant", "Raid", "Trade", "TribalCouncil"};
 
         void OnEnable()
         {
-            //var chobj = GameObject.FindWithTag("ChoiceManager");
-            //choice = ChoiceManager.GetComponent<ChoiceUIScript>();
-            //choice = GetComponent<ChoiceUIScript>();
-
-            // Get Player Action GameStep Components
             initialUndo = gameObject.AddComponent<InitialUndo>();
-            chooseFamily = GetComponent<ChooseFamily>();
-            chooseAction = GetComponent<ChooseAction>();
-            findWater = GetComponent<FindWater>();
-            playerOperation = GetComponent<PlayerOperation>();
-            //NEED TO ADD ALL COMPONENTS HERE
-
+            //playerOperation assigned in Inspector
         }
 
-        public (GameStep caller, GameStep target) gotoUndo;
-        //public List<GameStep> steps;
+        //public (GameStep caller, GameStep target) gotoUndo;
 
         void Start()
         {
@@ -48,7 +30,7 @@ namespace NavajoWars
             if (gs.stepStack.Count > 0) { gs.stepStack.Pop().Begin(); } 
             else
             {
-                // coming from card draw, neither can be done:
+                // coming from card draw, neither can have been done:
                 gs.isPlayerOpsDone = false;
                 gs.isEnemyOpsDone = false;
                 gs.isPreempt = false;
@@ -59,7 +41,7 @@ namespace NavajoWars
         }
 
         async void ConfirmScreen()
-        {            
+        {
             List<bParams> choices = new();
 
             bParams redo = new("Go Back to Card Draw");
@@ -73,31 +55,31 @@ namespace NavajoWars
             {
                 ui.hideBackNext();
                 ui.displayText($"\nPreempt for {gs.CurrentCard.Points[0]} AP?");
-                bParams yes = new("Yes Preempt");
+                bParams yes = new("Yes Preempt"); //, testYes);
                 choices.Add(yes);
-                bParams no = new("Do Not Preempt");
+                bParams no = new("Do Not Preempt"); //, testNo);
                 choices.Add(no);
-                ui.DisplayChoiceButtonsEvent(choices);
-                (int index, string text) result = await IReceive.GetChoiceAsync(choices);
+                ui.MakeChoiceButtonsAsync(choices);
+                bParams result = await IReceive.GetChoiceAsync();
                 // after button clicked, activate back to come here if stack is empty
                 // but set back to use stack for initial Undo (because may come back here with steps in stack)
                 ui.showBackNext();
-                if (result.text == yes.name)
+                if (result.name == yes.name)
                 {
-                    gs.isPreempt = true; // signals that points were subtracted
                     gs.AP -= gs.CurrentCard.Points[0];
                     ui.displayText($"Subtracted {gs.CurrentCard.Points[0]} AP\n");
+                    gs.isPreempt = true; // signals that points were subtracted
                     gs.stepStack.Push(initialUndo);
                     playerOperation.Begin();
                 }
-                if (result.text == no.name)
+                if (result.name == no.name)
                 {
                     gs.isPreempt = false;
                     ui.displayText("Calling Enemy Ops");
                     gs.stepStack.Push(initialUndo);
                     EnemyOperation();
                 }
-                if (result.text == redo.name)
+                if (result.name == redo.name)
                 {
                     gs.isPreempt = false;
                     gm.PrevScene();
@@ -132,25 +114,25 @@ namespace NavajoWars
                     ui.addText("Click 'Enemy Operations' to continue.");
                     choices.Add(enemy);
                 } 
-                ui.DisplayChoiceButtonsEvent(choices);
-                (int index, string text) result = await IReceive.GetChoiceAsync(choices);
+                ui.MakeChoiceButtonsAsync(choices);
+                bParams result = await IReceive.GetChoiceAsync();
 
-                if (result.text == redo.name)
+                if (result.name == redo.name)
                 {
                     // no back function, just reenter card name
                     gm.PrevScene();
                 }
-                if (result.text == draw.name)
+                if (result.name == draw.name)
                 {
                     // no back function, this screen confirms
                     SceneComplete();
                 }
-                if (result.text == player.name)
+                if (result.name == player.name)
                 {
                     gs.stepStack.Push(initialUndo);
                     playerOperation.Begin();
                 }
-                if (result.text == enemy.name)
+                if (result.name == enemy.name)
                 {
                     gs.stepStack.Push(initialUndo);
                     EnemyOperation();
@@ -216,7 +198,7 @@ namespace NavajoWars
             }
         }*/
 
-        async void PlayerOperation() // GameStep instead
+        /*async void PlayerOperation() // GameStep instead
         {
             // back button is assigned before calling this method
             ui.showBackNext();
@@ -234,7 +216,7 @@ namespace NavajoWars
             ui.unsubBack();
             ui.OnOpsBackClick += PlayerOperation;
             result.Begin();            
-        }
+        }*/
 
         void EnemyOperation()
         {
@@ -243,13 +225,12 @@ namespace NavajoWars
 
             // after button clicked, change back to come here
             ui.unsubBack();
-            ui.OnOpsBackClick += EnemyOperation;
+            ui.OnBackClick += EnemyOperation;
             // add call to enemy action GameStep
         }
 
         void PlayerOpsDone(GameStep caller)
         {
-            // called only from chooseFamily
             gs.canBackToDraw = false;
             // caller is at top of stepStack, leave any sub to next or back as fallback?
             gs.isPlayerOpsDone = true;
@@ -261,7 +242,7 @@ namespace NavajoWars
             gs.canBackToDraw = false;
             ui.unsubNext();
             ui.unsubBack();
-            setUndo(caller, caller);
+            gm.SaveUndo(caller);
             ConfirmScreen();
         }
 
@@ -275,37 +256,10 @@ namespace NavajoWars
 
         public override void instructFromStep(GameStep caller, string instruction) 
         {
-            // used instead of initialUndo to come back after action completed
+            // used instead of initialUndo to come back "down" after action completed
             if (instruction == "PlayerOpsDone") PlayerOpsDone(caller);
             if (instruction == "EnemyOpsDone") EnemyOpsDone(caller);
             //if (instruction == "ChooseAnotherAction") ChooseAnotherAction();
-        }
-
-        public override void setUndo(GameStep caller, GameStep target)
-        {
-            //no need for this method?
-            ui.unsubBack();
-            // caller is where the undo point was set, target is where to go on undo
-            gotoUndo = (caller, target); 
-            gm.tSaveGame();
-        }
-
-        public override void setUndo(GameStep target)
-        {
-            // only one argument sets new target, but leaves caller the same
-            ui.unsubBack(); 
-            GameStep caller = gotoUndo.caller;
-            gotoUndo = (caller, target);
-            gm.tSaveGame();
-        }
-
-        public override void callUndo()
-        {
-            // no need for this method? instead call undo function in the "popped" step?
-            // CALLED WHEN BACK BUTTON IS PRESSED, if there is any step in the stack
-            //gm.tLoadGame();
-            gs.stepStack.Pop().Undo();
-            //target.Undo(caller);
         }
 
         public override void initialUndoTarget() 
@@ -316,21 +270,18 @@ namespace NavajoWars
                 gs.AP += gs.CurrentCard.Points[0];
                 gs.isPreempt = false;
             }
-            if (gs.completedActions.Count == 0 && gs.completedFamilies.Count == 0) 
+            if (gs.completedActions == 0 && gs.completedFamilies == 0) 
             { gs.canBackToDraw = true; }
             ConfirmScreen();
-        }        
-
-        // FOLLOWING ARE NOT NEEDED?
-
-        public override void callUndo(GameStep caller, GameStep target)
-        {
-            throw new NotImplementedException();
         }
 
-        public override void callUndo(GameStep caller)
+        public static int numMissing(GameState.Family family)
         {
-            throw new NotImplementedException();
+            int missing = 0;
+            if (!family.HasMan) missing++;
+            if (!family.HasWoman) missing++;
+            if (!family.HasChild) missing++;
+            return missing;
         }
     }
 }

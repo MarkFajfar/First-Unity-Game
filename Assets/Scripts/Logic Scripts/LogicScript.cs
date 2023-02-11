@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NavajoWars
@@ -9,27 +11,25 @@ namespace NavajoWars
         protected GameManager gm;
         protected GameState gs;
         public GameObject UIObject;
-        protected UIScript ui;
+        public UIScript ui;
+
+        public List<GameStep> steps;
 
         void Awake()
         {
             var gmobj = GameObject.FindWithTag("GameController");
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
-            ui = UIObject.GetComponent<UIScript>();
+            // ui = UIObject.GetComponent<UIScript>(); // in Inspector
+            //steps = FindObjectsOfType<GameStep>().ToList();
         }
 
         public abstract void instructFromStep(GameStep caller, string instruction);
-        
-        public abstract void setUndo(GameStep caller, GameStep target);
 
-        public abstract void setUndo(GameStep target);
-
-        public abstract void callUndo(GameStep caller, GameStep target);
-
-        public abstract void callUndo(GameStep caller);
-
-        public abstract void callUndo();
+        public virtual void instructFromStep(GameStep caller, Action instruction)
+        {
+            instruction?.Invoke();
+        }
 
         public abstract void SceneComplete();
 

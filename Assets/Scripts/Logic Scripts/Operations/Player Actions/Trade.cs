@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 namespace NavajoWars
@@ -8,16 +10,60 @@ namespace NavajoWars
     {
         public override string stepName { get => "Trade"; }
 
+        GameState.Family selectedFamily;
+
         public override void Begin()
         {
-            
+            gm.SaveUndo(this);
+            askTrade();
+        }
 
+        void askTrade()
+        {
+            selectedFamily = gs.Families.Where(f => f.isSelectedOps).First();
+            int tradeGoodsAvail = gs.TradeGoodsMax - gs.TradeGoodsHeld;
+            ui.displayHeadline($"{selectedFamily.Name} Trades at Fort");
+            ui.displayText($"This action costs all remaining MP and 1 CP, will reduce {selectedFamily.Name}'s ferocity to zero, and {selectedFamily.Name} must be in the Fort. {(tradeGoodsAvail == 1 ? "One trade good is" : $"{tradeGoodsAvail} trade goods are")} available. Do you wish to trade?");
+            bParams yes = new("Yes, Trade", yesTrade);
+            bParams no = new("Do Not Trade", noTrade);
+            List<bParams> choices = new() { yes, no };
+            // use async because logic to apply after choice made
+            ui.MakeChoiceButtons(choices);        
+            //HAS TO BE LAST ACTION
+        }
+
+        void yesTrade() 
+        {
+            gs.TradeGoodsHeld = gs.TradeGoodsMax;
+            selectedFamily.Ferocity = 0;
+            gs.CP--;
+            ui.addText($"You have {gs.CP} CP and {gs.TradeGoodsHeld} trade goods. Press Next to Continue. ");
+            ui.OnNextClick += actionComplete;
+        }
+
+        void noTrade()
+        {
+            // go back, same as undo ?
+            gs.stepStack.Pop().Undo();
+        }
+
+        protected override void actionComplete()
+        {
+            base.actionComplete();
+            ChooseAnotherAction chooseAnotherAction = GetComponent<ChooseAnotherAction>();
+            chooseAnotherAction.Begin();
         }
 
         public override void Undo()
         {
-
-            // stuff to do on undo
-        }   
+            // reset complete marker??
+            if (isCompleted)
+            {
+                isCompleted = false;
+                gs.completedActions--;
+            }
+            gm.LoadUndo(this);
+            askTrade();
+        }
     }
 }

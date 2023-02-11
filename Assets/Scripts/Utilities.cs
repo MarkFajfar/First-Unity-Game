@@ -10,6 +10,68 @@ namespace NavajoWars
 {
     public class Utilities : MonoBehaviour
     {
+     /*for (int i = 0; i< 3; i++)
+            {
+                print("loop " + i);
+                int j = 0;
+                while (j< 5)
+                {
+                    print("j is: " + j);
+                    if (j< 3)
+                    {
+                        StartCoroutine(waitnumber(j));
+                        string result = await IReceive.testGetChoiceAsync();
+                        print(result);
+                        Debug.Log(result);
+                    }
+                    else number(j);
+                    //ChoiceMadeString choice = new ChoiceMadeString(j.ToString());
+                    //choice.OnChoiceMadeString(new ChoiceMadeString(j.ToString()));
+                    j++;
+                }
+            }
+
+            IEnumerator waitnumber(int j)
+            {
+                print("starting to wait" + j);
+                yield return new WaitForSeconds(3f);
+                print("done waiting" + j);
+                ChoiceMadeString choice = new ChoiceMadeString(j.ToString());
+                choice.OnChoiceMadeString(new ChoiceMadeString(j.ToString()));
+            }
+
+        void number(int k) { print(k + "\n"); }
+
+        print("done");*/
+        
+        
+        /*[MenuItem("Utilities/RunTest")]
+
+        
+        public static void RunTest()
+        {
+            print("Test function:\n");
+
+            for (int i = 1; i < 3; i++)
+            {
+                int j = 0;
+                while (j < 5)
+                {
+                    if (j<3) StartCoroutine(waitnumber(j));
+                    else number();
+                    j++;
+                }
+            }
+        }   
+
+        static IEnumerator waitnumber(int k)
+        {
+            yield return new WaitForSeconds(3f);
+            print(k + "\n");
+        }
+
+        static void number() { print(k + "\n"); }*/
+
         /*GameManager GameManager;
         GameState gs;
 

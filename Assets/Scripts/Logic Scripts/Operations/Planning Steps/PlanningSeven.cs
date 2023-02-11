@@ -4,32 +4,34 @@ using UnityEngine;
 
 namespace NavajoWars
 {
-    public class Raid : GameStep
+    public class PlanningSeven : GameStep
     {
-        public override string stepName { get => "Raid"; }
+        public override string stepName { get => "PlanningSeven"; }
 
         public override void Begin()
         {
-            //ui.displayHeadline($"{selectedFamily.Name} Raids New Mexico";
-            //ui.displayText("Placeholder for raid. ";
-
+            
+            gm.SaveUndo(this);
+            ui.displayHeadline("Planning Complete");
+            ui.displayText($"Press Next to continue.");
+            ui.OnNextClick += actionComplete;
         }
 
         protected override void actionComplete()
         {
             base.actionComplete();
-            ChooseAnotherAction chooseAnotherAction = GetComponent<ChooseAnotherAction>();
-            chooseAnotherAction.Begin();
+            logic.instructFromStep(this, "PlayerOpsDone");
         }
 
         public override void Undo()
         {
-            
+            // reset complete marker??
             if (isCompleted)
             {
                 isCompleted = false;
                 gs.completedActions--;
             }
+            gm.LoadUndo(this);
             Begin();
             // stuff to do on undo
         }
