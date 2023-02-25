@@ -10,8 +10,6 @@ namespace NavajoWars
     {
         protected GameManager gm;
         protected GameState gs;
-        public GameObject UIObject;
-        public UIScript ui;
 
         public List<GameStep> steps;
 
@@ -20,8 +18,7 @@ namespace NavajoWars
             var gmobj = GameObject.FindWithTag("GameController");
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
-            // ui = UIObject.GetComponent<UIScript>(); // in Inspector
-            //steps = FindObjectsOfType<GameStep>().ToList();
+            steps = FindObjectsOfType<GameStep>().ToList();
         }
 
         public abstract void instructFromStep(GameStep caller, string instruction);

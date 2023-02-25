@@ -41,7 +41,7 @@ namespace NavajoWars
             string fortMsg = (fortInGame && selectedFamily.Ferocity > 1) ? "A family with Ferocity > 1 that ends it activation in the same Area as a Fort must disband. " : "";
             if (fortInTerritory) fortMsg += isFirstAction ? "If currently in the same Area as a Fort, move only on first action and cost is increased by die roll. " : "Move from same Area as a Fort only in first action. ";
             ui.addText(chellyMsg + fortMsg + "Press Next to continue.");
-            ui.OnNextClick += resolveMove;
+            ui.OnNextClick = resolveMove;
         }
 
         void resolveMove()
@@ -50,10 +50,10 @@ namespace NavajoWars
             // after first screen cleared, set back button to come back to this step
             gs.stepStack.Push(this);
             ui.displayText($"Is {selectedFamily.Name} moving to a new Territory?");
-            bParams no = new("No Same Territory", noSame);
-            bParams yesN = new("Yes New Territory", yesNew);
-            bParams yesC = new("Yes to Canyon de Chelly", yesChelly);
-            List<bParams> choices = new() { no, yesN };
+            ButtonInfo no = new("No Same Territory", noSame);
+            ButtonInfo yesN = new("Yes New Territory", yesNew);
+            ButtonInfo yesC = new("Yes to Canyon de Chelly", yesChelly);
+            List<ButtonInfo> choices = new() { no, yesN };
             if (isFirstAction) choices.Add(yesC);
             ui.MakeChoiceButtons(choices);
         }

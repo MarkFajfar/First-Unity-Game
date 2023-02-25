@@ -1,0 +1,3 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:RadioButtonGroup value="-1" name="Locations" class="RadioButtons" style="height: 728px; top: 792px;" />
+</ui:UXML>

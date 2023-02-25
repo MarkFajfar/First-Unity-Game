@@ -27,9 +27,7 @@ namespace NavajoWars
         public override void Begin()
         {
             // reset completed families only if coming from choose player operation 
-            GameStep caller = null;
-            if (gs.stepStack.Count > 0) caller = gs.stepStack.Peek();
-            if (caller != null && caller.stepName == "PlayerOperation")
+            if (gs.stepStack.Count > 0 && gs.stepStack.Peek().stepName == "PlayerOperation") 
             {
                 gs.completedFamilies = 0;
                 gs.completedActions = 0;
@@ -87,11 +85,11 @@ namespace NavajoWars
                 //List<string> listFamilyNames = gs.Families.Where(f => !gs.completedFamilies.Contains(f)).Select(f => f.Name).ToList();
                 List<GameState.Family> listFamEligible = gs.Families.Where(f => !f.isCompletedOps).ToList();
                 //initialize list of buttons
-                List<bParams> bFamEligible = new List<bParams>();
+                List<ButtonInfo> bFamEligible = new List<ButtonInfo>();
                 //for each eligible family, create button using family name and index
                 for (int i = 0; i < listFamEligible.Count; i++)
                 {
-                    bParams bFamilyName = new(listFamEligible[i].Name, i);
+                    ButtonInfo bFamilyName = new(listFamEligible[i].Name, i);
                     bFamEligible.Add(bFamilyName);
                 }
                 /*// TEST CREATE BUTTON EVENT
@@ -99,7 +97,7 @@ namespace NavajoWars
                 calltCB(bFamEligible);*/
                 // use async because logic to apply to result
                 ui.MakeChoiceButtonsAsync(bFamEligible);
-                bParams result = await IReceive.GetChoiceAsync();
+                ButtonInfo result = await IReceive.GetChoiceAsync();
 
                 listFamEligible[result.tabIndex].isSelectedOps = true;
                 

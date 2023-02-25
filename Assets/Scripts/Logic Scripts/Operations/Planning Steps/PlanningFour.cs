@@ -26,14 +26,14 @@ namespace NavajoWars
                 ui.hideBackNext();
                 ui.displayText($"You may spend up to {toSpend} AP to purchase Trade Goods. How many?");
 
-                List<bParams> choices = new();
+                List<ButtonInfo> choices = new();
                 for (int i = 0; i < (toSpend + 1); i++)
                 {
-                    bParams choiceSpend = new(i.ToString(), i);
+                    ButtonInfo choiceSpend = new(i.ToString(), i);
                     choices.Add(choiceSpend);
                 }
                 ui.MakeChoiceButtonsAsync(choices);
-                bParams result = await IReceive.GetChoiceAsync();
+                ButtonInfo result = await IReceive.GetChoiceAsync();
 
                 gs.AP -= result.tabIndex;
                 gs.TradeGoodsHeld += result.tabIndex;

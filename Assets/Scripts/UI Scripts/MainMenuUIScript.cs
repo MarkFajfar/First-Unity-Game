@@ -149,6 +149,7 @@ namespace NavajoWars
             {
                 viewSetup.text = "";
                 viewSetup.visible = false;
+                scrollView.visible = false;
                 hideTitle.visible = false;
                 back.visible = false;
                 next.visible = false;
@@ -161,7 +162,7 @@ namespace NavajoWars
         void nextClicked()
         {
             stepSetup++;
-
+            print($"Setup step no. {stepSetup}");
             if (ChosenScenario.Setup[stepSetup] != "END")
             {
                 viewSetup.text = ChosenScenario.Setup[stepSetup];

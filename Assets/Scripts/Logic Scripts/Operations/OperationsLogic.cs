@@ -7,17 +7,19 @@ namespace NavajoWars
 {
     public class OperationsLogic : LogicScript, IReceive
     {
-        protected InitialUndo initialUndo;
-        public GameObject PlayerActionSteps;
-        public GameObject PlanningSteps;
+        public GameObject UIObject;
+        public OperationsUIScript ui;
         public PlayerOperation playerOperation;
+
+        protected InitialUndo initialUndo;
+        //public GameObject PlayerActionSteps;
+        //public GameObject PlanningSteps;
         
         public static string[] PlayerActionStepNames = {"FindWater", "Move", "Plant", "Raid", "Trade", "TribalCouncil"};
 
         void OnEnable()
         {
             initialUndo = gameObject.AddComponent<InitialUndo>();
-            //playerOperation assigned in Inspector
         }
 
         //public (GameStep caller, GameStep target) gotoUndo;
@@ -42,9 +44,11 @@ namespace NavajoWars
 
         async void ConfirmScreen()
         {
-            List<bParams> choices = new();
+            ui.OnBackClick -= ConfirmScreen;
 
-            bParams redo = new("Go Back to Card Draw");
+            List<ButtonInfo> choices = new();
+
+            ButtonInfo redo = new("Go Back to Card Draw");
             if (gs.canBackToDraw) 
             {
                 choices.Add(redo);
@@ -55,14 +59,15 @@ namespace NavajoWars
             {
                 ui.hideBackNext();
                 ui.displayText($"\nPreempt for {gs.CurrentCard.Points[0]} AP?");
-                bParams yes = new("Yes Preempt"); //, testYes);
+                ButtonInfo yes = new("Yes Preempt"); //, testYes);
                 choices.Add(yes);
-                bParams no = new("Do Not Preempt"); //, testNo);
+                ButtonInfo no = new("Do Not Preempt"); //, testNo);
                 choices.Add(no);
                 ui.MakeChoiceButtonsAsync(choices);
-                bParams result = await IReceive.GetChoiceAsync();
+                ButtonInfo result = await IReceive.GetChoiceAsync();
                 // after button clicked, activate back to come here if stack is empty
                 // but set back to use stack for initial Undo (because may come back here with steps in stack)
+                ui.OnBackClick += ConfirmScreen;
                 ui.showBackNext();
                 if (result.name == yes.name)
                 {
@@ -87,24 +92,25 @@ namespace NavajoWars
             }
             else
             {
+                ui.OnBackClick += ConfirmScreen;
                 ui.showBackNext();
                 gs.isPreempt = false;
 
-                bParams draw = new("Next Card");
+                ButtonInfo draw = new("Next Card");
                 if (gs.isEnemyOpsDone && gs.isPlayerOpsDone)
                 {
                     ui.displayText("All Operations completed. Click 'Next Card' to draw a new card.");
                     choices.Add(draw);
                 }
 
-                bParams player = new("Player Operations");
+                ButtonInfo player = new("Player Operations");
                 if (gs.isEnemyOpsDone && !gs.isPlayerOpsDone)
                 {
                     ui.displayText("Enemy Operations completed. Click 'Player Operations' to continue.");
                     choices.Add(player);
                 }
 
-                bParams enemy = new("Enemy Operations");
+                ButtonInfo enemy = new("Enemy Operations");
                 if ((gs.isPlayerOpsDone && !gs.isEnemyOpsDone) || gs.AP < gs.CurrentCard.Points[0])
                 {
                     if (gs.AP < gs.CurrentCard.Points[0] && !gs.isPlayerOpsDone)
@@ -115,7 +121,7 @@ namespace NavajoWars
                     choices.Add(enemy);
                 } 
                 ui.MakeChoiceButtonsAsync(choices);
-                bParams result = await IReceive.GetChoiceAsync();
+                ButtonInfo result = await IReceive.GetChoiceAsync();
 
                 if (result.name == redo.name)
                 {

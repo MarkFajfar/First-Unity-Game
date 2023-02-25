@@ -43,25 +43,25 @@ namespace NavajoWars
                     {
                         ui.addHeadline($"\n{gs.ElderDisplay[i] - j} Elder Action(s) in Slot {i}. Roll Die.");
                         ui.addText($"For this roll you need a {gs.ElderTarget[i]} or less.");
-                        bParams yes = new("Roll Succeeded");
-                        bParams no = new("Roll Failed");
-                        List<bParams> choices = new() { yes, no };
+                        ButtonInfo yes = new("Roll Succeeded");
+                        ButtonInfo no = new("Roll Failed");
+                        List<ButtonInfo> choices = new() { yes, no };
                         ui.MakeChoiceButtonsAsync(choices);
-                        bParams result = await IReceive.GetChoiceAsync();
+                        ButtonInfo result = await IReceive.GetChoiceAsync();
                         ui.displayText(""); 
                         // if no, will increment j and go to next loop
                         if (result.name == yes.name)
                         {
                             ui.displayText($"Choose Action");
-                            bParams addAP = new("Add 1 AP");
-                            bParams changeFerocity = new("Change Family Ferocity");
-                            bParams addMP = new("Add 1 MP for 1 CP");
-                            bParams addCP = new("Add 1 CP for 1 MP");
-                            List<bParams> elderChoices = new() { addAP, changeFerocity };
+                            ButtonInfo addAP = new("Add 1 AP");
+                            ButtonInfo changeFerocity = new("Change Family Ferocity");
+                            ButtonInfo addMP = new("Add 1 MP for 1 CP");
+                            ButtonInfo addCP = new("Add 1 CP for 1 MP");
+                            List<ButtonInfo> elderChoices = new() { addAP, changeFerocity };
                             if (gs.CP > gs.MP) elderChoices.Add(addMP);
                             if (gs.MP > gs.CP) elderChoices.Add(addCP);
                             ui.MakeChoiceButtonsAsync(elderChoices);
-                            bParams elderResult = await IReceive.GetChoiceAsync();
+                            ButtonInfo elderResult = await IReceive.GetChoiceAsync();
                             if (elderResult.name == addAP.name) 
                             {
                                 gs.AP++; 
@@ -100,22 +100,22 @@ namespace NavajoWars
             List<GameState.Family> listFerocityFamilies = new();
             ui.displayText("Change one Family +/- 1. Must have a Man. If increased and MP<5, add 1 MP. If decreased and CP<5, add 1 CP. Select Family.");
             listFerocityFamilies = gs.Families.Where(f => f.IsActive && f.HasMan && !selectedF.Contains(f.Name)).ToList();
-            List<bParams> bFamilies = new List<bParams>();
+            List<ButtonInfo> bFamilies = new List<ButtonInfo>();
             //for each applicable family, create button using family name and index
             for (int i = 0; i < listFerocityFamilies.Count; i++)
             {
-                bParams bFamilyName = new(listFerocityFamilies[i].Name, i);
+                ButtonInfo bFamilyName = new(listFerocityFamilies[i].Name, i);
                 bFamilies.Add(bFamilyName);
             }
             ui.MakeChoiceButtonsAsync(bFamilies);
-            bParams result = await IReceive.GetChoiceAsync();
+            ButtonInfo result = await IReceive.GetChoiceAsync();
             // convert back to family name and add to end of list
             selectedF.Add(listFerocityFamilies[result.tabIndex].Name);
             selectedFamily = gs.Families.First(f => f.Name == result.text);
             ui.displayText($"{selectedFamily.Name} selected. ");
-            bParams increase = new("Increase");
-            bParams decrease = new("Decrease");
-            List<bParams> UpDown = new() { increase, decrease };
+            ButtonInfo increase = new("Increase");
+            ButtonInfo decrease = new("Decrease");
+            List<ButtonInfo> UpDown = new() { increase, decrease };
             string MPremind = gs.MP < 5 ? "Increase will add 1 MP. " : "Increase will not add MP. ";
             string CPremind = gs.CP < 5 ? "Decrease will add 1 CP. " : "Decrease will not add CP. ";
             if (selectedFamily.Ferocity == 3)
@@ -133,7 +133,7 @@ namespace NavajoWars
                 ui.addText($"Increase or Decrease Ferocity? " + MPremind + CPremind);
             }
             ui.MakeChoiceButtonsAsync(UpDown);
-            bParams choiceUpDown = await IReceive.GetChoiceAsync();
+            ButtonInfo choiceUpDown = await IReceive.GetChoiceAsync();
             if (choiceUpDown.name == increase.name)
             {
                 selectedFamily.Ferocity++;

@@ -35,7 +35,7 @@ namespace NavajoWars
 
         void WeirdEventFunction(object sender, bParamsEventArgs choices) { }*/
 
-        public override void Begin()
+        public override async void Begin()
         {
             /*chooseFamily.tCreateButtons += WeirdActionFunction;
             chooseFamily.CreateButtonsEvent += WeirdEventFunction;*/
@@ -45,8 +45,7 @@ namespace NavajoWars
             // no save because only choosing from list of possible actions
 
             // if coming down from choose family, then reset list of completed actions
-            GameStep caller = gs.stepStack.Peek();
-            if (caller.stepName == "ChooseFamily") 
+            if (gs.stepStack.Peek().stepName == "ChooseFamily") 
             { 
                 gs.completedActions = 0;
                 foreach (GameStep step in logic.steps)
@@ -61,8 +60,9 @@ namespace NavajoWars
             ui.displayText($"Choose an action for {selectedFamily.Name}");
             if (gs.completedActions > 0)
             {
-                ui.addText(", or press Next to choose a new family.");
-                ui.OnNextClick += chooseAnotherFamily;
+                ui.addText(", or press Back to choose a new family.");
+                // ui.OnNextClick += chooseAnotherFamily; 
+                // subscribing here is a problem because if not clicking Next it does not unsubscribe
             }
             else
             {
@@ -71,21 +71,21 @@ namespace NavajoWars
             }
 
             //var validActions = new Dictionary<string, GameStep>() { { "Move", move }, { "Plant or Harvest Corn", plant } };      
-            bParams bMove = new("Move", move);
-            bParams bPlant = new("Plant or Harvest Corn", plant);
-            bParams bRaid = new("Raid", raid);
-            bParams bFindWater = new("Find Water", findWater);
-            bParams bTrade = new("Trade at Fort", trade);
-            bParams bTribalCouncil = new("Tribal Council", tribalCouncil);
-            List<bParams> validActions = new() { bMove, bPlant };
+            ButtonInfo bMove = new("Move", move);
+            ButtonInfo bPlant = new("Plant or Harvest Corn", plant);
+            ButtonInfo bRaid = new("Raid", raid);
+            ButtonInfo bFindWater = new("Find Water", findWater);
+            ButtonInfo bTrade = new("Trade at Fort", trade);
+            ButtonInfo bTribalCouncil = new("Tribal Council", tribalCouncil);
+            List<ButtonInfo> validActions = new() { bMove, bPlant };
             if (gs.completedActions == 0) validActions.Add(bTribalCouncil);
             if (selectedFamily.HasMan && gs.MP > 0) validActions.Add(bRaid);
             if (gs.HasDrought.Contains(selectedFamily.IsWhere)) validActions.Add(bFindWater);
             if (gs.HasFort.Contains(selectedFamily.IsWhere) && gs.CP > 0 && (gs.TradeGoodsMax - gs.TradeGoodsHeld) > 0) validActions.Add(bTrade);
-            ui.MakeChoiceButtons(validActions);
-            //GameStep result = await IReceive.GetChoiceAsyncObject(validActions);
+            ui.MakeChoiceButtonsAsync(validActions);
+            ButtonInfo result = await IReceive.GetChoiceAsync();
             gs.stepStack.Push(this);
-            //result.Begin();
+            result.gameStep.Begin();
         }
 
         void chooseAnotherFamily()

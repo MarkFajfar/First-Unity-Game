@@ -24,9 +24,9 @@ namespace NavajoWars
             int tradeGoodsAvail = gs.TradeGoodsMax - gs.TradeGoodsHeld;
             ui.displayHeadline($"{selectedFamily.Name} Trades at Fort");
             ui.displayText($"This action costs all remaining MP and 1 CP, will reduce {selectedFamily.Name}'s ferocity to zero, and {selectedFamily.Name} must be in the Fort. {(tradeGoodsAvail == 1 ? "One trade good is" : $"{tradeGoodsAvail} trade goods are")} available. Do you wish to trade?");
-            bParams yes = new("Yes, Trade", yesTrade);
-            bParams no = new("Do Not Trade", noTrade);
-            List<bParams> choices = new() { yes, no };
+            ButtonInfo yes = new("Yes, Trade", yesTrade);
+            ButtonInfo no = new("Do Not Trade", noTrade);
+            List<ButtonInfo> choices = new() { yes, no };
             // use async because logic to apply after choice made
             ui.MakeChoiceButtons(choices);        
             //HAS TO BE LAST ACTION

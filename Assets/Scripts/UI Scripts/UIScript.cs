@@ -11,8 +11,6 @@ namespace NavajoWars
     {
         protected GameManager gm;
         protected GameState gs;
-        public GameObject LogicObject;
-        public LogicScript logic;
 
         protected List<IReceive> Receivers;
 
@@ -35,9 +33,9 @@ namespace NavajoWars
             }
         }
 
-        public abstract void MakeChoiceButtons(List<bParams> choices);
+        public abstract void MakeChoiceButtons(List<ButtonInfo> choices);
 
-        public void MakeChoiceButtonsAsync(List<bParams> choices)
+        public void MakeChoiceButtonsAsync(List<ButtonInfo> choices)
         {
             foreach (var choice in choices) { choice.waiting = true; }
             MakeChoiceButtons(choices);
@@ -56,48 +54,31 @@ namespace NavajoWars
                 GameStep clickedStep = (GameStep)clickedButton.userData;
                 clickedStep.Begin();
             }
-            else if (clickedButton.userData.GetType() == typeof(bParams))
+            else if (clickedButton.userData.GetType() == typeof(ButtonInfo))
             {
-                bParams clickedParams = (bParams)clickedButton.userData;
+                ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
 
                 if (clickedParams.waiting)
                 {
-                    ChoiceMadeParams choice = new ChoiceMadeParams((bParams)clickedButton.userData);
+                    ChoiceMadeParams choice = new ChoiceMadeParams((ButtonInfo)clickedButton.userData);
                     choice.OnChoiceMadeParams(choice);
                 }
-                if (clickedParams.call != null) clickedParams.call.Invoke(); 
-                if (clickedParams.gameStep != null) clickedParams.gameStep.Begin(); 
+                if (!clickedParams.waiting && clickedParams.call != null) 
+                {
+                    print($"Button click calling {clickedParams.call}");
+                    clickedParams.call.Invoke();
+                }
+                if (!clickedParams.waiting && clickedParams.gameStep != null)
+                {
+                    print($"Button click beginning Step {clickedParams.gameStep}");
+                    clickedParams.gameStep.Begin();
+                }
                 if (!clickedParams.waiting && clickedParams.call == null && clickedParams.gameStep == null)
                 { foreach (var receiver in Receivers) receiver.methodManager(clickedParams.name); }
             }
             else
             { foreach (var receiver in Receivers) receiver.methodManager(clickedButton.name); }
             // if (clickedButton.userData as GameStep)
-        }
-
-        protected void buttonClickedEvent(ClickEvent evt)
-            // not needed, included in buttonClicked
-        {
-            var clickedButton = evt.target as Button;
-
-            ClearChoicePanel();
-            
-            if (clickedButton.userData.GetType() == typeof(GameStep))
-            {
-                ChoiceMadeGameStep choice = new ChoiceMadeGameStep((GameStep)clickedButton.userData);
-                choice.OnChoiceMadeGameStep(choice);
-            }
-            else if (clickedButton.userData.GetType() == typeof(bParams))
-            {
-                ChoiceMadeParams choice = new ChoiceMadeParams((bParams)clickedButton.userData);
-                choice.OnChoiceMadeParams(choice);
-            }
-            else
-            {
-                ChoiceMade choice = new ChoiceMade(clickedButton.tabIndex, clickedButton.name);
-                choice.OnChoiceMade(choice);
-            }
-            
         }
 
         protected void foldoutClicked(ClickEvent evt)
@@ -160,15 +141,9 @@ namespace NavajoWars
         public abstract void showPrev();
         public abstract void hidePrev();
 
-        public abstract void DisplayLocations();
-
-        public abstract void CloseLocations();
-
-        public abstract Territory ReturnLocation();
-
         public abstract void showButton(Button button);
         
-        public abstract void showButton(bParams bparams);
+        public abstract void showButton(ButtonInfo bparams);
 
         public abstract void MakeFamilyFoldouts(Dictionary<Person, GameState.Family> foldouts);
     }

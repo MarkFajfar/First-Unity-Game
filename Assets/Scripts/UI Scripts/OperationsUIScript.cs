@@ -8,6 +8,9 @@ namespace NavajoWars
 {
     public class OperationsUIScript : UIScript, IReceive
     {
+        public GameObject LogicObject;
+        public OperationsLogic logic; 
+        
         public Label headline;
         public Label message;
         Button prev;
@@ -16,11 +19,10 @@ namespace NavajoWars
         Button next;
         public string[] choiceButtonStyles;
 
-        public ScrollView choicePanel;
-        public List<Foldout> foldouts;
-
-        public RadioButtonGroup locations;
-
+        VisualElement choicePanel;
+        RadioButtonGroup locations; 
+        List<Foldout> foldouts;
+        
         void OnEnable()
         {
             //choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
@@ -48,7 +50,8 @@ namespace NavajoWars
             quit = root.Q<Button>("Quit");
             quit.clicked += quitClicked;
                         
-            choicePanel = root.Q<ScrollView>("ChoicePanel");
+            choicePanel = root.Q<VisualElement>("ChoicePanel");
+            locations = root.Q<RadioButtonGroup>("Locations");
             //foldouts = choicePanel.Query<Foldout>().ToList();
         }
 
@@ -77,6 +80,7 @@ namespace NavajoWars
             back.visible = false;
             next.visible = false;
             quit.visible = true;
+            CloseLocations();
         }
 
         public override void Initialize()
@@ -88,6 +92,7 @@ namespace NavajoWars
             headline.visible = true;
             message.visible = true;
             choicePanel.visible = false;
+            CloseLocations();
         }
 
         public override void displayText(string text)
@@ -132,12 +137,12 @@ namespace NavajoWars
         public override void hidePrev()
         { prev.visible = false; }
 
-        public override void MakeChoiceButtons(List<bParams> choices)
+        public override void MakeChoiceButtons(List<ButtonInfo> choices)
         {
             ClearChoicePanel();
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
-            foreach (bParams choice in choices)
+            foreach (ButtonInfo choice in choices)
             {
                 var choiceButton = new Button();
                 choiceButton.RegisterCallback<ClickEvent>(buttonClicked);
@@ -161,7 +166,7 @@ namespace NavajoWars
             choicePanel.Add(button);
         }
         
-        public override void showButton(bParams bparams)
+        public override void showButton(ButtonInfo bparams)
         {
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
@@ -216,19 +221,20 @@ namespace NavajoWars
             }
         }
 
-        public override void DisplayLocations()
+        public void DisplayLocations()
         {
             ClearChoicePanel();
             List<string> locationNames = new()
             { " Splitrock", " San Juan", " Zuni", " Monument", " Hopi", " Black Mesa", " C. de Chelly" };
             //choicePanel.Add(locations); // is this necessary?
+            locations.visible = true;
             locations.style.display = DisplayStyle.Flex;
             locations.choices = locationNames;
         }
 
-        public override Territory ReturnLocation() => (Territory)locations.value + 1;
+        public Territory ReturnLocation() => (Territory)locations.value + 1;
 
-        public override void CloseLocations()
+        public void CloseLocations()
         { locations.style.display = DisplayStyle.None; }
 
         public override void ClearChoicePanel()
@@ -237,8 +243,11 @@ namespace NavajoWars
             //List<Button> buttons = choicePanel.Query<Button>().ToList();
             choiceElements.AddRange(choicePanel.Query<Button>().ToList());
             choiceElements.AddRange(choicePanel.Query<Foldout>().ToList());
-            choiceElements.AddRange(choicePanel.Query<RadioButtonGroup>().ToList());
+            //choiceElements.AddRange(choicePanel.Query<RadioButtonGroup>().ToList());
+            // instead of removing radio button group, use CloseLocations
             // IEnumerable<VisualElement> choiceElements = new[] { buttons, foldouts, radios };
+
+            CloseLocations();
 
             foreach (var element in choiceElements)
             {

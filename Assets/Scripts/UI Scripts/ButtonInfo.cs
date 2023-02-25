@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace NavajoWars
 {
-    public class bParams
+    public class ButtonInfo
     {
         public string name;
         public string text;
@@ -15,7 +15,7 @@ namespace NavajoWars
         public Action call = null;
         public bool waiting = false;
 
-        public bParams()
+        public ButtonInfo()
         {
             name = "new button";
             text = "Button";
@@ -23,7 +23,7 @@ namespace NavajoWars
             tabIndex = 0;
         }
 
-        public bParams(string text)
+        public ButtonInfo(string text)
         {
             name = text.Replace(" ", "");
             this.text = text;
@@ -31,14 +31,14 @@ namespace NavajoWars
             tabIndex = 0;
         }
 
-        public bParams(string text, int tabIndex)
+        public ButtonInfo(string text, int tabIndex)
         {
             name = text.Replace(" ", "");
             this.text = text;
             style = "ButtonMenu";
             this.tabIndex = tabIndex;
         }
-        public bParams(string text, GameStep gameStep)
+        public ButtonInfo(string text, GameStep gameStep)
         {
             name = text.Replace(" ", "");
             this.text = text;
@@ -47,7 +47,7 @@ namespace NavajoWars
             this.gameStep = gameStep;
         }
 
-        public bParams(string text, Action call)
+        public ButtonInfo(string text, Action call)
         {
             name = text.Replace(" ", "");
             this.text = text;
@@ -57,7 +57,7 @@ namespace NavajoWars
         }
 
 
-        public bParams(string name, string text, int tabIndex)
+        public ButtonInfo(string name, string text, int tabIndex)
         {
             this.name = name;
             this.text = text;
@@ -65,7 +65,7 @@ namespace NavajoWars
             this.tabIndex = tabIndex;
         }
 
-        public bParams(string name, string text, int tabIndex, GameStep gameStep, Action call)
+        public ButtonInfo(string name, string text, int tabIndex, GameStep gameStep, Action call)
         {
             this.name = name;
             this.text = text;
@@ -76,13 +76,13 @@ namespace NavajoWars
         }
     }
 
-    public class bParamsEventArgs : EventArgs
+    public class ButtonInfoEventArgs : EventArgs
     {
-        public bParamsEventArgs(List<bParams> choices)
+        public ButtonInfoEventArgs(List<ButtonInfo> choices)
         {
-            eParams = choices;
+            eButtonInfo = choices;
         }
 
-        public List<bParams> eParams { get; set; }
+        public List<ButtonInfo> eButtonInfo { get; set; }
     }
 }

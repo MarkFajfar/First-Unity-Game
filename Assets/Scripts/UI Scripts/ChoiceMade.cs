@@ -64,11 +64,11 @@ namespace NavajoWars
     }
     public class ChoiceMadeParams : EventArgs
     {
-        public ChoiceMadeParams(bParams clickedParams)
+        public ChoiceMadeParams(ButtonInfo clickedParams)
         {
             cParams = clickedParams;
         }
-        public bParams cParams { get; set; }
+        public ButtonInfo cParams { get; set; }
 
         public delegate void ChoiceMadeParamsEventHandler(object sender, ChoiceMadeParams args);
         public static event ChoiceMadeParamsEventHandler ChoiceMadeParamsEvent;

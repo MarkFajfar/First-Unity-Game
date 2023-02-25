@@ -10,8 +10,8 @@ namespace NavajoWars
     {
         protected GameManager gm;
         protected GameState gs;
-        protected UIScript ui;
-        protected LogicScript logic;
+        protected OperationsUIScript ui;
+        protected OperationsLogic logic;
 
         public abstract string stepName { get; }
 
@@ -32,9 +32,9 @@ namespace NavajoWars
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
             var LogicObj = GameObject.FindWithTag("Logic");
-            logic = LogicObj.GetComponent<LogicScript>();
+            logic = LogicObj.GetComponent<OperationsLogic>();
             var UIObj = GameObject.FindWithTag("UI");
-            ui = UIObj.GetComponent<UIScript>();
+            ui = UIObj.GetComponent<OperationsUIScript>();
             clearCompleted = () => isCompleted = false; 
         }
 

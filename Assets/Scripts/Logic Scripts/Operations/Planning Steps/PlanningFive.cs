@@ -44,14 +44,14 @@ namespace NavajoWars
                     string or = (canWar && canDip) ? ", or " : "";
                     ui.displayText($"For {family.Name}, " + askWar + or + askDip + "?");
 
-                    bParams choiceWar = new("Tribal Warfare");
-                    bParams choiceDip = new("Tribal Diplomacy");
-                    bParams no = new("Neither");
-                    List<bParams> choices = new() { no };
+                    ButtonInfo choiceWar = new("Tribal Warfare");
+                    ButtonInfo choiceDip = new("Tribal Diplomacy");
+                    ButtonInfo no = new("Neither");
+                    List<ButtonInfo> choices = new() { no };
                     if (canWar) choices.Add(choiceWar);
                     if (canDip) choices.Add(choiceDip); 
                     ui.MakeChoiceButtonsAsync(choices);
-                    bParams result = await IReceive.GetChoiceAsync();                    
+                    ButtonInfo result = await IReceive.GetChoiceAsync();                    
                     if (result.name == choiceWar.name)
                     { gs.AP--; gs.MP--; }
                     if (result.name == choiceDip.name)

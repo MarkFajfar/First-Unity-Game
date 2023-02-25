@@ -24,12 +24,12 @@ namespace NavajoWars
             ui.displayHeadline($"{selectedFamily.Name} Calls Tribal Council");
             ui.displayText($"This must be {selectedFamily.Name}'s only action. If die roll is > = the family's current Area, collect 1 AP. Otherwise there is no effect. Was the die roll successful?");
 
-            bParams yes = new("Yes Successful");
-            bParams no = new("Not Successful");
-            List<bParams> choices = new() { yes, no };
+            ButtonInfo yes = new("Yes Successful");
+            ButtonInfo no = new("Not Successful");
+            List<ButtonInfo> choices = new() { yes, no };
             // use async because logic to apply after choice made
             ui.MakeChoiceButtonsAsync(choices);
-            bParams result = await IReceive.GetChoiceAsync();
+            ButtonInfo result = await IReceive.GetChoiceAsync();
             ui.displayText("");
             if (result.name == yes.name)
             {
