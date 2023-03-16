@@ -30,7 +30,7 @@ namespace NavajoWars
             ui.OnNextClick -= removeDrought;
             gs.HasDrought.Remove(selectedFamily.IsWhere);
             actionComplete();
-            ChooseAnotherAction chooseAnotherAction = GetComponent<ChooseAnotherAction>();
+            ChooseAnotherAction chooseAnotherAction = GetComponentInChildren<ChooseAnotherAction>();
             chooseAnotherAction.Begin();
         }
 

@@ -63,7 +63,7 @@ namespace NavajoWars
         public override void backClicked()
         {
             // check first if any step in stack; if not, go to subscribers to backClicked
-            if (gs.stepStack.Count > 0) gs.stepStack.Pop().Undo(); 
+            if (gm.stepStack.Count > 0) gm.stepStack.Pop().Undo(); 
             else base.backClicked();
         }
 

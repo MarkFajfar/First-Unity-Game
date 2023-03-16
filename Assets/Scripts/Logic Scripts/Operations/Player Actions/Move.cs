@@ -35,6 +35,7 @@ namespace NavajoWars
             missing = OperationsLogic.numMissing(selectedFamily);
             newTerritorySelected = false; 
             
+            ui.ClearChoicePanel();
             ui.displayHeadline($"Move {selectedFamily.Name}");
             ui.displayText($"{selectedFamily.Name} has {6 - missing} MP{(isFirstAction ? "" : ", minus points already spent")}. Move costs MPs equal to the destination Area's {(horse ? "parenthesized " : "")}value. If there is {(fortInGame ? $"a Fort in the destination Territory, or " : "")}an Outpost in an Area < = the destination Area, the MP cost is +1. ");
             string chellyMsg = isFirstAction ? "Move to or from Canyon de Chelly requires all MPs. " : "No move to or from Canyon because not family's first action. ";
@@ -48,16 +49,22 @@ namespace NavajoWars
         {
             ui.OnNextClick -= resolveMove;
             // after first screen cleared, set back button to come back to this step
-            gs.stepStack.Push(this);
+            gm.stepStack.Push(this);
             ui.displayText($"Is {selectedFamily.Name} moving to a new Territory?");
             ButtonInfo no = new("No Same Territory", noSame);
             ButtonInfo yesN = new("Yes New Territory", yesNew);
             ButtonInfo yesC = new("Yes to Canyon de Chelly", yesChelly);
+            //ButtonInfo nameWithReturn = new("Do Something Else", passedBack);
             List<ButtonInfo> choices = new() { no, yesN };
             if (isFirstAction) choices.Add(yesC);
             ui.MakeChoiceButtons(choices);
         }
 
+        /*void passedBack(ButtonInfo clickedParams)
+        {
+            print(clickedParams.text);
+        }
+*/
         void noSame() 
         {
             ui.displayText("Move completed. Press Next to continue. ");
@@ -90,7 +97,7 @@ namespace NavajoWars
                 ui.CloseLocations();
             }
             base.actionComplete();
-            ChooseAnotherAction chooseAnotherAction = GetComponent<ChooseAnotherAction>();
+            ChooseAnotherAction chooseAnotherAction = GetComponentInChildren<ChooseAnotherAction>();
             chooseAnotherAction.Begin();
         }
 

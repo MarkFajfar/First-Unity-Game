@@ -63,7 +63,7 @@ namespace NavajoWars
             ui.OnNextClick -= actionComplete;
             isCompleted = true;
             gs.completedActions++;
-            gs.stepStack.Push(this);
+            if (gm.stepStack.Peek() != this) gm.stepStack.Push(this);
             //logic.instructFromStep(this, "ChooseAnotherAction");
         }
     }

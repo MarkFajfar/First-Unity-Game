@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 namespace NavajoWars
@@ -44,13 +43,13 @@ namespace NavajoWars
         void noTrade()
         {
             // go back, same as undo ?
-            gs.stepStack.Pop().Undo();
+            gm.stepStack.Pop().Undo();
         }
 
         protected override void actionComplete()
         {
             base.actionComplete();
-            ChooseAnotherAction chooseAnotherAction = GetComponent<ChooseAnotherAction>();
+            ChooseAnotherAction chooseAnotherAction = GetComponentInChildren<ChooseAnotherAction>();
             chooseAnotherAction.Begin();
         }
 

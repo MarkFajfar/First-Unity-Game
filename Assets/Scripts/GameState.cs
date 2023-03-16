@@ -229,7 +229,6 @@ namespace NavajoWars
         //public List<GameStep> completedActions;
         public int completedFamilies;
         public int completedActions;
-        public Stack<GameStep> stepStack;
         
         public bool canBackToDraw
         { get => canbackToDraw; set => canbackToDraw = value; }

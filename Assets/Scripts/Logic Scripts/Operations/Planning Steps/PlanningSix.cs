@@ -44,8 +44,7 @@ namespace NavajoWars
         protected override void actionComplete()
         {
             base.actionComplete();
-            GameStep planningSeven = GetComponent<PlanningSeven>();
-            planningSeven.Begin();
+            GetComponentInChildren<PlanningSeven>().Begin();
         }
 
         public override void Undo()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
@@ -61,6 +62,16 @@ namespace NavajoWars
             ChoiceMadeGameStepEventHandler raiseEvent = ChoiceMadeGameStepEvent;
             if (raiseEvent != null) raiseEvent(this, e);
         }
+
+        public static void unsubChoiceMadeGameStep()
+        {
+            if (ChoiceMadeGameStepEvent != null)
+            {
+                //foreach (UIScript.ClickBack subscriber in OnOpsBackClick.GetInvocationList().Cast<UIScript.ClickBack>())
+                foreach (ChoiceMadeGameStepEventHandler subscriber in ChoiceMadeGameStepEvent.GetInvocationList().Cast<ChoiceMadeGameStepEventHandler>())
+                { ChoiceMadeGameStepEvent -= subscriber; }
+            }
+        }
     }
     public class ChoiceMadeParams : EventArgs
     {
@@ -77,6 +88,16 @@ namespace NavajoWars
         {
             ChoiceMadeParamsEventHandler raiseEvent = ChoiceMadeParamsEvent;
             if (raiseEvent != null) raiseEvent(this, e);
+        }
+
+        public static void unsubChoiceMadeParamsEvent()
+        {
+            if (ChoiceMadeParamsEvent != null)
+            {
+                //foreach (UIScript.ClickBack subscriber in OnOpsBackClick.GetInvocationList().Cast<UIScript.ClickBack>())
+                foreach (ChoiceMadeParamsEventHandler subscriber in ChoiceMadeParamsEvent.GetInvocationList().Cast<ChoiceMadeParamsEventHandler>())
+                { ChoiceMadeParamsEvent -= subscriber; }
+            }
         }
     }
 }

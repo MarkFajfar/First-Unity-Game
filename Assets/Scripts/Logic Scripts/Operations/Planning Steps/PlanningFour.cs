@@ -10,7 +10,7 @@ namespace NavajoWars
     {
         public override string stepName { get => "PlanningFour"; }
 
-        public async override void Begin()
+        public override void Begin()
         {
             gm.SaveUndo(this);
             ui.displayHeadline("Planning\nStep Four");
@@ -29,25 +29,34 @@ namespace NavajoWars
                 List<ButtonInfo> choices = new();
                 for (int i = 0; i < (toSpend + 1); i++)
                 {
-                    ButtonInfo choiceSpend = new(i.ToString(), i);
+                    ButtonInfo choiceSpend = new(i.ToString(), i, spend);
                     choices.Add(choiceSpend);
                 }
-                ui.MakeChoiceButtonsAsync(choices);
+                ui.MakeChoiceButtons(choices);
+                /*ui.MakeChoiceButtonsAsync(choices);
                 ButtonInfo result = await IReceive.GetChoiceAsync();
-
+                // TO DO: would this work with button return?
                 gs.AP -= result.tabIndex;
                 gs.TradeGoodsHeld += result.tabIndex;
                 ui.displayText($"Spending {result.tabIndex} AP leaves {gs.AP} AP.\n{gs.TradeGoodsHeld} Trade Goods Held. Press Next to continue.");
                 ui.showBackNext();
-                ui.OnNextClick += actionComplete;
+                ui.OnNextClick += actionComplete;*/
             }
+        }
+
+        void spend(ButtonInfo result) 
+        {
+            gs.AP -= result.tabIndex;
+            gs.TradeGoodsHeld += result.tabIndex;
+            ui.displayText($"Spending {result.tabIndex} AP leaves {gs.AP} AP.\n{gs.TradeGoodsHeld} Trade Goods Held. Press Next to continue.");
+            ui.showBackNext();
+            ui.OnNextClick += actionComplete;
         }
 
         protected override void actionComplete()
         {
             base.actionComplete();
-            //GameStep planningFive = GetComponent<PlanningFive>();
-            //planningFive.Begin();
+            GetComponentInChildren<PlanningFive>().Begin();
         }
 
         public override void Undo()

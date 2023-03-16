@@ -23,12 +23,12 @@ namespace NavajoWars
         void getReferences()
         {
             // assign in Inspector
-            move = gameObject.GetComponent<Move>();
-            plant = gameObject.GetComponent<Plant>();
-            raid = gameObject.GetComponent<Raid>();
-            findWater = gameObject.GetComponent<FindWater>();
-            trade = gameObject.GetComponent<Trade>();
-            tribalCouncil = gameObject.GetComponent<TribalCouncil>();
+            move = gameObject.GetComponentInChildren<Move>();
+            plant = gameObject.GetComponentInChildren<Plant>();
+            raid = gameObject.GetComponentInChildren<Raid>();
+            findWater = gameObject.GetComponentInChildren<FindWater>();
+            trade = gameObject.GetComponentInChildren<Trade>();
+            tribalCouncil = gameObject.GetComponentInChildren<TribalCouncil>();
         }
 
         /*void WeirdActionFunction(List<bParams> choices) { }
@@ -39,30 +39,29 @@ namespace NavajoWars
         {
             /*chooseFamily.tCreateButtons += WeirdActionFunction;
             chooseFamily.CreateButtonsEvent += WeirdEventFunction;*/
-            
+
             //getReferences();
 
             // no save because only choosing from list of possible actions
 
             // if coming down from choose family, then reset list of completed actions
-            if (gs.stepStack.Peek().stepName == "ChooseFamily") 
-            { 
+            if (gm.stepStack.Peek().stepName == "ChooseFamily")
+            {
                 gs.completedActions = 0;
-                foreach (GameStep step in logic.steps)
-                { if (OperationsLogic.PlayerActionStepNames.Contains(step.stepName)) step.isCompleted = false; }
-                // TODO: where are game steps stored?
-            }
-            // make this a generic method??
 
+                List<GameStep> steps = new() { move, plant, raid, findWater, trade, tribalCouncil };
+                foreach (GameStep step in steps) step.isCompleted = false;
+            }
+            
             ui.Initialize();
 
             selectedFamily = gs.Families.Where(f => f.isSelectedOps).First();
             ui.displayText($"Choose an action for {selectedFamily.Name}");
             if (gs.completedActions > 0)
             {
-                ui.addText(", or press Back to choose a new family.");
-                // ui.OnNextClick += chooseAnotherFamily; 
-                // subscribing here is a problem because if not clicking Next it does not unsubscribe
+                ui.addText(", or press Next to choose a new family.");
+                ui.OnNextClick = chooseAnotherFamily; 
+                // unsubscribe below if another button pressed
             }
             else
             {
@@ -81,10 +80,13 @@ namespace NavajoWars
             if (gs.completedActions == 0) validActions.Add(bTribalCouncil);
             if (selectedFamily.HasMan && gs.MP > 0) validActions.Add(bRaid);
             if (gs.HasDrought.Contains(selectedFamily.IsWhere)) validActions.Add(bFindWater);
-            if (gs.HasFort.Contains(selectedFamily.IsWhere) && gs.CP > 0 && (gs.TradeGoodsMax - gs.TradeGoodsHeld) > 0) validActions.Add(bTrade);
+            if (gs.HasFort.Contains(selectedFamily.IsWhere) && gs.CP > 0 && gs.TradeGoodsMax > gs.TradeGoodsHeld) validActions.Add(bTrade);
             ui.MakeChoiceButtonsAsync(validActions);
             ButtonInfo result = await IReceive.GetChoiceAsync();
-            gs.stepStack.Push(this);
+            // TODO: could return ButtonInfo and call that nextAction, which would unsubNext and push to stack before calling the GameStep in the ButtonInfo
+            // would need to create ButtonInfo with both GameStep and name of nextAction
+            ui.unsubNext();
+            gm.stepStack.Push(this);
             result.gameStep.Begin();
         }
 
@@ -92,8 +94,8 @@ namespace NavajoWars
         {
             ui.OnNextClick -= chooseAnotherFamily;
             // is it necessary to cancel task?
-            gs.stepStack.Push(this);
-            //ChooseFamily chooseFamily = GetComponent<ChooseFamily>();
+            gm.stepStack.Push(this);
+            //ChooseFamily chooseFamily = GetComponentInChildren<ChooseFamily>();
             chooseFamily.Undo();
         }
 

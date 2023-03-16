@@ -42,14 +42,15 @@ namespace NavajoWars
         }
 
         public abstract void ClearChoicePanel();
-        
+
         protected void buttonClicked(ClickEvent evt)
         {
             var clickedButton = evt.target as Button;
-            
+
             ClearChoicePanel();
-            
+
             if (clickedButton.userData.GetType() == typeof(GameStep))
+            // does not work:  if (clickedButton.userData as GameStep)
             {
                 GameStep clickedStep = (GameStep)clickedButton.userData;
                 clickedStep.Begin();
@@ -59,26 +60,37 @@ namespace NavajoWars
                 ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
 
                 if (clickedParams.waiting)
+                // if waiting, send back choice and stop
                 {
                     ChoiceMadeParams choice = new ChoiceMadeParams((ButtonInfo)clickedButton.userData);
                     choice.OnChoiceMadeParams(choice);
                 }
-                if (!clickedParams.waiting && clickedParams.call != null) 
+                else if (clickedParams.passBack != null)
+                // if there is a passBack function, send back the params and stop
                 {
-                    print($"Button click calling {clickedParams.call}");
+                    clickedParams.passBack.Invoke(clickedParams);
+                }
+                else if (clickedParams.call != null && clickedParams.gameStep == null)
+                {
                     clickedParams.call.Invoke();
                 }
-                if (!clickedParams.waiting && clickedParams.gameStep != null)
+                else if (clickedParams.gameStep != null && clickedParams.call == null)
                 {
-                    print($"Button click beginning Step {clickedParams.gameStep}");
                     clickedParams.gameStep.Begin();
                 }
-                if (!clickedParams.waiting && clickedParams.call == null && clickedParams.gameStep == null)
-                { foreach (var receiver in Receivers) receiver.methodManager(clickedParams.name); }
+                else if (clickedParams.gameStep != null && clickedParams.call != null)
+                {
+                    Debug.Log("Cannot have both GameStep and Action call");
+                }
+                else
+                {
+                    foreach (var receiver in Receivers) receiver.methodManager(clickedParams.name);
+                }
             }
             else
-            { foreach (var receiver in Receivers) receiver.methodManager(clickedButton.name); }
-            // if (clickedButton.userData as GameStep)
+            {
+                foreach (var receiver in Receivers) receiver.methodManager(clickedButton.name);
+            }
         }
 
         protected void foldoutClicked(ClickEvent evt)

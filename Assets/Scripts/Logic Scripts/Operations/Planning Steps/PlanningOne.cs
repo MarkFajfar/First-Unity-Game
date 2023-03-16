@@ -12,7 +12,7 @@ namespace NavajoWars
         {
             // reset completed families only if coming from choose player operation 
             GameStep caller = null;
-            if (gs.stepStack.Count > 0) caller = gs.stepStack.Peek();
+            if (gm.stepStack.Count > 0) caller = gm.stepStack.Peek();
             if (caller != null && caller.stepName == "PlayerOperation")
             {
                 gs.completedFamilies = 0;
@@ -34,7 +34,7 @@ namespace NavajoWars
         protected override void actionComplete()
         {
             base.actionComplete();
-            GameStep planningTwo = GetComponent<PlanningTwo>();
+            GameStep planningTwo = GetComponentInChildren<PlanningTwo>();
             planningTwo.Begin();
         }
 

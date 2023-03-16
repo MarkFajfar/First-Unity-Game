@@ -39,6 +39,8 @@ namespace NavajoWars
 
         async static Task<ButtonInfo> GetChoiceAsync()
         {
+            ChoiceMadeParams.unsubChoiceMadeParamsEvent();
+            
             ChoiceMadeParams.ChoiceMadeParamsEventHandler choiceEventHandler = null;
             var result = new TaskCompletionSource<ButtonInfo>();
             choiceEventHandler = (s, e) =>
@@ -49,19 +51,12 @@ namespace NavajoWars
             await result.Task;
             ChoiceMadeParams.ChoiceMadeParamsEvent -= choiceEventHandler;
             return result.Task.Result;
-            /*var result = new TaskCompletionSource<(int choiceIndex, string choiceText)>();
-            choiceEventHandler = (s, e) =>
-            {
-                result.SetResult((e.ChoiceIndex, e.ChoiceText));
-            };
-            ChoiceMade.ChoiceMadeEvent += choiceEventHandler;
-            await result.Task;
-            ChoiceMade.ChoiceMadeEvent -= choiceEventHandler;
-            return (result.Task.Result.choiceIndex, result.Task.Result.choiceText);*/
         }
 
         async static Task<GameStep> GetChoiceAsyncObject(List<ButtonInfo> choices)
         {
+            ChoiceMadeGameStep.unsubChoiceMadeGameStep();
+
             ChoiceMadeGameStep.ChoiceMadeGameStepEventHandler choiceEventHandler = null;
             var result = new TaskCompletionSource<GameStep>();
             choiceEventHandler = (s, e) =>
@@ -73,20 +68,5 @@ namespace NavajoWars
             ChoiceMadeGameStep.ChoiceMadeGameStepEvent -= choiceEventHandler;
             return result.Task.Result;
         }
-            /*async static Task<(int choiceIndex, string choiceText)> GetChoiceAsync(List<string> choices)
-        {
-            ChoiceUIScript choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
-            ChoiceUIScript.ChoiceMadeEventHandler choiceEventHandler = null;
-            var result = new TaskCompletionSource<(int choiceIndex, string choiceText)>();
-            choiceEventHandler = (s, e) =>
-            {
-                result.SetResult((e.ChoiceIndex, e.ChoiceText));
-            };
-            choice.ChoiceMadeEvent += choiceEventHandler;
-            choice.DisplayChoiceButtonsEvent(choices);
-            await result.Task;
-            choice.ChoiceMadeEvent -= choiceEventHandler;
-            return (result.Task.Result.choiceIndex, result.Task.Result.choiceText);
-        }*/
     }
 }

@@ -13,12 +13,13 @@ namespace NavajoWars
         public string style;
         public GameStep gameStep = null;
         public Action call = null;
+        public Action<ButtonInfo> passBack = null;
         public bool waiting = false;
 
         public ButtonInfo()
         {
-            name = "new button";
-            text = "Button";
+            name = "NewButton";
+            text = "New Button";
             style = "ButtonMenu";
             tabIndex = 0;
         }
@@ -38,6 +39,7 @@ namespace NavajoWars
             style = "ButtonMenu";
             this.tabIndex = tabIndex;
         }
+
         public ButtonInfo(string text, GameStep gameStep)
         {
             name = text.Replace(" ", "");
@@ -56,6 +58,43 @@ namespace NavajoWars
             this.call = call;
         }
 
+        public ButtonInfo(string text, int tabIndex, Action<ButtonInfo> passBackInfo)
+        {
+            name = text.Replace(" ", "");
+            this.text = text;
+            style = "ButtonMenu";
+            this.tabIndex = tabIndex;
+            this.passBack = passBackInfo;
+        }
+
+        public ButtonInfo(string text, Action<ButtonInfo> passBackInfo)
+        {
+            name = text.Replace(" ", "");
+            this.text = text;
+            style = "ButtonMenu";
+            tabIndex = 0;
+            this.passBack = passBackInfo;
+        }
+
+        public ButtonInfo(string text, GameStep gameStep, Action<ButtonInfo> passBackInfo)
+        {
+            name = text.Replace(" ", "");
+            this.text = text;
+            style = "ButtonMenu";
+            tabIndex = 0;
+            this.gameStep = gameStep;
+            passBack = passBackInfo;
+        }
+
+        public ButtonInfo(string text, Action call, Action<ButtonInfo> passBackInfo)
+        {
+            name = text.Replace(" ", "");
+            this.text = text;
+            style = "ButtonMenu";
+            tabIndex = 0;
+            this.call = call;
+            passBack = passBackInfo;
+        }
 
         public ButtonInfo(string name, string text, int tabIndex)
         {
@@ -73,6 +112,17 @@ namespace NavajoWars
             this.tabIndex = tabIndex;
             this.gameStep = gameStep;
             this.call = call;
+        }
+
+        public ButtonInfo(string name, string text, int tabIndex, GameStep gameStep, Action call, Action<ButtonInfo> passBackInfo)
+        {
+            this.name = name;
+            this.text = text;
+            style = "ButtonMenu";
+            this.tabIndex = tabIndex;
+            this.gameStep = gameStep;
+            this.call = call;
+            passBack = passBackInfo;
         }
     }
 

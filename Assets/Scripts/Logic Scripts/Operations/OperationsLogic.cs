@@ -22,14 +22,12 @@ namespace NavajoWars
             initialUndo = gameObject.AddComponent<InitialUndo>();
         }
 
-        //public (GameStep caller, GameStep target) gotoUndo;
-
         void Start()
         {
             // called when scene "Operations" is loaded, called from gm
             // but what if called from loaded save game? then go to saved currentStep?
-            if (gs.stepStack == null) { gs.stepStack = new(); }
-            if (gs.stepStack.Count > 0) { gs.stepStack.Pop().Begin(); } 
+            if (gm.stepStack == null) { gm.stepStack = new(); }
+            if (gm.stepStack.Count > 0) { gm.stepStack.Pop().Begin(); } 
             else
             {
                 // coming from card draw, neither can have been done:
@@ -38,7 +36,6 @@ namespace NavajoWars
                 gs.isPreempt = false;
                 gs.canBackToDraw = true;
                 ConfirmScreen();
-                //questionPreempt.Begin(questionPreempt);
             }
         }
 
@@ -48,7 +45,7 @@ namespace NavajoWars
 
             List<ButtonInfo> choices = new();
 
-            ButtonInfo redo = new("Go Back to Card Draw");
+            ButtonInfo redo = new("Go Back to Card Draw", backtoCardDraw);
             if (gs.canBackToDraw) 
             {
                 choices.Add(redo);
@@ -59,36 +56,15 @@ namespace NavajoWars
             {
                 ui.hideBackNext();
                 ui.displayText($"\nPreempt for {gs.CurrentCard.Points[0]} AP?");
-                ButtonInfo yes = new("Yes Preempt"); //, testYes);
+                ButtonInfo yes = new("Yes Preempt", yesPreempt); 
                 choices.Add(yes);
-                ButtonInfo no = new("Do Not Preempt"); //, testNo);
+                ButtonInfo no = new("Do Not Preempt", noEnemyOps);
                 choices.Add(no);
-                ui.MakeChoiceButtonsAsync(choices);
-                ButtonInfo result = await IReceive.GetChoiceAsync();
+                ui.MakeChoiceButtons(choices);
+                //ui.MakeChoiceButtonsAsync(choices);
+                //ButtonInfo result = await IReceive.GetChoiceAsync();
                 // after button clicked, activate back to come here if stack is empty
                 // but set back to use stack for initial Undo (because may come back here with steps in stack)
-                ui.OnBackClick += ConfirmScreen;
-                ui.showBackNext();
-                if (result.name == yes.name)
-                {
-                    gs.AP -= gs.CurrentCard.Points[0];
-                    ui.displayText($"Subtracted {gs.CurrentCard.Points[0]} AP\n");
-                    gs.isPreempt = true; // signals that points were subtracted
-                    gs.stepStack.Push(initialUndo);
-                    playerOperation.Begin();
-                }
-                if (result.name == no.name)
-                {
-                    gs.isPreempt = false;
-                    ui.displayText("Calling Enemy Ops");
-                    gs.stepStack.Push(initialUndo);
-                    EnemyOperation();
-                }
-                if (result.name == redo.name)
-                {
-                    gs.isPreempt = false;
-                    gm.PrevScene();
-                }
             }
             else
             {
@@ -122,7 +98,7 @@ namespace NavajoWars
                 } 
                 ui.MakeChoiceButtonsAsync(choices);
                 ButtonInfo result = await IReceive.GetChoiceAsync();
-
+                // use async where each choice is very short
                 if (result.name == redo.name)
                 {
                     // no back function, just reenter card name
@@ -135,94 +111,43 @@ namespace NavajoWars
                 }
                 if (result.name == player.name)
                 {
-                    gs.stepStack.Push(initialUndo);
+                    gm.stepStack.Push(initialUndo);
                     playerOperation.Begin();
                 }
                 if (result.name == enemy.name)
                 {
-                    gs.stepStack.Push(initialUndo);
+                    gm.stepStack.Push(initialUndo);
                     EnemyOperation();
                 }
             }
         }
 
-        // all further functions need to be game steps
-
-        /*async void mQuestionPreempt()
+        void yesPreempt()
         {
-            // just in case here by mistake when scene is done or if enemy ops done 
-            if (gs.isEnemyOpsDone && gs.isPlayerOpsDone) SceneComplete();
-            if (gs.isEnemyOpsDone) PlayerOperation();
-            // otherwise:
-            // set gotoUndo to null, so back button can work
-            gotoUndo.caller = null;
-            gotoUndo.target = null;
-            // set back button to here; previous button returns to card draw
-            ui.OnOpsBackClick += mQuestionPreempt;
-            // just in case here by mistake when scene is done or if enemy ops done 
-            if (gs.isEnemyOpsDone && gs.isPlayerOpsDone) SceneComplete();
-            else if (gs.isEnemyOpsDone) PlayerOperation();
-            else if (gs.isPlayerOpsDone) EnemyOperation();
-            else
-            {
-                // if coming back on undo and points were subtracted, add back
-                if (gs.isPreempt) 
-                {
-                    ui.displayText($"Adding {gs.CurrentCard.Points[0]} AP previously subtracted.\n");
-                    gs.AP += gs.CurrentCard.Points[0];
-                    gs.isPreempt = false;
-                } 
-                if (gs.AP >= gs.CurrentCard.Points[0])
-                {
-                    // previous button only if waiting for preempt answer (otherwise back to here)
-                    ui.hideBackNext();
-                    ui.addHeadline($"\nPreempt for {gs.CurrentCard.Points[0]} AP?");
-                    bParams yes = new("Yes Preempt");
-                    bParams no = new("Do Not Preempt");
-                    (int index, string text) result = await IReceive.GetChoiceAsync(new List<bParams> { yes, no });
-                    // after button clicked, activate back to come here
-                    ui.showBackNext();
-                    if (result.text == yes.name)
-                    {
-                        gs.isPreempt = true; // signals that points were subtracted
-                        gs.AP -= gs.CurrentCard.Points[0];
-                        ui.displayText($"Subtracted {gs.CurrentCard.Points[0]} AP\n");
-                        PlayerOperation();
-                    }
-                    if (result.text == no.name)
-                    {
-                        gs.isPreempt = false;
-                        ui.displayText("Calling Enemy Ops");
-                        EnemyOperation();
-                    }
-                }
-                else
-                {
-                    ui.displayText("Insufficient AP to Preempt; starting Enemy Operations.");
-                    EnemyOperation();
-                }
-            }
-        }*/
-
-        /*async void PlayerOperation() // GameStep instead
-        {
-            // back button is assigned before calling this method
+            ui.OnBackClick += ConfirmScreen;
             ui.showBackNext();
-            ui.displayHeadline("Select a Player Operation");
-            ui.displayText("");
-            // add gamestep objects to buttons to call directly 
-            bParams planning = new("Planning");
-            bParams actions = new("Take Actions", chooseFamily);
-            bParams passage = new("Passage of Time");
-            List<bParams> choices = new() { planning, actions, passage };
-            ui.DisplayChoiceButtonsEvent(choices);
-            GameStep result = await IReceive.GetChoiceAsyncObject(choices);
-            // after button clicked, change back to come here
-            // but will be superseded if there is any step in the stack 
-            ui.unsubBack();
-            ui.OnOpsBackClick += PlayerOperation;
-            result.Begin();            
-        }*/
+
+            gs.AP -= gs.CurrentCard.Points[0];
+            ui.displayText($"Subtracted {gs.CurrentCard.Points[0]} AP\n");
+            gs.isPreempt = true; // signals that points were subtracted
+            gm.stepStack.Push(initialUndo);
+            playerOperation.Begin();
+        }
+
+        void noEnemyOps()
+        {
+            // no backclick added because handled by back to initialUndo
+            gs.isPreempt = false;
+            ui.displayText("Calling Enemy Ops");
+            gm.stepStack.Push(initialUndo);
+            EnemyOperation();
+        }
+
+        void backtoCardDraw()
+        {
+            gs.isPreempt = false;
+            gm.PrevScene();
+        }
 
         void EnemyOperation()
         {
@@ -256,7 +181,7 @@ namespace NavajoWars
         {
             ui.unsubNext();
             ui.unsubBack();
-            gs.stepStack.Clear();
+            gm.stepStack.Clear();
             gm.LoadNewScene("CardDraw");
         }
 

@@ -30,7 +30,7 @@ namespace NavajoWars
         protected override void actionComplete()
         {
             base.actionComplete();
-            ChooseAnotherAction chooseAnotherAction = GetComponent<ChooseAnotherAction>();
+            ChooseAnotherAction chooseAnotherAction = GetComponentInChildren<ChooseAnotherAction>();
             chooseAnotherAction.Begin();
         }
 

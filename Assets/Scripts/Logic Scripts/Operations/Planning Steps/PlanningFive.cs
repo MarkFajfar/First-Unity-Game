@@ -52,6 +52,7 @@ namespace NavajoWars
                     if (canDip) choices.Add(choiceDip); 
                     ui.MakeChoiceButtonsAsync(choices);
                     ButtonInfo result = await IReceive.GetChoiceAsync();                    
+                    // note - efficient to use async when next step is very simple; also, this is a loop
                     if (result.name == choiceWar.name)
                     { gs.AP--; gs.MP--; }
                     if (result.name == choiceDip.name)
@@ -72,8 +73,7 @@ namespace NavajoWars
         protected override void actionComplete()
         {
             base.actionComplete();
-            GameStep planningSix = GetComponent<PlanningSix>();
-            planningSix.Begin();
+            GetComponentInChildren<PlanningSix>().Begin();
         }
 
         public override void Undo()

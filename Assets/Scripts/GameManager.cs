@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using Unity.VisualScripting;
 
 namespace NavajoWars
 {
@@ -21,6 +22,8 @@ namespace NavajoWars
 
         string savePath;
 
+        public Stack<GameStep> stepStack;
+
         void Awake()
         {
             if (Instance)
@@ -28,7 +31,6 @@ namespace NavajoWars
             Instance = this;
             DontDestroyOnLoad(gameObject);
             gs = GetComponent<GameState>();
-            SceneManager.sceneLoaded += OnSceneLoaded;
             savePath = Application.persistentDataPath + "/";
         }
 
@@ -36,6 +38,8 @@ namespace NavajoWars
         {
             print("Start Game Manager");
             //called only when game is loaded
+            //initialize current scene name so that undo save works
+            gs.CurrentSceneName = SceneManager.GetActiveScene().name;
             checkForSavedGame(GameObject.Find("MainMenuUI").GetComponent<MainMenuUIScript>());
         }
         
@@ -85,11 +89,16 @@ namespace NavajoWars
                 string sd = File.ReadAllText(savePath + gs.CurrentSceneName + "/" + step.stepName);
                 JsonUtility.FromJsonOverwrite(sd, gs);
             }
+            else
+            {
+                print($"Call to load undo data for {step.stepName} but no undo data found.");
+            }
         }
 
         public void ExitGame()
         {
-            if (Directory.Exists(savePath + gs.CurrentSceneName)) FileUtil.DeleteFileOrDirectory(savePath + gs.CurrentSceneName);
+            // FileUtil available only in Editor mode; specify true to delete files and subdirectories
+            if (Directory.Exists(savePath + gs.CurrentSceneName)) Directory.Delete(savePath + gs.CurrentSceneName, true);
             SaveGame();
 #if UNITY_EDITOR
             EditorApplication.ExitPlaymode();
@@ -101,15 +110,16 @@ namespace NavajoWars
         // scene management
         public void LoadNewScene(string newScene)
         {
+            if (Directory.Exists(savePath + gs.CurrentSceneName)) Directory.Delete(savePath + gs.CurrentSceneName, true); 
             gs.PriorSceneName = SceneManager.GetActiveScene().name;
             gs.CurrentSceneName = newScene;
             SaveGame();
             SceneManager.LoadScene(newScene);
         }
 
-        void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
+        /* void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
         {
-            // wait to see which of this is necessary
+            // this is what the Start method does - called when scene is loaded
             //currentScene = scene; // stored in gs
             //currentGameObjectUI = GameObject.FindWithTag("UI"); 
             //currentUIScript = currentGameObjectUI.GetComponent<IsUIScript>();
@@ -117,7 +127,7 @@ namespace NavajoWars
             // can also use:  
             // currentGameObjectUI.SendMessage("SayHello");
             
-            /* initialization is in each UI script's Start()
+            initialization is in each UI script's Start()
             // use switch for anything that the game manager needs to do when scene loads
             switch (scene.name)
             {
@@ -125,8 +135,9 @@ namespace NavajoWars
                     currentGameObjectUI.SendMessage("showKeyboard");
                     cardDrawUIScript = currentGameObjectUI.GetComponent<CardDrawUIScript>();
                     break;
-            }*/
-        }
+            }
+        }*/
+
         internal void PrevScene()
         {
             string newScene;

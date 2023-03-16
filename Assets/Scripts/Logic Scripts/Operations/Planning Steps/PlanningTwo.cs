@@ -13,8 +13,7 @@ namespace NavajoWars
         {
             gm.SaveUndo(this);
             ui.displayHeadline("Planning\nStep Two");
-            ui.displayText("Advance each Elder one box to the right. Elders in the right-most box stay put.");
-            ui.addText($"Collect {gs.ElderDisplay.Sum()} AP for Elders, so now there are {gs.AP + gs.ElderDisplay.Sum()} AP."); 
+            ui.displayText($"Advance each Elder one box to the right. Elders in the right-most box stay put.\nCollect {gs.ElderDisplay.Sum()} AP for Elders, so now there are {gs.AP + gs.ElderDisplay.Sum()} AP.\nPress Next to continue."); 
                 gs.AP += gs.ElderDisplay.Sum();
                 for (int i = 6; i > 0; i--)
                 {
@@ -27,8 +26,7 @@ namespace NavajoWars
         protected override void actionComplete()
         {
             base.actionComplete();
-            GameStep planningThree = GetComponent<PlanningThree>();
-            planningThree.Begin();
+            GetComponentInChildren<PlanningThree>().Begin();
         }
 
         public override void Undo()

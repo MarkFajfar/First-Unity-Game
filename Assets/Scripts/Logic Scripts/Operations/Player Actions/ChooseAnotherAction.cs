@@ -13,7 +13,7 @@ namespace NavajoWars
 
         public override void Begin()
         {
-            if (gs.stepStack.Count > 0 && (gs.stepStack.Peek().stepName == "Trade" || gs.stepStack.Peek().stepName == "TribalCouncil"))
+            if (gm.stepStack.Count > 0 && (gm.stepStack.Peek().stepName == "Trade" || gm.stepStack.Peek().stepName == "TribalCouncil"))
             {
                 // these have to be last action so go to end
                 endFamily();
@@ -32,9 +32,9 @@ namespace NavajoWars
 
         void sameFamily() 
         {
-            ChooseAction chooseAction = GetComponent<ChooseAction>();
+            ChooseAction chooseAction = GetComponentInChildren<ChooseAction>();
             // push to stepStack immediately before calling next action
-            gs.stepStack.Push(this);
+            gm.stepStack.Push(this);
             chooseAction.Begin();
         }
 
@@ -45,9 +45,9 @@ namespace NavajoWars
             selectedFamily.isSelectedOps = false;
             gs.completedFamilies++;
             gs.completedActions = 0;
-            ChooseFamily chooseFamily = GetComponent<ChooseFamily>();
+            ChooseFamily chooseFamily = GetComponentInChildren<ChooseFamily>();
             // push to stepStack immediately before calling next action
-            gs.stepStack.Push(this);
+            gm.stepStack.Push(this);
             chooseFamily.Begin();
         }
 

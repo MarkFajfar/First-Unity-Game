@@ -27,7 +27,7 @@ namespace NavajoWars
         public override void Begin()
         {
             // reset completed families only if coming from choose player operation 
-            if (gs.stepStack.Count > 0 && gs.stepStack.Peek().stepName == "PlayerOperation") 
+            if (gm.stepStack.Count > 0 && gm.stepStack.Peek().stepName == "PlayerOperation") 
             {
                 gs.completedFamilies = 0;
                 gs.completedActions = 0;
@@ -37,6 +37,9 @@ namespace NavajoWars
                     family.isCompletedOps = false;
                 }
                 clearCompleted?.Invoke();
+                // each GameStep subscribes to clearCompleted, so this Action 
+                // on each of them sets isCompleted to false
+                // same as iterating through GameSteps
             }
             // saveState immediately before calling action
             gm.SaveUndo(this);
@@ -100,10 +103,10 @@ namespace NavajoWars
                 ButtonInfo result = await IReceive.GetChoiceAsync();
 
                 listFamEligible[result.tabIndex].isSelectedOps = true;
-                
-                chooseAction = GetComponent<ChooseAction>();
+                ui.OnNextClick -= playerOpsDone;
+                chooseAction = GetComponentInChildren<ChooseAction>();
                 // push to stepStack immediately before calling next action
-                gs.stepStack.Push(this);
+                gm.stepStack.Push(this);
                 chooseAction.Begin();
             }
             else
@@ -118,7 +121,7 @@ namespace NavajoWars
             ui.OnNextClick -= playerOpsDone;
             // is it necessary to cancel task?
             // push to stepStack immediately before calling next action
-            gs.stepStack.Push(this);
+            gm.stepStack.Push(this);
             logic.instructFromStep(this, "PlayerOpsDone");
         }
 

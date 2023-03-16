@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using UnityEngine;
 
 namespace NavajoWars
@@ -16,10 +15,7 @@ namespace NavajoWars
         {
             gm.SaveUndo(this);
             ui.displayHeadline("Planning\nStep Three");
-            if (gs.ElderDisplay.Sum() > 0)
-            {
-                elderAction();
-            }
+            if (gs.ElderDisplay.Sum() > 0) elderAction();
             else
             {
                 ui.displayText("No Elder Actions available. Press Next to continue.");
@@ -41,8 +37,7 @@ namespace NavajoWars
                     int j = 0;
                     while (j < gs.ElderDisplay[i])
                     {
-                        ui.addHeadline($"\n{gs.ElderDisplay[i] - j} Elder Action(s) in Slot {i}. Roll Die.");
-                        ui.addText($"For this roll you need a {gs.ElderTarget[i]} or less.");
+                        ui.addText($"{gs.ElderDisplay[i] - j} Elder Action(s) in Slot {i}. Roll Die.\nFor this roll you need a {gs.ElderTarget[i]} or less.");
                         ButtonInfo yes = new("Roll Succeeded");
                         ButtonInfo no = new("Roll Failed");
                         List<ButtonInfo> choices = new() { yes, no };
@@ -52,7 +47,7 @@ namespace NavajoWars
                         // if no, will increment j and go to next loop
                         if (result.name == yes.name)
                         {
-                            ui.displayText($"Choose Action");
+                            ui.displayText("Choose Action");
                             ButtonInfo addAP = new("Add 1 AP");
                             ButtonInfo changeFerocity = new("Change Family Ferocity");
                             ButtonInfo addMP = new("Add 1 MP for 1 CP");
@@ -151,8 +146,7 @@ namespace NavajoWars
         protected override void actionComplete()
         {
             base.actionComplete();
-            GameStep planningFour = GetComponent<PlanningFour>();
-            planningFour.Begin();
+            GetComponentInChildren<PlanningFour>().Begin();
         }
 
         public override void Undo()
