@@ -51,7 +51,7 @@ namespace NavajoWars
                     if (canWar) choices.Add(choiceWar);
                     if (canDip) choices.Add(choiceDip); 
                     ui.MakeChoiceButtonsAsync(choices);
-                    ButtonInfo result = await IReceive.GetChoiceAsync();                    
+                    ButtonInfo result = await IReceive.GetChoiceAsyncParams();                    
                     // note - efficient to use async when next step is very simple; also, this is a loop
                     if (result.name == choiceWar.name)
                     { gs.AP--; gs.MP--; }

@@ -46,6 +46,34 @@ namespace NavajoWars
         }
     }
 
+    public class ChoiceMadeParams : EventArgs
+    {
+        public ChoiceMadeParams(ButtonInfo clickedParams)
+        {
+            cParams = clickedParams;
+        }
+        public ButtonInfo cParams { get; set; }
+
+        public delegate void ChoiceMadeParamsEventHandler(object sender, ChoiceMadeParams args);
+        public static event ChoiceMadeParamsEventHandler ChoiceMadeParamsEvent;
+
+        public void OnChoiceMadeParams(ChoiceMadeParams e)
+        {
+            ChoiceMadeParamsEventHandler raiseEvent = ChoiceMadeParamsEvent;
+            if (raiseEvent != null) raiseEvent(this, e);
+        }
+
+        public static void unsubChoiceMadeParams()
+        {
+            if (ChoiceMadeParamsEvent != null)
+            {
+                //foreach (UIScript.ClickBack subscriber in OnOpsBackClick.GetInvocationList().Cast<UIScript.ClickBack>())
+                foreach (ChoiceMadeParamsEventHandler subscriber in ChoiceMadeParamsEvent.GetInvocationList().Cast<ChoiceMadeParamsEventHandler>())
+                { ChoiceMadeParamsEvent -= subscriber; }
+            }
+        }
+    }
+
     public class ChoiceMadeGameStep : EventArgs
     {
         public ChoiceMadeGameStep(GameStep gamestep)
@@ -70,33 +98,6 @@ namespace NavajoWars
                 //foreach (UIScript.ClickBack subscriber in OnOpsBackClick.GetInvocationList().Cast<UIScript.ClickBack>())
                 foreach (ChoiceMadeGameStepEventHandler subscriber in ChoiceMadeGameStepEvent.GetInvocationList().Cast<ChoiceMadeGameStepEventHandler>())
                 { ChoiceMadeGameStepEvent -= subscriber; }
-            }
-        }
-    }
-    public class ChoiceMadeParams : EventArgs
-    {
-        public ChoiceMadeParams(ButtonInfo clickedParams)
-        {
-            cParams = clickedParams;
-        }
-        public ButtonInfo cParams { get; set; }
-
-        public delegate void ChoiceMadeParamsEventHandler(object sender, ChoiceMadeParams args);
-        public static event ChoiceMadeParamsEventHandler ChoiceMadeParamsEvent;
-
-        public void OnChoiceMadeParams(ChoiceMadeParams e)
-        {
-            ChoiceMadeParamsEventHandler raiseEvent = ChoiceMadeParamsEvent;
-            if (raiseEvent != null) raiseEvent(this, e);
-        }
-
-        public static void unsubChoiceMadeParamsEvent()
-        {
-            if (ChoiceMadeParamsEvent != null)
-            {
-                //foreach (UIScript.ClickBack subscriber in OnOpsBackClick.GetInvocationList().Cast<UIScript.ClickBack>())
-                foreach (ChoiceMadeParamsEventHandler subscriber in ChoiceMadeParamsEvent.GetInvocationList().Cast<ChoiceMadeParamsEventHandler>())
-                { ChoiceMadeParamsEvent -= subscriber; }
             }
         }
     }

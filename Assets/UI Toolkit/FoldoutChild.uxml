@@ -1,0 +1,7 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+    <ui:Foldout text="Child A to:" name="FoldoutChild" value="true" class="FoldoutChild" style="display: flex; align-items: center;">
+        <ui:Button display-tooltip-when-elided="true" name="Action1" class="ButtonMan" />
+        <ui:Button display-tooltip-when-elided="true" name="Action2" class="ButtonWoman" />
+        <ui:Button text="Elder" display-tooltip-when-elided="true" name="Action3" style="font-size: 32px; width: 200px; background-color: rgba(255, 255, 255, 0.31); height: 200px; margin-left: 10px; margin-right: 10px; margin-top: 10px; margin-bottom: 10px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;" />
+    </ui:Foldout>
+</ui:UXML>

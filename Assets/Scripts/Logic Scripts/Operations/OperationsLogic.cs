@@ -12,10 +12,8 @@ namespace NavajoWars
         public PlayerOperation playerOperation;
 
         protected InitialUndo initialUndo;
-        //public GameObject PlayerActionSteps;
-        //public GameObject PlanningSteps;
         
-        public static string[] PlayerActionStepNames = {"FindWater", "Move", "Plant", "Raid", "Trade", "TribalCouncil"};
+        //public static string[] PlayerActionStepNames = {"FindWater", "Move", "Plant", "Raid", "Trade", "TribalCouncil"};
 
         void OnEnable()
         {
@@ -30,7 +28,7 @@ namespace NavajoWars
             if (gm.stepStack.Count > 0) { gm.stepStack.Pop().Begin(); } 
             else
             {
-                // coming from card draw, neither can have been done:
+                // if nothing on stack then coming from card draw, so set 'done' to false:
                 gs.isPlayerOpsDone = false;
                 gs.isEnemyOpsDone = false;
                 gs.isPreempt = false;
@@ -54,6 +52,7 @@ namespace NavajoWars
 
             if (!gs.isEnemyOpsDone && !gs.isPlayerOpsDone && gs.AP >= gs.CurrentCard.Points[0])
             {
+                // no back button because neither is done so only back to draw
                 ui.hideBackNext();
                 ui.displayText($"\nPreempt for {gs.CurrentCard.Points[0]} AP?");
                 ButtonInfo yes = new("Yes Preempt", yesPreempt); 
@@ -68,7 +67,8 @@ namespace NavajoWars
             }
             else
             {
-                ui.OnBackClick += ConfirmScreen;
+                // use = because should do only one thing
+                ui.OnBackClick = ConfirmScreen;
                 ui.showBackNext();
                 gs.isPreempt = false;
 
@@ -97,7 +97,7 @@ namespace NavajoWars
                     choices.Add(enemy);
                 } 
                 ui.MakeChoiceButtonsAsync(choices);
-                ButtonInfo result = await IReceive.GetChoiceAsync();
+                ButtonInfo result = await IReceive.GetChoiceAsyncParams();
                 // use async where each choice is very short
                 if (result.name == redo.name)
                 {
@@ -124,7 +124,7 @@ namespace NavajoWars
 
         void yesPreempt()
         {
-            ui.OnBackClick += ConfirmScreen;
+            ui.OnBackClick = ConfirmScreen;
             ui.showBackNext();
 
             gs.AP -= gs.CurrentCard.Points[0];
@@ -155,8 +155,8 @@ namespace NavajoWars
             ui.displayText(""); 
 
             // after button clicked, change back to come here
-            ui.unsubBack();
-            ui.OnBackClick += EnemyOperation;
+            // ui.unsubBack(); // not necessary using equals
+            ui.OnBackClick = EnemyOperation;
             // add call to enemy action GameStep
         }
 

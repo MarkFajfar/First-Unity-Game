@@ -221,7 +221,58 @@
 .FoldoutChild {
     -unity-font: resource('Fonts/Arvo-Regular');
     -unity-font-definition: resource('Fonts/Arvo-Regular SDF');
-    background-image: resource('Textures/Counters/Counter Child');
-    -unity-background-scale-mode: scale-to-fit;
     font-size: 76px;
+}
+
+.ButtonWoman {
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.31);
+    background-image: resource('Textures/Counters/Counter Woman');
+    height: 200px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ButtonMan {
+    font-size: 32px;
+    width: 200px;
+    background-color: rgba(255, 255, 255, 0.31);
+    background-image: resource('Textures/Counters/Counter Man');
+    height: 200px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ButtonMan:hover {
+    border-left-color: rgb(151, 64, 27);
+    border-right-color: rgb(151, 64, 27);
+    border-top-color: rgb(151, 64, 27);
+    border-bottom-color: rgb(151, 64, 27);
+    border-left-width: 12px;
+    border-right-width: 12px;
+    border-top-width: 12px;
+    border-bottom-width: 12px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.ButtonWoman:hover {
+    border-left-color: rgb(151, 64, 27);
+    border-right-color: rgb(151, 64, 27);
+    border-top-color: rgb(151, 64, 27);
+    border-bottom-color: rgb(151, 64, 27);
+    border-left-width: 12px;
+    border-right-width: 12px;
+    border-top-width: 12px;
+    border-bottom-width: 12px;
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }

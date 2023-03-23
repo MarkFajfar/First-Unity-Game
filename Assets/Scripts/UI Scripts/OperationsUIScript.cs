@@ -22,7 +22,9 @@ namespace NavajoWars
         VisualElement choicePanel;
         RadioButtonGroup locations; 
         List<Foldout> foldouts;
-        
+
+        [SerializeField] VisualTreeAsset foldoutChild;
+
         void OnEnable()
         {
             //choice = GameObject.Find("ChoiceUI").GetComponent<ChoiceUIScript>();
@@ -190,6 +192,18 @@ namespace NavajoWars
             ClearChoicePanel();
 
             choicePanel.style.display = DisplayStyle.Flex;
+            // https://gamedev.stackexchange.com/questions/199609/how-to-create-instances-of-a-unity-ui-toolkit-template-from-code
+            // [SerializeField] VisualTreeAsset to be assigned in inspector
+            // instantiate a copy of that VisualTreeAsset as a VisualElement
+            // query to find the Foldout in the VisualElement
+            // make any changes to the Foldout
+            // add the Visual Element to the choicePanel
+            VisualElement foldoutToAdd = foldoutChild.Instantiate();
+            //Foldout testfoldout = foldoutToAdd as Foldout; //does not work
+            Foldout embedded = foldoutToAdd.Q<Foldout>();
+            embedded.text = "Test Name";
+            foldoutToAdd.visible = true;
+            choicePanel.Add(foldoutToAdd);
 
             foreach (KeyValuePair<Person, GameState.Family> foldout in foldouts)
             // for (int i = 0; i < (childrenInPassage.Count() + childrenInFamilies.Count()); i++)

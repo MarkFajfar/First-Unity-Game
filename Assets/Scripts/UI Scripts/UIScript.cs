@@ -60,7 +60,7 @@ namespace NavajoWars
                 ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
 
                 if (clickedParams.waiting)
-                // if waiting, send back choice and stop
+                // if waiting, send back choice (usually to a loop)
                 {
                     ChoiceMadeParams choice = new ChoiceMadeParams((ButtonInfo)clickedButton.userData);
                     choice.OnChoiceMadeParams(choice);

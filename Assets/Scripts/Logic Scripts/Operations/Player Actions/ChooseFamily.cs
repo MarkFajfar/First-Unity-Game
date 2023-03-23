@@ -100,7 +100,7 @@ namespace NavajoWars
                 calltCB(bFamEligible);*/
                 // use async because logic to apply to result
                 ui.MakeChoiceButtonsAsync(bFamEligible);
-                ButtonInfo result = await IReceive.GetChoiceAsync();
+                ButtonInfo result = await IReceive.GetChoiceAsyncParams();
 
                 listFamEligible[result.tabIndex].isSelectedOps = true;
                 ui.OnNextClick -= playerOpsDone;

@@ -37,9 +37,9 @@ namespace NavajoWars
         }
 
 
-        async static Task<ButtonInfo> GetChoiceAsync()
+        async static Task<ButtonInfo> GetChoiceAsyncParams()
         {
-            ChoiceMadeParams.unsubChoiceMadeParamsEvent();
+            ChoiceMadeParams.unsubChoiceMadeParams();
             
             ChoiceMadeParams.ChoiceMadeParamsEventHandler choiceEventHandler = null;
             var result = new TaskCompletionSource<ButtonInfo>();
@@ -53,7 +53,7 @@ namespace NavajoWars
             return result.Task.Result;
         }
 
-        async static Task<GameStep> GetChoiceAsyncObject(List<ButtonInfo> choices)
+        async static Task<GameStep> GetChoiceAsyncGameStep()
         {
             ChoiceMadeGameStep.unsubChoiceMadeGameStep();
 

@@ -42,7 +42,7 @@ namespace NavajoWars
                         ButtonInfo no = new("Roll Failed");
                         List<ButtonInfo> choices = new() { yes, no };
                         ui.MakeChoiceButtonsAsync(choices);
-                        ButtonInfo result = await IReceive.GetChoiceAsync();
+                        ButtonInfo result = await IReceive.GetChoiceAsyncParams();
                         ui.displayText(""); 
                         // if no, will increment j and go to next loop
                         if (result.name == yes.name)
@@ -56,7 +56,7 @@ namespace NavajoWars
                             if (gs.CP > gs.MP) elderChoices.Add(addMP);
                             if (gs.MP > gs.CP) elderChoices.Add(addCP);
                             ui.MakeChoiceButtonsAsync(elderChoices);
-                            ButtonInfo elderResult = await IReceive.GetChoiceAsync();
+                            ButtonInfo elderResult = await IReceive.GetChoiceAsyncParams();
                             if (elderResult.name == addAP.name) 
                             {
                                 gs.AP++; 
@@ -103,7 +103,7 @@ namespace NavajoWars
                 bFamilies.Add(bFamilyName);
             }
             ui.MakeChoiceButtonsAsync(bFamilies);
-            ButtonInfo result = await IReceive.GetChoiceAsync();
+            ButtonInfo result = await IReceive.GetChoiceAsyncParams();
             // convert back to family name and add to end of list
             selectedF.Add(listFerocityFamilies[result.tabIndex].Name);
             selectedFamily = gs.Families.First(f => f.Name == result.text);
@@ -128,7 +128,7 @@ namespace NavajoWars
                 ui.addText($"Increase or Decrease Ferocity? " + MPremind + CPremind);
             }
             ui.MakeChoiceButtonsAsync(UpDown);
-            ButtonInfo choiceUpDown = await IReceive.GetChoiceAsync();
+            ButtonInfo choiceUpDown = await IReceive.GetChoiceAsyncParams();
             if (choiceUpDown.name == increase.name)
             {
                 selectedFamily.Ferocity++;

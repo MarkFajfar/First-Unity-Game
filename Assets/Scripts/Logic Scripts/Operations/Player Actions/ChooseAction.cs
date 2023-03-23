@@ -82,7 +82,7 @@ namespace NavajoWars
             if (gs.HasDrought.Contains(selectedFamily.IsWhere)) validActions.Add(bFindWater);
             if (gs.HasFort.Contains(selectedFamily.IsWhere) && gs.CP > 0 && gs.TradeGoodsMax > gs.TradeGoodsHeld) validActions.Add(bTrade);
             ui.MakeChoiceButtonsAsync(validActions);
-            ButtonInfo result = await IReceive.GetChoiceAsync();
+            ButtonInfo result = await IReceive.GetChoiceAsyncParams();
             // TODO: could return ButtonInfo and call that nextAction, which would unsubNext and push to stack before calling the GameStep in the ButtonInfo
             // would need to create ButtonInfo with both GameStep and name of nextAction
             ui.unsubNext();

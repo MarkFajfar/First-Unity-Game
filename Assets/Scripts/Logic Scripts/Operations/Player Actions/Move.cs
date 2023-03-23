@@ -54,23 +54,17 @@ namespace NavajoWars
             ButtonInfo no = new("No Same Territory", noSame);
             ButtonInfo yesN = new("Yes New Territory", yesNew);
             ButtonInfo yesC = new("Yes to Canyon de Chelly", yesChelly);
-            //ButtonInfo nameWithReturn = new("Do Something Else", passedBack);
             List<ButtonInfo> choices = new() { no, yesN };
             if (isFirstAction) choices.Add(yesC);
             ui.MakeChoiceButtons(choices);
         }
 
-        /*void passedBack(ButtonInfo clickedParams)
-        {
-            print(clickedParams.text);
-        }
-*/
         void noSame() 
         {
             ui.displayText("Move completed. Press Next to continue. ");
             bool fortInTerritory = gs.HasFort.Contains(selectedFamily.IsWhere);
             if (selectedFamily.Ferocity > 1 && fortInTerritory) ui.addText("Reminder: a Family with Ferocity > 1 that ends it activation in the same Area as a Fort must disband.\nPress Next to continue.");
-            ui.OnNextClick += actionComplete;
+            ui.OnNextClick = actionComplete;
         }
 
         void yesNew() 
@@ -78,14 +72,14 @@ namespace NavajoWars
             ui.displayText($"Select {selectedFamily.Name}'s new Territory and click Next to continue.");
             ui.DisplayLocations();
             newTerritorySelected = true;
-            ui.OnNextClick += actionComplete;
+            ui.OnNextClick = actionComplete;
         }
 
         void yesChelly()
         {
             ui.displayText("Move to Canyon de Chelly completed. Press Next to continue.");
             selectedFamily.IsWhere = Territory.Canyon;
-            ui.OnNextClick += actionComplete;
+            ui.OnNextClick = actionComplete;
         }
 
         protected override void actionComplete()
@@ -97,8 +91,7 @@ namespace NavajoWars
                 ui.CloseLocations();
             }
             base.actionComplete();
-            ChooseAnotherAction chooseAnotherAction = GetComponentInChildren<ChooseAnotherAction>();
-            chooseAnotherAction.Begin();
+            GetComponentInChildren<ChooseAnotherAction>().Begin();
         }
 
         public override void Undo()

@@ -117,27 +117,6 @@ namespace NavajoWars
             SceneManager.LoadScene(newScene);
         }
 
-        /* void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
-        {
-            // this is what the Start method does - called when scene is loaded
-            //currentScene = scene; // stored in gs
-            //currentGameObjectUI = GameObject.FindWithTag("UI"); 
-            //currentUIScript = currentGameObjectUI.GetComponent<IsUIScript>();
-            // use IsUIScript or IsMethodReceiver to call any method in interface
-            // can also use:  
-            // currentGameObjectUI.SendMessage("SayHello");
-            
-            initialization is in each UI script's Start()
-            // use switch for anything that the game manager needs to do when scene loads
-            switch (scene.name)
-            {
-                case "CardDraw":
-                    currentGameObjectUI.SendMessage("showKeyboard");
-                    cardDrawUIScript = currentGameObjectUI.GetComponent<CardDrawUIScript>();
-                    break;
-            }
-        }*/
-
         internal void PrevScene()
         {
             string newScene;

@@ -15,12 +15,7 @@
             <ui:VisualElement name="BodyBottom" style="flex-grow: 1; overflow: hidden; flex-basis: auto; width: 100%; align-items: center;">
                 <ui:ScrollView name="ScrollView" style="flex-grow: 0; width: 100%; align-items: center; height: auto; display: flex; overflow: hidden; justify-content: center;">
                     <ui:VisualElement name="ChoicePanel" picking-mode="Ignore" style="align-items: center; width: 100%;">
-                        <ui:RadioButtonGroup value="-1" name="Locations" class="RadioButtons" style="height: 728px; top: auto; left: auto; position: relative; display: none;" />
-                        <ui:Foldout text="Child A" name="Person1" value="true" style="position: relative; -unity-font: resource(&apos;Fonts/Arvo-Regular&apos;); -unity-font-definition: resource(&apos;Fonts/Arvo-Regular SDF&apos;); font-size: 76px; background-image: none; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 40px; margin-right: 40px; margin-top: 40px; margin-bottom: 40px; -unity-background-scale-mode: scale-to-fit; align-items: center; justify-content: flex-start; display: flex; width: 50%;">
-                            <ui:Button text="Man" display-tooltip-when-elided="true" name="Action1" style="font-size: 32px; width: 100%; background-color: rgba(255, 255, 255, 0.31);" />
-                            <ui:Button text="Woman" display-tooltip-when-elided="true" name="Action2" style="font-size: 32px; width: 100%; background-color: rgba(255, 255, 255, 0.31);" />
-                            <ui:Button text="Elder" display-tooltip-when-elided="true" name="Action3" style="font-size: 32px; width: 100%; background-color: rgba(255, 255, 255, 0.31);" />
-                        </ui:Foldout>
+                        <ui:RadioButtonGroup value="-1" name="Locations" class="RadioButtons" style="height: 728px; top: auto; left: auto; position: relative; display: none; visibility: visible; overflow: visible;" />
                     </ui:VisualElement>
                 </ui:ScrollView>
             </ui:VisualElement>
