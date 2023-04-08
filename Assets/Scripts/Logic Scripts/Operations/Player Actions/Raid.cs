@@ -33,7 +33,7 @@ namespace NavajoWars
             ButtonInfo fort = new("Fort", raidFort);
             List<ButtonInfo> choices = new() { sf, outpost };
             if (fortInTerritory) choices.Add(fort);
-            ui.MakeChoiceButtons(choices);
+            ui.ShowChoiceButtons(choices);
         }
 
         void raidSF()

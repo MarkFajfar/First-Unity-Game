@@ -32,7 +32,7 @@ namespace NavajoWars
                     ButtonInfo choiceSpend = new(i.ToString(), i, spend);
                     choices.Add(choiceSpend);
                 }
-                ui.MakeChoiceButtons(choices);
+                ui.ShowChoiceButtons(choices);
                 /*ui.MakeChoiceButtonsAsync(choices);
                 ButtonInfo result = await IReceive.GetChoiceAsync();
                 // TO DO: would this work with button return?

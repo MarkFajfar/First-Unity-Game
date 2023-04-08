@@ -27,7 +27,7 @@ namespace NavajoWars
             ButtonInfo no = new("Do Not Trade", noTrade);
             List<ButtonInfo> choices = new() { yes, no };
             // use async because logic to apply after choice made
-            ui.MakeChoiceButtons(choices);        
+            ui.ShowChoiceButtons(choices);        
             //HAS TO BE LAST ACTION
         }
 

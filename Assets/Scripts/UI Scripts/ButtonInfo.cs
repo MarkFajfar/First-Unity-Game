@@ -9,34 +9,38 @@ namespace NavajoWars
     {
         public string name;
         public string text;
-        public int tabIndex;
-        public string style;
+        public int tabIndex = 0;
+        public string style = "ButtonMenu";
+        public object buttonData = null;
         public GameStep gameStep = null;
         public Action call = null;
         public Action<ButtonInfo> passBack = null;
         public bool waiting = false;
+        public bool clearPanel = true;
+        public bool closeFoldout = true;
+        
+        // experimental:
+        public string parentName = "";
+        // foldoutName never added in constructor, but only when button put into foldout
+        public object parentData = null;
+
 
         public ButtonInfo()
         {
             name = "NewButton";
             text = "New Button";
-            style = "ButtonMenu";
-            tabIndex = 0;
         }
 
         public ButtonInfo(string text)
         {
             name = text.Replace(" ", "");
             this.text = text;
-            style = "ButtonMenu";
-            tabIndex = 0;
         }
 
         public ButtonInfo(string text, int tabIndex)
         {
             name = text.Replace(" ", "");
             this.text = text;
-            style = "ButtonMenu";
             this.tabIndex = tabIndex;
         }
 
@@ -44,8 +48,6 @@ namespace NavajoWars
         {
             name = text.Replace(" ", "");
             this.text = text;
-            style = "ButtonMenu";
-            tabIndex = 0;
             this.gameStep = gameStep;
         }
 
@@ -53,8 +55,6 @@ namespace NavajoWars
         {
             name = text.Replace(" ", "");
             this.text = text;
-            style = "ButtonMenu";
-            tabIndex = 0;
             this.call = call;
         }
 
@@ -62,26 +62,38 @@ namespace NavajoWars
         {
             name = text.Replace(" ", "");
             this.text = text;
-            style = "ButtonMenu";
             this.tabIndex = tabIndex;
-            this.passBack = passBackInfo;
+            passBack = passBackInfo;
         }
 
         public ButtonInfo(string text, Action<ButtonInfo> passBackInfo)
         {
             name = text.Replace(" ", "");
             this.text = text;
-            style = "ButtonMenu";
-            tabIndex = 0;
-            this.passBack = passBackInfo;
+            passBack = passBackInfo;
+        }
+
+        public ButtonInfo(string name, string style, Action<ButtonInfo> passBackInfo)
+        {
+            this.name = name.Replace(" ", "");
+            text = "";
+            this.style = style;
+            passBack = passBackInfo;
+        }
+
+        public ButtonInfo(string name, string style, int tabIndex, Action<ButtonInfo> passBackInfo)
+        {
+            this.name = name.Replace(" ", "");
+            text = "";
+            this.style = style;
+            this.tabIndex = tabIndex;
+            passBack = passBackInfo;
         }
 
         public ButtonInfo(string text, GameStep gameStep, Action<ButtonInfo> passBackInfo)
         {
             name = text.Replace(" ", "");
             this.text = text;
-            style = "ButtonMenu";
-            tabIndex = 0;
             this.gameStep = gameStep;
             passBack = passBackInfo;
         }
@@ -90,8 +102,6 @@ namespace NavajoWars
         {
             name = text.Replace(" ", "");
             this.text = text;
-            style = "ButtonMenu";
-            tabIndex = 0;
             this.call = call;
             passBack = passBackInfo;
         }
@@ -100,7 +110,6 @@ namespace NavajoWars
         {
             this.name = name;
             this.text = text;
-            style = "ButtonMenu";
             this.tabIndex = tabIndex;
         }
 
@@ -108,7 +117,6 @@ namespace NavajoWars
         {
             this.name = name;
             this.text = text;
-            style = "ButtonMenu";
             this.tabIndex = tabIndex;
             this.gameStep = gameStep;
             this.call = call;
@@ -118,7 +126,6 @@ namespace NavajoWars
         {
             this.name = name;
             this.text = text;
-            style = "ButtonMenu";
             this.tabIndex = tabIndex;
             this.gameStep = gameStep;
             this.call = call;

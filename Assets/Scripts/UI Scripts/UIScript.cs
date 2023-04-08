@@ -33,31 +33,39 @@ namespace NavajoWars
             }
         }
 
-        public abstract void MakeChoiceButtons(List<ButtonInfo> choices);
+        public abstract void ShowChoiceButtons(List<ButtonInfo> choices);
 
         public void MakeChoiceButtonsAsync(List<ButtonInfo> choices)
         {
             foreach (var choice in choices) { choice.waiting = true; }
-            MakeChoiceButtons(choices);
+            ShowChoiceButtons(choices);
         }
 
         public abstract void ClearChoicePanel();
+
+        protected void choiceButtonClicked(ClickEvent evt) 
+        {
+            // any choice-specific step to add?
+            buttonClicked(evt);
+        }
 
         protected void buttonClicked(ClickEvent evt)
         {
             var clickedButton = evt.target as Button;
 
-            ClearChoicePanel();
-
-            if (clickedButton.userData.GetType() == typeof(GameStep))
+            if (clickedButton.userData is GameStep) //.GetType() == typeof(GameStep))
             // does not work:  if (clickedButton.userData as GameStep)
             {
+                ClearChoicePanel(); // would a next step ever need to keep the panel?
                 GameStep clickedStep = (GameStep)clickedButton.userData;
                 clickedStep.Begin();
             }
-            else if (clickedButton.userData.GetType() == typeof(ButtonInfo))
+            else if (clickedButton.userData is ButtonInfo) //.GetType() == typeof(ButtonInfo))
             {
                 ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
+
+                if (clickedParams.clearPanel) ClearChoicePanel(); 
+                // set to false to leave panel (eg for foldout)
 
                 if (clickedParams.waiting)
                 // if waiting, send back choice (usually to a loop)
@@ -81,6 +89,7 @@ namespace NavajoWars
                 else if (clickedParams.gameStep != null && clickedParams.call != null)
                 {
                     Debug.Log("Cannot have both GameStep and Action call");
+                    // would then default to methodManager call ?
                 }
                 else
                 {
@@ -89,23 +98,32 @@ namespace NavajoWars
             }
             else
             {
+                // do not clear panel in this case; do that in called method?
                 foreach (var receiver in Receivers) receiver.methodManager(clickedButton.name);
             }
         }
 
-        protected void foldoutClicked(ClickEvent evt)
+        protected void foldoutButtonClicked(ClickEvent evt)
         {
             var clickedButton = evt.target as Button;
-            int choiceIndex = clickedButton.tabIndex; // choicesList.IndexOf(clickedButton.text); 
-            string choiceText = "clicked" + clickedButton.parent + clickedButton.text;
 
-            print("Parent: " + clickedButton.parent);
-            print("Data: " + clickedButton.userData);
-            print("Index: " + clickedButton.tabIndex);
+            if (clickedButton.userData.GetType() == typeof(ButtonInfo))
+            {
+                ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
 
-            ClearChoicePanel();
+                if (clickedParams.closeFoldout) // can set to false in button
+                { 
+                    clickedButton.parent.style.display = DisplayStyle.None;
+                    // if necessary: clickedButton.parent.visible = false;
+                    // may need a reference to foldout if not direct parent
+                    // foldout is still present, just not displayed
+                    // setting foldout "value=false" would close up foldout but leave it displayed
+                }
+            }
 
-            // add call to foldout action -- how to make it generic?
+            print("Foldout Parent: " + clickedButton.parent);
+
+            buttonClicked(evt);
         }
 
         public Action OnNextClick;
@@ -157,6 +175,6 @@ namespace NavajoWars
         
         public abstract void showButton(ButtonInfo bparams);
 
-        public abstract void MakeFamilyFoldouts(Dictionary<Person, GameState.Family> foldouts);
+        public abstract void ShowChoiceFoldouts(List<FoldoutInfo> foldouts);
     }
 }

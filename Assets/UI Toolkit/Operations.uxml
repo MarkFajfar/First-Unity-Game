@@ -20,6 +20,7 @@
                 </ui:ScrollView>
             </ui:VisualElement>
         </ui:VisualElement>
+        <NavajoWars.ChoiceButton focusable="true" class="ButtonMenu" />
         <ui:VisualElement name="BottomBar" style="position: relative; width: 100%; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-grow: 0; justify-content: space-between; flex-shrink: 0; flex-direction: row; align-items: flex-end; margin-left: 0; padding-left: 2%; padding-right: 2%; flex-basis: 10%;">
             <ui:Button text="Back" display-tooltip-when-elided="false" name="Back" class="BackNext" style="visibility: visible; top: auto; bottom: auto; height: 150px; padding-top: 10px; margin-bottom: 24px; position: relative; left: auto;" />
             <ui:Button text="Next" display-tooltip-when-elided="false" name="Next" class="BackNext" style="left: auto; right: auto; visibility: visible; top: auto; height: 150px; margin-bottom: 24px; position: relative; bottom: auto;" />

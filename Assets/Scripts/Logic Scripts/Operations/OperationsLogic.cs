@@ -59,7 +59,7 @@ namespace NavajoWars
                 choices.Add(yes);
                 ButtonInfo no = new("Do Not Preempt", noEnemyOps);
                 choices.Add(no);
-                ui.MakeChoiceButtons(choices);
+                ui.ShowChoiceButtons(choices);
                 //ui.MakeChoiceButtonsAsync(choices);
                 //ButtonInfo result = await IReceive.GetChoiceAsync();
                 // after button clicked, activate back to come here if stack is empty

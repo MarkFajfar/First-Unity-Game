@@ -1,6 +1,5 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,8 +10,8 @@ namespace NavajoWars
         public GameObject LogicObject;
         public OperationsLogic logic; 
         
-        public Label headline;
-        public Label message;
+        Label headline;
+        Label message;
         Button prev;
         Button quit;
         Button back;
@@ -82,7 +81,7 @@ namespace NavajoWars
             back.visible = false;
             next.visible = false;
             quit.visible = true;
-            CloseLocations();
+            // ClearChoicePanel(); // this is called later, messing up load?
         }
 
         public override void Initialize()
@@ -94,7 +93,7 @@ namespace NavajoWars
             headline.visible = true;
             message.visible = true;
             choicePanel.visible = false;
-            CloseLocations();
+            ClearChoicePanel();
         }
 
         public override void displayText(string text)
@@ -139,22 +138,32 @@ namespace NavajoWars
         public override void hidePrev()
         { prev.visible = false; }
 
-        public override void MakeChoiceButtons(List<ButtonInfo> choices)
+        Button MakeButtonFromInfo(ButtonInfo info)
+        {
+            Button button = new()
+            {   
+                name = info.name,
+                text = info.text, 
+                tabIndex = info.tabIndex,
+                userData = info
+                // note info can be altered prior to creation of button, eg to add foldout Name
+            };
+            button.AddToClassList(info.style);
+            //foreach (string style in choiceButtonStyles) choiceButton.AddToClassList(style);
+            return button;
+        }
+
+        public override void ShowChoiceButtons(List<ButtonInfo> choices)
         {
             ClearChoicePanel();
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
             foreach (ButtonInfo choice in choices)
             {
-                var choiceButton = new Button();
-                choiceButton.RegisterCallback<ClickEvent>(buttonClicked);
-                choiceButton.AddToClassList(choice.style);
-                //foreach (string style in choiceButtonStyles) choiceButton.AddToClassList(style);
-                choiceButton.name = choice.name;
-                choiceButton.text = choice.text;
-                choiceButton.tabIndex = choice.tabIndex;
-                choiceButton.userData = choice;
+                Button choiceButton = MakeButtonFromInfo(choice);
+                choiceButton.RegisterCallback<ClickEvent>(choiceButtonClicked);
                 choicePanel.Add(choiceButton);
+                choiceButton.visible = true;
                 choiceButton.style.display = DisplayStyle.Flex;
             }
         }
@@ -172,31 +181,58 @@ namespace NavajoWars
         {
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
-            Button choiceButton = new();
-            choiceButton.RegisterCallback<ClickEvent>(buttonClicked);
-            choiceButton.AddToClassList(bparams.style);
-            //foreach (string style in choiceButtonStyles) choiceButton.AddToClassList(style);
-            choiceButton.name = bparams.name;
-            choiceButton.text = bparams.text;
-            choiceButton.tabIndex = bparams.tabIndex;
-            choiceButton.userData = bparams;
-            choiceButton.style.display = DisplayStyle.Flex;
-            choicePanel.Add(choiceButton);
+            Button button = MakeButtonFromInfo(bparams);
+            button.RegisterCallback<ClickEvent>(buttonClicked);
+            button.style.display = DisplayStyle.Flex;
+            choicePanel.Add(button);
         }
 
-        public override void MakeFamilyFoldouts(Dictionary<Person, GameState.Family> foldouts)
-        // (List<Person> childrenInPassage, List<GameState.Family> childrenInFamilies)
+        Foldout MakeFoldoutFromInfo(FoldoutInfo info)
         {
-            // TODO: make this function generic ?? "MakeFoldouts"
+            Foldout foldout = new()
+            {
+                value = false,
+                name = info.name,
+                text = info.text,
+                tabIndex = info.tabIndex,
+                userData = info
+            };
 
+            foreach (ButtonInfo bparams in info.buttons)
+            {
+                // add foldout name and even data to bparams before making button?
+                bparams.parentName = info.name;
+                bparams.parentData = info;
+                // note allows treatment of info as object, but does not "know" that parentData in this case is FoldoutInfo
+                bparams.clearPanel = false; // do not clear panel when foldout clicked
+                Button foldoutButton = MakeButtonFromInfo(bparams);
+                foldoutButton.RegisterCallback<ClickEvent>(foldoutButtonClicked);
+                foldout.Add(foldoutButton);
+                foldoutButton.style.display = DisplayStyle.Flex;
+                foldoutButton.visible = true;
+            }
+
+            foldout.AddToClassList(info.style);
+            return foldout;
+        }
+
+        public override void ShowChoiceFoldouts(List<FoldoutInfo> foldouts)
+        {
             ClearChoicePanel();
-
             choicePanel.style.display = DisplayStyle.Flex;
-            // https://gamedev.stackexchange.com/questions/199609/how-to-create-instances-of-a-unity-ui-toolkit-template-from-code
+            choicePanel.visible = true;
+
+            foreach (FoldoutInfo info in foldouts)
+            {
+                Foldout choiceFoldout = MakeFoldoutFromInfo(info);
+                choiceFoldout.style.display = DisplayStyle.Flex;
+                choiceFoldout.visible = true;
+                choicePanel.Add(choiceFoldout);
+            }/*// https://gamedev.stackexchange.com/questions/199609/how-to-create-instances-of-a-unity-ui-toolkit-template-from-code
             // [SerializeField] VisualTreeAsset to be assigned in inspector
             // instantiate a copy of that VisualTreeAsset as a VisualElement
             // query to find the Foldout in the VisualElement
-            // make any changes to the Foldout
+            // make any changes to the Foldout (this method for when not making changes)
             // add the Visual Element to the choicePanel
             VisualElement foldoutToAdd = foldoutChild.Instantiate();
             //Foldout testfoldout = foldoutToAdd as Foldout; //does not work
@@ -205,7 +241,7 @@ namespace NavajoWars
             foldoutToAdd.visible = true;
             choicePanel.Add(foldoutToAdd);
 
-            foreach (KeyValuePair<Person, GameState.Family> foldout in foldouts)
+            foreach (FoldoutInfo foldout in foldouts)
             // for (int i = 0; i < (childrenInPassage.Count() + childrenInFamilies.Count()); i++)
             {
                 // Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
@@ -214,7 +250,7 @@ namespace NavajoWars
                 choiceFoldout.AddToClassList("FoldoutChild");
                 choiceFoldout.value = false;
                 choiceFoldout.style.display = DisplayStyle.Flex;
-                choiceFoldout.text = foldout.Key.ToString(); // child? family name?
+                choiceFoldout.text = foldout.name.ToString(); // child? family name?
 
                 // each child can be converted into a man, woman or elder
 
@@ -232,7 +268,7 @@ namespace NavajoWars
                     choiceFoldout.Add(foldoutButton);
                     foldoutButton.style.display = DisplayStyle.Flex;
                 }
-            }
+            }*/
         }
 
         public void DisplayLocations()
@@ -251,11 +287,42 @@ namespace NavajoWars
         public void CloseLocations()
         { locations.style.display = DisplayStyle.None; }
 
+        public void ShowChoiceToggles(List<ToggleInfo> toggles)
+        {
+            ClearChoicePanel();
+            choicePanel.style.display = DisplayStyle.Flex;
+            choicePanel.visible = true;
+            foreach (ToggleInfo info in toggles)
+            {
+                Toggle toggle = new()
+                {
+                    label = info.label,
+                    name = info.name,
+                    userData = info,
+                };
+                toggle.AddToClassList(info.style);
+                toggle.RegisterValueChangedCallback(toggleValueChanged);
+                choicePanel.Add(toggle);
+                toggle.visible = true;
+                toggle.style.display = DisplayStyle.Flex;
+            }
+            // move to makeToggleFromInfo method? or used only here?
+        }
+
+        void toggleValueChanged(ChangeEvent<bool> evt) 
+        {
+            var toggle = evt.target as Toggle;
+            var info = toggle.userData as ToggleInfo;
+            //Action<ToggleInfo, bool> passBack = info.passBack;
+            info.passBack?.Invoke(info, toggle.value);
+        }
+
         public override void ClearChoicePanel()
         {
             List<VisualElement> choiceElements = new();
             //List<Button> buttons = choicePanel.Query<Button>().ToList();
             choiceElements.AddRange(choicePanel.Query<Button>().ToList());
+            choiceElements.AddRange(choicePanel.Query<Toggle>().ToList());
             choiceElements.AddRange(choicePanel.Query<Foldout>().ToList());
             //choiceElements.AddRange(choicePanel.Query<RadioButtonGroup>().ToList());
             // instead of removing radio button group, use CloseLocations
@@ -263,11 +330,41 @@ namespace NavajoWars
 
             CloseLocations();
 
-            foreach (var element in choiceElements)
+            foreach (VisualElement element in choiceElements)
             {
                 element.style.display = DisplayStyle.None;
                 element.RemoveFromHierarchy();
             }
+        }
+
+
+
+        public void makeTestButton()
+        {
+            choicePanel.style.display = DisplayStyle.Flex;
+            choicePanel.visible = true;
+            ChoiceButton button = new()
+            {
+                testString = "Test",
+                passback = testResult
+            };
+            button.RegisterCallback<ClickEvent>(testButtonClicked);
+            button.AddToClassList("ButtonMenu");
+            button.style.display = DisplayStyle.Flex;
+            choicePanel.Add(button);
+        }
+
+        void testButtonClicked(ClickEvent evt)
+        {
+            var clickedButton = evt.target as ChoiceButton;
+            print(clickedButton.testString);
+            clickedButton.ChangeText("Clicked!");
+            clickedButton.passback?.Invoke();
+        }
+
+        void testResult()
+        {
+            displayText("this is the test Result");
         }
     }
 }

@@ -27,7 +27,7 @@ namespace NavajoWars
             ButtonInfo same = new("Action for Same Family", sameFamily);
             ButtonInfo end = new("Another Family or End", endFamily);
             List<ButtonInfo> choices = new() { same, end };
-            ui.MakeChoiceButtons(choices);
+            ui.ShowChoiceButtons(choices);
         }
 
         void sameFamily() 

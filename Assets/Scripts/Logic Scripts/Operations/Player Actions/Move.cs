@@ -56,7 +56,7 @@ namespace NavajoWars
             ButtonInfo yesC = new("Yes to Canyon de Chelly", yesChelly);
             List<ButtonInfo> choices = new() { no, yesN };
             if (isFirstAction) choices.Add(yesC);
-            ui.MakeChoiceButtons(choices);
+            ui.ShowChoiceButtons(choices);
         }
 
         void noSame() 
