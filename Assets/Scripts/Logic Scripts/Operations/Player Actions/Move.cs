@@ -9,7 +9,7 @@ namespace NavajoWars
     {
         public override string stepName { get => "Move"; }
 
-        GameState.Family selectedFamily;
+        Family selectedFamily;
         //Territory priorLocation;
         bool horse;
         bool fortInGame;

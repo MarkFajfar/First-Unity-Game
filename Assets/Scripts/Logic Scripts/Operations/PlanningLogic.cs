@@ -221,7 +221,7 @@ namespace NavajoWars
         }
 
         List<string> selectedF = new ();
-        GameState.Family selectedFamily;
+        Family selectedFamily;
         List<string> listFerocityNames = new ();
         public async void clickedChangeFamilyFerocity()
         {

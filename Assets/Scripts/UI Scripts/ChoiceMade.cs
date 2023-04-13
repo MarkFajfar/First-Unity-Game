@@ -59,8 +59,9 @@ namespace NavajoWars
 
         public void OnChoiceMadeParams(ChoiceMadeParams e)
         {
-            ChoiceMadeParamsEventHandler raiseEvent = ChoiceMadeParamsEvent;
-            if (raiseEvent != null) raiseEvent(this, e);
+            ChoiceMadeParamsEvent?.Invoke(this, e);
+            //ChoiceMadeParamsEventHandler raiseEvent = ChoiceMadeParamsEvent;
+            //if (raiseEvent != null) raiseEvent(this, e);
         }
 
         public static void unsubChoiceMadeParams()

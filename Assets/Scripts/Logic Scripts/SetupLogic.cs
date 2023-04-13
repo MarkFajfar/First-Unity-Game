@@ -49,27 +49,30 @@ namespace NavajoWars
             gs.PersonsInPassage = new();
             gs.ElderDisplay = new int[7] { 1, 1, 1, 0, 0, 0, 0 };
 
-            gs.FamilyA = new() { Name = "Family A" };
-            gs.FamilyB = new() { Name = "Family B" };
-            gs.FamilyC = new() { Name = "Family C" };
-            gs.FamilyD = new() { Name = "Family D" };
-            gs.FamilyE = new() { Name = "Family E" };
-            gs.FamilyF = new() { Name = "Family F" };
+            Family FamilyA = new() { Name = "Family A" };
+            Family FamilyB = new() { Name = "Family B" };
+            Family FamilyC = new() { Name = "Family C" };
+            Family FamilyD = new() { Name = "Family D" };
+            Family FamilyE = new() { Name = "Family E" };
+            Family FamilyF = new() { Name = "Family F" };
+            Family DefaultFamily = new() { Name = Info.Default };
 
             gs.Families = new();
 
-            gs.FamilyA.IsActive = scenario.IsActiveFamilyA;
-            if (gs.FamilyA.IsActive) gs.Families.Add(gs.FamilyA);
-            gs.FamilyB.IsActive = scenario.IsActiveFamilyB;
-            if (gs.FamilyB.IsActive) gs.Families.Add(gs.FamilyB);
-            gs.FamilyC.IsActive = scenario.IsActiveFamilyC;
-            if (gs.FamilyC.IsActive) gs.Families.Add(gs.FamilyC);
-            gs.FamilyD.IsActive = scenario.IsActiveFamilyD;
-            if (gs.FamilyD.IsActive) gs.Families.Add(gs.FamilyD);
-            gs.FamilyE.IsActive = scenario.IsActiveFamilyE;
-            if (gs.FamilyE.IsActive) gs.Families.Add(gs.FamilyE);
-            gs.FamilyF.IsActive = scenario.IsActiveFamilyF;
-            if (gs.FamilyF.IsActive) gs.Families.Add(gs.FamilyF);
+            FamilyA.IsActive = scenario.IsActiveFamilyA;
+            if (FamilyA.IsActive) gs.Families.Add(FamilyA);
+            FamilyB.IsActive = scenario.IsActiveFamilyB;
+            if (FamilyB.IsActive) gs.Families.Add(FamilyB);
+            FamilyC.IsActive = scenario.IsActiveFamilyC;
+            if (FamilyC.IsActive) gs.Families.Add(FamilyC);
+            FamilyD.IsActive = scenario.IsActiveFamilyD;
+            if (FamilyD.IsActive) gs.Families.Add(FamilyD);
+            FamilyE.IsActive = scenario.IsActiveFamilyE;
+            if (FamilyE.IsActive) gs.Families.Add(FamilyE);
+            FamilyF.IsActive = scenario.IsActiveFamilyF;
+            if (FamilyF.IsActive) gs.Families.Add(FamilyF);
+
+            gs.AllFamilies = new() { FamilyA, FamilyB, FamilyC, FamilyD, FamilyE, FamilyF };
 
             if (scenario.Name == "Broken" || scenario.Name == "Fearing")
                 gs.Subjugation.Red = 3;
@@ -90,7 +93,7 @@ namespace NavajoWars
 
         void assignFamilyValues()
         {
-            GameState.Family family = gs.Families[fNum];
+            Family family = gs.Families[fNum];
             //ui.displayHeadline(family.Name);
             ui.viewSetup.text = $"Select {family.Name}'s\nLocation and Ferocity";
             ui.locations.visible = true;

@@ -1,19 +1,46 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class FoldoutInfo 
+    public class FoldoutInfo : Info
     {
         public string name;
         public string text;
         public int tabIndex = 0;
         public string style;
+        
         public List<ButtonInfo> buttons = null;
-        public bool waiting = false;
-        public object foldoutData = null;
+        public Action<FoldoutInfo> passBack = null;
+
+        public Foldout Make()
+        {
+            Foldout foldout = new()
+            {
+                value = false,
+                name = name,
+                text = text,
+                tabIndex = tabIndex,
+                userData = this
+            };
+
+            foreach (ButtonInfo bparams in buttons)
+            {
+                // add foldout name and even data to bparams before making button?
+                bparams.parentName = this.name;
+                bparams.parentData = this;
+                // note allows treatment of info as object, but does not "know" that parentData in this case is FoldoutInfo
+                bparams.clearPanel = false; // do not clear panel when foldout clicked
+                Button foldoutButton = bparams.Make();
+                foldout.Add(foldoutButton);
+                foldoutButton.style.display = DisplayStyle.Flex;
+                foldoutButton.visible = true;
+            }
+
+            foldout.AddToClassList(style);
+            return foldout;
+        }
 
         public FoldoutInfo()
         {

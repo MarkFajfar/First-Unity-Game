@@ -206,7 +206,7 @@ namespace NavajoWars
             ConfirmScreen();
         }
 
-        public static int numMissing(GameState.Family family)
+        public static int numMissing(Family family)
         {
             int missing = 0;
             if (!family.HasMan) missing++;

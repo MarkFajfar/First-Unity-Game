@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace NavajoWars
 {
-    public enum Territory { SantaFe, Splitrock, SanJuan, Zuni, Monument, Hopi, BlackMesa, Canyon }
-    public enum Person { Man, Woman, Child, Elder }
-    public enum CardType { Operations, Ceremony, Event }
+    public enum Territory { SantaFe, Splitrock, SanJuan, Zuni, Monument, Hopi, BlackMesa, Canyon, Default }
+    public enum Person { Man, Woman, Child, Elder, Default }
+    public enum CardType { Operations, Ceremony, Event, Default }
 
     [Serializable]
     public class GameState : MonoBehaviour 
@@ -181,48 +181,17 @@ namespace NavajoWars
         public recovery Recovery;
         public subjugation Subjugation;
 
-        [Serializable]
-        public class Family
-        {
-            public string Name { get => name; set => name = value; }
-            [SerializeField] string name;
-            public bool IsActive { get => isActive; set => isActive = value; }
-            [SerializeField] bool isActive = false;
-            public bool HasMan { get => hasMan; set => hasMan = value; }
-            [SerializeField] bool hasMan = true;
-            public bool HasWoman { get => hasWoman; set => hasWoman = value; }
-            [SerializeField] bool hasWoman = true;
-            public bool HasChild { get => hasChild; set => hasChild = value; }
-            [SerializeField] bool hasChild = true;
-            public bool HasHorse { get => hasHorse; set => hasHorse = value; }
-            [SerializeField] bool hasHorse = false;
-            public Territory IsWhere { get => isWhere; set => isWhere = value; }
-            [SerializeField] Territory isWhere = Territory.Splitrock;
-            public int Ferocity { get => ferocity; set => ferocity = value; }
-            [SerializeField] int ferocity = 0;
+        /*public Family FamilyA;
+        public Family FamilyB;
+        public Family FamilyC;
+        public Family FamilyD;
+        public Family FamilyE;
+        public Family FamilyF;
+        [HideInInspector] public Family DefaultFamily;*/
 
-            int[] evReference = { 2, 1, 0, -1 };
-            public int Evasion
-            { get { return evReference[Ferocity]; } }
-            //public int Evasion { get => evasion; set => evasion = value; }
-            //[SerializeField] int evasion = 0;
-
-            public bool isSelectedOps { get => isselectedops; set => isselectedops = value; }
-            [SerializeField] bool isselectedops = false;
-
-            public bool isCompletedOps { get => iscompletedops; set => iscompletedops = value; }
-            [SerializeField] bool iscompletedops = false;
-        }
-
-        [HideInInspector] public Family FamilyA;
-        [HideInInspector] public Family FamilyB;
-        [HideInInspector] public Family FamilyC;
-        [HideInInspector] public Family FamilyD;
-        [HideInInspector] public Family FamilyE;
-        [HideInInspector] public Family FamilyF;
-
-        public List<Family> Families;
-
+        public List<Family> AllFamilies;
+        [NonSerialized] [HideInInspector] public List<Family> Families;
+                
         // variables used in Operations script
         //public Family selectedFamily;
         //public List<Family> completedFamilies;

@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 833963894}
   - component: {fileID: 833963895}
   - component: {fileID: 833963896}
+  - component: {fileID: 833963897}
   m_Layer: 0
   m_Name: Passage
   m_TagString: Untagged
@@ -472,6 +473,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7dd1b1848a8656445ab3cb319cbbf214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isCompleted: 0
+--- !u!114 &833963897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833963893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec0484457c75ac749bc7503291cf44d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   isCompleted: 0

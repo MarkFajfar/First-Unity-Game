@@ -9,10 +9,12 @@ namespace NavajoWars
     {
         public override string stepName { get => "FindWater"; }
 
-        GameState.Family selectedFamily;
+        Family selectedFamily;
+
+        bool testIsEligible(Family f) => f is { HasMan: true, HasWoman: false, Ferocity : 1 or 2 };
 
         public override void Begin()
-        {
+        { 
             selectedFamily = gs.Families.Where(f => f.isSelectedOps).First();
             bool horse = selectedFamily.HasHorse;
             int missing = OperationsLogic.numMissing(selectedFamily);

@@ -1,29 +1,30 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class ButtonInfo
+    public class ButtonInfo : Info
     {
         public string name;
         public string text;
         public int tabIndex = 0;
         public string style = "ButtonMenu";
-        public object buttonData = null;
-        public GameStep gameStep = null;
-        public Action call = null;
-        public Action<ButtonInfo> passBack = null;
-        public bool waiting = false;
-        public bool clearPanel = true;
-        public bool closeFoldout = true;
-        
-        // experimental:
-        public string parentName = "";
-        // foldoutName never added in constructor, but only when button put into foldout
-        public object parentData = null;
 
+        public Action<ButtonInfo> passBack = null;
+
+        public Button Make()
+        {
+            Button button = new()
+            {
+                name = name,
+                text = text,
+                tabIndex = tabIndex,
+                userData = this
+            };
+            button.AddToClassList(style);
+            return button;
+        }
 
         public ButtonInfo()
         {
@@ -63,7 +64,7 @@ namespace NavajoWars
             name = text.Replace(" ", "");
             this.text = text;
             this.tabIndex = tabIndex;
-            passBack = passBackInfo;
+            passBack = passBackInfo; 
         }
 
         public ButtonInfo(string text, Action<ButtonInfo> passBackInfo)

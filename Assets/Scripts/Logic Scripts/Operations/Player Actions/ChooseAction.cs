@@ -18,7 +18,7 @@ namespace NavajoWars
 
         public ChooseFamily chooseFamily;
 
-        GameState.Family selectedFamily;
+        Family selectedFamily;
 
         void getReferences()
         {

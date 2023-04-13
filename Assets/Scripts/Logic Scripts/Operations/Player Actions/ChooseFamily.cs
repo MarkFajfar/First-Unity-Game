@@ -86,7 +86,7 @@ namespace NavajoWars
                 }
                 //create list of eligible families
                 //List<string> listFamilyNames = gs.Families.Where(f => !gs.completedFamilies.Contains(f)).Select(f => f.Name).ToList();
-                List<GameState.Family> listFamEligible = gs.Families.Where(f => !f.isCompletedOps).ToList();
+                List<Family> listFamEligible = gs.Families.Where(f => !f.isCompletedOps).ToList();
                 //initialize list of buttons
                 List<ButtonInfo> bFamEligible = new List<ButtonInfo>();
                 //for each eligible family, create button using family name and index

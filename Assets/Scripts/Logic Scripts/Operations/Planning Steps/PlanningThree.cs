@@ -91,11 +91,11 @@ namespace NavajoWars
 
         async void ChangeFamilyFerocity()
         {
-            GameState.Family selectedFamily;
-            List<GameState.Family> listFerocityFamilies = new();
+            Family selectedFamily;
+            List<Family> listFerocityFamilies = new();
             ui.displayText("Change one Family +/- 1. Must have a Man. If increased and MP<5, add 1 MP. If decreased and CP<5, add 1 CP. Select Family.");
             listFerocityFamilies = gs.Families.Where(f => f.IsActive && f.HasMan && !selectedF.Contains(f.Name)).ToList();
-            List<ButtonInfo> bFamilies = new List<ButtonInfo>();
+            List<ButtonInfo> bFamilies = new();
             //for each applicable family, create button using family name and index
             for (int i = 0; i < listFerocityFamilies.Count; i++)
             {

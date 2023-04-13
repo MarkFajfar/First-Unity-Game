@@ -10,10 +10,11 @@ namespace NavajoWars
         
         public override void Begin()
         {
-            // no need for save because no changes made?
+            // need save for undo to reverse changes in next step
+            gm.SaveUndo(this);
             ui.showBackNext();
             ui.displayHeadline("Select a Player Operation");
-            // ui.displayText(""); // leave any text from prior step
+            ui.displayText(""); // leave any text from prior step?
             // add gamestep objects to buttons to call directly 
             ButtonInfo planning = new("Planning", GetComponentInChildren<PlanningOne>(), nextStep);
             ButtonInfo actions = new("Take Actions", GetComponentInChildren<ChooseFamily>(), nextStep);
@@ -32,7 +33,7 @@ namespace NavajoWars
 
         public override void Undo()
         {
-            // same whether or not called from Undo?
+            gm.LoadUndo(this);
             Begin();
         }
     }

@@ -9,7 +9,7 @@ namespace NavajoWars
 {
     public class PlayerActionLogic : OperationsLogic
     {
-        GameState.Family selectedFamily;
+        Family selectedFamily;
         List<string> completedFamilies; 
         
         int numFamEligible;

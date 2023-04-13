@@ -63,7 +63,15 @@ namespace NavajoWars
         {
             string sd = File.ReadAllText(savePath + "savefile.json");
             JsonUtility.FromJsonOverwrite(sd, gs);
+            CreateFamiliesList();
             SceneManager.LoadScene(gs.CurrentSceneName);
+        }
+
+        void CreateFamiliesList()
+        {
+            gs.Families = new();
+            foreach (Family family in gs.AllFamilies) 
+            { if (family.IsActive) gs.Families.Add(family); }
         }
 
         internal void DeleteSaveAndStartNew()
@@ -88,6 +96,7 @@ namespace NavajoWars
                 print("Loading Undo Data: " + step.stepName);
                 string sd = File.ReadAllText(savePath + gs.CurrentSceneName + "/" + step.stepName);
                 JsonUtility.FromJsonOverwrite(sd, gs);
+                CreateFamiliesList();
             }
             else
             {

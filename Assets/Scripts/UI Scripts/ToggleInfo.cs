@@ -1,11 +1,9 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public class ToggleInfo
+    public class ToggleInfo : Info
     {
         public bool value = false;
         public string label;
@@ -13,17 +11,31 @@ namespace NavajoWars
         public string text = "";
         public int tabIndex = 0;
         public string style = "Toggle";
-        public object toggleData = null;
-        public GameStep gameStep = null;
-        public Action call = null;
-        public Action<ToggleInfo, bool> passBack = null;
-        public bool waiting = false;
-        public bool clearPanel = true;
-        public bool closeFoldout = true;
 
-        // experimental:
-        public string parentName = "";
-        // foldoutName never added in constructor, but only when button put into foldout
-        public object parentData = null;
+        public Action<ToggleInfo, bool> passBack = null;
+
+        public Toggle Make()
+        {
+            Toggle toggle = new()
+            {
+                value = false,
+                label = label,
+                name = name,
+                text = text,
+                tabIndex = tabIndex,
+                userData = this,
+            };
+            toggle.AddToClassList(style);
+            return toggle;
+        }
+
+        public ToggleInfo(string label, Family family, Person person, Action<ToggleInfo, bool> passBackInfo)
+        {
+            this.label = label;
+            name = label.Replace(" ", "");
+            this.family = family;
+            this.person = person;
+            passBack = passBackInfo;
+        }
     }
 }

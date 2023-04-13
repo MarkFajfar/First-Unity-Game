@@ -9,7 +9,7 @@ namespace NavajoWars
     {
         public override string stepName { get => "TribalCouncil"; }
 
-        GameState.Family selectedFamily;
+        Family selectedFamily;
 
         public override void Begin()
         {

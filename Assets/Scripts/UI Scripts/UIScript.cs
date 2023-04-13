@@ -1,3 +1,4 @@
+using Mono.Cecil;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -53,52 +54,65 @@ namespace NavajoWars
         {
             var clickedButton = evt.target as Button;
 
-            if (clickedButton.userData is GameStep) //.GetType() == typeof(GameStep))
-            // does not work:  if (clickedButton.userData as GameStep)
+            /*Action thingtodo = clickedButton.userData switch
+            {
+                GameStep clickedStep => clickedStep.Begin,
+                Action call => call,
+                _ => ClearChoicePanel
+            };
+
+            thingtodo?.Invoke();*/
+
+            if (clickedButton.userData is GameStep clickedStep) 
             {
                 ClearChoicePanel(); // would a next step ever need to keep the panel?
-                GameStep clickedStep = (GameStep)clickedButton.userData;
                 clickedStep.Begin();
             }
-            else if (clickedButton.userData is ButtonInfo) //.GetType() == typeof(ButtonInfo))
+            else if (clickedButton.userData is Action call) call?.Invoke();
+            // clear panel in called action
+            else if (clickedButton.userData is ButtonInfo info) 
             {
-                ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
+                //ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
 
-                if (clickedParams.clearPanel) ClearChoicePanel(); 
+                if (info.clearPanel) ClearChoicePanel();
                 // set to false to leave panel (eg for foldout)
 
-                if (clickedParams.waiting)
+                if (info.waiting)
                 // if waiting, send back choice (usually to a loop)
                 {
-                    ChoiceMadeParams choice = new ChoiceMadeParams((ButtonInfo)clickedButton.userData);
+                    ChoiceMadeParams choice = new(info);
+                    //ChoiceMadeParams choice = new ChoiceMadeParams((ButtonInfo)clickedButton.userData);
                     choice.OnChoiceMadeParams(choice);
                 }
-                else if (clickedParams.passBack != null)
+                else if (info.passBack != null)
                 // if there is a passBack function, send back the params and stop
                 {
-                    clickedParams.passBack.Invoke(clickedParams);
+                    info.passBack.Invoke(info);
                 }
-                else if (clickedParams.call != null && clickedParams.gameStep == null)
+                else if (info.call != Info.InvalidMessage && info.gameStep == null)
                 {
-                    clickedParams.call.Invoke();
+                    info.call?.Invoke();
                 }
-                else if (clickedParams.gameStep != null && clickedParams.call == null)
+                else if (info.gameStep != null && info.call == Info.InvalidMessage)
                 {
-                    clickedParams.gameStep.Begin();
+                    info.gameStep.Begin();
                 }
-                else if (clickedParams.gameStep != null && clickedParams.call != null)
+                else if (info.gameStep != null && info.call != Info.InvalidMessage)
                 {
+                    displayText("Invalid Choice Selected");
                     Debug.Log("Cannot have both GameStep and Action call");
                     // would then default to methodManager call ?
                 }
                 else
                 {
-                    foreach (var receiver in Receivers) receiver.methodManager(clickedParams.name);
+                    Debug.Log($"ButtonInfo received, but no valid action. Trying to call {info.name} on receivers");
+                    foreach (var receiver in Receivers) receiver.methodManager(info.name);
                 }
             }
             else
             {
                 // do not clear panel in this case; do that in called method?
+                Debug.Log($"No button userdata received. Trying to call {clickedButton.name} on receivers");
                 foreach (var receiver in Receivers) receiver.methodManager(clickedButton.name);
             }
         }
@@ -107,11 +121,11 @@ namespace NavajoWars
         {
             var clickedButton = evt.target as Button;
 
-            if (clickedButton.userData.GetType() == typeof(ButtonInfo))
+            if (clickedButton.userData is ButtonInfo info)
             {
-                ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
+                //ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
 
-                if (clickedParams.closeFoldout) // can set to false in button
+                if (info.closeFoldout) // can set to false in button
                 { 
                     clickedButton.parent.style.display = DisplayStyle.None;
                     // if necessary: clickedButton.parent.visible = false;
@@ -125,6 +139,15 @@ namespace NavajoWars
 
             buttonClicked(evt);
         }
+
+        protected void toggleValueChanged(ChangeEvent<bool> evt)
+        {
+            var toggle = evt.target as Toggle;
+            var info = toggle.userData as ToggleInfo;
+            info.passBack?.Invoke(info, toggle.value);
+            // no other reaction other than passback?
+        }
+
 
         public Action OnNextClick;
         public Action OnBackClick;

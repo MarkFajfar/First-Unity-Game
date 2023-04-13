@@ -1,11 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
-using TreeEditor;
-using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
@@ -31,48 +25,30 @@ namespace NavajoWars
 
             foreach (Person person in adultsInPassage)
             {
-                PersonFamily data = new()
+                /*PersonFamily data = new()
                 { 
                     person = person,
                     family = null
-                };
+                };*/
 
                 string label = person.ToString() + " in Passage";
-
-                ToggleInfo info = makeToggleInfo(label, data);
-
+                ToggleInfo info = new(label, new() { Name = Info.Default}, person, actionOnToggle);
                 togglesToMake.Add(info);
             }
 
-            foreach (GameState.Family family in gs.Families)
+            foreach (Family family in gs.Families)
             {
                 if (family.HasMan) 
                 {
-                    PersonFamily man = new()
-                    {
-                        person = Person.Man,
-                        family = family
-                    };
-
                     string label = $"Man in {family.Name}";
-
-                    ToggleInfo info = makeToggleInfo(label, man);
-
+                    ToggleInfo info = new(label, family, Person.Man, actionOnToggle);
                     togglesToMake.Add(info);
                 }
 
                 if (family.HasWoman)
                 {
-                    PersonFamily woman = new()
-                    {
-                        person = Person.Woman,
-                        family = family
-                    };
-
                     string label = $"Woman in {family.Name}";
-
-                    ToggleInfo info = makeToggleInfo(label, woman);
-
+                    ToggleInfo info = new(label, family, Person.Woman, actionOnToggle);
                     togglesToMake.Add(info);
                 }
             }
@@ -80,51 +56,28 @@ namespace NavajoWars
             ui.OnNextClick = displaySummary;
         }
 
-        ToggleInfo makeToggleInfo(string label, object data)
+        void actionOnToggle(ToggleInfo info, bool ticked)
         {
-            ToggleInfo info = new()
+            if (info.family.Name != Info.Default)
             {
-                label = label,
-                name = label.Replace(" ", ""),
-                toggleData = data,
-                passBack = actionOnToggle,
-            };
-            return info;
-        }
-
-        List<PersonFamily> changes = new();
-        // keep a list of changes made when toggled? or just describe final status
-
-        void actionOnToggle(ToggleInfo toggle, bool ticked)
-        {
-            if (toggle.toggleData is PersonFamily)
-            { 
-                var data = toggle.toggleData as PersonFamily;
-
-                changes.Add(data); // ?
-                
-                //data.family != null ? data.family.HasMan = !value : ;
-                if (data.family != null)
-                {
-                    GameState.Family affectedFamily = gs.Families.Where(f => f.Name == data.family.Name).First();
-                    if (data.person == Person.Man) affectedFamily.HasMan = !ticked;
-                    if (data.person == Person.Woman) affectedFamily.HasWoman = !ticked;
-                }
-                else
-                {
-                    if (ticked) 
-                    {
-                        Person affectedPerson = gs.PersonsInPassage.Where(p => p == data.person).First();
-                        gs.PersonsInPassage.Remove(affectedPerson);
-                    }
-                    else 
-                    {
-                        gs.PersonsInPassage.Add(data.person);
-                    }                    
-                }
-                if (ticked) gs.PersonsInPassage.Add(Person.Elder);
-                if (!ticked) gs.PersonsInPassage.Remove(Person.Elder);
+                Family affectedFamily = gs.Families.Where(f => f.Name == info.family.Name).First();
+                if (info.person == Person.Man) affectedFamily.HasMan = !ticked;
+                if (info.person == Person.Woman) affectedFamily.HasWoman = !ticked;
             }
+            else
+            {
+                if (ticked) 
+                {
+                    Person affectedPerson = gs.PersonsInPassage.Where(p => p == info.person).First();
+                    gs.PersonsInPassage.Remove(affectedPerson);
+                }
+                else 
+                {
+                    gs.PersonsInPassage.Add(info.person);
+                }                    
+            }
+            if (ticked) gs.PersonsInPassage.Add(Person.Elder);
+            else gs.PersonsInPassage.Remove(Person.Elder);
         }
 
         void displaySummary()
@@ -132,13 +85,13 @@ namespace NavajoWars
             ui.OnNextClick -= displaySummary;
             ui.ClearChoicePanel();
             ui.displayText($"There are now ... Press Next to continue.");
-            ui.addText("\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text\n Example of long text");
+            ui.OnNextClick = actionComplete;
         }
 
         protected override void actionComplete()
         {
             base.actionComplete();
-            // GetComponentInChildren<PassageTwo>().Begin();
+            GetComponentInChildren<PassageOneB>().Begin();
         }
 
         public override void Undo()
