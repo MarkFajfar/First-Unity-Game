@@ -9,7 +9,7 @@ namespace NavajoWars
     public class Family
     {
         public string Name { get => name; set => name = value; }
-        [SerializeField] new string name;
+        [SerializeField] string name;
         public bool IsActive { get => isActive; set => isActive = value; }
         [SerializeField] bool isActive = false;
         public bool HasMan { get => hasMan; set => hasMan = value; }

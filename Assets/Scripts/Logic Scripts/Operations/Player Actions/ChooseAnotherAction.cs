@@ -13,6 +13,7 @@ namespace NavajoWars
 
         public override void Begin()
         {
+            gm.SaveUndo(this);
             if (gm.stepStack.Count > 0 && (gm.stepStack.Peek().stepName == "Trade" || gm.stepStack.Peek().stepName == "TribalCouncil"))
             {
                 // these have to be last action so go to end
@@ -45,14 +46,14 @@ namespace NavajoWars
             selectedFamily.isSelectedOps = false;
             gs.completedFamilies++;
             gs.completedActions = 0;
-            ChooseFamily chooseFamily = GetComponentInChildren<ChooseFamily>();
             // push to stepStack immediately before calling next action
             gm.stepStack.Push(this);
-            chooseFamily.Begin();
+            GetComponentInChildren<ChooseFamily>().Begin();
         }
 
         public override void Undo()
         {
+            gm.LoadUndo(this);
             chooseAnotherAction();
         }
     }

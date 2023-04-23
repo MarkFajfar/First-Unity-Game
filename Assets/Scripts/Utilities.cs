@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -10,47 +11,134 @@ namespace NavajoWars
 {
     public class Utilities : MonoBehaviour
     {
-     /*for (int i = 0; i< 3; i++)
+#if UNITY_EDITOR
+
+        class MyClass
+        {
+            public string name;
+            public int number;
+        }
+
+        static MyClass change(MyClass obj)
+        {
+            obj.number++;
+            return obj;
+        }
+
+        [MenuItem("Utilities/ObjTest")]
+        public static void ObjTest()
+        {
+            MyClass obj = new() { name = "Test", number = 1};
+            var newObj = change(obj);
+            print(obj.number);
+            print(newObj.number);
+            print(obj == newObj);
+        }       
+
+
+        struct sf1 
+        { 
+            // when put in struct, class is still ref type
+            public Family family1; 
+            public void setHorse(bool horse) 
+            { 
+                family1.HasHorse = horse;
+            }
+        }
+        
+        struct sf2 { public Family family2; }
+
+        static List<int> testlist = new () { 1, 2, 3, 4, 5, 6 };
+
+        [MenuItem("Utilities/ListTest")]
+        public static void ListTest() 
+        {
+
+            List<int> small = testlist.Where(x => x < 4).ToList();
+            foreach (int i in small) Debug.Log("First: " + i);
+            small = testlist.FindAll(x => x > 3);
+            foreach (int i in small) Debug.Log("Second: " + i);
+
+
+
+            Family tfA = new() { Name = "Test A" };
+            Family tfB = new() { Name = "Test B" };
+
+            sf1 sf11 = new() { family1 = tfA };
+            sf2 sf12 = new() { family2 = tfB };
+            
+            List<Family> list1 = new() { tfA, tfB };
+            list1[0].HasHorse = true;
+            Debug.Log($"First Horse Test tfA: {tfA.HasHorse}");
+            Debug.Log($"First Horse Test struct: {sf11.family1.HasHorse}");
+            if (sf11.family1.HasHorse == true) sf11.family1.HasHorse = false;
+            Debug.Log($"Second Horse Test tfA: {tfA.HasHorse}, {sf11.family1 == list1[0]}");
+        }
+
+        [MenuItem("Utilities/RunScenarioTest")]
+        public static void RunScenarioTest()
+        {
+            Debug.Log("Test function:\n");
+
+            // make list of scenarios
+            List<Scenario> scenarios = Resources.LoadAll("Scenarios", typeof(Scenario)).Cast<Scenario>().ToList();
+
+            var testScenario =
+                from scenario in scenarios
+                where scenario.Name == "Rise"
+                select scenario;
+            foreach (var scenario in testScenario)
             {
-                print("loop " + i);
-                int j = 0;
-                while (j< 5)
-                {
-                    print("j is: " + j);
-                    if (j< 3)
-                    {
-                        StartCoroutine(waitnumber(j));
-                        string result = await IReceive.testGetChoiceAsync();
-                        print(result);
-                        Debug.Log(result);
-                    }
-                    else number(j);
-                    //ChoiceMadeString choice = new ChoiceMadeString(j.ToString());
-                    //choice.OnChoiceMadeString(new ChoiceMadeString(j.ToString()));
-                    j++;
-                }
+                Debug.Log(scenario.LongTitle);
             }
 
-            IEnumerator waitnumber(int j)
-            {
-                print("starting to wait" + j);
-                yield return new WaitForSeconds(3f);
-                print("done waiting" + j);
-                ChoiceMadeString choice = new ChoiceMadeString(j.ToString());
-                choice.OnChoiceMadeString(new ChoiceMadeString(j.ToString()));
-            }
+            //var shortTest = scenarios.Where(s => s.Name == "Mundo");
+            foreach (var s in scenarios.Where(s => s.Name == "Mundo"))
+            { Debug.Log(s.LongTitle); }
 
-        void number(int k) { print(k + "\n"); }
+            var shortTest2 = scenarios.Max(s => s.CP);
+            Debug.Log(shortTest2);
+        }
 
-        print("done");*/
-        
-        
+        [MenuItem("Utilities/SceneName")]
+        public static void SceneName()
+        {
+            Debug.Log(SceneManager.GetActiveScene().name);
+        }
+
+        [MenuItem("Utilities/CreateSO")]
+        public static void CreateSO()
+        {
+            Card cardEvent = ScriptableObject.CreateInstance("Card") as Card;
+            AssetDatabase.CreateAsset(cardEvent, "Assets/Resources/Cards/cardEvent.asset");
+        }
+
+        [MenuItem("Utilities/TestSO")]
+        public static void TestSO()
+        {
+            var testName = "Test";
+            Card currentCard = Resources.Load<Card>("Cards/card" + testName);
+            currentCard.AddToPassage = Person.Woman;
+            Debug.Log(currentCard.AddToPassage);
+            //Debug.Log(currentCard.TestAddSO.Name);
+            //Card.StepOne(currentCard); 
+            //call to method uses class name, specific card info is in parameter
+        }
+
+        [MenuItem("Utilities/UpdateSO")]
+        public static void UpdateSO()
+        {
+            var testName = "Fearing";
+            Scenario scenario = Resources.Load<Scenario>("Scenarios/" + testName);
+            //scenario.Subjugation.Red = 3;
+            //Debug.Log(testName + " Red is " + scenario.Subjugation.Red);
+        }
+
         /*[MenuItem("Utilities/RunTest")]
 
-        
         public static void RunTest()
         {
-            print("Test function:\n");
+            Debug.Log("Test function:\n");
 
             for (int i = 1; i < 3; i++)
             {
@@ -67,84 +155,11 @@ namespace NavajoWars
         static IEnumerator waitnumber(int k)
         {
             yield return new WaitForSeconds(3f);
-            print(k + "\n");
+            Debug.Log(k + "\n");
         }
 
-        static void number() { print(k + "\n"); }*/
+        static void number() { Debug.Log(k + "\n"); }*/
 
-        /*GameManager GameManager;
-        GameState gs;
-
-        void Awake()
-        {
-            GameManager = GameObject.FindWithTag("GameController").GetComponent<GameManager>();
-            gs = GameManager.GetComponent<GameState>();
-            //CreateSO();
-            //TestSO();
-        }
-
-
-
-        //comment out menu items for build
-        //[MenuItem("Utilities/RunTest")]
-        public static void RunTest()
-        {
-            print("Test function:\n");
-
-            // make list of scenarios
-            List<Scenario> scenarios = Resources.LoadAll("Scenarios", typeof(Scenario)).Cast<Scenario>().ToList();
-
-            var testScenario =
-                from scenario in scenarios
-                where scenario.Name == "Rise"
-                select scenario;
-            foreach (var scenario in testScenario)
-            {
-                print(scenario.LongTitle);
-            }
-
-            //var shortTest = scenarios.Where(s => s.Name == "Mundo");
-            foreach (var s in scenarios.Where(s => s.Name == "Mundo"))
-            { print(s.LongTitle); }
-
-            var shortTest2 = scenarios.Max(s => s.CP);
-            print(shortTest2);
-        }
-
-        //[MenuItem("Utilities/SceneName")]
-        public static void SceneName()
-        {
-            print(SceneManager.GetActiveScene().name);
-        }
-
-        //[MenuItem("Utilities/CreateSO")]
-        public static void CreateSO()
-        {
-            Card cardEvent = ScriptableObject.CreateInstance("Card") as Card;
-            AssetDatabase.CreateAsset(cardEvent, "Assets/Resources/Cards/cardEvent.asset");
-        }
-
-        //[MenuItem("Utilities/TestSO")]
-        public static void TestSO()
-        {
-            var testName = "Test";
-            Card currentCard = Resources.Load<Card>("Cards/card" + testName);
-            currentCard.AddToPassage = Person.Woman;
-            print(currentCard.AddToPassage);
-            //print(currentCard.TestAddSO.Name);
-            //Card.StepOne(currentCard); 
-            //call to method uses class name, specific card info is in parameter
-        }
-
-        [MenuItem("Utilities/UpdateSO")]
-        public static void UpdateSO()
-        {
-            var testName = "Fearing";
-            Scenario scenario = Resources.Load<Scenario>("Scenarios/" + testName);
-            scenario.Subjugation.Red = 3;
-            print(testName + " Red is " + scenario.Subjugation.Red);
-        }*/
-
-
+#endif
     }
 }

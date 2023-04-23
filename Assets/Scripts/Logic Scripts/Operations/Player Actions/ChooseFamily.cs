@@ -16,14 +16,6 @@ namespace NavajoWars
         int numFamInCan;
         ChooseAction chooseAction;
 
-        /*public event EventHandler<bParamsEventArgs> CreateButtonsEvent;
-
-        protected virtual void CreateButtons(bParamsEventArgs e)
-        {
-            EventHandler<bParamsEventArgs> raiseEvent = CreateButtonsEvent;
-            raiseEvent?.Invoke(this, e);
-        }*/
-
         public override void Begin()
         {
             // reset completed families only if coming from choose player operation 
@@ -85,24 +77,23 @@ namespace NavajoWars
                     ui.unsubNext(); // clear next button, just in case
                 }
                 //create list of eligible families
-                //List<string> listFamilyNames = gs.Families.Where(f => !gs.completedFamilies.Contains(f)).Select(f => f.Name).ToList();
                 List<Family> listFamEligible = gs.Families.Where(f => !f.isCompletedOps).ToList();
                 //initialize list of buttons
                 List<ButtonInfo> bFamEligible = new List<ButtonInfo>();
-                //for each eligible family, create button using family name and index
+                //for each eligible family, create button using family name and index, or can just use info.family field
+                //foreach (family in listFamEligible)
                 for (int i = 0; i < listFamEligible.Count; i++)
                 {
                     ButtonInfo bFamilyName = new(listFamEligible[i].Name, i);
+                    bFamilyName.family = listFamEligible[i];
                     bFamEligible.Add(bFamilyName);
                 }
-                /*// TEST CREATE BUTTON EVENT
-                CreateButtons(new bParamsEventArgs(bFamEligible));
-                calltCB(bFamEligible);*/
                 // use async because logic to apply to result
                 ui.MakeChoiceButtonsAsync(bFamEligible);
                 ButtonInfo result = await IReceive.GetChoiceAsyncParams();
 
-                listFamEligible[result.tabIndex].isSelectedOps = true;
+                result.family.isSelectedOps = true;
+                //result.family.isSelectedOps = true;
                 ui.OnNextClick -= playerOpsDone;
                 chooseAction = GetComponentInChildren<ChooseAction>();
                 // push to stepStack immediately before calling next action
@@ -127,9 +118,6 @@ namespace NavajoWars
 
         public override void Undo()
         {
-            // stuff to do on undo
-            // overwrite saveState immediately before calling action
-            //JsonUtility.FromJsonOverwrite(saveState, gs);
             gm.LoadUndo(this);
             chooseFamily();
         }

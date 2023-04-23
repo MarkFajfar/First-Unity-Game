@@ -28,6 +28,8 @@ namespace NavajoWars
         // called from main menu to start a new game
         public void SetupNewGame(Scenario scenario)
         {
+            // load values from Scenario
+            
             gs.ChosenScenario = scenario;
             gs.AP = scenario.AP;
             gs.CP = scenario.CP;
@@ -43,6 +45,17 @@ namespace NavajoWars
             gs.Firearms = 0;
 
             gs.HasDrought = scenario.HasDrought;
+
+            if (scenario.Name == "Broken" || scenario.Name == "Fearing")
+                gs.Subjugation.Red = 3;
+
+            if (scenario.Name == "Rope")
+            {
+                gs.Firearms = 1;
+                // Rope also has Manuelito counter and different family setup
+            }
+
+            // setup tables and families
 
             gs.CeremonyCardsInHand = new();
             gs.EventCardsInPlay = new();
@@ -74,14 +87,14 @@ namespace NavajoWars
 
             gs.AllFamilies = new() { FamilyA, FamilyB, FamilyC, FamilyD, FamilyE, FamilyF };
 
-            if (scenario.Name == "Broken" || scenario.Name == "Fearing")
-                gs.Subjugation.Red = 3;
+            // setup initial game info
 
-            if (scenario.Name == "Rope") 
-            { 
-                gs.Firearms = 1;
-                // Rope also has Manuelito counter and different family setup
-            }
+            gs.isPlayerOpsDone = false;
+            gs.isEnemyOpsDone = false;
+            gs.isPreempt = false;
+            gs.canBackToDraw = true;
+
+            // setup family values
 
             locationNames = new()
             { " Splitrock", " San Juan", " Zuni", " Monument", " Hopi", " Black Mesa", " C. de Chelly" };

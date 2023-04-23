@@ -28,11 +28,7 @@ namespace NavajoWars
             if (gm.stepStack.Count > 0) { gm.stepStack.Pop().Begin(); } 
             else
             {
-                // if nothing on stack then coming from card draw, so set 'done' to false:
-                gs.isPlayerOpsDone = false;
-                gs.isEnemyOpsDone = false;
-                gs.isPreempt = false;
-                gs.canBackToDraw = true;
+                // if nothing on stack then coming from card draw, so 'done' values either from saved game or setup
                 ConfirmScreen();
             }
         }
@@ -60,14 +56,13 @@ namespace NavajoWars
                 ButtonInfo no = new("Do Not Preempt", noEnemyOps);
                 choices.Add(no);
                 ui.ShowChoiceButtons(choices);
-                //ui.MakeChoiceButtonsAsync(choices);
-                //ButtonInfo result = await IReceive.GetChoiceAsync();
+                
                 // after button clicked, activate back to come here if stack is empty
                 // but set back to use stack for initial Undo (because may come back here with steps in stack)
             }
             else
             {
-                // use = because should do only one thing
+                // use = because should do only one thing on back click
                 ui.OnBackClick = ConfirmScreen;
                 ui.showBackNext();
                 gs.isPreempt = false;
@@ -99,22 +94,22 @@ namespace NavajoWars
                 ui.MakeChoiceButtonsAsync(choices);
                 ButtonInfo result = await IReceive.GetChoiceAsyncParams();
                 // use async where each choice is very short
-                if (result.name == redo.name)
+                if (result == redo)
                 {
                     // no back function, just reenter card name
                     gm.PrevScene();
                 }
-                if (result.name == draw.name)
+                if (result == draw)
                 {
                     // no back function, this screen confirms
                     SceneComplete();
                 }
-                if (result.name == player.name)
+                if (result == player)
                 {
                     gm.stepStack.Push(initialUndo);
                     playerOperation.Begin();
                 }
-                if (result.name == enemy.name)
+                if (result == enemy)
                 {
                     gm.stepStack.Push(initialUndo);
                     EnemyOperation();
@@ -182,6 +177,11 @@ namespace NavajoWars
             ui.unsubNext();
             ui.unsubBack();
             gm.stepStack.Clear();
+            // reset 'done' values
+            gs.isPlayerOpsDone = false;
+            gs.isEnemyOpsDone = false;
+            gs.isPreempt = false;
+            gs.canBackToDraw = true;
             gm.LoadNewScene("CardDraw");
         }
 

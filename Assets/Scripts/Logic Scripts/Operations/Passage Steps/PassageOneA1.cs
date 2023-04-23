@@ -11,8 +11,8 @@ namespace NavajoWars
         public override void Begin()
         {
             gm.SaveUndo(this);
-            List<Person> childrenInPassage = gs.PersonsInPassage.FindAll(p => p == Person.Child).ToList();
-            List<Family> familiesWithChildren = gs.Families.Where(f => f.HasChild).ToList();
+            List<Person> childrenInPassage = gs.PersonsInPassage.FindAll(p => p == Person.Child);
+            List<Family> familiesWithChildren = gs.Families.FindAll(f => f.HasChild);
             // following are not used?
             //int numManInPassage = gs.PersonsInPassage.FindAll(p => p == Person.Man).Count();
             //int numManInFamilies = gs.Families.Where(f => f.HasMan).Count();
@@ -20,15 +20,15 @@ namespace NavajoWars
             //int numWomanInFamilies = gs.Families.Where(f => f.HasWoman).Count();
 
             ui.displayHeadline("Passage of Time\nStep One (A)");
+            ui.OnNextClick = actionComplete;
             if (childrenInPassage.Count() + familiesWithChildren.Count() > 0)
             {
-                ui.displayText($"Each Child in a Family or the Passage of Time Box may be converted into an Adult or Elder. Select below and place new counters into Passage of Time Box.");
+                ui.displayText($"Each Child in a Family or the Passage of Time Box may be converted into an Adult or Elder. Select below and place new counters into Passage of Time Box. Or, press Next to continue to the next part of Step One (A).");
                 displayChildren(childrenInPassage, familiesWithChildren);
             }
             else 
             {
                 ui.displayText("No children eligible to convert; press Next to continue to the next part of Step One (A).");
-                ui.OnNextClick = actionComplete;
             }
         }
 
@@ -83,7 +83,6 @@ namespace NavajoWars
             if (foldout.family.Name != Info.Default) 
             {
                 foldout.family.HasChild = false;
-                ui.closeFoldout(foldout);
                 ui.displayText($"Remove one Child from {foldout.family.Name} ");
             }
             else 
@@ -92,6 +91,7 @@ namespace NavajoWars
                 ui.displayText($"Remove one Child from the Passage of Time Box ");
             }
 
+            ui.closeFoldout(foldout); 
             gs.PersonsInPassage.Add(button.person);
             ui.addText($"and place a new {button.person} into the Passage of Time Box.");
             ui.addText("\nIf done with children, press Next to continue to the next part of Step One (A).");

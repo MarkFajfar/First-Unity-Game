@@ -19,14 +19,15 @@ namespace NavajoWars
             else
             {
                 ui.displayText("No Elder Actions available. Press Next to continue.");
-                ui.OnNextClick += actionComplete;
+                ui.OnNextClick = actionComplete;
             }
         }
 
+        //TODO revise to be calls rather than async
         async void elderAction()
         {
             selectedF = new();
-            ui.hideBackNext();
+            // ui.hideBackNext();
             // async necessary to pause loops and await button click
             // at this point there are no elders in slot 0 (moved right in prev step)
             for (int i = 1; i < gs.ElderDisplay.Length; i++)
@@ -45,7 +46,7 @@ namespace NavajoWars
                         ButtonInfo result = await IReceive.GetChoiceAsyncParams();
                         ui.displayText(""); 
                         // if no, will increment j and go to next loop
-                        if (result.name == yes.name)
+                        if (result == yes)
                         {
                             ui.displayText("Choose Action");
                             ButtonInfo addAP = new("Add 1 AP");
@@ -57,26 +58,29 @@ namespace NavajoWars
                             if (gs.MP > gs.CP) elderChoices.Add(addCP);
                             ui.MakeChoiceButtonsAsync(elderChoices);
                             ButtonInfo elderResult = await IReceive.GetChoiceAsyncParams();
-                            if (elderResult.name == addAP.name) 
+                            if (elderResult == addAP) 
                             {
                                 gs.AP++; 
                                 ui.displayText($"Adding 1 AP; there are now {gs.AP}\n");
                             }
-                            if (elderResult.name == addMP.name) 
+                            if (elderResult == addMP) 
                             {
                                 gs.MP++;
                                 gs.CP--;
                                 ui.displayText($"Adding 1 MP (to {gs.MP}) and Reducing CP by 1 (to {gs.CP})\n");
                             }
-                            if (elderResult.name == addCP.name)
+                            if (elderResult == addCP)
                             {
                                 gs.MP--;
                                 gs.CP++;
                                 ui.displayText($"Adding 1 CP (to {gs.CP}) and Reducing MP by 1 (to {gs.MP})\n");
                             }
-                            if (elderResult.name == changeFerocity.name)
+                            if (elderResult == changeFerocity)
                             {
-                                ChangeFamilyFerocity();
+                                // TODO: fix loop needing to be one long function
+                                ChangeFamilyFerocity1();
+                                ButtonInfo ferocityResult = await IReceive.GetChoiceAsyncParams();
+                                ChangeFamilyFerocity2(ferocityResult);
                             }
                         }
                         j++;
@@ -89,24 +93,31 @@ namespace NavajoWars
             ui.OnNextClick += actionComplete;
         }
 
-        async void ChangeFamilyFerocity()
+        void ChangeFamilyFerocity1()
         {
-            Family selectedFamily;
             List<Family> listFerocityFamilies = new();
             ui.displayText("Change one Family +/- 1. Must have a Man. If increased and MP<5, add 1 MP. If decreased and CP<5, add 1 CP. Select Family.");
             listFerocityFamilies = gs.Families.Where(f => f.IsActive && f.HasMan && !selectedF.Contains(f.Name)).ToList();
             List<ButtonInfo> bFamilies = new();
             //for each applicable family, create button using family name and index
-            for (int i = 0; i < listFerocityFamilies.Count; i++)
+            //for (int i = 0; i < listFerocityFamilies.Count; i++)
+            foreach (Family family in listFerocityFamilies)
             {
-                ButtonInfo bFamilyName = new(listFerocityFamilies[i].Name, i);
+                ButtonInfo bFamilyName = new(family.Name)
+                {
+                    family = family
+                };
                 bFamilies.Add(bFamilyName);
             }
             ui.MakeChoiceButtonsAsync(bFamilies);
-            ButtonInfo result = await IReceive.GetChoiceAsyncParams();
+        }
+
+
+        async void ChangeFamilyFerocity2(ButtonInfo result)
+        {
             // convert back to family name and add to end of list
-            selectedF.Add(listFerocityFamilies[result.tabIndex].Name);
-            selectedFamily = gs.Families.First(f => f.Name == result.text);
+            selectedF.Add(result.family.Name); //(listFerocityFamilies[result.tabIndex].Name);
+            Family selectedFamily = result.family; //gs.Families.First(f => f.Name == result.text);
             ui.displayText($"{selectedFamily.Name} selected. ");
             ButtonInfo increase = new("Increase");
             ButtonInfo decrease = new("Decrease");
@@ -129,13 +140,13 @@ namespace NavajoWars
             }
             ui.MakeChoiceButtonsAsync(UpDown);
             ButtonInfo choiceUpDown = await IReceive.GetChoiceAsyncParams();
-            if (choiceUpDown.name == increase.name)
+            if (choiceUpDown == increase)
             {
                 selectedFamily.Ferocity++;
                 gs.MP += gs.MP < 5 ? 1 : 0;
                 ui.displayText($"{selectedFamily.Name} Ferocity is now {selectedFamily.Ferocity} and there are {gs.MP} MP.\n");
             }
-            if (choiceUpDown.name == decrease.name)
+            if (choiceUpDown == decrease)
             {
                 selectedFamily.Ferocity--;
                 gs.CP += gs.CP < 5 ? 1 : 0;
@@ -158,7 +169,6 @@ namespace NavajoWars
             }
             gm.LoadUndo(this);
             Begin();
-            // stuff to do on undo
         }
     }
 }

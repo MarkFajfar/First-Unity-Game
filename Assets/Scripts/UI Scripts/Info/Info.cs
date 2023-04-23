@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace NavajoWars
 {
-    public class Info
+    public abstract class Info
     {
         public object data = null;
         public GameStep gameStep = null;

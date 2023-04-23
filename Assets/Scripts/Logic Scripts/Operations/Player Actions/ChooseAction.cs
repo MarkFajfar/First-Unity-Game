@@ -31,19 +31,11 @@ namespace NavajoWars
             tribalCouncil = gameObject.GetComponentInChildren<TribalCouncil>();
         }
 
-        /*void WeirdActionFunction(List<bParams> choices) { }
-
-        void WeirdEventFunction(object sender, bParamsEventArgs choices) { }*/
+        /**/
 
         public override async void Begin()
         {
-            /*chooseFamily.tCreateButtons += WeirdActionFunction;
-            chooseFamily.CreateButtonsEvent += WeirdEventFunction;*/
-
-            //getReferences();
-
-            // no save because only choosing from list of possible actions
-
+            gm.SaveUndo(this);
             // if coming down from choose family, then reset list of completed actions
             if (gm.stepStack.Peek().stepName == "ChooseFamily")
             {
@@ -101,6 +93,7 @@ namespace NavajoWars
 
         public override void Undo()
         {
+            gm.LoadUndo(this);
             Begin();
         }
     }

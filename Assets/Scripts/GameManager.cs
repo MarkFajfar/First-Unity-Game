@@ -70,8 +70,8 @@ namespace NavajoWars
         void CreateFamiliesList()
         {
             gs.Families = new();
-            foreach (Family family in gs.AllFamilies) 
-            { if (family.IsActive) gs.Families.Add(family); }
+            //gs.Families.AddRange(gs.AllFamilies.Where(f => f.IsActive));
+            gs.Families = gs.AllFamilies.FindAll(f => f.IsActive);
         }
 
         internal void DeleteSaveAndStartNew()

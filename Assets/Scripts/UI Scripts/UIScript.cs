@@ -54,15 +54,6 @@ namespace NavajoWars
         {
             var clickedButton = evt.target as Button;
 
-            /*Action thingtodo = clickedButton.userData switch
-            {
-                GameStep clickedStep => clickedStep.Begin,
-                Action call => call,
-                _ => ClearChoicePanel
-            };
-
-            thingtodo?.Invoke();*/
-
             if (clickedButton.userData is GameStep clickedStep) 
             {
                 ClearChoicePanel(); // would a next step ever need to keep the panel?

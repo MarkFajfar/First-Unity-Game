@@ -31,7 +31,7 @@ namespace NavajoWars
             ui.MakeChoiceButtonsAsync(choices);
             ButtonInfo result = await IReceive.GetChoiceAsyncParams();
             ui.displayText("");
-            if (result.name == yes.name)
+            if (result == yes)
             {
                 gs.AP++;
                 ui.addText("One AP added. ");

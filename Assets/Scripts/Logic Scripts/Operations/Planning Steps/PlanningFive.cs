@@ -53,9 +53,9 @@ namespace NavajoWars
                     ui.MakeChoiceButtonsAsync(choices);
                     ButtonInfo result = await IReceive.GetChoiceAsyncParams();                    
                     // note - efficient to use async when next step is very simple; also, this is a loop
-                    if (result.name == choiceWar.name)
+                    if (result == choiceWar)
                     { gs.AP--; gs.MP--; }
-                    if (result.name == choiceDip.name)
+                    if (result == choiceDip)
                     { gs.AP--; gs.TradeGoodsHeld--; }
                     ui.displayText("");
                 }

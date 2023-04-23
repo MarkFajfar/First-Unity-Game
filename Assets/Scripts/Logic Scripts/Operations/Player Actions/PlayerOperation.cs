@@ -25,10 +25,10 @@ namespace NavajoWars
             ui.ShowChoiceButtons(choices);  
         }
 
-        void nextStep(ButtonInfo clickedParams) 
+        void nextStep(ButtonInfo info) 
         {
             gm.stepStack.Push(this);
-            clickedParams.gameStep.Begin();
+            info.gameStep.Begin();
         }
 
         public override void Undo()

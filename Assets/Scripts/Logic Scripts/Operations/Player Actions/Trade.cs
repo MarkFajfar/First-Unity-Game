@@ -49,8 +49,7 @@ namespace NavajoWars
         protected override void actionComplete()
         {
             base.actionComplete();
-            ChooseAnotherAction chooseAnotherAction = GetComponentInChildren<ChooseAnotherAction>();
-            chooseAnotherAction.Begin();
+            GetComponentInChildren<ChooseAnotherAction>().Begin();
         }
 
         public override void Undo()

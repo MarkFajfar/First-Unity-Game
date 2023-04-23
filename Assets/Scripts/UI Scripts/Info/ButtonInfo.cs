@@ -38,6 +38,7 @@ namespace NavajoWars
             this.text = text;
         }
 
+        // change to data rather than tabIndex?
         public ButtonInfo(string text, int tabIndex)
         {
             name = text.Replace(" ", "");

@@ -61,6 +61,8 @@ namespace NavajoWars
 
         public override void backClicked()
         {
+            // always clear choice panel?
+            ClearChoicePanel();
             // check first if any step in stack; if not, go to subscribers to backClicked
             if (gm.stepStack.Count > 0) gm.stepStack.Pop().Undo(); 
             else base.backClicked();
@@ -240,7 +242,6 @@ namespace NavajoWars
                 choiceToggle.visible = true;
                 choiceToggle.style.display = DisplayStyle.Flex;
             }
-            // move to makeToggleFromInfo method? or used only here?
         }
 
         void registerCallbacks(VisualElement ve) 
@@ -296,38 +297,6 @@ namespace NavajoWars
                 element.style.display = DisplayStyle.None;
                 element.RemoveFromHierarchy();
             }
-        }
-
-
-
-
-
-        public void makeTestButton()
-        {
-            choicePanel.style.display = DisplayStyle.Flex;
-            choicePanel.visible = true;
-            ChoiceButton button = new()
-            {
-                testString = "Test",
-                passback = testResult
-            };
-            button.RegisterCallback<ClickEvent>(testButtonClicked);
-            button.AddToClassList("ButtonMenu");
-            button.style.display = DisplayStyle.Flex;
-            choicePanel.Add(button);
-        }
-
-        void testButtonClicked(ClickEvent evt)
-        {
-            var clickedButton = evt.target as ChoiceButton;
-            print(clickedButton.testString);
-            clickedButton.ChangeText("Clicked!");
-            clickedButton.passback?.Invoke();
-        }
-
-        void testResult()
-        {
-            displayText("this is the test Result");
         }
     }
 }

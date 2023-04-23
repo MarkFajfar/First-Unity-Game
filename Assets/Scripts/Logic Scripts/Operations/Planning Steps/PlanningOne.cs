@@ -28,19 +28,17 @@ namespace NavajoWars
             ui.displayHeadline("Planning\nStep One");
             ui.displayText($"Place a {gs.CurrentCard.ThisCardPerson} in the Passage of Time Box, then press Next to continue.");
             gs.PersonsInPassage.Add(gs.CurrentCard.ThisCardPerson);
-            ui.OnNextClick += actionComplete;
+            ui.OnNextClick = actionComplete;
         }
 
         protected override void actionComplete()
         {
             base.actionComplete();
-            GameStep planningTwo = GetComponentInChildren<PlanningTwo>();
-            planningTwo.Begin();
+            GetComponentInChildren<PlanningTwo>().Begin();
         }
 
         public override void Undo()
         {
-            // reset complete marker??
             if (isCompleted)
             {
                 isCompleted = false;
@@ -48,7 +46,6 @@ namespace NavajoWars
             }
             gm.LoadUndo(this);
             Begin();
-            // stuff to do on undo
         }
     }
 }
