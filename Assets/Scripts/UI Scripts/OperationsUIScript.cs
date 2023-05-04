@@ -7,6 +7,8 @@ using static NavajoWars.MakeFromInfo;
 
 namespace NavajoWars
 {
+    public enum gsFunc { GameStateAP, ChildTest }
+
     public class OperationsUIScript : UIScript, IReceive
     {
         public GameObject LogicObject;
@@ -21,9 +23,26 @@ namespace NavajoWars
         public string[] choiceButtonStyles;
 
         VisualElement choicePanel;
-        RadioButtonGroup locations; 
+        RadioButtonGroup locations;
+        VisualElement statusPanel;
 
         [SerializeField] VisualTreeAsset foldoutChild;
+
+        // create a Dictionary of enum/Delegate
+        Dictionary<gsFunc, Delegate> functions = new();
+        // create a delegate that takes an int as a parameter
+        delegate void gsFuncDelInt(int v);        
+        // create a method that takes an int as a parameter
+        void gsFuncAP(int v) { gs.AP = v; } 
+        // in onEnable:
+        //   instantiate a new delegate of type gsFuncDelInt
+        //   set it equal to the method
+        //   add the delegate to the dictionary with its enum key
+        // same for a bool 
+        delegate void gsFuncDelFamilyBool(Family f, bool b, string s);
+        void gsFuncChild(Family f, bool b, string s) { f.HasChild = b; Debug.Log(s); }
+
+
 
         void OnEnable()
         {
@@ -52,6 +71,60 @@ namespace NavajoWars
                         
             choicePanel = root.Q<VisualElement>("ChoicePanel");
             locations = root.Q<RadioButtonGroup>("Locations");
+
+            statusPanel = root.Q<VisualElement>("StatusPanel");
+
+            gsFuncDelInt APDel = (int v) => gs.AP = v; 
+            gsFuncDelFamilyBool ChildDel = gsFuncChild;
+
+            functions.Add(gsFunc.GameStateAP, APDel);
+            functions.Add(gsFunc.ChildTest, ChildDel);
+
+            foreach (string function in Enum.GetNames(typeof(gsFunc)))
+            {
+                VisualElement element = statusPanel.Query(className: function);
+                var key = (gsFunc)Enum.Parse(typeof(gsFunc), function);
+                if (element is SliderInt slider) 
+                {
+                    gsFuncDelInt sliderFunc = (gsFuncDelInt)functions[key];
+                    slider.RegisterValueChangedCallback(v => sliderFunc(v.newValue));
+                }
+                if (element is Toggle toggle && 
+                    !element.GetClasses().ToList().
+                    Contains(Foldout.toggleUssClassName)) 
+                {
+                    //make separate method to check parent against Territories, etc.
+                    var parentClasses = toggle.parent.GetClasses().ToList();
+                    string parentClass = "";
+                    Family foldoutFamily = null;
+                    foreach (string terr in Enum.GetNames(typeof(Territory))) 
+                    { 
+                        if (parentClasses.Contains(terr)) parentClass = terr;
+                        // could register callback here
+                    }
+                    foreach (Family family in gs.AllFamilies) 
+                    {
+                        string name = family.Name.Replace(" ", "");
+                        if (parentClasses.Contains(name))
+                        {
+                            parentClass = name;
+                            foldoutFamily = family;
+                        }
+                    }
+                    // assign a family to test
+                    foldoutFamily = gs.Families[1]; // delete after testing
+                    if (foldoutFamily != null) 
+                    { 
+                        // register callback that passes v and foldoutFamily
+                    }
+                    if (parentClass != "")
+                    {
+                        // make delegate that takes v and parentClass
+                        gsFuncDelFamilyBool toggleFunc = (gsFuncDelFamilyBool)functions[key];
+                        toggle.RegisterValueChangedCallback(v => toggleFunc(foldoutFamily, v.newValue, parentClass));
+                    }
+                }
+            }
         }
 
         public override void nextClicked() 
@@ -157,7 +230,7 @@ namespace NavajoWars
         {
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
-            button.RegisterCallback<ClickEvent>(buttonClicked);
+            //button.RegisterCallback<ClickEvent>(buttonClicked);
             button.style.display = DisplayStyle.Flex;
             choicePanel.Add(button);
         }

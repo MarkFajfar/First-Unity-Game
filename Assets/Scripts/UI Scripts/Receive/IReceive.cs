@@ -36,7 +36,6 @@ namespace NavajoWars
             return result.Task.Result;
         }
 
-
         async static Task<ButtonInfo> GetChoiceAsyncParams()
         {
             ChoiceMadeParams.unsubChoiceMadeParams();

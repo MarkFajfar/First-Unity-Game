@@ -12,6 +12,7 @@ namespace NavajoWars
         Button confirm;
         Button back;
         Button quit;
+        Button test;
         
         TextField cardNumInput;
 
@@ -67,6 +68,7 @@ namespace NavajoWars
                 {
                     print($"Card Number {num} Selected");
                     gs.CurrentCardNum = num;
+                    gs.canBackToDraw = true;
                     gm.CardNumInput();   // "I'm finished; this is what happened"
                     // gs.PlayedCards.Add(num); //add to played cards when completed
                 }

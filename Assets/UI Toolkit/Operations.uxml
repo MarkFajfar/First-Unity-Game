@@ -1,15 +1,52 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/MainStyles.uss?fileID=7433441132597879392&amp;guid=5c28875138ec85a48a15204caaad60cc&amp;type=3#MainStyles" />
+    <Style src="project://database/Assets/UI%20Toolkit/FunctionClasses.uss?fileID=7433441132597879392&amp;guid=bbce1e7756d3e934a9fb49cd39e26ab1&amp;type=3#FunctionClasses" />
     <ui:VisualElement name="Root" picking-mode="Ignore" style="align-items: flex-start; justify-content: space-around; flex-grow: 1; flex-wrap: nowrap; flex-direction: column; overflow: hidden; flex-shrink: 0; max-height: 1920px;">
-        <ui:VisualElement picking-mode="Ignore" name="TopBar" style="flex-direction: row; align-items: flex-start; justify-content: space-between; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-wrap: wrap; max-height: none; flex-grow: 0; overflow: hidden; padding-left: 1%; padding-right: 1%; padding-top: 0; padding-bottom: 0; flex-basis: 18%; flex-shrink: 0;">
+        <ui:VisualElement picking-mode="Ignore" name="TopBar" style="flex-direction: row; align-items: flex-start; justify-content: space-between; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-wrap: wrap; max-height: none; flex-grow: 0; overflow: hidden; padding-left: 1%; padding-right: 1%; padding-top: 0; padding-bottom: 0; flex-basis: 18%; flex-shrink: 0; display: flex;">
             <ui:Button text="Prev" display-tooltip-when-elided="true" name="Prev" class="BackNext ButtonQuit" style="right: auto; left: auto; visibility: visible; position: relative; top: auto; height: 56px; width: 12%;" />
             <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="BackNext ButtonQuit" style="visibility: visible; position: relative; top: auto; right: auto; height: 56px;" />
             <ui:Label text="Operations" display-tooltip-when-elided="true" name="Headline" picking-mode="Ignore" class="Headline" style="width: 95%; height: auto; white-space: normal; flex-grow: 0; position: relative; top: auto; align-items: auto; margin-top: 4px;" />
         </ui:VisualElement>
-        <ui:VisualElement name="Body" style="flex-grow: 1; width: 100%; align-items: center; overflow: hidden; max-height: 80%; flex-shrink: 1; flex-basis: auto;">
+        <ui:ScrollView name="StatusPanel" picking-mode="Ignore" style="flex-grow: 1; width: 95%; height: 95%; margin-left: 18px; margin-right: 0; margin-top: 0; margin-bottom: 0; display: flex; visibility: visible; overflow: visible; transition-property: display; transition-duration: 1s; transition-timing-function: ease-in; transition-delay: 0s; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); font-size: 42px;">
+            <ui:TextField picking-mode="Ignore" label="Card" text="3" password="false" name="Card" is-delayed="true" style="width: 25%; left: 10%; -unity-text-align: upper-left;" />
+            <ui:SliderInt label="AP" value="5" high-value="19" show-input-field="true" name="AP" direction="Horizontal" class="SliderPoints GameStateAP" />
+            <ui:SliderInt label="CP" value="5" high-value="19" show-input-field="true" name="CP" direction="Horizontal" class="SliderPoints" />
+            <ui:SliderInt label="MP" value="5" high-value="19" show-input-field="true" name="MP" direction="Horizontal" class="SliderPoints" />
+            <ui:SliderInt label="Enemy Ferocity" value="5" high-value="19" show-input-field="true" name="EnemyFerocity" direction="Horizontal" class="SliderPoints" />
+            <ui:SliderInt label="Enemy Morale" value="5" high-value="19" show-input-field="true" name="EnemyMorale" direction="Horizontal" class="SliderPoints" />
+            <ui:Foldout text="Splitrock" name="Splitrock" value="false" class="Splitrock" style="left: 10%; width: 50%;">
+                <ui:Toggle label="Drought" name="SplitrockDrought" class="ChildTest" style="font-size: 32px;" />
+                <ui:Toggle label="Corn" name="SplitrockCorn" style="font-size: 32px;" />
+                <ui:Toggle label="Mission" name="SplitrockMission" style="font-size: 32px;" />
+                <ui:Toggle label="Rancho" name="SplitrockRancho" style="font-size: 32px;" />
+                <ui:Toggle label="Fort" name="SplitrockFort" style="font-size: 32px;" />
+            </ui:Foldout>
+            <ui:Foldout text="San Juan" name="SanJuan" value="false" class="SanJuan" style="left: 10%; width: 50%;">
+                <ui:Toggle label="Drought" name="SanJuanDrought" style="font-size: 32px;" />
+                <ui:Toggle label="Corn" name="SanJuanCorn" style="font-size: 32px;" />
+                <ui:Toggle label="Mission" name="SanJuanMission" style="font-size: 32px;" />
+                <ui:Toggle label="Rancho" name="SanJuanRancho" style="font-size: 32px;" />
+                <ui:Toggle label="Fort" name="SanJuanFort" style="font-size: 32px;" />
+            </ui:Foldout>
+            <ui:Foldout text="Zuni" name="Zuni" value="false" class="Zuni" style="left: 10%; width: 50%;">
+                <ui:Toggle label="Drought" name="ZuniDrought" style="font-size: 32px;" />
+                <ui:Toggle label="Corn" name="ZuniCorn" style="font-size: 32px;" />
+                <ui:Toggle label="Mission" name="ZuniMission" style="font-size: 32px;" />
+                <ui:Toggle label="Rancho" name="ZuniRancho" style="font-size: 32px;" />
+                <ui:Toggle label="Fort" name="ZuniFort" style="font-size: 32px;" />
+            </ui:Foldout>
+            <ui:Foldout text="Monument" name="Monument" value="false" class="Monument" style="left: 10%; width: 50%;">
+                <ui:Toggle label="Drought" name="MonumentDrought" style="font-size: 32px;" />
+                <ui:Toggle label="Corn" name="MonumentCorn" style="font-size: 32px;" />
+                <ui:Toggle label="Mission" name="MonumentMission" style="font-size: 32px;" />
+                <ui:Toggle label="Rancho" name="MonumentRancho" style="font-size: 32px;" />
+                <ui:Toggle label="Fort" name="MonumentFort" style="font-size: 32px;" />
+            </ui:Foldout>
+        </ui:ScrollView>
+        <ui:VisualElement name="Body" style="flex-grow: 1; width: 100%; align-items: center; overflow: hidden; max-height: 80%; flex-shrink: 1; flex-basis: auto; display: none;">
             <ui:VisualElement name="BodyTop" style="overflow: hidden; flex-grow: 1; padding-left: 4%; padding-right: 2%; padding-top: 0; padding-bottom: 0; flex-basis: auto; width: 100%;">
                 <ui:ScrollView name="MessagePanel" picking-mode="Ignore" style="overflow: visible; flex-wrap: wrap; width: auto; align-items: stretch; justify-content: center; min-width: auto; min-height: auto; max-height: 100%;">
-                    <ui:Label text="Message text here." display-tooltip-when-elided="false" name="Message" picking-mode="Ignore" style="justify-content: flex-start; align-items: stretch; flex-wrap: wrap; width: auto; height: auto; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); -unity-text-align: upper-left; font-size: 72px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; margin-left: 2%; margin-right: 2%; margin-top: 1%; margin-bottom: 1%; white-space: normal; color: rgb(0, 0, 0); overflow: hidden; flex-shrink: 1; max-height: none;" />
+                    <ui:Label text="Message text here." display-tooltip-when-elided="false" name="Message" picking-mode="Ignore" class="TextDefault" />
                 </ui:ScrollView>
             </ui:VisualElement>
             <ui:VisualElement name="BodyBottom" style="flex-grow: 1; overflow: hidden; flex-basis: auto; width: 100%; align-items: center;">

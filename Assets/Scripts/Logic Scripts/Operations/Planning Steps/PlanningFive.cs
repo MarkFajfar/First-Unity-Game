@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace NavajoWars
 {
@@ -11,6 +9,8 @@ namespace NavajoWars
 
         bool isWarInstr;
         bool isDipInstr;
+
+        //TODO: add process for Tribal War and Diplomacy
 
         public override void Begin()
         {
@@ -32,7 +32,7 @@ namespace NavajoWars
 
         async void askDipWar()
         {
-            ui.hideBackNext();
+            //ui.hideBackNext();
             foreach (var family in gs.Families.Where(f => f.HasMan))
             {
                 if (gs.AP > 0 && (gs.MP > 0 || gs.TradeGoodsHeld > 0))
@@ -78,7 +78,6 @@ namespace NavajoWars
 
         public override void Undo()
         {
-            // reset complete marker??
             if (isCompleted)
             {
                 isCompleted = false;
@@ -86,7 +85,6 @@ namespace NavajoWars
             }
             gm.LoadUndo(this);
             Begin();
-            // stuff to do on undo
         }
     }
 }

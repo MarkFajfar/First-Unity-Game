@@ -12,7 +12,7 @@ namespace NavajoWars
         public string style = "ButtonMenu";
 
         public Action<ButtonInfo> passBack = null;
-
+        
         public Button Make()
         {
             Button button = new()
@@ -22,6 +22,31 @@ namespace NavajoWars
                 tabIndex = tabIndex,
                 userData = this
             };
+            button.AddToClassList(style);
+            return button;
+        }
+
+        public Button MakeWithCall()
+        {
+            Button button = new()
+            {
+                name = name,
+                text = text,
+                tabIndex = tabIndex,
+                userData = this
+            };
+            if (call != InvalidMessage) button.clicked += call.Invoke;
+            
+            if (passBack != null)
+            {
+                button.clickable.clickedWithEventInfo += (EventBase evt) =>
+                {
+                    var dButton = evt.target as Button;
+                    if (dButton.userData is ButtonInfo info)
+                        info.passBack.Invoke(info);
+                };
+            }
+            ;
             button.AddToClassList(style);
             return button;
         }

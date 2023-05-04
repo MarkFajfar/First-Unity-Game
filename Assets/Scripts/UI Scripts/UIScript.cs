@@ -44,6 +44,13 @@ namespace NavajoWars
 
         public abstract void ClearChoicePanel();
 
+        protected void choiceButtonClicked(EventBase evtBase)
+        {
+            // any choice-specific step to add?
+            var evt = evtBase as ClickEvent;
+            buttonClicked(evt);
+        }
+
         protected void choiceButtonClicked(ClickEvent evt) 
         {
             // any choice-specific step to add?
@@ -53,6 +60,8 @@ namespace NavajoWars
         protected void buttonClicked(ClickEvent evt)
         {
             var clickedButton = evt.target as Button;
+
+            
 
             if (clickedButton.userData is GameStep clickedStep) 
             {

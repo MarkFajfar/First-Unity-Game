@@ -17,7 +17,7 @@ namespace NavajoWars
             ui.displayHeadline("Planning\nStep Six");
             ui.displayText("Reset Cubes"); // add text from glossary
             ui.addText("Press Next to continue.");
-            ui.OnNextClick += resetCubes;
+            ui.OnNextClick = resetCubes;
         }
 
         void resetCubes() 
@@ -38,7 +38,7 @@ namespace NavajoWars
             gs.Recovery.Red = gs.Raided.Red;
             gs.Raided.Red = 0;
             ui.displayText($"The Raided Bowl is now empty, and the following cubes are in the Recovery Bowl:\nBlack: {gs.Recovery.Black}\nWhite: {gs.Recovery.White}\nBrown: {gs.Recovery.Brown}\nGreen: {gs.Recovery.Green}\nBlue: {gs.Recovery.Blue}\nYellow: {gs.Recovery.Yellow}\nRed: {gs.Recovery.Red}\nPress Next to continue.");
-            ui.OnNextClick += actionComplete;
+            ui.OnNextClick = actionComplete;
         }
 
         protected override void actionComplete()
@@ -49,7 +49,6 @@ namespace NavajoWars
 
         public override void Undo()
         {
-            // reset complete marker??
             if (isCompleted)
             {
                 isCompleted = false;
@@ -57,7 +56,6 @@ namespace NavajoWars
             }
             gm.LoadUndo(this);
             Begin();
-            // stuff to do on undo
         }
     }
 }

@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace NavajoWars
 {
@@ -23,7 +21,7 @@ namespace NavajoWars
             }
         }
 
-        //TODO revise to be calls rather than async
+        //TODO: revise to be calls rather than async?
         async void elderAction()
         {
             selectedF = new();
@@ -81,6 +79,8 @@ namespace NavajoWars
                                 ChangeFamilyFerocity1();
                                 ButtonInfo ferocityResult = await IReceive.GetChoiceAsyncParams();
                                 ChangeFamilyFerocity2(ferocityResult);
+                                ButtonInfo choiceUpDown = await IReceive.GetChoiceAsyncParams();
+                                ChangeFamilyFerocity3(choiceUpDown);
                             }
                         }
                         j++;
@@ -88,9 +88,9 @@ namespace NavajoWars
                 }
             }
             ui.displayHeadline("Elder Actions Completed");
-            ui.displayText("Press Next to continue.");
-            ui.showBackNext();
-            ui.OnNextClick += actionComplete;
+            ui.addText("Press Next to continue.");
+            //ui.showBackNext();
+            ui.OnNextClick = actionComplete;
         }
 
         void ChangeFamilyFerocity1()
@@ -99,37 +99,40 @@ namespace NavajoWars
             ui.displayText("Change one Family +/- 1. Must have a Man. If increased and MP<5, add 1 MP. If decreased and CP<5, add 1 CP. Select Family.");
             listFerocityFamilies = gs.Families.Where(f => f.IsActive && f.HasMan && !selectedF.Contains(f.Name)).ToList();
             List<ButtonInfo> bFamilies = new();
-            //for each applicable family, create button using family name and index
-            //for (int i = 0; i < listFerocityFamilies.Count; i++)
+            //for each applicable family, create button 
             foreach (Family family in listFerocityFamilies)
             {
                 ButtonInfo bFamilyName = new(family.Name)
-                {
-                    family = family
-                };
+                { family = family };
                 bFamilies.Add(bFamilyName);
             }
             ui.MakeChoiceButtonsAsync(bFamilies);
         }
 
-
-        async void ChangeFamilyFerocity2(ButtonInfo result)
+        void ChangeFamilyFerocity2(ButtonInfo result)
         {
-            // convert back to family name and add to end of list
+            // get family name and add to list
             selectedF.Add(result.family.Name); //(listFerocityFamilies[result.tabIndex].Name);
-            Family selectedFamily = result.family; //gs.Families.First(f => f.Name == result.text);
-            ui.displayText($"{selectedFamily.Name} selected. ");
-            ButtonInfo increase = new("Increase");
-            ButtonInfo decrease = new("Decrease");
+            ui.displayText($"{result.family.Name} selected. ");
+            ButtonInfo increase = new("Increase")
+            {
+                data = true,
+                family = result.family
+            };
+            ButtonInfo decrease = new("Decrease")
+            {
+                data = false,
+                family = result.family
+            };
             List<ButtonInfo> UpDown = new() { increase, decrease };
             string MPremind = gs.MP < 5 ? "Increase will add 1 MP. " : "Increase will not add MP. ";
             string CPremind = gs.CP < 5 ? "Decrease will add 1 CP. " : "Decrease will not add CP. ";
-            if (selectedFamily.Ferocity == 3)
+            if (result.family.Ferocity == 3)
             {
                 ui.addText(CPremind);
                 UpDown.Remove(increase);
             }
-            else if (selectedFamily.Ferocity == 0)
+            else if (result.family.Ferocity == 0)
             {
                 ui.addText(MPremind);
                 UpDown.Remove(decrease);
@@ -139,18 +142,21 @@ namespace NavajoWars
                 ui.addText($"Increase or Decrease Ferocity? " + MPremind + CPremind);
             }
             ui.MakeChoiceButtonsAsync(UpDown);
-            ButtonInfo choiceUpDown = await IReceive.GetChoiceAsyncParams();
-            if (choiceUpDown == increase)
+        }
+
+        void ChangeFamilyFerocity3(ButtonInfo result)
+        {
+            if ((bool)result.data == true)
             {
-                selectedFamily.Ferocity++;
-                gs.MP += gs.MP < 5 ? 1 : 0;
-                ui.displayText($"{selectedFamily.Name} Ferocity is now {selectedFamily.Ferocity} and there are {gs.MP} MP.\n");
+                result.family.Ferocity++;
+                if (gs.MP < 5) gs.MP++;
+                ui.displayText($"{result.family.Name} Ferocity is now {result.family.Ferocity} and there are {gs.MP} MP.\n");
             }
-            if (choiceUpDown == decrease)
+            if ((bool)result.data == false)
             {
-                selectedFamily.Ferocity--;
+                result.family.Ferocity--;
                 gs.CP += gs.CP < 5 ? 1 : 0;
-                ui.displayText($"{selectedFamily.Name} Ferocity is now {selectedFamily.Ferocity} and there are {gs.CP} CP.\n");
+                ui.displayText($"{result.family.Name} Ferocity is now {result.family.Ferocity} and there are {gs.CP} CP.\n");
             }
         }
 

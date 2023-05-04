@@ -1,8 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace NavajoWars
 {
@@ -41,9 +39,10 @@ namespace NavajoWars
 
         void spend(ButtonInfo result) 
         {
-            gs.AP -= (int)result.data;
-            gs.TradeGoodsHeld += (int)result.data;
-            ui.displayText($"Spending {(int)result.data} AP leaves {gs.AP} AP.\n{gs.TradeGoodsHeld} Trade Goods Held. Press Next to continue.");
+            int spent = (int)result.data; 
+            gs.AP -= spent;
+            gs.TradeGoodsHeld += spent;
+            ui.displayText($"Spending {spent} AP leaves {gs.AP} AP.\n{gs.TradeGoodsHeld} Trade Goods Held. Press Next to continue.");
             ui.OnNextClick = actionComplete;
         }
 
