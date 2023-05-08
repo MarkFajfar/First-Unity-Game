@@ -1,4 +1,5 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="StatusPanel" src="project://database/Assets/UI%20Toolkit/StatusPanel.uxml?fileID=9197481963319205126&amp;guid=ebeeedc8b069e454793778bc2cdcc88b&amp;type=3#StatusPanel" />
     <Style src="project://database/Assets/UI%20Toolkit/MainStyles.uss?fileID=7433441132597879392&amp;guid=5c28875138ec85a48a15204caaad60cc&amp;type=3#MainStyles" />
     <Style src="project://database/Assets/UI%20Toolkit/FunctionClasses.uss?fileID=7433441132597879392&amp;guid=bbce1e7756d3e934a9fb49cd39e26ab1&amp;type=3#FunctionClasses" />
     <ui:VisualElement name="Root" picking-mode="Ignore" style="align-items: flex-start; justify-content: space-around; flex-grow: 1; flex-wrap: nowrap; flex-direction: column; overflow: hidden; flex-shrink: 0; max-height: 1920px;">
@@ -7,43 +8,7 @@
             <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="BackNext ButtonQuit" style="visibility: visible; position: relative; top: auto; right: auto; height: 56px;" />
             <ui:Label text="Operations" display-tooltip-when-elided="true" name="Headline" picking-mode="Ignore" class="Headline" style="width: 95%; height: auto; white-space: normal; flex-grow: 0; position: relative; top: auto; align-items: auto; margin-top: 4px;" />
         </ui:VisualElement>
-        <ui:ScrollView name="StatusPanel" picking-mode="Ignore" style="flex-grow: 1; width: 95%; height: 95%; margin-left: 18px; margin-right: 0; margin-top: 0; margin-bottom: 0; display: flex; visibility: visible; overflow: visible; transition-property: display; transition-duration: 1s; transition-timing-function: ease-in; transition-delay: 0s; -unity-font: resource(&apos;Fonts/EBGaramond-Medium&apos;); -unity-font-definition: resource(&apos;Fonts/EBGaramond-Medium SDF&apos;); font-size: 42px;">
-            <ui:TextField picking-mode="Ignore" label="Card" text="3" password="false" name="Card" is-delayed="true" style="width: 25%; left: 10%; -unity-text-align: upper-left;" />
-            <ui:SliderInt label="AP" value="5" high-value="19" show-input-field="true" name="AP" direction="Horizontal" class="SliderPoints GameStateAP" />
-            <ui:SliderInt label="CP" value="5" high-value="19" show-input-field="true" name="CP" direction="Horizontal" class="SliderPoints" />
-            <ui:SliderInt label="MP" value="5" high-value="19" show-input-field="true" name="MP" direction="Horizontal" class="SliderPoints" />
-            <ui:SliderInt label="Enemy Ferocity" value="5" high-value="19" show-input-field="true" name="EnemyFerocity" direction="Horizontal" class="SliderPoints" />
-            <ui:SliderInt label="Enemy Morale" value="5" high-value="19" show-input-field="true" name="EnemyMorale" direction="Horizontal" class="SliderPoints" />
-            <ui:Foldout text="Splitrock" name="Splitrock" value="false" class="Splitrock" style="left: 10%; width: 50%;">
-                <ui:Toggle label="Drought" name="SplitrockDrought" class="ChildTest" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="SplitrockCorn" style="font-size: 32px;" />
-                <ui:Toggle label="Mission" name="SplitrockMission" style="font-size: 32px;" />
-                <ui:Toggle label="Rancho" name="SplitrockRancho" style="font-size: 32px;" />
-                <ui:Toggle label="Fort" name="SplitrockFort" style="font-size: 32px;" />
-            </ui:Foldout>
-            <ui:Foldout text="San Juan" name="SanJuan" value="false" class="SanJuan" style="left: 10%; width: 50%;">
-                <ui:Toggle label="Drought" name="SanJuanDrought" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="SanJuanCorn" style="font-size: 32px;" />
-                <ui:Toggle label="Mission" name="SanJuanMission" style="font-size: 32px;" />
-                <ui:Toggle label="Rancho" name="SanJuanRancho" style="font-size: 32px;" />
-                <ui:Toggle label="Fort" name="SanJuanFort" style="font-size: 32px;" />
-            </ui:Foldout>
-            <ui:Foldout text="Zuni" name="Zuni" value="false" class="Zuni" style="left: 10%; width: 50%;">
-                <ui:Toggle label="Drought" name="ZuniDrought" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="ZuniCorn" style="font-size: 32px;" />
-                <ui:Toggle label="Mission" name="ZuniMission" style="font-size: 32px;" />
-                <ui:Toggle label="Rancho" name="ZuniRancho" style="font-size: 32px;" />
-                <ui:Toggle label="Fort" name="ZuniFort" style="font-size: 32px;" />
-            </ui:Foldout>
-            <ui:Foldout text="Monument" name="Monument" value="false" class="Monument" style="left: 10%; width: 50%;">
-                <ui:Toggle label="Drought" name="MonumentDrought" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="MonumentCorn" style="font-size: 32px;" />
-                <ui:Toggle label="Mission" name="MonumentMission" style="font-size: 32px;" />
-                <ui:Toggle label="Rancho" name="MonumentRancho" style="font-size: 32px;" />
-                <ui:Toggle label="Fort" name="MonumentFort" style="font-size: 32px;" />
-            </ui:Foldout>
-        </ui:ScrollView>
-        <ui:VisualElement name="Body" style="flex-grow: 1; width: 100%; align-items: center; overflow: hidden; max-height: 80%; flex-shrink: 1; flex-basis: auto; display: none;">
+        <ui:VisualElement name="Body" style="flex-grow: 1; width: 100%; align-items: center; overflow: hidden; max-height: 80%; flex-shrink: 1; flex-basis: auto; display: flex;">
             <ui:VisualElement name="BodyTop" style="overflow: hidden; flex-grow: 1; padding-left: 4%; padding-right: 2%; padding-top: 0; padding-bottom: 0; flex-basis: auto; width: 100%;">
                 <ui:ScrollView name="MessagePanel" picking-mode="Ignore" style="overflow: visible; flex-wrap: wrap; width: auto; align-items: stretch; justify-content: center; min-width: auto; min-height: auto; max-height: 100%;">
                     <ui:Label text="Message text here." display-tooltip-when-elided="false" name="Message" picking-mode="Ignore" class="TextDefault" />
@@ -57,8 +22,10 @@
                 </ui:ScrollView>
             </ui:VisualElement>
         </ui:VisualElement>
+        <ui:Instance template="StatusPanel" name="StatusPanel" style="width: 95%;" />
         <ui:VisualElement name="BottomBar" style="position: relative; width: 100%; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-grow: 0; justify-content: space-between; flex-shrink: 0; flex-direction: row; align-items: flex-end; margin-left: 0; padding-left: 2%; padding-right: 2%; flex-basis: 10%;">
             <ui:Button text="Back" display-tooltip-when-elided="false" name="Back" class="BackNext" style="visibility: visible; top: auto; bottom: auto; height: 150px; padding-top: 10px; margin-bottom: 24px; position: relative; left: auto;" />
+            <ui:Button text="Status" display-tooltip-when-elided="false" name="Status" class="BackNext" style="visibility: visible; top: auto; bottom: auto; height: 150px; padding-top: 10px; margin-bottom: 24px; position: relative; left: auto;" />
             <ui:Button text="Next" display-tooltip-when-elided="false" name="Next" class="BackNext" style="left: auto; right: auto; visibility: visible; top: auto; height: 150px; margin-bottom: 24px; position: relative; bottom: auto;" />
         </ui:VisualElement>
     </ui:VisualElement>

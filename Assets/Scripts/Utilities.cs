@@ -75,6 +75,15 @@ namespace NavajoWars
             Debug.Log($"Second Horse Test tfA: {tfA.HasHorse}, {sf11.family1 == list1[0]}");
         }
 
+        static Family FamilyA = new() { Name = "Family A" };
+        [MenuItem("Utilities/FamilyTest")]
+        public static void FamilyTest() 
+        { 
+            Debug.Log("nameof: " + nameof(FamilyA));
+            Debug.Log("Name:   " + FamilyA.Name); 
+        }
+
+
         [MenuItem("Utilities/RunScenarioTest")]
         public static void RunScenarioTest()
         {

@@ -7,8 +7,6 @@ using static NavajoWars.MakeFromInfo;
 
 namespace NavajoWars
 {
-    public enum gsFunc { GameStateAP, ChildTest }
-
     public class OperationsUIScript : UIScript, IReceive
     {
         public GameObject LogicObject;
@@ -20,29 +18,15 @@ namespace NavajoWars
         Button quit;
         Button back;
         Button next;
+        Button status;
         public string[] choiceButtonStyles;
 
+        VisualElement bodyPanel;
         VisualElement choicePanel;
-        RadioButtonGroup locations;
         VisualElement statusPanel;
-
+        RadioButtonGroup locations;
+        
         [SerializeField] VisualTreeAsset foldoutChild;
-
-        // create a Dictionary of enum/Delegate
-        Dictionary<gsFunc, Delegate> functions = new();
-        // create a delegate that takes an int as a parameter
-        delegate void gsFuncDelInt(int v);        
-        // create a method that takes an int as a parameter
-        void gsFuncAP(int v) { gs.AP = v; } 
-        // in onEnable:
-        //   instantiate a new delegate of type gsFuncDelInt
-        //   set it equal to the method
-        //   add the delegate to the dictionary with its enum key
-        // same for a bool 
-        delegate void gsFuncDelFamilyBool(Family f, bool b, string s);
-        void gsFuncChild(Family f, bool b, string s) { f.HasChild = b; Debug.Log(s); }
-
-
 
         void OnEnable()
         {
@@ -68,63 +52,14 @@ namespace NavajoWars
             
             quit = root.Q<Button>("Quit");
             quit.clicked += quitClicked;
-                        
+
+            status = root.Q<Button>("Status");
+            status.clicked += statusClicked;
+
+            bodyPanel = root.Q<VisualElement>("Body");
             choicePanel = root.Q<VisualElement>("ChoicePanel");
-            locations = root.Q<RadioButtonGroup>("Locations");
-
             statusPanel = root.Q<VisualElement>("StatusPanel");
-
-            gsFuncDelInt APDel = (int v) => gs.AP = v; 
-            gsFuncDelFamilyBool ChildDel = gsFuncChild;
-
-            functions.Add(gsFunc.GameStateAP, APDel);
-            functions.Add(gsFunc.ChildTest, ChildDel);
-
-            foreach (string function in Enum.GetNames(typeof(gsFunc)))
-            {
-                VisualElement element = statusPanel.Query(className: function);
-                var key = (gsFunc)Enum.Parse(typeof(gsFunc), function);
-                if (element is SliderInt slider) 
-                {
-                    gsFuncDelInt sliderFunc = (gsFuncDelInt)functions[key];
-                    slider.RegisterValueChangedCallback(v => sliderFunc(v.newValue));
-                }
-                if (element is Toggle toggle && 
-                    !element.GetClasses().ToList().
-                    Contains(Foldout.toggleUssClassName)) 
-                {
-                    //make separate method to check parent against Territories, etc.
-                    var parentClasses = toggle.parent.GetClasses().ToList();
-                    string parentClass = "";
-                    Family foldoutFamily = null;
-                    foreach (string terr in Enum.GetNames(typeof(Territory))) 
-                    { 
-                        if (parentClasses.Contains(terr)) parentClass = terr;
-                        // could register callback here
-                    }
-                    foreach (Family family in gs.AllFamilies) 
-                    {
-                        string name = family.Name.Replace(" ", "");
-                        if (parentClasses.Contains(name))
-                        {
-                            parentClass = name;
-                            foldoutFamily = family;
-                        }
-                    }
-                    // assign a family to test
-                    foldoutFamily = gs.Families[1]; // delete after testing
-                    if (foldoutFamily != null) 
-                    { 
-                        // register callback that passes v and foldoutFamily
-                    }
-                    if (parentClass != "")
-                    {
-                        // make delegate that takes v and parentClass
-                        gsFuncDelFamilyBool toggleFunc = (gsFuncDelFamilyBool)functions[key];
-                        toggle.RegisterValueChangedCallback(v => toggleFunc(foldoutFamily, v.newValue, parentClass));
-                    }
-                }
-            }
+            locations = root.Q<RadioButtonGroup>("Locations");
         }
 
         public override void nextClicked() 
@@ -141,6 +76,27 @@ namespace NavajoWars
             else base.backClicked();
         }
 
+        protected override void statusClicked()
+        {
+            // base.statusClicked();
+            // switch display of statusPanel and bodyPanel
+            /*var showing = statusPanel.style.display;
+            statusPanel.style.display = bodyPanel.style.display;
+            bodyPanel.style.display = showing;*/
+            if (statusPanel.style.display == DisplayStyle.None)
+            {
+                statusPanel.style.display = DisplayStyle.Flex;
+                print("Status panel: " + statusPanel.style.display);
+                bodyPanel.style.display = DisplayStyle.None;
+            }
+            else 
+            {
+                statusPanel.style.display = DisplayStyle.None;
+                print("Status panel: " + statusPanel.style.display);
+                bodyPanel.style.display = DisplayStyle.Flex;
+            }
+        }
+
         void Start()
         {
             // called when scene "Operations" is loaded, called from gm
@@ -154,6 +110,8 @@ namespace NavajoWars
             back.visible = false;
             next.visible = false;
             quit.visible = true;
+            status.visible = true;
+            statusPanel.style.display = DisplayStyle.None;
             // ClearChoicePanel(); // this is called later, messing up load?
         }
 
@@ -163,8 +121,11 @@ namespace NavajoWars
             quit.visible = true;
             back.visible = true;
             next.visible = true;
+            status.visible= true;
             headline.visible = true;
             message.visible = true;
+            bodyPanel.style.display = DisplayStyle.Flex;
+            statusPanel.style.display = DisplayStyle.None;
             choicePanel.visible = false;
             ClearChoicePanel();
         }

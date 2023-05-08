@@ -34,7 +34,7 @@ namespace NavajoWars
             gs.AP = scenario.AP;
             gs.CP = scenario.CP;
             gs.MP = scenario.MP;
-            gs.Ferocity = scenario.Ferocity;
+            gs.EnemyFerocity = scenario.Ferocity;
             gs.Morale = scenario.Morale;
 
             gs.HorsesHeld = scenario.Horses;
@@ -86,6 +86,16 @@ namespace NavajoWars
             if (FamilyF.IsActive) gs.Families.Add(FamilyF);
 
             gs.AllFamilies = new() { FamilyA, FamilyB, FamilyC, FamilyD, FamilyE, FamilyF };
+
+            foreach (var f in gs.AllFamilies)
+            {
+                if (!f.IsActive)
+                {
+                    f.HasMan = false;
+                    f.HasWoman = false;
+                    f.HasChild = false;
+                }
+            }
 
             // setup initial game info
 

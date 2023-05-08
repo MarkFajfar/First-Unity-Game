@@ -345,7 +345,7 @@
 .SliderPoints {
     left: 10%;
     width: 400px;
-    height: 100px;
+    height: 120px;
     font-size: 42px;
     -unity-text-align: middle-left;
     align-items: center;
@@ -354,8 +354,6 @@
     margin-right: 0;
     margin-top: 0;
     margin-bottom: 0;
-    padding-top: 8px;
-    padding-bottom: 8px;
 }
 
 .unity-base-slider__text-field {
@@ -374,4 +372,20 @@
 .unity-base-slider__label {
     white-space: normal;
     max-width: 100px;
+}
+
+.FoldoutHeading {
+    font-size: 52px;
+    left: 10%;
+    width: 90%;
+    padding-top: 22px;
+}
+
+.FoldoutItem {
+    left: 10%;
+    width: 50%;
+}
+
+.ToggleInFoldout {
+    font-size: 32px;
 }

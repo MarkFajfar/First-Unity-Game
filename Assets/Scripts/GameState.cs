@@ -54,9 +54,9 @@ namespace NavajoWars
         public int Morale
         { get => morale; set => morale = value; }
         [SerializeField] int morale;
-        public int Ferocity
-        { get => ferocity; set => ferocity = value; }
-        [SerializeField] int ferocity;
+        public int EnemyFerocity
+        { get => enemyFerocity; set => enemyFerocity = value; }
+        [SerializeField] int enemyFerocity;
         public int EnemyAP
         { get => enemyAP; set => enemyAP = value; }
         [SerializeField] int enemyAP;

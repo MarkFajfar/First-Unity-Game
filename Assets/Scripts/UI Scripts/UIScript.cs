@@ -164,6 +164,9 @@ namespace NavajoWars
         public virtual void quitClicked()
         { gm.ExitGame(); }
 
+        protected virtual void statusClicked()
+        { }
+
         public virtual void unsubBack()
         {
             if (OnBackClick != null)

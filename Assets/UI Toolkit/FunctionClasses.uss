@@ -1,7 +1,11 @@
-.GameStateAP {
-}
+.AP { } .CP { } .MP { } .Morale { } .EnemyFerocity { } .EnemyRaid { }
 
-.ChildTest {
-}
+.TradeGoodsHeld { } .SheepHeld { } .HorsesHeld { } .Firearms { }
+
+.HasDrought { } .HasCorn { } .HasMission { } .HasRancho { } .HasFort { }
 
 .SantaFe { } .Splitrock { } .SanJuan { } .Zuni { } .Monument { } .Hopi { } .BlackMesa { } .Canyon { } 
+
+.IsActive { } .Man { } .Woman { } .Child { } .Elder { } .Horse { } .IsWhere { }
+
+.FamilyA { } .FamilyB { } .FamilyC { } .FamilyD { } .FamilyE { } .FamilyF { }
