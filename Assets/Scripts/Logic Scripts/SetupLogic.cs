@@ -94,6 +94,7 @@ namespace NavajoWars
                     f.HasMan = false;
                     f.HasWoman = false;
                     f.HasChild = false;
+                    f.IsWhere = Territory.Default;
                 }
             }
 
@@ -129,7 +130,7 @@ namespace NavajoWars
         {
             gs.Families[fNum].IsWhere = (Territory)ui.locations.value+1;
             gs.Families[fNum].Ferocity = ui.ferocities.value;
-            print($"Location of {gs.Families[fNum].Name} is {gs.Families[fNum].IsWhere.ToString()}");
+            print($"Location of {gs.Families[fNum].Name} is {gs.Families[fNum].IsWhere}");
             print($"Ferocity of {gs.Families[fNum].Name} is {gs.Families[fNum].Ferocity}");
             fNum++;
             if (fNum < gs.Families.Count) assignFamilyValues();

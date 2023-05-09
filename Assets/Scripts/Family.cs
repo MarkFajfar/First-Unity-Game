@@ -21,7 +21,7 @@ namespace NavajoWars
         public bool HasHorse { get => hasHorse; set => hasHorse = value; }
         [SerializeField] bool hasHorse = false;
         public Territory IsWhere { get => isWhere; set => isWhere = value; }
-        [SerializeField] Territory isWhere = Territory.Splitrock;
+        [SerializeField] Territory isWhere = Territory.Default;
         public int Ferocity { get => ferocity; set => ferocity = value; }
         [SerializeField] int ferocity = 0;
 

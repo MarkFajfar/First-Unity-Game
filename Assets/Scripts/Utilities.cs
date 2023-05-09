@@ -25,6 +25,15 @@ namespace NavajoWars
             return obj;
         }
 
+        [MenuItem("Utilities/Dropdown Test")]
+        public static void SetupTest() 
+        {
+            //var gmobj = GameObject.FindWithTag("GameController");
+            //var gs = gmobj.GetComponent<GameState>();
+            print("placeholder");
+        }
+        
+
         [MenuItem("Utilities/ObjTest")]
         public static void ObjTest()
         {
