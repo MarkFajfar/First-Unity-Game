@@ -285,8 +285,8 @@ namespace NavajoWars
             foreach (var toggle in ve.Query<Toggle>().ToList())
             {
                 // check if toggle is sub-element of a foldout 
-                List<string> classes = (List<string>)toggle.GetClasses();
-                if (!classes.Contains(Foldout.toggleUssClassName))
+                //List<string> classes = (List<string>)toggle.GetClasses();
+                if (!toggle.ClassListContains(Foldout.toggleUssClassName))
                 toggle.RegisterValueChangedCallback(toggleValueChanged);
             }
         }
@@ -326,7 +326,9 @@ namespace NavajoWars
 
             CloseLocations();
 
-            foreach (VisualElement element in choiceElements)
+            var kids = choicePanel.Children();
+
+            foreach (VisualElement element in kids)
             {
                 element.style.display = DisplayStyle.None;
                 element.RemoveFromHierarchy();

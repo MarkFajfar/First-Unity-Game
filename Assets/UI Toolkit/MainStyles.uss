@@ -389,3 +389,66 @@
 .ToggleInFoldout {
     font-size: 32px;
 }
+
+.ToggleMan .unity-toggle__checkmark {
+    background-image: resource('Textures/Counters/Counter Man');
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.52);
+    align-items: flex-start;
+    width: 48px;
+    height: 48px;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-right: 0;
+}
+
+.ToggleWoman .unity-toggle__checkmark {
+    background-image: resource('Textures/Counters/Counter Woman');
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.52);
+    align-items: flex-start;
+    width: 48px;
+    height: 48px;
+    padding-left: 0;
+    padding-right: 8;
+}
+
+.ToggleChild .unity-toggle__checkmark {
+    background-image: resource('Textures/Counters/Counter Child');
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.52);
+    align-items: flex-start;
+    width: 48px;
+    height: 48px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.ToggleMan .unity-toggle__input:checked {
+    background-image: resource('Textures/Counters/Counter Man');
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    align-items: auto;
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ToggleWoman .unity-toggle__input:checked {
+    background-image: resource('Textures/Counters/Counter Woman');
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.ToggleChild .unity-toggle__input:checked {
+    background-image: resource('Textures/Counters/Counter Child');
+    background-color: rgba(255, 255, 255, 0);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
+    -unity-background-scale-mode: scale-to-fit;
+}
+
+.RadioButtonFerocity .unity-base-field__input {
+    font-size: 32px;
+    flex-direction: row;
+}

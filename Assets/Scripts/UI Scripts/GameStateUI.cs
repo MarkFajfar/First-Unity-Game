@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static NavajoWars.GameStateFunction;
+using gsfo = NavajoWars.GameStateUI.GameStateFunctionObject;
 
 namespace NavajoWars
 {
@@ -23,37 +25,40 @@ namespace NavajoWars
         GameManager gm;
         GameState gs;
 
-        delegate void Delegate(gsFuncObj obj);
-        delegate int DelegateInt();
-        delegate bool DelegateBool();
-        delegate Territory DelegateTerritory();
-        delegate List<Territory> DelegateListTerritory();
+        public delegate void Delegate(GameStateFunctionObject obj);
+        public delegate int DelegateInt();
+        public delegate bool DelegateBool();
+        public delegate Territory DelegateTerritory();
+        public delegate List<Territory> DelegateListTerritory();
 
         VisualElement statusPanel;
         Button status;
 
         // string FoldoutClassName = Foldout.toggleUssClassName;
 
-        class gsFuncObj
+        public class GameStateFunctionObject
         {
-            public GameStateFunction gsFunc;
+            public GameStateFunction tag;
             public Delegate callback;
-            public VisualElement ve;
-            public DelegateInt getV = null;
-            public int setV;
-            public DelegateBool getB = null;
-            public bool setB;
+            public VisualElement ve = null;
+            public DelegateInt getValue = null;
+            public int setValue;
+            public DelegateBool getBool = null;
+            public bool setBool;
             public Family f = null;
             public Territory t = Territory.Default;
             public DelegateTerritory getT = null; // necessary?
             public DelegateListTerritory getListT = null; // necessary
-            public VisualElement p = null;
+            public VisualElement parent = null;
 
-            public gsFuncObj() { }
+            public GameStateFunctionObject() { }
+
+            public GameStateFunctionObject(GameStateFunction tag) 
+            { this.tag = tag; }
         }
 
-        List<gsFuncObj> gsFuncObjects = new();
-        List<gsFuncObj> familyActiveCheck = new();
+        List<GameStateFunctionObject> gsfObjects = new();
+        List<GameStateFunctionObject> familyActiveCheck = new();
 
         void Awake()
         {
@@ -74,227 +79,222 @@ namespace NavajoWars
 
         void initializeFunctions()
         {
-            gsFuncObjects.Add(new()
+            gsfo[] toplevelObjects = 
+            { 
+                new(AP)
+                {
+                    callback = new((gsfo obj) => gs.AP = obj.setValue),
+                    getValue = delegate { return gs.AP; }
+                },
+                new(CP) 
+                {
+                    callback = new((gsfo obj) => gs.CP = obj.setValue),
+                    getValue = delegate { return gs.CP; }
+                },
+                new(MP)
+                {
+                    callback = new((gsfo obj) => gs.MP = obj.setValue),
+                    getValue = delegate { return gs.MP; }
+                },
+                new(Morale)
+                {
+                    callback = new((gsfo obj) => gs.Morale = obj.setValue),
+                    getValue = delegate { return gs.Morale; }
+                },
+                new(EnemyFerocity)
+                {
+                    callback = new((gsfo obj) => gs.EnemyFerocity = obj.setValue),
+                    getValue = delegate { return gs.EnemyFerocity; }
+                } 
+            };
+
+            foreach (gsfo obj  in toplevelObjects)
             {
-                gsFunc = AP,
-                callback = new((gsFuncObj obj) => gs.AP = obj.setV),
-                // setting gs.AP value is different from setting obj.v!!
-                getV = delegate { return gs.AP; },
-                ve = elem(AP)
-            } );
-            gsFuncObjects.Add(new()
-            {
-                gsFunc = CP,
-                callback = new((gsFuncObj obj) => gs.CP = obj.setV),
-                getV = delegate { return gs.CP; },
-                ve = elem(CP)
-            }); 
-            gsFuncObjects.Add(new()
-            {
-                gsFunc = MP,
-                callback = new((gsFuncObj obj) => gs.MP = obj.setV),
-                getV = delegate { return gs.MP; },
-                ve = elem(MP)
-            }); 
-            gsFuncObjects.Add(new()
-            {
-                gsFunc = Morale,
-                callback = new((gsFuncObj obj) => gs.Morale = obj.setV),
-                getV = delegate { return gs.Morale; },
-                ve = elem(Morale)
-            }); 
-            gsFuncObjects.Add(new()
-            {
-                gsFunc = EnemyFerocity,
-                callback = new((gsFuncObj obj) => gs.EnemyFerocity = obj.setV),
-                getV = delegate { return gs.EnemyFerocity; },
-                ve = elem(EnemyFerocity)
-            });
+                obj.ve = elem(obj.tag);
+                gsfObjects.Add(obj);
+            }
 
             foreach (Family family in gs.AllFamilies)
             {
                 VisualElement foldout = elem(family.Name.Replace(" ", ""));
-                gsFuncObjects.Add(new()
+
+                gsfo[] familyObjects =
                 {
-                    gsFunc = IsActive,
-                    callback = new ((gsFuncObj obj) => { obj.f.IsActive = obj.setB;
-                        if (obj.setB) showChildren(obj.p);
-                        else
-                        {
-                            hideChildren(obj.p);
-                            obj.ve.style.display = DisplayStyle.Flex;
-                        }
-                    }),
-                    getB = delegate { return family.IsActive; },
-                    f = family,
-                    ve = elem(IsActive, foldout),
-                    p = (Foldout)foldout
-                });
-                gsFuncObjects.Add(new()
+                    new(IsActive)
+                    {
+                        callback = new((gsfo obj) => { obj.f.IsActive = obj.setBool;
+                            if (obj.setBool) showChildren(obj.parent);
+                            else
+                            {
+                                hideChildren(obj.parent);
+                                obj.ve.style.display = DisplayStyle.Flex;
+                            }
+                        }),
+                        getBool = delegate { return family.IsActive; }
+                    },
+                    new(Man)
+                    {
+                        callback = new((gsfo obj) => obj.f.HasMan = obj.setBool),
+                        getBool = delegate { return family.HasMan; }
+                    },
+                    new(Woman)
+                    {
+                        callback = new((gsfo obj) => obj.f.HasWoman = obj.setBool),
+                        getBool = delegate { return family.HasWoman; }
+                    },
+                    new(Child)
+                    {
+                        callback = new((gsfo obj) => obj.f.HasChild = obj.setBool),
+                        getBool = delegate { return family.HasChild; }
+                    },
+                    new(Horse)
+                    {
+                        callback = new((gsfo obj) => obj.f.HasHorse = obj.setBool),
+                        getBool = delegate { return family.HasHorse; }
+                    },
+                    new(IsWhere)
+                    {
+                        callback = new((gsfo obj) => obj.f.IsWhere = (Territory)obj.setValue + 1),
+                        getValue = delegate { return (int)family.IsWhere; }
+                    },
+                    new(Ferocity) 
+                    {
+                        callback = new((gsfo obj) => obj.f.Ferocity = obj.setValue),
+                        getValue = delegate { return family.Ferocity; }
+                    }
+                };
+
+                foreach (gsfo obj in familyObjects)
                 {
-                    gsFunc = Man,
-                    callback = new((gsFuncObj obj) => obj.f.HasMan = obj.setB),
-                    getB = delegate { return family.HasMan; },
-                    f = family,
-                    ve = elem(Man, foldout),
-                    p = (Foldout)foldout
-                });
-                gsFuncObjects.Add(new()
-                {
-                    gsFunc = Woman,
-                    callback = new((gsFuncObj obj) => obj.f.HasWoman = obj.setB),
-                    getB = delegate { return family.HasWoman; },
-                    f = family,
-                    ve = elem(Woman, foldout),
-                    p = (Foldout)foldout
-                });
-                gsFuncObjects.Add(new()
-                {
-                    gsFunc = Child,
-                    callback = new((gsFuncObj obj) => obj.f.HasChild = obj.setB),
-                    getB = delegate { return family.HasChild; },
-                    f = family,
-                    ve = elem(Child, foldout),
-                    p = (Foldout)foldout
-                });
-                gsFuncObjects.Add(new()
-                {
-                    gsFunc = Horse,
-                    callback = new((gsFuncObj obj) => obj.f.HasHorse = obj.setB),
-                    getB = delegate { return family.HasHorse; },
-                    f = family,
-                    ve = elem(Horse, foldout),
-                    p = (Foldout)foldout
-                });
-                gsFuncObjects.Add(new()
-                {
-                    gsFunc = IsWhere,
-                    callback = new ((gsFuncObj obj) => obj.f.IsWhere = (Territory)obj.setV + 1),
-                    getV = delegate { return (int)family.IsWhere; },
-                    f = family,
-                    ve = elem(IsWhere, foldout),
-                    p = (Foldout)foldout
-                });
+                    obj.f = family;
+                    obj.ve = elem(obj.tag, foldout);
+                    obj.parent = (Foldout)foldout;
+                    gsfObjects.Add(obj);
+                }
             }
 
             for (int i = 1; i < (int)Territory.Default; i++)
             {
-                Territory terr = (Territory)i;
-                VisualElement foldout = elem(terr.ToString());
+                Territory territory = (Territory)i;
+                VisualElement foldout = elem($"{territory}");
 
-                gsFuncObjects.Add(new()
+                gsfo[] territoryObjects =
                 {
-                    gsFunc = HasDrought,
-                    callback = new((gsFuncObj obj) =>
-                        toggleTerritoryValue(gs.HasDrought, obj.t, obj.setB)),
-                    t = terr,
-                    getB = delegate { return gs.HasDrought.Contains(terr); },
-                    ve = elem(HasDrought, foldout),
-                    p = (Foldout)foldout
-                });
-                gsFuncObjects.Add(new()
+                    new(HasDrought)
+                    {
+                        callback = new((gsfo obj) =>
+                            toggleTerritoryValue(gs.HasDrought, obj.t, obj.setBool)),
+                        getBool = delegate { return gs.HasDrought.Contains(territory); }
+                    },
+                    new(HasCorn)
+                    {
+                    callback = new((gsfo obj) =>
+                        toggleTerritoryValue(gs.HasCorn, obj.t, obj.setBool)),
+                    getBool = delegate { return gs.HasCorn.Contains(territory); }
+                    },
+                    new(HasMission)
+                    {
+                        callback = new((gsfo obj) =>
+                            toggleTerritoryValue(gs.HasMission, obj.t, obj.setBool)),
+                        getBool = delegate { return gs.HasMission.Contains(territory); }
+                    },
+                    new(HasRancho)
+                    {
+                        callback = new((gsfo obj) =>
+                            toggleTerritoryValue(gs.HasRancho, obj.t, obj.setBool)),
+                        getBool = delegate { return gs.HasRancho.Contains(territory); }
+                    },
+                    new(HasFort)
+                    {
+                        callback = new((gsfo obj) =>
+                            toggleTerritoryValue(gs.HasFort, obj.t, obj.setBool)),
+                        getBool = delegate { return gs.HasFort.Contains(territory); }
+                    }   
+                };
+                
+                foreach (gsfo obj in territoryObjects)
                 {
-                    gsFunc = HasCorn,
-                    callback = new((gsFuncObj obj) =>
-                        toggleTerritoryValue(gs.HasCorn, obj.t, obj.setB)),
-                    t = terr,
-                    getB = delegate { return gs.HasCorn.Contains(terr); },
-                    ve = elem(HasCorn, foldout),
-                    p = (Foldout)foldout
-                }); 
-                gsFuncObjects.Add(new()
-                {
-                    gsFunc = HasMission,
-                    callback = new((gsFuncObj obj) =>
-                        toggleTerritoryValue(gs.HasMission, obj.t, obj.setB)),
-                    t = terr,
-                    getB = delegate { return gs.HasMission.Contains(terr); },
-                    ve = elem(HasMission, foldout),
-                    p = (Foldout)foldout
-                }); 
-                gsFuncObjects.Add(new()
-                {
-                    gsFunc = HasRancho,
-                    callback = new((gsFuncObj obj) =>
-                        toggleTerritoryValue(gs.HasRancho, obj.t, obj.setB)),
-                    t = terr,
-                    getB = delegate { return gs.HasRancho.Contains(terr); },
-                    ve = elem(HasRancho, foldout),
-                    p = (Foldout)foldout
-                }); 
-                gsFuncObjects.Add(new()
-                {
-                    gsFunc = HasFort,
-                    callback = new((gsFuncObj obj) =>
-                        toggleTerritoryValue(gs.HasFort, obj.t, obj.setB)),
-                    t = terr,
-                    getB = delegate { return gs.HasFort.Contains(terr); },
-                    ve = elem(HasFort, foldout),
-                    p = (Foldout)foldout
-                });
+                    obj.t = territory;
+                    obj.ve = elem(obj.tag, foldout);
+                    obj.parent = (Foldout)foldout;
+                    gsfObjects.Add(obj);
+                }
             }
+            
             void toggleTerritoryValue(List<Territory> list, Territory t, bool b)
             {
                 if (b && !list.Contains(t)) list.Add(t);
-                if (!b) list.Remove(t); // else would remove whenever the list contains
+                if (!b) list.Remove(t); // "else" would remove whenever list.Contains(t)
             }
 
             // make list of IsActive obj to toggle close/open
-            familyActiveCheck = gsFuncObjects.Where(obj => obj.gsFunc == IsActive).ToList();
+            familyActiveCheck = gsfObjects.Where(obj => obj.tag == IsActive).ToList();
 
             assignCallBacks();
         }
 
         void assignCallBacks()
         {
-            foreach (var obj in gsFuncObjects)
+            foreach (var obj in gsfObjects)
             {
                 if (obj.ve is DropdownField dropdown)
                 {
                     dropdown.RegisterValueChangedCallback((evt) =>
-                    { obj.setV = dropdown.index; obj.callback(obj); });
+                    { obj.setValue = dropdown.index; obj.callback(obj); });
                 }
-                else if (obj.ve is INotifyValueChanged<int> eInt)
+                else if (obj.ve is INotifyValueChanged<int> veInt)
                 {
-                    eInt.RegisterValueChangedCallback((evt) =>
-                    { obj.setV = evt.newValue; obj.callback(obj); });
+                    veInt.RegisterValueChangedCallback((evt) =>
+                    { obj.setValue = evt.newValue; obj.callback(obj); });
                 }
-                else if (obj.ve is INotifyValueChanged<bool> eBool)
+                else if (obj.ve is INotifyValueChanged<bool> veBool)
                 {
-                    eBool.RegisterValueChangedCallback(evt =>
-                    { obj.setB = evt.newValue; obj.callback(obj); });
+                    veBool.RegisterValueChangedCallback(evt =>
+                    { obj.setBool = evt.newValue; obj.callback(obj); });
                 }
             }
         }
 
         void Refresh()
         {
-            foreach (var obj in gsFuncObjects)
+            foreach (var obj in gsfObjects)
             { 
                 if (obj.ve is DropdownField dropdown)
-                { dropdown.index = obj.getV() - 1; }
+                { dropdown.index = obj.getValue() - 1; }
+                // cannot use SetValueWithoutNotify on index, only value
                 /*else if (obj.t != Territory.Default) // not necessary using obj.getB
                 {
                     var eBool = (INotifyValueChanged<bool>)obj.ve;
                     eBool.value = obj.getListT().Contains(obj.t);
                 }*/
-                else if (obj.ve is INotifyValueChanged<int> eInt)
-                { eInt.value = obj.getV(); }
-                else if (obj.ve is INotifyValueChanged<bool> eBool)
-                { eBool.value = obj.getB(); }
+                else if (obj.ve is INotifyValueChanged<int> veInt)
+                { veInt.SetValueWithoutNotify(obj.getValue()); }
+                else if (obj.ve is INotifyValueChanged<bool> veBool)
+                { veBool.SetValueWithoutNotify(obj.getBool()); }
+                // eInt.value = obj.getValue(); 
             }
 
             // iterate through IsActive on each family
             foreach (var familyObj in familyActiveCheck)
             {
-                if (familyObj.getB()) showChildren(familyObj.p);
-                else 
+                if (familyObj.getBool())
+                { showChildren(familyObj.parent); }
+                else
                 {
-                    hideChildren(familyObj.p);
+                    hideChildren(familyObj.parent);
                     familyObj.ve.style.display = DisplayStyle.Flex;
                 }
             }
         }
+
+        
+        VisualElement elem(GameStateFunction tag) => findVisualElement($"{tag}", statusPanel);
+
+        VisualElement elem(string s) => findVisualElement($"{s}", statusPanel);
+
+        VisualElement elem(GameStateFunction tag, VisualElement parent) => findVisualElement($"{tag}", parent);
+
+        // TODO: make these utility functions:
 
         void hideChildren(VisualElement ve)
         {
@@ -308,47 +308,43 @@ namespace NavajoWars
             { child.style.display = DisplayStyle.Flex; }
         }
 
-        VisualElement elem(GameStateFunction gsFunc) 
+        VisualElement findVisualElement(string s, VisualElement area)
         {
-            VisualElement ve = statusPanel.Query(className: gsFunc.ToString());
-            if (ve != null) return ve; 
-            else 
-            {
-                Debug.LogError($"No VisualElement found for class {gsFunc}");
-                return null; 
-            }
-        }
-
-        VisualElement elem(string s)
-        {
-            VisualElement ve = statusPanel.Query(className: s);
+            VisualElement ve = area.Query(className: s);
             if (ve != null) return ve;
             else
             {
-                Debug.LogError($"No VisualElement found for class {s}");
+                Debug.LogError($"No VisualElement found for class {s} in {area}");
                 return null;
             }
         }
-
-        VisualElement elem(GameStateFunction gsFunc, VisualElement p)
+        
+        // this searches from element up:
+        /*var list = statusPanel.Query(className: $"{tag}").ToList();
+        if (list == null || list.Count == 0)
         {
-            VisualElement ve;
-            var list = statusPanel.Query(className: gsFunc.ToString()).ToList();
-            if (list == null || list.Count == 0)
+            Debug.LogError($"No VisualElement found anywhere with class {tag}");
+            return null;
+        }
+        else
+        {
+            // TODO: get type of parent element to match other than foldout
+            foreach ( var element in list) 
             {
-                Debug.LogError($"No VisualElement found anywhere with class {gsFunc}");
-                return null;
-            }
-            else
-            {
-                ve = list.Where(e => e.parent == p).FirstOrDefault();
-                if (ve != null) return ve;
-                else
-                {
-                    Debug.LogError($"Class {gsFunc} found, but none found in foldout {p}");
-                    return null;
+                if (element.GetFirstOfType<Foldout>() == parent)
+                { 
+                    ve = element;
+                    break;
                 }
             }
-        }
+            // ve = list.Where(e => e.parent == parent).FirstOrDefault();
+            ve = list.Where(e => e.GetFirstOfType<Foldout>() == parent).FirstOrDefault(); 
+            if (ve != null) return ve;
+            else
+            {
+                Debug.LogError($"Class {tag} found, but none found in foldout {parent}");
+                return null;
+            }
+        }*/
     }
 }

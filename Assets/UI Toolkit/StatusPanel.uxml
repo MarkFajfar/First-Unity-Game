@@ -9,12 +9,15 @@
         <ui:SliderInt label="Enemy Ferocity" value="5" high-value="19" show-input-field="true" name="EnemyFerocity" direction="Horizontal" class="SliderPoints EnemyFerocity" />
         <ui:SliderInt label="Enemy Morale" value="5" high-value="19" show-input-field="true" name="EnemyMorale" direction="Horizontal" class="SliderPoints Morale" />
         <ui:Foldout text="Families" name="FamilyFoldout" class="FoldoutHeading">
-            <ui:Foldout text="Family A" name="FamilyA" value="false" class="FoldoutItem FamilyA">
+            <ui:Foldout text="Family A" name="FamilyA" value="true" class="FoldoutItem FamilyA">
                 <ui:Toggle label="Active" name="IsActive" class="ToggleInFoldout IsActive" />
-                <ui:Toggle label="Man" name="Man" class="Man ToggleInFoldout" />
-                <ui:Toggle label="Woman" name="Woman" class="Woman ToggleInFoldout" style="font-size: 32px;" />
-                <ui:Toggle label="Child" name="Child" class="Child ToggleInFoldout" style="font-size: 32px;" />
+                <ui:VisualElement style="flex-direction: row;">
+                    <ui:Toggle name="Man" class="Man ToggleInFoldout ToggleMan" style="width: 48px;" />
+                    <ui:Toggle name="Woman" class="Woman ToggleInFoldout ToggleWoman" style="font-size: 32px; width: 48px;" />
+                    <ui:Toggle name="Child" class="Child ToggleInFoldout ToggleChild" style="font-size: 32px; width: 48px;" />
+                </ui:VisualElement>
                 <ui:Toggle label="Horse" name="Horse" class="Horse ToggleInFoldout" style="font-size: 32px;" />
+                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="RadioButtonFerocity" />
                 <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="ToggleInFoldout IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family B" name="FamilyB" value="false" class="FoldoutItem FamilyB">
