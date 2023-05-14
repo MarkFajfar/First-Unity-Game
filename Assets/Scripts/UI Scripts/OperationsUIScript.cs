@@ -86,13 +86,11 @@ namespace NavajoWars
             if (statusPanel.style.display == DisplayStyle.None)
             {
                 statusPanel.style.display = DisplayStyle.Flex;
-                print("Status panel: " + statusPanel.style.display);
                 bodyPanel.style.display = DisplayStyle.None;
             }
             else 
             {
                 statusPanel.style.display = DisplayStyle.None;
-                print("Status panel: " + statusPanel.style.display);
                 bodyPanel.style.display = DisplayStyle.Flex;
             }
         }
@@ -111,6 +109,8 @@ namespace NavajoWars
             next.visible = false;
             quit.visible = true;
             status.visible = true;
+            bodyPanel.style.display = DisplayStyle.Flex;
+            choicePanel.style.display = DisplayStyle.Flex;
             statusPanel.style.display = DisplayStyle.None;
             // ClearChoicePanel(); // this is called later, messing up load?
         }
@@ -125,6 +125,7 @@ namespace NavajoWars
             headline.visible = true;
             message.visible = true;
             bodyPanel.style.display = DisplayStyle.Flex;
+            choicePanel.style.display = DisplayStyle.Flex;
             statusPanel.style.display = DisplayStyle.None;
             choicePanel.visible = false;
             ClearChoicePanel();
@@ -175,8 +176,11 @@ namespace NavajoWars
         public override void ShowChoiceButtons(List<ButtonInfo> choices)
         {
             ClearChoicePanel();
+            
+            bodyPanel.style.display = DisplayStyle.Flex;
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
+            
             foreach (ButtonInfo info in choices)
             {
                 Button choiceButton = info.Make(); // MakeButtonFromInfo(choice);
@@ -209,6 +213,7 @@ namespace NavajoWars
         public override void ShowChoiceFoldouts(List<FoldoutInfo> foldouts)
         {
             ClearChoicePanel();
+
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
 
@@ -219,7 +224,8 @@ namespace NavajoWars
                 choiceFoldout.style.display = DisplayStyle.Flex;
                 choiceFoldout.visible = true;
                 choicePanel.Add(choiceFoldout);
-            }/*// https://gamedev.stackexchange.com/questions/199609/how-to-create-instances-of-a-unity-ui-toolkit-template-from-code
+            }  
+            /*// https://gamedev.stackexchange.com/questions/199609/how-to-create-instances-of-a-unity-ui-toolkit-template-from-code
             // [SerializeField] VisualTreeAsset to be assigned in inspector
             // instantiate a copy of that VisualTreeAsset as a VisualElement
             // query to find the Foldout in the VisualElement
@@ -265,6 +271,7 @@ namespace NavajoWars
         public void ShowChoiceToggles(List<ToggleInfo> toggles)
         {
             ClearChoicePanel();
+
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
 
@@ -291,7 +298,7 @@ namespace NavajoWars
             }
         }
 
-        internal void closeFoldout(FoldoutInfo info)
+        internal void hideFoldout(FoldoutInfo info)
         {
             Foldout foldout = choicePanel.Query<Foldout>(info.name);
             foldout.style.display = DisplayStyle.None;
@@ -315,24 +322,20 @@ namespace NavajoWars
 
         public override void ClearChoicePanel()
         {
-            List<VisualElement> choiceElements = new();
+            CloseLocations();
+
+            foreach (var element in choicePanel.Children().ToList())
+            { element.RemoveFromHierarchy(); }
+
             //List<Button> buttons = choicePanel.Query<Button>().ToList();
-            choiceElements.AddRange(choicePanel.Query<Button>().ToList());
-            choiceElements.AddRange(choicePanel.Query<Toggle>().ToList());
-            choiceElements.AddRange(choicePanel.Query<Foldout>().ToList());
+            //choiceElements.AddRange(choicePanel.Query<Button>().ToList());
+            //choiceElements.AddRange(choicePanel.Query<Toggle>().ToList());
+            //choiceElements.AddRange(choicePanel.Query<Foldout>().ToList());
             //choiceElements.AddRange(choicePanel.Query<RadioButtonGroup>().ToList());
             // instead of removing radio button group, use CloseLocations
             // IEnumerable<VisualElement> choiceElements = new[] { buttons, foldouts, radios };
 
-            CloseLocations();
 
-            var kids = choicePanel.Children();
-
-            foreach (VisualElement element in kids)
-            {
-                element.style.display = DisplayStyle.None;
-                element.RemoveFromHierarchy();
-            }
         }
     }
 }

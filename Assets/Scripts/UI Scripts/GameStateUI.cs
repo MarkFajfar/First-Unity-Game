@@ -14,11 +14,12 @@ namespace NavajoWars
         EnemyAP, EnemyFerocity, 
         TradeGoodsHeld, SheepHeld, HorsesHeld, Firearms, 
         HasDrought, HasCorn, HasMission, HasRancho, HasFort,
-        IsActive, Man, Woman, Child, Horse, Ferocity, IsWhere
+        IsActive, Man, Woman, Child, Horse, Ferocity, IsWhere,
+        PassageDisplay, ElderDisplay, GoodsDisplay, 
+        AddPersonToPassage, AddGood
     }
 
     // TODO: add Elder List - foldout of sliders??
-    // TODO: for Family - add Ferocity (dropdown)
 
     public class GameStateUI : MonoBehaviour
     {
@@ -47,8 +48,8 @@ namespace NavajoWars
             public bool setBool;
             public Family f = null;
             public Territory t = Territory.Default;
-            public DelegateTerritory getT = null; // necessary?
-            public DelegateListTerritory getListT = null; // necessary
+            // public DelegateTerritory getT = null; // necessary?
+            // public DelegateListTerritory getListT = null; // necessary
             public VisualElement parent = null;
 
             public GameStateFunctionObject() { }
@@ -59,6 +60,7 @@ namespace NavajoWars
 
         List<GameStateFunctionObject> gsfObjects = new();
         List<GameStateFunctionObject> familyActiveCheck = new();
+        string[] personStyles = { "ButtonMan", "ButtonWoman", "ButtonChild", "ButtonElder" };
 
         void Awake()
         {
@@ -79,14 +81,14 @@ namespace NavajoWars
 
         void initializeFunctions()
         {
-            gsfo[] toplevelObjects = 
-            { 
+            gsfo[] toplevelObjects =
+            {
                 new(AP)
                 {
                     callback = new((gsfo obj) => gs.AP = obj.setValue),
                     getValue = delegate { return gs.AP; }
                 },
-                new(CP) 
+                new(CP)
                 {
                     callback = new((gsfo obj) => gs.CP = obj.setValue),
                     getValue = delegate { return gs.CP; }
@@ -105,10 +107,10 @@ namespace NavajoWars
                 {
                     callback = new((gsfo obj) => gs.EnemyFerocity = obj.setValue),
                     getValue = delegate { return gs.EnemyFerocity; }
-                } 
+                }
             };
 
-            foreach (gsfo obj  in toplevelObjects)
+            foreach (gsfo obj in toplevelObjects)
             {
                 obj.ve = elem(obj.tag);
                 gsfObjects.Add(obj);
@@ -116,7 +118,8 @@ namespace NavajoWars
 
             foreach (Family family in gs.AllFamilies)
             {
-                VisualElement foldout = elem(family.Name.Replace(" ", ""));
+                Foldout foldout = (Foldout)elem(family.Name.Replace(" ", ""));
+                foldout.value = false; // start closed
 
                 gsfo[] familyObjects =
                 {
@@ -168,15 +171,19 @@ namespace NavajoWars
                 {
                     obj.f = family;
                     obj.ve = elem(obj.tag, foldout);
-                    obj.parent = (Foldout)foldout;
+                    obj.parent = foldout;
                     gsfObjects.Add(obj);
                 }
             }
 
+            // make list of IsActive obj to toggle close/open
+            familyActiveCheck = gsfObjects.Where(obj => obj.tag == IsActive).ToList();
+
             for (int i = 1; i < (int)Territory.Default; i++)
             {
                 Territory territory = (Territory)i;
-                VisualElement foldout = elem($"{territory}");
+                Foldout foldout = (Foldout)elem($"{territory}");
+                foldout.value = false; // start closed
 
                 gsfo[] territoryObjects =
                 {
@@ -227,8 +234,30 @@ namespace NavajoWars
                 if (!b) list.Remove(t); // "else" would remove whenever list.Contains(t)
             }
 
-            // make list of IsActive obj to toggle close/open
-            familyActiveCheck = gsfObjects.Where(obj => obj.tag == IsActive).ToList();
+            // add userData to AddPerson buttons
+            // can find the buttons by style
+            //List<Button> personButtons = gsfObjects.Where(obj => obj.tag == AddPersonToPassage).Select(obj => (Button)obj.ve).ToList();            
+            // Man, Woman, Child, Elder
+            for (int i = 0; i < personStyles.Count(); i++)
+            {
+                string style = personStyles[i];
+                gsfo obj = new(AddPersonToPassage)
+                {
+                    callback = new((gsfo obj) =>
+                    {
+                        var person = (Person)obj.setValue;
+                        gs.PersonsInPassage.Add(person);
+                        addButtonToPassageDisplay(person);
+                    }),
+                    ve = statusPanel.Query(className: style).Where(e => e.ClassListContains($"{AddPersonToPassage}")),
+                };
+
+                if (obj.ve == null)
+                { Debug.Log($"No Button found for {style}"); }
+                else obj.ve.userData = (Person)i;
+
+                gsfObjects.Add(obj);
+            }
 
             assignCallBacks();
         }
@@ -241,6 +270,11 @@ namespace NavajoWars
                 {
                     dropdown.RegisterValueChangedCallback((evt) =>
                     { obj.setValue = dropdown.index; obj.callback(obj); });
+                }
+                else if (obj.ve is Button button)
+                {
+                    button.clickable.clickedWithEventInfo += (EventBase evt) =>
+                    { obj.setValue = (int)button.userData; obj.callback(obj); };
                 }
                 else if (obj.ve is INotifyValueChanged<int> veInt)
                 {
@@ -262,16 +296,12 @@ namespace NavajoWars
                 if (obj.ve is DropdownField dropdown)
                 { dropdown.index = obj.getValue() - 1; }
                 // cannot use SetValueWithoutNotify on index, only value
-                /*else if (obj.t != Territory.Default) // not necessary using obj.getB
-                {
-                    var eBool = (INotifyValueChanged<bool>)obj.ve;
-                    eBool.value = obj.getListT().Contains(obj.t);
-                }*/
                 else if (obj.ve is INotifyValueChanged<int> veInt)
                 { veInt.SetValueWithoutNotify(obj.getValue()); }
                 else if (obj.ve is INotifyValueChanged<bool> veBool)
                 { veBool.SetValueWithoutNotify(obj.getBool()); }
                 // eInt.value = obj.getValue(); 
+                // will not affect buttons because they are type <string>
             }
 
             // iterate through IsActive on each family
@@ -285,9 +315,45 @@ namespace NavajoWars
                     familyObj.ve.style.display = DisplayStyle.Flex;
                 }
             }
+
+            foreach (var person in elem(PassageDisplay).Children().ToList())
+            { person.RemoveFromHierarchy(); }
+            foreach (var passagePerson in gs.PersonsInPassage)
+            { addButtonToPassageDisplay(passagePerson); }
         }
 
-        
+        void addButtonToPassageDisplay(Person person)
+        {
+            var info = new ButtonInfo()
+            {
+                name = $"{person}",
+                text = "",
+                call = delegate { gs.PersonsInPassage.Remove(person); },
+                style = personStyles[(int)person]
+                /* person switch
+                {
+                    Person.Man => "ButtonMan",
+                    Person.Woman => "ButtonWoman",
+                    Person.Child => "ButtonChild",
+                    Person.Elder => "ButtonElder"
+                }, */
+            };
+
+            var button = info.MakeWithCall();
+            // adds call directly to .clicked
+            // additional callback to remove button when clicked
+            button.RegisterCallback<ClickEvent>(evt =>
+            {
+                var b = evt.target as Button;
+                b.RemoveFromHierarchy();
+            });
+
+            elem(PassageDisplay).Add(button);
+            button.visible = true;
+            button.style.display = DisplayStyle.Flex;
+        }
+
+        // each of these returns the First ve found
         VisualElement elem(GameStateFunction tag) => findVisualElement($"{tag}", statusPanel);
 
         VisualElement elem(string s) => findVisualElement($"{s}", statusPanel);
@@ -310,7 +376,7 @@ namespace NavajoWars
 
         VisualElement findVisualElement(string s, VisualElement area)
         {
-            VisualElement ve = area.Query(className: s);
+            VisualElement ve = area.Q(className: s); 
             if (ve != null) return ve;
             else
             {
@@ -328,7 +394,6 @@ namespace NavajoWars
         }
         else
         {
-            // TODO: get type of parent element to match other than foldout
             foreach ( var element in list) 
             {
                 if (element.GetFirstOfType<Foldout>() == parent)

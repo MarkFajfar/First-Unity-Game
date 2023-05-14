@@ -51,6 +51,15 @@ namespace NavajoWars
             return button;
         }
 
+        public static void RemoveWhenClicked(Button button) 
+        {
+            button.RegisterCallback<ClickEvent>(evt =>
+            {
+                var b = evt.target as Button;
+                b.RemoveFromHierarchy();
+            });
+        }
+
         public ButtonInfo()
         {
             name = "NewButton";

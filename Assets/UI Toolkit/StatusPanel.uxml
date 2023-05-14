@@ -10,55 +10,70 @@
         <ui:SliderInt label="Enemy Morale" value="5" high-value="19" show-input-field="true" name="EnemyMorale" direction="Horizontal" class="SliderPoints Morale" />
         <ui:Foldout text="Families" name="FamilyFoldout" class="FoldoutHeading">
             <ui:Foldout text="Family A" name="FamilyA" value="true" class="FoldoutItem FamilyA">
-                <ui:Toggle label="Active" name="IsActive" class="ToggleInFoldout IsActive" />
-                <ui:VisualElement style="flex-direction: row;">
-                    <ui:Toggle name="Man" class="Man ToggleInFoldout ToggleMan" style="width: 48px;" />
-                    <ui:Toggle name="Woman" class="Woman ToggleInFoldout ToggleWoman" style="font-size: 32px; width: 48px;" />
-                    <ui:Toggle name="Child" class="Child ToggleInFoldout ToggleChild" style="font-size: 32px; width: 48px;" />
+                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                    <ui:Toggle name="Man" class="Man ToggleMan" />
+                    <ui:Toggle name="Woman" class="Woman ToggleWoman" />
+                    <ui:Toggle name="Child" class="Child ToggleChild" />
+                    <ui:Toggle name="Horse" class="Horse ToggleHorse" />
                 </ui:VisualElement>
-                <ui:Toggle label="Horse" name="Horse" class="Horse ToggleInFoldout" style="font-size: 32px;" />
-                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="RadioButtonFerocity" />
-                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="ToggleInFoldout IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
+                <ui:Toggle label="Active" name="IsActive" class="Toggle IsActive" />
+                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="RadioButtonFerocity Toggle Ferocity" />
+                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family B" name="FamilyB" value="false" class="FoldoutItem FamilyB">
-                <ui:Toggle label="Active" name="IsActive" class="ToggleInFoldout IsActive" />
-                <ui:Toggle label="Man" name="Man" class="Man" style="font-size: 32px;" />
-                <ui:Toggle label="Woman" name="Woman" class="Woman" style="font-size: 32px;" />
-                <ui:Toggle label="Child" name="Child" class="Child" style="font-size: 32px;" />
-                <ui:Toggle label="Horse" name="Horse" class="Horse" style="font-size: 32px;" />
-                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="ToggleInFoldout IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
+                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                    <ui:Toggle name="Man" class="Man ToggleMan" />
+                    <ui:Toggle name="Woman" class="Woman ToggleWoman" />
+                    <ui:Toggle name="Child" class="Child ToggleChild" />
+                    <ui:Toggle name="Horse" class="Horse ToggleHorse" />
+                </ui:VisualElement>
+                <ui:Toggle label="Active" name="IsActive" class="Toggle IsActive" />
+                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="RadioButtonFerocity Toggle Ferocity" />
+                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family C" name="FamilyC" value="false" class="FoldoutItem FamilyC">
-                <ui:Toggle label="Active" name="IsActive" class="ToggleInFoldout IsActive" />
-                <ui:Toggle label="Man" name="Man" class="Man" style="font-size: 32px;" />
-                <ui:Toggle label="Woman" name="Woman" class="Woman" style="font-size: 32px;" />
-                <ui:Toggle label="Child" name="Child" class="Child" style="font-size: 32px;" />
-                <ui:Toggle label="Horse" name="Horse" class="Horse" style="font-size: 32px;" />
-                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="ToggleInFoldout IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
+                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                    <ui:Toggle name="Man" class="Man ToggleMan" />
+                    <ui:Toggle name="Woman" class="Woman ToggleWoman" />
+                    <ui:Toggle name="Child" class="Child ToggleChild" />
+                    <ui:Toggle name="Horse" class="Horse ToggleHorse" />
+                </ui:VisualElement>
+                <ui:Toggle label="Active" name="IsActive" class="Toggle IsActive" />
+                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="RadioButtonFerocity Toggle Ferocity" />
+                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family D" name="FamilyD" value="false" class="FoldoutItem FamilyD">
-                <ui:Toggle label="Active" name="IsActive" class="ToggleInFoldout IsActive" />
-                <ui:Toggle label="Man" name="Man" class="Man" style="font-size: 32px;" />
-                <ui:Toggle label="Woman" name="Woman" class="Woman" style="font-size: 32px;" />
-                <ui:Toggle label="Child" name="Child" class="Child" style="font-size: 32px;" />
-                <ui:Toggle label="Horse" name="Horse" class="Horse" style="font-size: 32px;" />
-                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="ToggleInFoldout IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
+                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                    <ui:Toggle name="Man" class="Man ToggleMan" />
+                    <ui:Toggle name="Woman" class="Woman ToggleWoman" />
+                    <ui:Toggle name="Child" class="Child ToggleChild" />
+                    <ui:Toggle name="Horse" class="Horse ToggleHorse" />
+                </ui:VisualElement>
+                <ui:Toggle label="Active" name="IsActive" class="Toggle IsActive" />
+                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="RadioButtonFerocity Toggle Ferocity" />
+                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family E" name="FamilyE" value="false" class="FoldoutItem FamilyE">
-                <ui:Toggle label="Active" name="IsActive" class="ToggleInFoldout IsActive" />
-                <ui:Toggle label="Man" name="Man" class="Man" style="font-size: 32px;" />
-                <ui:Toggle label="Woman" name="Woman" class="Woman" style="font-size: 32px;" />
-                <ui:Toggle label="Child" name="Child" class="Child" style="font-size: 32px;" />
-                <ui:Toggle label="Horse" name="Horse" class="Horse" style="font-size: 32px;" />
-                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="ToggleInFoldout IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
+                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                    <ui:Toggle name="Man" class="Man ToggleMan" />
+                    <ui:Toggle name="Woman" class="Woman ToggleWoman" />
+                    <ui:Toggle name="Child" class="Child ToggleChild" />
+                    <ui:Toggle name="Horse" class="Horse ToggleHorse" />
+                </ui:VisualElement>
+                <ui:Toggle label="Active" name="IsActive" class="Toggle IsActive" />
+                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="RadioButtonFerocity Toggle Ferocity" />
+                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family F" name="FamilyF" value="false" class="FoldoutItem FamilyF">
-                <ui:Toggle label="Active" name="IsActive" class="ToggleInFoldout IsActive" />
-                <ui:Toggle label="Man" name="Man" class="Man" style="font-size: 32px;" />
-                <ui:Toggle label="Woman" name="Woman" class="Woman" style="font-size: 32px;" />
-                <ui:Toggle label="Child" name="Child" class="Child" style="font-size: 32px;" />
-                <ui:Toggle label="Horse" name="Horse" class="Horse" style="font-size: 32px;" />
-                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="ToggleInFoldout IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
+                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                    <ui:Toggle name="Man" class="Man ToggleMan" />
+                    <ui:Toggle name="Woman" class="Woman ToggleWoman" />
+                    <ui:Toggle name="Child" class="Child ToggleChild" />
+                    <ui:Toggle name="Horse" class="Horse ToggleHorse" />
+                </ui:VisualElement>
+                <ui:Toggle label="Active" name="IsActive" class="Toggle IsActive" />
+                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="RadioButtonFerocity Toggle Ferocity" />
+                <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
         </ui:Foldout>
         <ui:Foldout text="Territories" name="TerritoryFoldout" class="FoldoutHeading">
@@ -112,5 +127,16 @@
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />
             </ui:Foldout>
         </ui:Foldout>
+        <ui:VisualElement name="Displays" picking-mode="Ignore" style="left: 10%; flex-wrap: nowrap; flex-direction: column;">
+            <ui:Label text="Persons in Passge" display-tooltip-when-elided="true" name="LabelPersonsInPassage" style="font-size: 52px;" />
+            <ui:VisualElement name="PassageDisplay" class="PassageDisplay" style="flex-direction: row; flex-wrap: wrap; align-items: flex-start;" />
+            <ui:Label text="Add To Passage" display-tooltip-when-elided="true" name="LabelAddToPassage" />
+            <ui:VisualElement name="PassageButtons" style="flex-direction: row; justify-content: space-between; width: 80%;">
+                <ui:Button display-tooltip-when-elided="true" name="AddMan" class="AddPersonToPassage ButtonMan" />
+                <ui:Button display-tooltip-when-elided="true" name="AddWoman" class="AddPersonToPassage ButtonWoman" />
+                <ui:Button display-tooltip-when-elided="true" name="AddChild" class="AddPersonToPassage ButtonChild" />
+                <ui:Button display-tooltip-when-elided="true" name="AddElder" class="AddPersonToPassage ButtonElder" />
+            </ui:VisualElement>
+        </ui:VisualElement>
     </ui:ScrollView>
 </ui:UXML>

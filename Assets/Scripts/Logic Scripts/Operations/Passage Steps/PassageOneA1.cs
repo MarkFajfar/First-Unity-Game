@@ -91,7 +91,7 @@ namespace NavajoWars
                 ui.displayText($"Remove one Child from the Passage of Time Box ");
             }
 
-            ui.closeFoldout(foldout); 
+            ui.hideFoldout(foldout); 
             gs.PersonsInPassage.Add(button.person);
             ui.addText($"and place a new {button.person} into the Passage of Time Box.");
             ui.addText("\nIf done with children, press Next to continue to the next part of Step One (A).");

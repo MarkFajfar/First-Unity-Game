@@ -56,9 +56,6 @@ namespace NavajoWars
                 ButtonInfo no = new("Do Not Preempt", noEnemyOps);
                 choices.Add(no);
                 ui.ShowChoiceButtons(choices);
-                ButtonInfo crazy = new("Crazy Stuff", crazyStuff);
-                UnityEngine.UIElements.Button crazyButton = crazy.MakeWithCall();
-                ui.showButton(crazyButton);
                 
                 // after button clicked, activate back to come here if stack is empty
                 // but set back to use stack for initial Undo (because may come back here with steps in stack)
