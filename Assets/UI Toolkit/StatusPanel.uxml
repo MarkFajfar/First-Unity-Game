@@ -9,7 +9,7 @@
         <ui:SliderInt label="Enemy Ferocity" value="5" high-value="19" show-input-field="true" name="EnemyFerocity" direction="Horizontal" class="SliderPoints EnemyFerocity" />
         <ui:SliderInt label="Enemy Morale" value="5" high-value="19" show-input-field="true" name="EnemyMorale" direction="Horizontal" class="SliderPoints Morale" />
         <ui:Foldout text="Families" name="FamilyFoldout" class="FoldoutHeading">
-            <ui:Foldout text="Family A" name="FamilyA" value="true" class="FoldoutItem FamilyA">
+            <ui:Foldout text="Family A" name="FamilyA" value="false" class="FoldoutItem FamilyA">
                 <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
                     <ui:Toggle name="Man" class="Man ToggleMan" />
                     <ui:Toggle name="Woman" class="Woman ToggleWoman" />
