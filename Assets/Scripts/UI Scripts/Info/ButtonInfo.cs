@@ -28,13 +28,14 @@ namespace NavajoWars
 
         public Button MakeWithCall()
         {
-            Button button = new()
-            {
+            Button button = Make(); //new()
+            /* {
                 name = name,
                 text = text,
                 tabIndex = tabIndex,
                 userData = this
-            };
+            }; */
+            // first Make using method, then add click fuctions
             if (call != InvalidMessage) button.clicked += call.Invoke;
             
             if (passBack != null)
@@ -47,7 +48,7 @@ namespace NavajoWars
                 };
             }
             ;
-            button.AddToClassList(style);
+            //button.AddToClassList(style);
             return button;
         }
 

@@ -6,8 +6,10 @@
 
 .SantaFe { } .Splitrock { } .SanJuan { } .Zuni { } .Monument { } .Hopi { } .BlackMesa { } .Canyon { } 
 
-.IsActive { } .Man { } .Woman { } .Child { } .Elder { } .Horse { } .IsWhere { } .Ferocity { }
+.IsActive { } .Horse { } .IsWhere { } .Ferocity { }
 
 .FamilyA { } .FamilyB { } .FamilyC { } .FamilyD { } .FamilyE { } .FamilyF { }
 
-.PassageDisplay { } .ElderDisplay { } .GoodsDisplay { } .AddPersonToPassage { } .AddGood
+.PassageDisplay { } .ElderDisplay { } .GoodsDisplay { } .AddPersonToPassage { } .AddGood { }
+
+.TestFunctionClass { }

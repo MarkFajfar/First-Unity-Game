@@ -19,7 +19,7 @@ namespace NavajoWars
                 gs.completedActions = 0;
                 foreach (var family in gs.Families)
                 {
-                    family.isSelectedOps = false;
+                    family.isSelectedOps = false; 
                     family.isCompletedOps = false;
                 }
                 clearCompleted?.Invoke();

@@ -211,7 +211,7 @@ namespace NavajoWars
                 { gs.PersonsInPassage.Remove(person); }
             }
 
-            ui.displayText($"There are now ... Press Next to continue.");
+            ui.displayText($"Passage of Time Step One complete. Press Next to continue.");
             ui.OnNextClick = actionComplete;
         }
 

@@ -330,6 +330,7 @@ namespace NavajoWars
                 text = "",
                 call = delegate { gs.PersonsInPassage.Remove(person); },
                 style = personStyles[(int)person]
+                // this style is added to class list on make
                 /* person switch
                 {
                     Person.Man => "ButtonMan",
@@ -341,7 +342,9 @@ namespace NavajoWars
 
             var button = info.MakeWithCall();
             // adds call directly to .clicked
-            // additional callback to remove button when clicked
+            button.AddToClassList("Person");
+            // need to also add the style "Person"
+            // add callback to remove button when clicked
             button.RegisterCallback<ClickEvent>(evt =>
             {
                 var b = evt.target as Button;

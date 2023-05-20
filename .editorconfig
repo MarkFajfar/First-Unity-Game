@@ -1,0 +1,15 @@
+root = true
+
+[*.{cs}]
+dotnet_diagnostic.IDE1006.severity = silent
+
+# https://github.com/dotnet/roslyn/blob/1fbd48157d9196ad227f120b731d3f80b1b162de/.editorconfig#L92-L99
+# https://code.visualstudio.com/docs/other/unity#_enabling-unity-warnings
+
+#[Assets/Assetstore/**.cs]
+#generated_code = true
+#dotnet_analyzer_diagnostic.severity = none
+
+#[Assets/Plugins/**.cs]
+#generated_code = true
+#dotnet_analyzer_diagnostic.severity = none

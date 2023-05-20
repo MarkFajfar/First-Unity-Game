@@ -20,11 +20,11 @@
             <ui:Button text="Load Saved Game" display-tooltip-when-elided="true" name="LoadSave" class="ButtonMenu" />
             <ui:Button text="Start New Game" display-tooltip-when-elided="true" name="NewGame" class="ButtonMenu" />
         </ui:VisualElement>
-        <ui:Button text="Back" display-tooltip-when-elided="true" name="Back" class="BackNext" style="visibility: hidden;" />
-        <ui:Button text="Next" display-tooltip-when-elided="true" name="Next" class="BackNext" style="left: auto; right: 5%; visibility: hidden;" />
-        <ui:Button text="Confirm" display-tooltip-when-elided="true" name="Confirm" class="BackNext" style="left: auto; right: 5%; width: 30%; visibility: hidden;" />
-        <ui:Button text="Back" display-tooltip-when-elided="true" name="LoadBack" class="BackNext" style="visibility: hidden;" />
-        <ui:Button text="Confirm" display-tooltip-when-elided="true" name="LoadConfirm" class="BackNext" style="left: auto; right: 5%; width: 30%; visibility: hidden;" />
-        <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="BackNext ButtonQuit" />
+        <ui:Button text="Back" display-tooltip-when-elided="true" name="Back" class="BackNext ButtonMenu" style="visibility: hidden;" />
+        <ui:Button text="Next" display-tooltip-when-elided="true" name="Next" class="BackNext ButtonMenu" style="left: auto; right: 5%; visibility: hidden;" />
+        <ui:Button text="Confirm" display-tooltip-when-elided="true" name="Confirm" class="BackNext ButtonMenu" style="left: auto; right: 5%; width: 30%; visibility: hidden;" />
+        <ui:Button text="Back" display-tooltip-when-elided="true" name="LoadBack" class="BackNext ButtonMenu" style="visibility: hidden;" />
+        <ui:Button text="Confirm" display-tooltip-when-elided="true" name="LoadConfirm" class="BackNext ButtonMenu" style="left: auto; right: 5%; width: 30%; visibility: hidden;" />
+        <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="ButtonQuit ButtonMenu Quit BackNext" />
     </ui:VisualElement>
 </ui:UXML>

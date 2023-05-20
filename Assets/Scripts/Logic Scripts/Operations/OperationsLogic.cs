@@ -52,7 +52,7 @@ namespace NavajoWars
                 ui.hideBackNext();
                 ui.displayText($"\nPreempt for {gs.CurrentCard.Points[0]} AP?");
                 ButtonInfo yes = new("Yes Preempt", yesPreempt); 
-                choices.Add(yes);
+                choices.Add(yes); 
                 ButtonInfo no = new("Do Not Preempt", noEnemyOps);
                 choices.Add(no);
                 ui.ShowChoiceButtons(choices);

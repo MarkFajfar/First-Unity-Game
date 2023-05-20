@@ -4,8 +4,8 @@
     <Style src="project://database/Assets/UI%20Toolkit/FunctionClasses.uss?fileID=7433441132597879392&amp;guid=bbce1e7756d3e934a9fb49cd39e26ab1&amp;type=3#FunctionClasses" />
     <ui:VisualElement name="Root" picking-mode="Ignore" style="align-items: flex-start; justify-content: space-around; flex-grow: 1; flex-wrap: nowrap; flex-direction: column; overflow: hidden; flex-shrink: 0; max-height: 1920px;">
         <ui:VisualElement picking-mode="Ignore" name="TopBar" style="flex-direction: row; align-items: flex-start; justify-content: space-between; width: 100%; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-wrap: wrap; max-height: none; flex-grow: 0; overflow: hidden; padding-left: 1%; padding-right: 1%; padding-top: 0; padding-bottom: 0; flex-basis: 18%; flex-shrink: 0; display: flex;">
-            <ui:Button text="Prev" display-tooltip-when-elided="true" name="Prev" class="BackNext ButtonQuit" style="right: auto; left: auto; visibility: visible; position: relative; top: auto; height: 56px; width: 12%;" />
-            <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="BackNext ButtonQuit" style="visibility: visible; position: relative; top: auto; right: auto; height: 56px;" />
+            <ui:Button text="Prev" display-tooltip-when-elided="true" name="Prev" class="ButtonMenu Quit" style="right: auto; left: auto; visibility: visible; position: relative; top: auto; height: 56px; width: 12%;" />
+            <ui:Button text="Quit" display-tooltip-when-elided="true" name="Quit" class="ButtonMenu Quit" style="visibility: visible; position: relative; top: auto; right: auto; height: 56px;" />
             <ui:Label text="Operations" display-tooltip-when-elided="true" name="Headline" picking-mode="Ignore" class="Headline" style="width: 95%; height: auto; white-space: normal; flex-grow: 0; position: relative; top: auto; align-items: auto; margin-top: 4px;" />
         </ui:VisualElement>
         <ui:VisualElement name="Body" style="flex-grow: 1; width: 100%; align-items: center; overflow: hidden; max-height: 80%; flex-shrink: 1; flex-basis: auto; display: flex;">
@@ -24,9 +24,9 @@
         </ui:VisualElement>
         <ui:Instance template="StatusPanel" name="StatusPanel" style="width: 95%;" />
         <ui:VisualElement name="BottomBar" style="position: relative; width: 100%; margin-right: 0; margin-top: 0; margin-bottom: 0; flex-grow: 0; justify-content: space-between; flex-shrink: 0; flex-direction: row; align-items: flex-end; margin-left: 0; padding-left: 2%; padding-right: 2%; flex-basis: 10%;">
-            <ui:Button text="Back" display-tooltip-when-elided="false" name="Back" class="BackNext" style="visibility: visible; top: auto; bottom: auto; height: 150px; padding-top: 10px; margin-bottom: 24px; position: relative; left: auto;" />
-            <ui:Button text="Status" display-tooltip-when-elided="false" name="Status" class="BackNext" style="visibility: visible; top: auto; bottom: auto; height: 150px; padding-top: 10px; margin-bottom: 24px; position: relative; left: auto;" />
-            <ui:Button text="Next" display-tooltip-when-elided="false" name="Next" class="BackNext" style="left: auto; right: auto; visibility: visible; top: auto; height: 150px; margin-bottom: 24px; position: relative; bottom: auto;" />
+            <ui:Button text="Back" display-tooltip-when-elided="false" name="Back" class="ButtonMenu BackNext" style="visibility: visible; top: auto; bottom: auto; height: 150px; padding-top: 10px; margin-bottom: 24px; position: relative; left: auto;" />
+            <ui:Button text="Status" display-tooltip-when-elided="false" name="Status" class="ButtonMenu BackNext" style="visibility: visible; top: auto; bottom: auto; height: 150px; padding-top: 10px; margin-bottom: 24px; position: relative; left: auto;" />
+            <ui:Button text="Next" display-tooltip-when-elided="false" name="Next" class="ButtonMenu BackNext" style="left: auto; right: auto; visibility: visible; top: auto; height: 150px; margin-bottom: 24px; position: relative; bottom: auto;" />
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>
