@@ -11,7 +11,7 @@
         <ui:Foldout text="Families" name="FamilyFoldout" class="FoldoutHeading">
             <ui:Foldout text="Family A" name="FamilyA" value="false" class="FoldoutItem FamilyA">
                 <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
-                    <ui:Toggle name="Man" class="Toggle Person Man" />
+                    <ui:Toggle name="Man" value="false" class="Toggle Person Man" />
                     <ui:Toggle name="Woman" class="Toggle Person Woman" />
                     <ui:Toggle name="Child" class="Toggle Person Child" />
                     <ui:Toggle name="Horse" class="Toggle Person Horse" />
@@ -128,7 +128,7 @@
             </ui:Foldout>
         </ui:Foldout>
         <ui:VisualElement name="Displays" picking-mode="Ignore" style="left: 10%; flex-wrap: nowrap; flex-direction: column;">
-            <ui:Label text="Persons in Passge" display-tooltip-when-elided="true" name="LabelPersonsInPassage" style="font-size: 52px;" />
+            <ui:Label text="Persons in Passage" display-tooltip-when-elided="true" name="LabelPersonsInPassage" style="font-size: 52px;" />
             <ui:VisualElement name="PassageDisplay" class="PassageDisplay" style="flex-direction: row; flex-wrap: wrap; align-items: flex-start;" />
             <ui:Label text="Add To Passage" display-tooltip-when-elided="true" name="LabelAddToPassage" />
             <ui:VisualElement name="PassageButtons" style="flex-direction: row; justify-content: space-between; width: 80%;">
@@ -136,6 +136,16 @@
                 <ui:Button display-tooltip-when-elided="true" name="AddWoman" class="AddPersonToPassage Person Woman" />
                 <ui:Button display-tooltip-when-elided="true" name="AddChild" class="AddPersonToPassage Person Child" />
                 <ui:Button display-tooltip-when-elided="true" name="AddElder" class="AddPersonToPassage Person Elder" />
+            </ui:VisualElement>
+            <ui:Label text="Resources" display-tooltip-when-elided="true" name="Label             Resources" style="font-size: 52px;" />
+            <ui:VisualElement name="ResourceDisplay" class="ResourceDisplay" style="flex-direction: row; flex-wrap: wrap; align-items: flex-start;" />
+            <ui:Label text="Add To Resources" display-tooltip-when-elided="true" name="LabelAddToResources" />
+            <ui:VisualElement name="ResourceButtons" style="flex-direction: row; justify-content: space-between; width: 80%;">
+                <ui:Button display-tooltip-when-elided="true" name="AddHorse" class="AddResource Resource Horse" />
+                <ui:Button display-tooltip-when-elided="true" name="AddSheep" class="AddResource Resource Sheep" />
+                <ui:Button display-tooltip-when-elided="true" name="AddCorn" class="AddResource Resource Corn" />
+                <ui:Button display-tooltip-when-elided="true" name="AddTradeGood" class="AddResource Resource TradeGood" />
+                <ui:Button display-tooltip-when-elided="true" name="AddFirearm" class="AddResource Resource Firearm" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:ScrollView>

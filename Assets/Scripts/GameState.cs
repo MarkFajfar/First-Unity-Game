@@ -7,6 +7,7 @@ namespace NavajoWars
 {
     public enum Territory { SantaFe, Splitrock, SanJuan, Zuni, Monument, Hopi, BlackMesa, Canyon, Default }
     public enum Person { Man, Woman, Child, Elder, Default }
+    public enum Resource { Horse, Sheep, Corn, TradeGood, Firearm, Default }
     public enum CardType { Operations, Ceremony, Event, Default }
 
     [Serializable]
@@ -38,6 +39,8 @@ namespace NavajoWars
         public List<Card> EventCardsInPlay;
 
         public List<Person> PersonsInPassage;
+
+        public List<Resource> Resources;
 
         public int[] ElderDisplay;
         public readonly int[] ElderTarget = { 0, 1, 2, 2, 3, 4, 5 };
@@ -92,6 +95,11 @@ namespace NavajoWars
         public int Firearms
         { get => firearms; set => firearms = Math.Clamp(value, 0, 5); }
         [SerializeField] int firearms;
+
+        // number of corn tokens moved to resource box in Passage Step 4
+        public int CornHarvested
+        { get => cornHarvested; set => cornHarvested = value; }
+        [SerializeField] int cornHarvested;
 
         public List<Territory> HasDrought;
         public List<Territory> HasCorn;

@@ -46,7 +46,6 @@ namespace NavajoWars
             else mainMenu.showScenarios();
         }
 
-
         // save and load functions
         public void SaveGame()
         {

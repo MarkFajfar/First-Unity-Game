@@ -28,13 +28,7 @@ namespace NavajoWars
 
         public Button MakeWithCall()
         {
-            Button button = Make(); //new()
-            /* {
-                name = name,
-                text = text,
-                tabIndex = tabIndex,
-                userData = this
-            }; */
+            Button button = Make(); 
             // first Make using method, then add click fuctions
             if (call != InvalidMessage) button.clicked += call.Invoke;
             

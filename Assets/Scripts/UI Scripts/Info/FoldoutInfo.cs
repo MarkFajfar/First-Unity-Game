@@ -33,6 +33,7 @@ namespace NavajoWars
                 // note allows treatment of info as object, but does not "know" that parentData in this case is FoldoutInfo
                 bparams.clearPanel = false; // do not clear panel when foldout clicked
                 Button foldoutButton = bparams.Make();
+                foldoutButton.AddToClassList("FoldoutItem");
                 foldout.Add(foldoutButton);
                 foldoutButton.style.display = DisplayStyle.Flex;
                 foldoutButton.visible = true;

@@ -12,11 +12,12 @@ namespace NavajoWars
     { 
         AP, CP, MP, Morale, 
         EnemyAP, EnemyFerocity, 
-        TradeGoodsHeld, SheepHeld, HorsesHeld, Firearms, 
+        TradeGoodsHeld, SheepHeld, HorsesHeld, CornHarvested, Firearms, 
         HasDrought, HasCorn, HasMission, HasRancho, HasFort,
-        IsActive, Man, Woman, Child, Horse, Ferocity, IsWhere,
-        PassageDisplay, ElderDisplay, GoodsDisplay, 
-        AddPersonToPassage, AddGood
+        IsActive, Man, Woman, Child, Ferocity, IsWhere,
+        Horse, Sheep, Corn, TradeGood, Firearm,
+        PassageDisplay, ElderDisplay, ResourceDisplay, 
+        AddPersonToPassage, AddResource
     }
 
     // TODO: add Elder List - foldout of sliders??
@@ -31,6 +32,13 @@ namespace NavajoWars
         public delegate bool DelegateBool();
         public delegate Territory DelegateTerritory();
         public delegate List<Territory> DelegateListTerritory();
+
+        List<GameStateFunctionObject> gsfObjects = new();
+        List<GameStateFunctionObject> familyActiveCheck = new();
+        // personStyles may not be correct
+        string[] personStyles = { "Man", "Woman", "Child", "Elder" };
+        string[] resourceStyles = {"Horse", "Sheep", "Corn", "TradeGood", "Firearm" };
+
 
         VisualElement statusPanel;
         Button status;
@@ -57,10 +65,6 @@ namespace NavajoWars
             public GameStateFunctionObject(GameStateFunction tag) 
             { this.tag = tag; }
         }
-
-        List<GameStateFunctionObject> gsfObjects = new();
-        List<GameStateFunctionObject> familyActiveCheck = new();
-        string[] personStyles = { "ButtonMan", "ButtonWoman", "ButtonChild", "ButtonElder" };
 
         void Awake()
         {
@@ -245,6 +249,7 @@ namespace NavajoWars
                 {
                     callback = new((gsfo obj) =>
                     {
+                        // when button pressed use int from setValue as lookup in Person enum
                         var person = (Person)obj.setValue;
                         gs.PersonsInPassage.Add(person);
                         addButtonToPassageDisplay(person);
@@ -253,8 +258,31 @@ namespace NavajoWars
                 };
 
                 if (obj.ve == null)
-                { Debug.Log($"No Button found for {style}"); }
+                { Debug.Log($"No Add Person Button found for {style}"); }
                 else obj.ve.userData = (Person)i;
+
+                gsfObjects.Add(obj);
+            }
+
+            // Resources box: Horse, Sheep, Corn, TradeGood, Firearm
+            for (int i = 0; i < resourceStyles.Count(); i++)
+            {
+                string style = resourceStyles[i];
+                gsfo obj = new(AddResource)
+                {
+                    callback = new((gsfo obj) =>
+                    {
+                        // when button pressed use int from setValue as lookup in Person enum
+                        var resource = (Resource)obj.setValue;
+                        gs.Resources.Add(resource);
+                        addButtonToResourceDisplay(resource);
+                    }),
+                    ve = statusPanel.Query(className: style).Where(e => e.ClassListContains($"{AddResource}")),
+                };
+
+                if (obj.ve == null)
+                { Debug.Log($"No Add Resource Button found for {style}"); }
+                else obj.ve.userData = (Resource)i;
 
                 gsfObjects.Add(obj);
             }
@@ -268,11 +296,13 @@ namespace NavajoWars
             {
                 if (obj.ve is DropdownField dropdown)
                 {
+                    // dropdown value is a string so use int in index
                     dropdown.RegisterValueChangedCallback((evt) =>
                     { obj.setValue = dropdown.index; obj.callback(obj); });
                 }
                 else if (obj.ve is Button button)
                 {
+                    // assumes that userData is an int to be used for setValue
                     button.clickable.clickedWithEventInfo += (EventBase evt) =>
                     { obj.setValue = (int)button.userData; obj.callback(obj); };
                 }
@@ -320,6 +350,10 @@ namespace NavajoWars
             { person.RemoveFromHierarchy(); }
             foreach (var passagePerson in gs.PersonsInPassage)
             { addButtonToPassageDisplay(passagePerson); }
+            foreach (var resource in elem(ResourceDisplay).Children().ToList())
+            { resource.RemoveFromHierarchy(); }
+            foreach (var resource in gs.Resources)
+            { addButtonToResourceDisplay(resource); }
         }
 
         void addButtonToPassageDisplay(Person person)
@@ -352,6 +386,32 @@ namespace NavajoWars
             });
 
             elem(PassageDisplay).Add(button);
+            button.visible = true;
+            button.style.display = DisplayStyle.Flex;
+        }
+
+        void addButtonToResourceDisplay(Resource resource)
+        {
+            var info = new ButtonInfo()
+            {
+                name = $"{resource}",
+                text = "",
+                call = delegate { gs.Resources.Remove(resource); },
+                style = resourceStyles[(int)resource]
+            };
+
+            var button = info.MakeWithCall();
+            // adds call directly to .clicked
+            button.AddToClassList("Resource");
+            // need to also add the style "Person"
+            // add callback to remove button when clicked
+            button.RegisterCallback<ClickEvent>(evt =>
+            {
+                var b = evt.target as Button;
+                b.RemoveFromHierarchy();
+            });
+
+            elem(ResourceDisplay).Add(button);
             button.visible = true;
             button.style.display = DisplayStyle.Flex;
         }

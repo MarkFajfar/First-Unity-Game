@@ -40,16 +40,19 @@ namespace NavajoWars
             foreach (Person child in childrenInPassage)
             {
                 List<ButtonInfo> buttons = new();
-                ButtonInfo man = new ("PassageMan", "ButtonMan", countPassage, actionOnChildButton);
-                ButtonInfo woman = new ("PassageWoman", "ButtonWoman", countPassage, actionOnChildButton);
+                ButtonInfo man = new ("PassageMan", "Man", countPassage, actionOnChildButton);
+                ButtonInfo woman = new ("PassageWoman", "Woman", countPassage, actionOnChildButton);
+                ButtonInfo elder = new("PassageElder", "Elder", countPassage, actionOnChildButton);
                 man.person = Person.Man;
                 woman.person = Person.Woman;
+                elder.person = Person.Elder;
                 buttons.Add(man);
                 buttons.Add(woman);
+                buttons.Add(elder);
                 //foreach (ButtonInfo button in buttons) 
                 //{ button.text = ""; } // not necessary done in constructor when name but no text is specified
                 FoldoutInfo passageFoldout = new (
-                        $"Passage {countPassage}",
+                        $"Child in Passage {countPassage}",
                         "FoldoutChild",
                         buttons);
                 foldoutsToShow.Add(passageFoldout);
@@ -59,12 +62,15 @@ namespace NavajoWars
             foreach (Family family in familiesWithChildren)
             {
                 List<ButtonInfo> buttons = new();
-                ButtonInfo man = new("FamilyMan", "ButtonMan", actionOnChildButton);
-                ButtonInfo woman = new("FamilyWoman", "ButtonWoman", actionOnChildButton);
+                ButtonInfo man = new("FamilyMan", "Man", actionOnChildButton);
+                ButtonInfo woman = new("FamilyWoman", "Woman", actionOnChildButton);
+                ButtonInfo elder = new("FamilyElder", "Elder", actionOnChildButton);
                 man.person = Person.Man;
                 woman.person = Person.Woman;
+                elder.person = Person.Elder;
                 buttons.Add(man);
                 buttons.Add(woman);
+                buttons.Add(elder);
                 FoldoutInfo familyFoldout = new (
                         $"Child in {family.Name}",
                         "FoldoutChild",
