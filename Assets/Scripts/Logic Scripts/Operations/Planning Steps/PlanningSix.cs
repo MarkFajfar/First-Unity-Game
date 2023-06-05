@@ -23,21 +23,17 @@ namespace NavajoWars
         void resetCubes() 
         { 
             ui.OnNextClick -= resetCubes;
-            gs.Recovery.Black = gs.Raided.Black;
-            gs.Raided.Black = 0;
-            gs.Recovery.White = gs.Raided.White;
-            gs.Raided.White = 0;
-            gs.Recovery.Brown = gs.Raided.Brown;
-            gs.Raided.Brown = 0;
-            gs.Recovery.Green = gs.Raided.Green;
-            gs.Raided.Green = 0;
-            gs.Recovery.Blue = gs.Raided.Blue;
-            gs.Raided.Blue = 0;
-            gs.Recovery.Yellow = gs.Raided.Yellow;
-            gs.Raided.Yellow = 0;
-            gs.Recovery.Red = gs.Raided.Red;
-            gs.Raided.Red = 0;
-            ui.displayText($"The Raided Bowl is now empty, and the following cubes are in the Recovery Bowl:\nBlack: {gs.Recovery.Black}\nWhite: {gs.Recovery.White}\nBrown: {gs.Recovery.Brown}\nGreen: {gs.Recovery.Green}\nBlue: {gs.Recovery.Blue}\nYellow: {gs.Recovery.Yellow}\nRed: {gs.Recovery.Red}\nPress Next to continue.");
+            foreach (Cube cube in gs.Raided)
+            {
+                gs.Recovery.Add(cube);
+                gs.Raided.Remove(cube);
+            }
+            ui.displayText("The Raided Bowl is now empty, and the following cubes are in the Recovery Bowl:\n");
+            foreach (Cube cube in gs.Recovery)
+            {
+                ui.addText($"{cube}, ");
+            }
+            ui.addText("\nPress Next to continue.");
             ui.OnNextClick = actionComplete;
         }
 

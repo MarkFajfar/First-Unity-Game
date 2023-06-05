@@ -47,7 +47,11 @@ namespace NavajoWars
             gs.HasDrought = scenario.HasDrought;
 
             if (scenario.Name == "Broken" || scenario.Name == "Fearing")
-                gs.Subjugation.Red = 3;
+            {
+                gs.Subjugation.Add(Cube.Red);
+                gs.Subjugation.Add(Cube.Red); 
+                gs.Subjugation.Add(Cube.Red);
+            }
 
             if (scenario.Name == "Rope")
             {

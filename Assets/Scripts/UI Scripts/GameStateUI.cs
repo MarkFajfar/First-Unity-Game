@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static NavajoWars.GameStateFunction;
@@ -10,14 +11,17 @@ namespace NavajoWars
 {
     public enum GameStateFunction 
     { 
-        AP, CP, MP, Morale, 
-        EnemyAP, EnemyFerocity, 
+        Default, AP, CP, MP, Morale, EnemyAP, EnemyFerocity, 
+        Elder0, Elder1, Elder2, Elder3, Elder4, Elder5, Elder6,
         TradeGoodsHeld, SheepHeld, HorsesHeld, CornHarvested, Firearms, 
         HasDrought, HasCorn, HasMission, HasRancho, HasFort,
-        IsActive, Man, Woman, Child, Ferocity, IsWhere,
+        IsActive, Man, Woman, Child, Elder, Ferocity, IsWhere,
         Horse, Sheep, Corn, TradeGood, Firearm,
-        PassageDisplay, ElderDisplay, ResourceDisplay, 
-        AddPersonToPassage, AddResource
+        PassageDisplay, ElderDisplay, ResourceDisplay,
+        Raided, Recovery, Subjugation,
+        AddPersonToPassage, AddResource,
+        AddToRaided, AddToRecovery, AddToSubjugation,
+        Black, White, Brown, Red, Yellow, Green, Blue
     }
 
     // TODO: add Elder List - foldout of sliders??
@@ -36,9 +40,10 @@ namespace NavajoWars
         List<GameStateFunctionObject> gsfObjects = new();
         List<GameStateFunctionObject> familyActiveCheck = new();
         // personStyles may not be correct
-        string[] personStyles = { "Man", "Woman", "Child", "Elder" };
-        string[] resourceStyles = {"Horse", "Sheep", "Corn", "TradeGood", "Firearm" };
-
+        string[] personStyles = { $"{Man}", $"{Woman}", $"{Child}", $"{Elder}" };
+        string[] resourceStyles = { $"{Horse}",  $"{Sheep}",  $"{Corn}",  $"{TradeGood}",  $"{Firearm}" };
+        string[] cubeStyles = { $"{Black}", $"{White}", $"{Brown}", $"{Red}", $"{Yellow}", $"{Green}", $"{Blue}" };
+        List<List<Cube>> Bowls; 
 
         VisualElement statusPanel;
         Button status;
@@ -71,6 +76,8 @@ namespace NavajoWars
             var gmobj = GameObject.FindWithTag("GameController");
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
+
+            Bowls = new List<List<Cube>> { gs.Raided, gs.Recovery, gs.Subjugation };
         }
 
         void OnEnable()
@@ -83,6 +90,9 @@ namespace NavajoWars
             initializeFunctions();
         }
 
+        /// <summary>
+        /// set the callback function and value for each object
+        /// </summary>
         void initializeFunctions()
         {
             gsfo[] toplevelObjects =
@@ -111,6 +121,41 @@ namespace NavajoWars
                 {
                     callback = new((gsfo obj) => gs.EnemyFerocity = obj.setValue),
                     getValue = delegate { return gs.EnemyFerocity; }
+                },
+                new(Elder0)
+                {
+                    callback = new((gsfo obj) => gs.ElderDisplay[0] = obj.setValue),
+                    getValue = delegate { return gs.ElderDisplay[0]; }
+                },
+                new(Elder1)
+                {
+                    callback = new((gsfo obj) => gs.ElderDisplay[1] = obj.setValue),
+                    getValue = delegate { return gs.ElderDisplay[1]; }
+                },
+                new(Elder2)
+                {
+                    callback = new((gsfo obj) => gs.ElderDisplay[2] = obj.setValue),
+                    getValue = delegate { return gs.ElderDisplay[2]; }
+                },
+                new(Elder3)
+                {
+                    callback = new((gsfo obj) => gs.ElderDisplay[3] = obj.setValue),
+                    getValue = delegate { return gs.ElderDisplay[3]; }
+                },
+                new(Elder4)
+                {
+                    callback = new((gsfo obj) => gs.ElderDisplay[4] = obj.setValue),
+                    getValue = delegate { return gs.ElderDisplay[4]; }
+                },
+                new(Elder5)
+                {
+                    callback = new((gsfo obj) => gs.ElderDisplay[5] = obj.setValue),
+                    getValue = delegate { return gs.ElderDisplay[5]; }
+                },
+                new(Elder6)
+                {
+                    callback = new((gsfo obj) => gs.ElderDisplay[6] = obj.setValue),
+                    getValue = delegate { return gs.ElderDisplay[6]; }
                 }
             };
 
@@ -254,7 +299,7 @@ namespace NavajoWars
                         gs.PersonsInPassage.Add(person);
                         addButtonToPassageDisplay(person);
                     }),
-                    ve = statusPanel.Query(className: style).Where(e => e.ClassListContains($"{AddPersonToPassage}")),
+                    ve = statusPanel.Query(className: style).Where(e => e.ClassListContains($"{AddPersonToPassage}")),                    
                 };
 
                 if (obj.ve == null)
@@ -286,10 +331,72 @@ namespace NavajoWars
 
                 gsfObjects.Add(obj);
             }
+            
+            // Cubes: Black, White, Brown, Red, Yellow, Green, Blue
+            foreach (var bowl in Bowls)
+            {
+                GameStateFunction tag = Default;
+                if (bowl == gs.Raided) tag = AddToRaided;
+                if (bowl == gs.Recovery) tag = AddToRecovery;
+                if (bowl == gs.Subjugation) tag = AddToSubjugation;
 
+                for (int i = 0; i < cubeStyles.Count(); i++)
+                {
+                    string style = cubeStyles[i];
+                    gsfo obj = new(tag)
+                    {
+                        callback = new((gsfo obj) =>
+                        {
+                            // when button pressed use int from setValue as lookup in Person enum
+                            var cube = (Cube)obj.setValue;
+                            bowl.Add(cube);
+                            addCubeButtonToBowl(cube, bowl);
+                        }),
+                        ve = statusPanel.Query(className: style).Where(e => e.ClassListContains($"{tag}")),
+                    };
+
+                    if (obj.ve == null)
+                    { Debug.Log($"No Add Cube Button found for {style}"); }
+                    else obj.ve.userData = (Cube)i;
+
+                    gsfObjects.Add(obj);
+                }
+            }
             assignCallBacks();
         }
 
+        void addCubeButtonToBowl(Cube cube, List<Cube> bowl)
+        {
+            var info = new ButtonInfo()
+            {
+                name = $"{cube}",
+                text = "",
+                call = delegate { bowl.Remove(cube); },
+                style = cubeStyles[(int)cube]
+            };
+
+            var button = info.MakeWithCall();
+            // adds call directly to .clicked
+            // add callback to remove button when clicked
+            button.RegisterCallback<ClickEvent>(evt =>
+            {
+                var b = evt.target as Button;
+                b.RemoveFromHierarchy();
+            });
+
+            string bowlName = "";
+            if (bowl == gs.Raided) bowlName = $"{Raided}";
+            if (bowl == gs.Recovery) bowlName = $"{Recovery}";
+            if (bowl == gs.Subjugation) bowlName = $"{Subjugation}";
+            elem(bowlName).Add(button);
+            button.visible = true;
+            button.style.display = DisplayStyle.Flex;
+        }
+
+        /// <summary>
+        /// so that when clicked: set the value in the object, 
+        /// and then pass the object to the callback function in the object
+        /// </summary>
         void assignCallBacks()
         {
             foreach (var obj in gsfObjects)
@@ -350,10 +457,26 @@ namespace NavajoWars
             { person.RemoveFromHierarchy(); }
             foreach (var passagePerson in gs.PersonsInPassage)
             { addButtonToPassageDisplay(passagePerson); }
+
             foreach (var resource in elem(ResourceDisplay).Children().ToList())
             { resource.RemoveFromHierarchy(); }
             foreach (var resource in gs.Resources)
             { addButtonToResourceDisplay(resource); }
+
+            foreach (var cube in elem(Raided).Children().ToList())
+            { cube.RemoveFromHierarchy(); }
+            foreach (var cube in gs.Raided)
+            { addCubeButtonToBowl(cube, gs.Raided); }
+
+            foreach (var cube in elem(Recovery).Children().ToList())
+            { cube.RemoveFromHierarchy(); }
+            foreach (var cube in gs.Recovery)
+            { addCubeButtonToBowl(cube, gs.Recovery); }
+
+            foreach (var cube in elem(Subjugation).Children().ToList())
+            { cube.RemoveFromHierarchy(); }
+            foreach (var cube in gs.Subjugation)
+            { addCubeButtonToBowl(cube, gs.Subjugation); }
         }
 
         void addButtonToPassageDisplay(Person person)
@@ -375,9 +498,8 @@ namespace NavajoWars
             };
 
             var button = info.MakeWithCall();
-            // adds call directly to .clicked
-            button.AddToClassList("Person");
-            // need to also add the style "Person"
+            // button.AddToClassList("Person");
+            // don't need to add style person because Man, Woman etc. made equivalenrt
             // add callback to remove button when clicked
             button.RegisterCallback<ClickEvent>(evt =>
             {
@@ -403,7 +525,7 @@ namespace NavajoWars
             var button = info.MakeWithCall();
             // adds call directly to .clicked
             button.AddToClassList("Resource");
-            // need to also add the style "Person"
+            // need to also add the style "Resource"
             // add callback to remove button when clicked
             button.RegisterCallback<ClickEvent>(evt =>
             {
@@ -425,12 +547,20 @@ namespace NavajoWars
 
         // TODO: make these utility functions:
 
+        /// <summary>
+        /// set all children in ve to <see cref="DisplayStyle.None"/>
+        /// </summary>
+        /// <param name="ve"></param>
         void hideChildren(VisualElement ve)
         {
             foreach (var child in ve.Children())
             { child.style.display = DisplayStyle.None; }
         }
 
+        /// <summary>
+        /// set all children in ve to <see cref="DisplayStyle.Flex"/>
+        /// </summary>
+        /// <param name="ve"></param>
         void showChildren(VisualElement ve)
         {
             foreach (var child in ve.Children())

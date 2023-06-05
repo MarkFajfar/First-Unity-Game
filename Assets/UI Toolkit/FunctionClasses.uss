@@ -1,5 +1,7 @@
 .AP { } .CP { } .MP { } .Morale { } .EnemyFerocity { } .EnemyRaid { }
 
+.Elder0 { } .Elder1 { } .Elder2 { } .Elder3 { } .Elder4 { } .Elder5 { } .Elder6 { }
+
 .TradeGoodsHeld { } .SheepHeld { } .HorsesHeld { } .Firearms { }
 
 .HasDrought { } .HasCorn { } .HasMission { } .HasRancho { } .HasFort { }
@@ -12,4 +14,4 @@
 
 .PassageDisplay { } .ElderDisplay { } .ResourceDisplay { } .AddPersonToPassage { } .AddResource { }
 
-.TestFunctionClass { }
+.Raided { } .Recovery { } .Subjugation { } .AddToRaided { } .AddToRecovery { } .AddToSubjugation { }

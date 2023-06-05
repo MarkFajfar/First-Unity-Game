@@ -25,6 +25,13 @@ namespace NavajoWars
             return obj;
         }
 
+        [MenuItem("Utilities/String Test")]
+        public static void StringTest() 
+        {
+            string s = $"{Person.Man}";
+            Debug.Log(s);
+        }
+
         [MenuItem("Utilities/Dropdown Test")]
         public static void SetupTest() 
         {

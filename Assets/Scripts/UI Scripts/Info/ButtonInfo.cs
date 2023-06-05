@@ -12,7 +12,11 @@ namespace NavajoWars
         public string style = "ButtonMenu";
 
         public Action<ButtonInfo> passBack = null;
-        
+
+        /// <summary>
+        /// make button from info, including style
+        /// </summary>
+        /// <returns>button object</returns>
         public Button Make()
         {
             Button button = new()
@@ -26,6 +30,11 @@ namespace NavajoWars
             return button;
         }
 
+        /// <summary>
+        /// make button from info that when clicked 
+        /// will invoke callback and pass info to passback
+        /// </summary>
+        /// <returns>button with call assigned to click function</returns>
         public Button MakeWithCall()
         {
             Button button = Make(); 

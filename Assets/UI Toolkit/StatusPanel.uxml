@@ -8,7 +8,7 @@
         <ui:SliderInt label="MP" value="5" high-value="19" show-input-field="true" name="MP" direction="Horizontal" class="SliderPoints MP" />
         <ui:SliderInt label="Enemy Ferocity" value="5" high-value="19" show-input-field="true" name="EnemyFerocity" direction="Horizontal" class="SliderPoints EnemyFerocity" />
         <ui:SliderInt label="Enemy Morale" value="5" high-value="19" show-input-field="true" name="EnemyMorale" direction="Horizontal" class="SliderPoints Morale" />
-        <ui:Foldout text="Families" name="FamilyFoldout" class="FoldoutHeading">
+        <ui:Foldout text="Families" name="FamilyFoldout" class="FoldoutHeading" style="width: 80%;">
             <ui:Foldout text="Family A" name="FamilyA" value="false" class="FoldoutItem FamilyA">
                 <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
                     <ui:Toggle name="Man" value="false" class="Toggle Person Man" />
@@ -76,7 +76,7 @@
                 <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
         </ui:Foldout>
-        <ui:Foldout text="Territories" name="TerritoryFoldout" class="FoldoutHeading">
+        <ui:Foldout text="Territories" name="TerritoryFoldout" class="FoldoutHeading" style="width: 80%;">
             <ui:Foldout text="Splitrock" name="Splitrock" value="false" class="Splitrock FoldoutItem" style="left: 10%; width: 50%;">
                 <ui:Toggle label="Drought" name="Drought" class="HasDrought" style="font-size: 32px;" />
                 <ui:Toggle label="Corn" name="Corn" class="HasCorn" style="font-size: 32px;" />
@@ -127,25 +127,61 @@
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />
             </ui:Foldout>
         </ui:Foldout>
-        <ui:VisualElement name="Displays" picking-mode="Ignore" style="left: 10%; flex-wrap: nowrap; flex-direction: column;">
+        <ui:VisualElement name="Displays" picking-mode="Ignore" style="left: 10%; flex-wrap: nowrap; flex-direction: column; width: 80%;">
             <ui:Label text="Persons in Passage" display-tooltip-when-elided="true" name="LabelPersonsInPassage" style="font-size: 52px;" />
             <ui:VisualElement name="PassageDisplay" class="PassageDisplay" style="flex-direction: row; flex-wrap: wrap; align-items: flex-start;" />
             <ui:Label text="Add To Passage" display-tooltip-when-elided="true" name="LabelAddToPassage" />
             <ui:VisualElement name="PassageButtons" style="flex-direction: row; justify-content: space-between; width: 80%;">
-                <ui:Button display-tooltip-when-elided="true" name="AddMan" class="AddPersonToPassage Person Man" />
-                <ui:Button display-tooltip-when-elided="true" name="AddWoman" class="AddPersonToPassage Person Woman" />
-                <ui:Button display-tooltip-when-elided="true" name="AddChild" class="AddPersonToPassage Person Child" />
-                <ui:Button display-tooltip-when-elided="true" name="AddElder" class="AddPersonToPassage Person Elder" />
+                <ui:Button display-tooltip-when-elided="true" name="AddMan" class="AddPersonToPassage Man" />
+                <ui:Button display-tooltip-when-elided="true" name="AddWoman" class="AddPersonToPassage Woman" />
+                <ui:Button display-tooltip-when-elided="true" name="AddChild" class="AddPersonToPassage Child" />
+                <ui:Button display-tooltip-when-elided="true" name="AddElder" class="AddPersonToPassage Elder" />
             </ui:VisualElement>
-            <ui:Label text="Resources" display-tooltip-when-elided="true" name="Label             Resources" style="font-size: 52px;" />
+            <ui:Label text="Resources" display-tooltip-when-elided="true" name="LabelResources" style="font-size: 52px;" />
             <ui:VisualElement name="ResourceDisplay" class="ResourceDisplay" style="flex-direction: row; flex-wrap: wrap; align-items: flex-start;" />
             <ui:Label text="Add To Resources" display-tooltip-when-elided="true" name="LabelAddToResources" />
             <ui:VisualElement name="ResourceButtons" style="flex-direction: row; justify-content: space-between; width: 80%;">
-                <ui:Button display-tooltip-when-elided="true" name="AddHorse" class="AddResource Resource Horse" />
-                <ui:Button display-tooltip-when-elided="true" name="AddSheep" class="AddResource Resource Sheep" />
-                <ui:Button display-tooltip-when-elided="true" name="AddCorn" class="AddResource Resource Corn" />
-                <ui:Button display-tooltip-when-elided="true" name="AddTradeGood" class="AddResource Resource TradeGood" />
-                <ui:Button display-tooltip-when-elided="true" name="AddFirearm" class="AddResource Resource Firearm" />
+                <ui:Button display-tooltip-when-elided="true" name="AddHorse" class="AddResource Horse" />
+                <ui:Button display-tooltip-when-elided="true" name="AddSheep" class="AddResource Sheep" />
+                <ui:Button display-tooltip-when-elided="true" name="AddCorn" class="AddResource Corn" />
+                <ui:Button display-tooltip-when-elided="true" name="AddTradeGood" class="AddResource TradeGood" />
+                <ui:Button display-tooltip-when-elided="true" name="AddFirearm" class="AddResource Firearm" />
+            </ui:VisualElement>
+            <ui:Label text="Raided Bowl" display-tooltip-when-elided="true" name="LabelRaided" style="font-size: 52px;" />
+            <ui:VisualElement name="RaidedBowl" class="Raided" style="flex-direction: row; flex-wrap: wrap; align-items: flex-start;" />
+            <ui:Label text="Add To Raided" display-tooltip-when-elided="true" name="LabelAddToRaided" />
+            <ui:VisualElement name="RaidedButtons" style="flex-direction: row; justify-content: space-between; width: 80%;">
+                <ui:Button display-tooltip-when-elided="true" name="AddBlack" class="AddToRaided Black" />
+                <ui:Button display-tooltip-when-elided="true" name="AddWhite" class="AddToRaided White" />
+                <ui:Button display-tooltip-when-elided="true" name="AddBrown" class="AddToRaided Brown" />
+                <ui:Button display-tooltip-when-elided="true" name="AddRed" class="AddToRaided Red" />
+                <ui:Button display-tooltip-when-elided="true" name="AddYellow" class="AddToRaided Yellow" />
+                <ui:Button display-tooltip-when-elided="true" name="AddGreen" class="AddToRaided Green" />
+                <ui:Button display-tooltip-when-elided="true" name="AddBlue" class="AddToRaided Blue" />
+            </ui:VisualElement>
+            <ui:Label text="Recovery Bowl" display-tooltip-when-elided="true" name="LabelRecovery" style="font-size: 52px;" />
+            <ui:VisualElement name="RecoveryBowl" class="Recovery" style="flex-direction: row; flex-wrap: wrap; align-items: flex-start;" />
+            <ui:Label text="Add To Recovery" display-tooltip-when-elided="true" name="LabelAddToRecovery" />
+            <ui:VisualElement name="RecoveryButtons" style="flex-direction: row; justify-content: space-between; width: 80%;">
+                <ui:Button display-tooltip-when-elided="true" name="AddBlack" class="AddToRecovery Black" />
+                <ui:Button display-tooltip-when-elided="true" name="AddWhite" class="AddToRecovery White" />
+                <ui:Button display-tooltip-when-elided="true" name="AddBrown" class="AddToRecovery Brown" />
+                <ui:Button display-tooltip-when-elided="true" name="AddRed" class="AddToRecovery Red" />
+                <ui:Button display-tooltip-when-elided="true" name="AddYellow" class="AddToRecovery Yellow" />
+                <ui:Button display-tooltip-when-elided="true" name="AddGreen" class="AddToRecovery Green" />
+                <ui:Button display-tooltip-when-elided="true" name="AddBlue" class="AddToRecovery Blue" />
+            </ui:VisualElement>
+            <ui:Label text="Subjugation Bowl" display-tooltip-when-elided="true" name="LabelSubjugation" style="font-size: 52px;" />
+            <ui:VisualElement name="SubjugationBowl" class="Subjugation" style="flex-direction: row; flex-wrap: wrap; align-items: flex-start;" />
+            <ui:Label text="Add To Subjugation" display-tooltip-when-elided="true" name="LabelAddToSubjugation" />
+            <ui:VisualElement name="SubjugationButtons" style="flex-direction: row; justify-content: space-between; width: 80%;">
+                <ui:Button display-tooltip-when-elided="true" name="AddBlack" class="AddToSubjugation Black" />
+                <ui:Button display-tooltip-when-elided="true" name="AddWhite" class="AddToSubjugation White" />
+                <ui:Button display-tooltip-when-elided="true" name="AddBrown" class="AddToSubjugation Brown" />
+                <ui:Button display-tooltip-when-elided="true" name="AddRed" class="AddToSubjugation Red" />
+                <ui:Button display-tooltip-when-elided="true" name="AddYellow" class="AddToSubjugation Yellow" />
+                <ui:Button display-tooltip-when-elided="true" name="AddGreen" class="AddToSubjugation Green" />
+                <ui:Button display-tooltip-when-elided="true" name="AddBlue" class="AddToSubjugation Blue" />
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:ScrollView>
