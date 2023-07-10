@@ -80,16 +80,18 @@ namespace NavajoWars
         {
             string sd = JsonUtility.ToJson(gs);
             print("Saving Undo Data: " + sd);
-            if (!Directory.Exists(savePath + gs.CurrentSceneName)) Directory.CreateDirectory(savePath + gs.CurrentSceneName);
-            File.WriteAllText(savePath + gs.CurrentSceneName + "/" + step.stepName, sd);
+            string dirPath = savePath + gs.CurrentSceneName;
+            if (!Directory.Exists(dirPath)) Directory.CreateDirectory(dirPath);
+            File.WriteAllText(dirPath + "/" + step.stepName, sd);
         }
 
         public void LoadUndo(GameStep step)
         {
-            if (File.Exists(savePath + gs.CurrentSceneName + "/" + step.stepName))
+            string fileName = savePath + gs.CurrentSceneName + "/" + step.stepName;
+            if (File.Exists(fileName))
             {
                 print("Loading Undo Data: " + step.stepName);
-                string sd = File.ReadAllText(savePath + gs.CurrentSceneName + "/" + step.stepName);
+                string sd = File.ReadAllText(fileName);
                 JsonUtility.FromJsonOverwrite(sd, gs);
                 CreateFamiliesList();
             }

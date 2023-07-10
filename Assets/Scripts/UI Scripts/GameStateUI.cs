@@ -161,13 +161,13 @@ namespace NavajoWars
 
             foreach (gsfo obj in toplevelObjects)
             {
-                obj.ve = elem(obj.tag);
+                obj.ve = element(obj.tag);
                 gsfObjects.Add(obj);
             }
 
             foreach (Family family in gs.AllFamilies)
             {
-                Foldout foldout = (Foldout)elem(family.Name.Replace(" ", ""));
+                Foldout foldout = (Foldout)element(family.Name.Replace(" ", ""));
                 foldout.value = false; // start closed
 
                 gsfo[] familyObjects =
@@ -219,7 +219,7 @@ namespace NavajoWars
                 foreach (gsfo obj in familyObjects)
                 {
                     obj.f = family;
-                    obj.ve = elem(obj.tag, foldout);
+                    obj.ve = element(obj.tag, foldout);
                     obj.parent = foldout;
                     gsfObjects.Add(obj);
                 }
@@ -231,7 +231,7 @@ namespace NavajoWars
             for (int i = 1; i < (int)Territory.Default; i++)
             {
                 Territory territory = (Territory)i;
-                Foldout foldout = (Foldout)elem($"{territory}");
+                Foldout foldout = (Foldout)element($"{territory}");
                 foldout.value = false; // start closed
 
                 gsfo[] territoryObjects =
@@ -271,7 +271,7 @@ namespace NavajoWars
                 foreach (gsfo obj in territoryObjects)
                 {
                     obj.t = territory;
-                    obj.ve = elem(obj.tag, foldout);
+                    obj.ve = element(obj.tag, foldout);
                     obj.parent = (Foldout)foldout;
                     gsfObjects.Add(obj);
                 }
@@ -388,7 +388,7 @@ namespace NavajoWars
             if (bowl == gs.Raided) bowlName = $"{Raided}";
             if (bowl == gs.Recovery) bowlName = $"{Recovery}";
             if (bowl == gs.Subjugation) bowlName = $"{Subjugation}";
-            elem(bowlName).Add(button);
+            element(bowlName).Add(button);
             button.visible = true;
             button.style.display = DisplayStyle.Flex;
         }
@@ -453,27 +453,27 @@ namespace NavajoWars
                 }
             }
 
-            foreach (var person in elem(PassageDisplay).Children().ToList())
+            foreach (var person in element(PassageDisplay).Children().ToList())
             { person.RemoveFromHierarchy(); }
             foreach (var passagePerson in gs.PersonsInPassage)
             { addButtonToPassageDisplay(passagePerson); }
 
-            foreach (var resource in elem(ResourceDisplay).Children().ToList())
+            foreach (var resource in element(ResourceDisplay).Children().ToList())
             { resource.RemoveFromHierarchy(); }
             foreach (var resource in gs.Resources)
             { addButtonToResourceDisplay(resource); }
 
-            foreach (var cube in elem(Raided).Children().ToList())
+            foreach (var cube in element(Raided).Children().ToList())
             { cube.RemoveFromHierarchy(); }
             foreach (var cube in gs.Raided)
             { addCubeButtonToBowl(cube, gs.Raided); }
 
-            foreach (var cube in elem(Recovery).Children().ToList())
+            foreach (var cube in element(Recovery).Children().ToList())
             { cube.RemoveFromHierarchy(); }
             foreach (var cube in gs.Recovery)
             { addCubeButtonToBowl(cube, gs.Recovery); }
 
-            foreach (var cube in elem(Subjugation).Children().ToList())
+            foreach (var cube in element(Subjugation).Children().ToList())
             { cube.RemoveFromHierarchy(); }
             foreach (var cube in gs.Subjugation)
             { addCubeButtonToBowl(cube, gs.Subjugation); }
@@ -507,7 +507,7 @@ namespace NavajoWars
                 b.RemoveFromHierarchy();
             });
 
-            elem(PassageDisplay).Add(button);
+            element(PassageDisplay).Add(button);
             button.visible = true;
             button.style.display = DisplayStyle.Flex;
         }
@@ -533,17 +533,17 @@ namespace NavajoWars
                 b.RemoveFromHierarchy();
             });
 
-            elem(ResourceDisplay).Add(button);
+            element(ResourceDisplay).Add(button);
             button.visible = true;
             button.style.display = DisplayStyle.Flex;
         }
 
         // each of these returns the First ve found
-        VisualElement elem(GameStateFunction tag) => findVisualElement($"{tag}", statusPanel);
+        VisualElement element(GameStateFunction tag) => findVisualElement($"{tag}", statusPanel);
 
-        VisualElement elem(string s) => findVisualElement($"{s}", statusPanel);
+        VisualElement element(string s) => findVisualElement($"{s}", statusPanel);
 
-        VisualElement elem(GameStateFunction tag, VisualElement parent) => findVisualElement($"{tag}", parent);
+        VisualElement element(GameStateFunction tag, VisualElement parent) => findVisualElement($"{tag}", parent);
 
         // TODO: make these utility functions:
 

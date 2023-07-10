@@ -11,6 +11,8 @@ namespace NavajoWars
         {
             foreach (Person p in gs.PersonsInPassage.Where(p => p == Person.Default)) gs.PersonsInPassage.Remove(p);
 
+            elderMoveCount = 0; // necessary here?
+
             gm.SaveUndo(this);
             ui.displayHeadline("Passage of Time\nStep One (B) - (E)");
 
@@ -51,7 +53,7 @@ namespace NavajoWars
             {
                 List<ButtonInfo> buttons = new();
 
-                List<Family> families = person switch
+                List<Family> eligibleFamilies = person switch
                 {
                     Person.Child => gs.Families.FindAll(f => !f.HasChild),
                     Person.Woman => gs.Families.FindAll(f => !f.HasWoman),
@@ -59,7 +61,7 @@ namespace NavajoWars
                     _ => gs.Families
                 };
                 
-                foreach (var family in families)
+                foreach (var family in eligibleFamilies)
                 { buttons.Add(makeFamilybutton(countPassage, family, person)); }
                 
                 if (gs.CP > 0) 
@@ -71,18 +73,18 @@ namespace NavajoWars
                     //foreach (var inactive in gs.Families.Where(f => !f.IsActive && f.Name != Info.Default).ToList())
                     // inactive families are not in gs.Families
                 }
-                FoldoutInfo f = new(
+                FoldoutInfo foldoutToShow = new(
                         $"Passage {countPassage}, {person}",
                         "FoldoutChild",
                         buttons);
-                foldoutsToShow.Add(f);
+                foldoutsToShow.Add(foldoutToShow);
                 countPassage++;
             }
 
             //TODO: make this a generic method?
             ButtonInfo makeFamilybutton(int count, Family family, Person person) 
             {
-                ButtonInfo b = new()
+                ButtonInfo familyButton = new()
                 {
                     text = $"Move to {family.Name}",
                     name = family.Name.Replace(" ", "") + count,
@@ -93,7 +95,7 @@ namespace NavajoWars
                     person = person,
                     passBack = actionOnFoldoutButton
                 };
-                return b;
+                return familyButton;
             }
 
             ui.ShowChoiceFoldouts(foldoutsToShow);
@@ -143,6 +145,7 @@ namespace NavajoWars
         }
 
         int elderMoveCount;
+        // does this need to be reset to zero at some point? when and how? in Begin?
 
         void actionOnToggle(ToggleInfo info, bool ticked)
         {
