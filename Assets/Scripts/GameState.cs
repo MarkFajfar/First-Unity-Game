@@ -72,9 +72,10 @@ namespace NavajoWars
         public int TradeGoodsHeld
         { get => tradeGoodsHeld; set => tradeGoodsHeld = Math.Clamp(value, 0, 11); }
         [SerializeField] int tradeGoodsHeld;
-        public int TradeGoodsMax // is this the same in every scenario?
+        public int TradeGoodsMax 
         { get => tradeGoodsMax; set => tradeGoodsMax = Math.Clamp(value, 0, 11); }
         [SerializeField] int tradeGoodsMax;
+        // is tgMax the same in every scenario?
 
         // Game has 8 sheep tokens; each scenario starts with 3
         public int SheepHeld

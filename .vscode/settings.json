@@ -1,6 +1,5 @@
 {
-    "files.exclude":
-    {
+    "files.exclude": {
         ".vs/": true,
         "**/.DS_Store": true,
         "**/.git": true,
@@ -10,7 +9,6 @@
         "**/*.apk": true,
         "**/*.asset": true,
         "**/*.booproj": true,
-        "**/*.csproj": true,
         "**/*.cubemap": true,
         "**/*.dll": true,
         "**/*.exe": true,
@@ -35,7 +33,6 @@
         "**/*.pidb": true,
         "**/*.prefab": true,
         "**/*.psd": true,
-        "**/*.sln": true,
         "**/*.suo": true,
         "**/*.tga": true,
         "**/*.tif": true,
@@ -62,5 +59,6 @@
     "editor.fontLigatures": true,
     "editor.fontFamily": "Fira Code",
     "editor.wrappingIndent": "indent",
-    "editor.wordWrap": "on"
+    "editor.wordWrap": "on",
+    "dotnet.defaultSolution": "First-Unity-Game.sln"
 }

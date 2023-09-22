@@ -420,7 +420,7 @@ namespace NavajoWars
                 }
                 else if (obj.ve is INotifyValueChanged<bool> veBool)
                 {
-                    veBool.RegisterValueChangedCallback(evt =>
+                    veBool.RegisterValueChangedCallback((evt) =>
                     { obj.setBool = evt.newValue; obj.callback(obj); });
                 }
             }
