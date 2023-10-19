@@ -161,10 +161,10 @@
     align-items: center;
 }
 
-Button.Person,
-Button.Man,
-Button.Woman,
-Button.Child,
+Button.Person, 
+Button.Man, 
+Button.Woman, 
+Button.Child, 
 Button.Elder {
     width: 200px;
     height: 200px;
@@ -175,10 +175,10 @@ Button.Elder {
     -unity-background-scale-mode: scale-and-crop;
 }
 
-Button.Person:hover,
-Button.Man:hover,
-Button.Woman:hover,
-Button.Child:hover,
+Button.Person:hover, 
+Button.Man:hover, 
+Button.Woman:hover, 
+Button.Child:hover, 
 Button.Elder:hover {
     border-left-color: rgb(151, 64, 27);
     border-right-color: rgb(151, 64, 27);
@@ -194,15 +194,14 @@ Button.Elder:hover {
     border-bottom-right-radius: 4px;
 }
 
-#Displays .Man,
-#Displays .Woman,
-#Displays .Child,
+#Displays .Man, 
+#Displays .Woman, 
+#Displays .Child, 
 #Displays .Elder {
     max-width: 20%;
 }
 
 .Man {
-    background-color: rgba(255, 255, 255, 0.31);
     background-image: resource('Textures/Counters/Counter Man');
 }
 
@@ -221,11 +220,11 @@ Button.Elder:hover {
     background-image: resource('Textures/Counters/Counter Elder');
 }
 
-Button.Resource,
-Button.Horse,
-Button.Sheep,
-Button.Corn,
-Button.TradeGood,
+Button.Resource, 
+Button.Horse, 
+Button.Sheep, 
+Button.Corn, 
+Button.TradeGood, 
 Button.Firearm {
     width: 160px;
     height: 160px;
@@ -238,9 +237,9 @@ Button.Firearm {
 
 Button.Resource:hover,
 Button.Horse:hover,
-Button.Sheep:hover,
+Button.Sheep:hover, 
 Button.Corn:hover,
-Button.TradeGood:hover,
+Button.TradeGood:hover, 
 Button.Firearm:hover {
     border-left-color: rgb(151, 64, 27);
     border-right-color: rgb(151, 64, 27);
@@ -256,12 +255,11 @@ Button.Firearm:hover {
     border-bottom-right-radius: 4px;
 }
 
-#Displays .Horse,
-#Displays .Sheep,
-#Displays .Corn,
+#Displays .Horse, 
+#Displays .Sheep, 
+#Displays .Corn, 
 #Displays .TradeGood,
-#Displays .Firearm
-{
+#Displays .Firearm {
     max-width: 20%;
 }
 
@@ -303,7 +301,7 @@ Button.Firearm:hover {
 
 .SliderPoints {
     left: 10%;
-    width: 400px;
+    width: 80%;
     height: 120px;
     font-size: 42px;
     -unity-text-align: middle-left;
@@ -342,23 +340,49 @@ Button.Firearm:hover {
 
 .FoldoutItem {
     left: 10%;
-    width: 50%;
 }
 
 Toggle.Person .unity-toggle__checkmark {
     align-items: flex-start;
     width: 48px;
     height: 48px;
-    font-size: 32px;
     -unity-background-scale-mode: scale-to-fit;
+    opacity: 0.68;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
 }
 
 Toggle.Person .unity-toggle__input:checked {
-    -unity-background-image-tint-color: #f2fab6;
+    -unity-background-image-tint-color: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+}
+
+Toggle.ElderDisplay {
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.ElderDisplay .unity-radio-button-group__container {
+    flex-direction: row;
+}
+
+.ElderDisplay .unity-radio-button__text {
+    display: flex;
+}
+
+.Ferocity .unity-radio-button-group__container {
+    flex-direction: row;
 }
 
 Toggle.Man .unity-toggle__checkmark {
     background-image: resource('Textures/Counters/Counter Man');
+    -unity-background-image-tint-color: rgb(255, 255, 255);
 }
 
 Toggle.Woman .unity-toggle__checkmark {
@@ -379,40 +403,40 @@ RadioButton.Ferocity .unity-base-field__input {
     justify-content: space-around;
 }
 
-.Black{
+.Black {
     background-image: resource('Textures/Counters/CubeBlack');
 }
 
-.White{
+.White {
     background-image: resource('Textures/Counters/CubeWhite');
 }
 
-.Brown{
+.Brown {
     background-image: resource('Textures/Counters/CubeBrown');
 }
 
-.Red{
+.Red {
     background-image: resource('Textures/Counters/CubeRed');
 }
-    
-.Yellow{
+
+.Yellow {
     background-image: resource('Textures/Counters/CubeYellow');
 }
 
-.Green{
+.Green {
     background-image: resource('Textures/Counters/CubeGreen');
 }
-    
-.Blue{
+
+.Blue {
     background-image: resource('Textures/Counters/CubeBlue');
 }
 
-Button.Black,
+Button.Black, 
 Button.White,
-Button.Brown,
-Button.Red,
-Button.Yellow,
-Button.Green,
+Button.Brown, 
+Button.Red, 
+Button.Yellow, 
+Button.Green, 
 Button.Blue {
     width: 100px;
     height: 100px;
@@ -423,7 +447,7 @@ Button.Blue {
     -unity-background-scale-mode: scale-and-crop;
 }
 
-Button.Black:hover,
+Button.Black:hover, 
 Button.White:hover,
 Button.Brown:hover,
 Button.Red:hover,
@@ -444,12 +468,13 @@ Button.Blue:hover {
     border-bottom-right-radius: 4px;
 }
 
-#Displays .Black,
+#Displays .Black, 
 #Displays .White,
 #Displays .Brown,
 #Displays .Red,
 #Displays .Yellow,
 #Displays .Green,
-#Displays .Blue {
+#Displays .Blue
+{
     max-width: 10%;
 }

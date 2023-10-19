@@ -28,15 +28,15 @@ namespace NavajoWars
             // ui.hideBackNext();
             // async necessary to pause loops and await button click
             // at this point there are no elders in slot 0 (moved right in prev step)
+            ui.displayText(""); 
             for (int i = 1; i < gs.ElderDisplay.Length; i++)
             {
                 if (gs.ElderDisplay[i] > 0)
                 {
-                    ui.displayText(""); 
                     int j = 0;
                     while (j < gs.ElderDisplay[i])
                     {
-                        ui.addText($"{gs.ElderDisplay[i] - j} Elder Action(s) in Slot {i}. Roll Die.\nFor this roll you need a {gs.ElderTarget[i]} or less.");
+                        ui.addText($"{gs.ElderDisplay[i] - j} Elder Action(s) in Slot {i+1}. Roll Die.\nFor this roll you need a {gs.ElderTarget[i]} or less.");
                         ButtonInfo yes = new("Roll Succeeded");
                         ButtonInfo no = new("Roll Failed");
                         List<ButtonInfo> choices = new() { yes, no };
@@ -59,19 +59,19 @@ namespace NavajoWars
                             if (elderResult == addAP) 
                             {
                                 gs.AP++; 
-                                ui.displayText($"Adding 1 AP; there are now {gs.AP}\n");
+                                ui.displayText($"Adding 1 AP; there are now {gs.AP}.\n");
                             }
                             if (elderResult == addMP) 
                             {
                                 gs.MP++;
                                 gs.CP--;
-                                ui.displayText($"Adding 1 MP (to {gs.MP}) and Reducing CP by 1 (to {gs.CP})\n");
+                                ui.displayText($"Adding 1 MP (to {gs.MP}) and Reducing CP by 1 (to {gs.CP}).\n");
                             }
                             if (elderResult == addCP)
                             {
                                 gs.MP--;
                                 gs.CP++;
-                                ui.displayText($"Adding 1 CP (to {gs.CP}) and Reducing MP by 1 (to {gs.MP})\n");
+                                ui.displayText($"Adding 1 CP (to {gs.CP}) and Reducing MP by 1 (to {gs.MP}).\n");
                             }
                             if (elderResult == changeFerocity)
                             {

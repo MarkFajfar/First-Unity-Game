@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace NavajoWars
 {
@@ -68,10 +69,39 @@ namespace NavajoWars
         { get => enemyRaid; set => enemyRaid = value; }
         [SerializeField] int enemyRaid;
 
+        /// <summary>
+        /// sets number of Resource enum in Resources to value
+        /// </summary>
+        void setResource(int target, Resource resource)
+        {
+            // int target = Math.Clamp(value, 0, 11);
+            int current = Resources.Where(r => r == resource).Count();
+            while (target != current)
+            {
+                if (target > current) Resources.Add(resource);
+                if (target < current) Resources.Remove(resource);
+                current = Resources.Where(r => r == resource).Count();
+            }
+        }
+
         // Game has 9 TradeGoods tokens, and 2 more from intruders; each scenario starts with 3
         public int TradeGoodsHeld
-        { get => tradeGoodsHeld; set => tradeGoodsHeld = Math.Clamp(value, 0, 11); }
-        [SerializeField] int tradeGoodsHeld;
+        { 
+            get { return Resources.Where(r => r == Resource.TradeGood).Count(); }
+            set { setResource(Math.Clamp(value, 0, TradeGoodsMax), Resource.TradeGood);                
+                /* int target = Math.Clamp(value, 0, 11);
+                int current = Resources.Where(r => r == Resource.TradeGood).Count();
+                while (target != current)
+                {
+                    if (target > current) Resources.Add(Resource.TradeGood);
+                    if (target < current) Resources.Remove(Resource.TradeGood);
+                    current = Resources.Where(r => r == Resource.TradeGood).Count();
+                } */
+            }
+        }
+        //[SerializeField] int tradeGoodsHeld;
+        //Resources list is serialized, not number held
+
         public int TradeGoodsMax 
         { get => tradeGoodsMax; set => tradeGoodsMax = Math.Clamp(value, 0, 11); }
         [SerializeField] int tradeGoodsMax;
@@ -79,24 +109,45 @@ namespace NavajoWars
 
         // Game has 8 sheep tokens; each scenario starts with 3
         public int SheepHeld
-        { get => sheepHeld; set => sheepHeld = Math.Clamp(value, 0, 8); }
-        [SerializeField] int sheepHeld;
+        { get => Resources.Where(r => r == Resource.Sheep).Count();
+        set => setResource(Math.Clamp(value, 0, SheepMax), Resource.Sheep); }
+        //{ get => sheepHeld; set => sheepHeld = Math.Clamp(value, 0, 8); }
+        //[SerializeField] int sheepHeld;
         public int SheepMax 
         { get => sheepMax; set => sheepMax = Math.Clamp(value, 0, 8); }
         [SerializeField] int sheepMax;
 
         // Game has 8 horses tokens; each scenario starts with 3
         public int HorsesHeld
-        { get => horsesHeld; set => horsesHeld = Math.Clamp(value, 0, 8); }
-        [SerializeField] int horsesHeld;
+        {
+            get => Resources.Where(r => r == Resource.Horse).Count() +
+                Families.Where(f => f.HasHorse).Count();
+            set 
+            { 
+                int target = Math.Clamp(value, 0, HorsesMax - Families.Where(f => f.HasHorse).Count());
+                setResource(target, Resource.Horse);                
+                /* int target = Math.Clamp(value, 0, 11);
+                int current = Resources.Where(r => r == Resource.TradeGood).Count();
+                while (target != current)
+                {
+                    if (target > current) Resources.Add(Resource.TradeGood);
+                    if (target < current) Resources.Remove(Resource.TradeGood);
+                    current = Resources.Where(r => r == Resource.TradeGood).Count();
+                } */
+            }
+        }
+        //{ get => horsesHeld; set => horsesHeld = Math.Clamp(value, 0, 8); }
+        //[SerializeField] int horsesHeld;
         public int HorsesMax 
         { get => horsesMax; set => horsesMax = Math.Clamp(value, 0, 8); }
         [SerializeField] int horsesMax;
 
         // Game has 1 Firearms token, and 4 more from intruders
         public int Firearms
-        { get => firearms; set => firearms = Math.Clamp(value, 0, 5); }
-        [SerializeField] int firearms;
+        { get => Resources.Where(r => r == Resource.Firearm).Count();
+          set => setResource(Math.Clamp(value, 0, 5), Resource.Firearm); }
+        //{ get => firearms; set => firearms = Math.Clamp(value, 0, 5); }
+        //[SerializeField] int firearms;
 
         // number of corn tokens moved to resource box in Passage Step 4
         public int CornHarvested

@@ -10,8 +10,8 @@
         <ui:SliderInt label="Enemy Morale" value="5" high-value="19" show-input-field="true" name="EnemyMorale" direction="Horizontal" class="SliderPoints Morale" />
         <ui:Foldout text="Families" name="FamilyFoldout" class="FoldoutHeading" style="width: 80%;">
             <ui:Foldout text="Family A" name="FamilyA" value="false" class="FoldoutItem FamilyA">
-                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
-                    <ui:Toggle name="Man" value="false" class="Toggle Person Man" />
+                <ui:VisualElement name="Members" style="flex-direction: row;">
+                    <ui:Toggle name="Man" value="false" class="Toggle Person Man" style="background-color: rgba(255, 255, 255, 0);" />
                     <ui:Toggle name="Woman" class="Toggle Person Woman" />
                     <ui:Toggle name="Child" class="Toggle Person Child" />
                     <ui:Toggle name="Horse" class="Toggle Person Horse" />
@@ -21,7 +21,7 @@
                 <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family B" name="FamilyB" value="false" class="FoldoutItem FamilyB">
-                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                <ui:VisualElement name="Members" style="flex-direction: row;">
                     <ui:Toggle name="Man" class="Toggle Person Man" />
                     <ui:Toggle name="Woman" class="Toggle Person Woman" />
                     <ui:Toggle name="Child" class="Toggle Person Child" />
@@ -32,7 +32,7 @@
                 <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family C" name="FamilyC" value="false" class="FoldoutItem FamilyC">
-                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                <ui:VisualElement name="Members" style="flex-direction: row;">
                     <ui:Toggle name="Man" class="Toggle Person Man" />
                     <ui:Toggle name="Woman" class="Toggle Person Woman" />
                     <ui:Toggle name="Child" class="Toggle Person Child" />
@@ -43,7 +43,7 @@
                 <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family D" name="FamilyD" value="false" class="FoldoutItem FamilyD">
-                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                <ui:VisualElement name="Members" style="flex-direction: row;">
                     <ui:Toggle name="Man" class="Toggle Person Man" />
                     <ui:Toggle name="Woman" class="Toggle Person Woman" />
                     <ui:Toggle name="Child" class="Toggle Person Child" />
@@ -54,7 +54,7 @@
                 <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family E" name="FamilyE" value="false" class="FoldoutItem FamilyE">
-                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                <ui:VisualElement name="Members" style="flex-direction: row;">
                     <ui:Toggle name="Man" class="Toggle Person Man" />
                     <ui:Toggle name="Woman" class="Toggle Person Woman" />
                     <ui:Toggle name="Child" class="Toggle Person Child" />
@@ -65,16 +65,25 @@
                 <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
             <ui:Foldout text="Family F" name="FamilyF" value="false" class="FoldoutItem FamilyF">
-                <ui:VisualElement name="Members" style="flex-direction: row; justify-content: space-around;">
+                <ui:VisualElement name="Members" style="flex-direction: row;">
                     <ui:Toggle name="Man" class="Toggle Person Man" />
                     <ui:Toggle name="Woman" class="Toggle Person Woman" />
                     <ui:Toggle name="Child" class="Toggle Person Child" />
                     <ui:Toggle name="Horse" class="Toggle Person Horse" />
                 </ui:VisualElement>
                 <ui:Toggle label="Active" name="IsActive" class="Toggle IsActive" />
-                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2,3" class="Toggle Ferocity" />
+                <ui:RadioButtonGroup label="Ferocity" value="-1" name="Ferocity" choices="0, 1, 2, 3" class="Toggle Ferocity" />
                 <ui:DropdownField label="Location" index="-1" name="IsWhere" choices="Splitrock, San Juan, Zuni, Monument, Hopi, Black Mesa, Canyon de Chelly" class="Toggle IsWhere" style="max-height: 60px; -unity-text-align: middle-left;" />
             </ui:Foldout>
+        </ui:Foldout>
+        <ui:Foldout text="Elder Display" name="ElderFoldout" class="FoldoutHeading ElderDisplay" style="width: 80%;">
+            <ui:RadioButtonGroup label="Slot 1" value="-1" name="Slot0" choices="0, 1, 2, 3, 4, 5" class="Toggle Elder0 ElderDisplay" />
+            <ui:RadioButtonGroup label="Slot 2" value="-1" name="Slot1" choices="0, 1, 2, 3, 4, 5" class="Toggle Elder1 ElderDisplay" />
+            <ui:RadioButtonGroup label="Slot 3" value="-1" name="Slot2" choices="0, 1, 2, 3, 4, 5" class="Toggle Elder2 ElderDisplay" />
+            <ui:RadioButtonGroup label="Slot 4" value="-1" name="Slot3" choices="0, 1, 2, 3, 4, 5" class="Toggle Elder3 ElderDisplay" />
+            <ui:RadioButtonGroup label="Slot 5" value="-1" name="Slot4" choices="0, 1, 2, 3, 4, 5" class="Toggle Elder4 ElderDisplay" />
+            <ui:RadioButtonGroup label="Slot 6" value="-1" name="Slot5" choices="0, 1, 2, 3, 4, 5" class="Toggle Elder5 ElderDisplay" />
+            <ui:RadioButtonGroup label="Slot 7" value="-1" name="Slot6" choices="0, 1, 2, 3, 4, 5" class="Toggle Elder6 ElderDisplay" />
         </ui:Foldout>
         <ui:Foldout text="Territories" name="TerritoryFoldout" class="FoldoutHeading" style="width: 80%;">
             <ui:Foldout text="Splitrock" name="Splitrock" value="false" class="Splitrock FoldoutItem" style="left: 10%; width: 50%;">

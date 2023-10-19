@@ -317,7 +317,7 @@ namespace NavajoWars
                 {
                     callback = new((gsfo obj) =>
                     {
-                        // when button pressed use int from setValue as lookup in Person enum
+                        // when button pressed use int from setValue as lookup in Resource enum
                         var resource = (Resource)obj.setValue;
                         gs.Resources.Add(resource);
                         addButtonToResourceDisplay(resource);

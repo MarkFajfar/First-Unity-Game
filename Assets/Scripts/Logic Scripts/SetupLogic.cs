@@ -37,15 +37,6 @@ namespace NavajoWars
             gs.EnemyFerocity = scenario.Ferocity;
             gs.Morale = scenario.Morale;
 
-            gs.HorsesHeld = scenario.Horses;
-            gs.HorsesMax = scenario.HorsesMax;
-            gs.SheepHeld = scenario.Sheep;
-            gs.SheepMax = scenario.SheepMax; 
-            gs.TradeGoodsMax = 3;
-            gs.Firearms = 0;
-
-            gs.HasDrought = scenario.HasDrought;
-
             if (scenario.Name == "Broken" || scenario.Name == "Fearing")
             {
                 gs.Subjugation.Add(Cube.Red);
@@ -101,6 +92,25 @@ namespace NavajoWars
                     f.IsWhere = Territory.Default;
                 }
             }
+
+            // horses depend on families so set after families
+
+            gs.HorsesMax = scenario.HorsesMax;
+            gs.HorsesHeld = scenario.Horses;
+            gs.SheepMax = scenario.SheepMax;
+            gs.SheepHeld = scenario.Sheep;
+            gs.TradeGoodsMax = 3;
+            gs.Firearms = 0;
+
+            gs.HasDrought = scenario.HasDrought;
+
+            // not necessary because done in set accessor
+            /* for (int i = 0; i < gs.HorsesHeld; i++)
+            { gs.Resources.Add(Resource.Horse); }
+
+            for (int i = 0; i < gs.SheepHeld; i++)
+            { gs.Resources.Add(Resource.Sheep); }
+ */
 
             // setup initial game info
 
