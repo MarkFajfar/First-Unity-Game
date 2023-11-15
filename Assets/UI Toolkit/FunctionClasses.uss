@@ -4,7 +4,7 @@
 
 .TradeGoodsHeld { } .SheepHeld { } .HorsesHeld { } .Firearms { }
 
-.HasDrought { } .HasCorn { } .HasMission { } .HasRancho { } .HasFort { }
+.HasDrought { } .DroughtNum { } .HasCorn { } .HasMission { } .HasRancho { } .HasFort { }
 
 .SantaFe { } .Splitrock { } .SanJuan { } .Zuni { } .Monument { } .Hopi { } .BlackMesa { } .Canyon { } 
 

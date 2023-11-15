@@ -14,7 +14,7 @@ namespace NavajoWars
         Default, AP, CP, MP, Morale, EnemyAP, EnemyFerocity, 
         Elder0, Elder1, Elder2, Elder3, Elder4, Elder5, Elder6,
         TradeGoodsHeld, SheepHeld, HorsesHeld, CornHarvested, Firearms, 
-        HasDrought, HasCorn, HasMission, HasRancho, HasFort,
+        HasDrought, DroughtNum, HasCorn, HasMission, HasRancho, HasFort,
         IsActive, Man, Woman, Child, Elder, Ferocity, IsWhere,
         Horse, Sheep, Corn, TradeGood, Firearm,
         PassageDisplay, ElderDisplay, ResourceDisplay,
@@ -236,17 +236,23 @@ namespace NavajoWars
 
                 gsfo[] territoryObjects =
                 {
-                    new(HasDrought)
+                    /* new(HasDrought)
                     {
                         callback = new((gsfo obj) =>
                             toggleTerritoryValue(gs.HasDrought, obj.t, obj.setBool)),
                         getBool = delegate { return gs.HasDrought.Contains(territory); }
+                    }, */
+                    new(DroughtNum)
+                    {
+                        // cast the territory as an int
+                        callback = new((gsfo obj) => gs.TerritoryDrought[(int)obj.t] = obj.setValue),
+                        getValue = delegate { return gs.TerritoryDrought[(int)territory]; }
                     },
                     new(HasCorn)
                     {
-                    callback = new((gsfo obj) =>
-                        toggleTerritoryValue(gs.HasCorn, obj.t, obj.setBool)),
-                    getBool = delegate { return gs.HasCorn.Contains(territory); }
+                        callback = new((gsfo obj) =>
+                            toggleTerritoryValue(gs.HasCorn, obj.t, obj.setBool)),
+                        getBool = delegate { return gs.HasCorn.Contains(territory); }
                     },
                     new(HasMission)
                     {

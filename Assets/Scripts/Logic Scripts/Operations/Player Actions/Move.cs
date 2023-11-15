@@ -61,15 +61,17 @@ namespace NavajoWars
 
         void noSame() 
         {
-            ui.displayText("Move completed. Press Next to continue. ");
+            ui.displayText("Move completed. ");
+            if (gs.HasCorn.Contains(selectedFamily.IsWhere)) ui.addText("Remove corn counter if Family moving from that Area.");
             bool fortInTerritory = gs.HasFort.Contains(selectedFamily.IsWhere);
-            if (selectedFamily.Ferocity > 1 && fortInTerritory) ui.addText("Reminder: a Family with Ferocity > 1 that ends it activation in the same Area as a Fort must disband.\nPress Next to continue.");
+            if (selectedFamily.Ferocity > 1 && fortInTerritory) ui.addText("Reminder: a Family with Ferocity > 1 that ends it activation in the same Area as a Fort must disband.");
+            ui.addText("\nPress Next to continue.");
             ui.OnNextClick = actionComplete;
         }
 
         void yesNew() 
         {
-            ui.displayText($"Select {selectedFamily.Name}'s new Territory and click Next to continue.");
+            ui.displayText($"Select {selectedFamily.Name}'s new Territory and press Next to continue.");
             ui.DisplayLocations();
             newTerritorySelected = true;
             ui.OnNextClick = actionComplete;

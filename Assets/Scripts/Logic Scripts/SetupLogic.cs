@@ -56,6 +56,7 @@ namespace NavajoWars
             gs.EventCardsInPlay = new();
             gs.PersonsInPassage = new();
             gs.ElderDisplay = new int[7] { 1, 1, 1, 0, 0, 0, 0 };
+            gs.TerritoryDrought = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
             Family FamilyA = new() { Name = "Family A" };
             Family FamilyB = new() { Name = "Family B" };

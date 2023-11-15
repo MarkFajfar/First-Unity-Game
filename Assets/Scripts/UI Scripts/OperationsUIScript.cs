@@ -334,8 +334,12 @@ namespace NavajoWars
             //choiceElements.AddRange(choicePanel.Query<RadioButtonGroup>().ToList());
             // instead of removing radio button group, use CloseLocations
             // IEnumerable<VisualElement> choiceElements = new[] { buttons, foldouts, radios };
+        }
 
-
+        public void removeVisualElement(string name)
+        {
+            VisualElement element = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>(name);
+            element.RemoveFromHierarchy();
         }
     }
 }

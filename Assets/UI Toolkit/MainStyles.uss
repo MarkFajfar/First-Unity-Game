@@ -363,13 +363,24 @@ Toggle.Person .unity-toggle__input:checked {
     opacity: 0;
 }
 
+Toggle.DroughtNum,
 Toggle.ElderDisplay {
     align-items: flex-start;
     justify-content: flex-start;
 }
 
+.DroughtNum .unity-radio-button-group__container
+{
+    flex-direction: row;
+}
+
 .ElderDisplay .unity-radio-button-group__container {
     flex-direction: row;
+}
+
+.DroughtNum .unity-radio-button__text
+{
+    display: flex;
 }
 
 .ElderDisplay .unity-radio-button__text {

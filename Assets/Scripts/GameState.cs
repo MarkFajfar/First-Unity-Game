@@ -42,10 +42,27 @@ namespace NavajoWars
 
         public List<Person> PersonsInPassage;
 
+        public List<Resource> AnimalsInPassage;
+
         public List<Resource> Resources;
 
         public int[] ElderDisplay;
         public readonly int[] ElderTarget = { 0, 1, 2, 2, 3, 4, 5 };
+
+        public int Population
+        {
+            get
+            {
+                int population = ElderDisplay.Sum();
+                foreach (var f in Families)
+                {
+                    if (f.HasMan) population++;
+                    if (f.HasWoman) population++;
+                    if (f.HasChild) population++;
+                }
+                return population;
+            }
+        }
 
         public int AP
         { get => ap; set => ap = Math.Clamp(value, 0, 19); }
@@ -124,16 +141,8 @@ namespace NavajoWars
                 Families.Where(f => f.HasHorse).Count();
             set 
             { 
-                int target = Math.Clamp(value, 0, HorsesMax - Families.Where(f => f.HasHorse).Count());
+                int target = Math.Clamp(value, 0, Math.Max(0, HorsesMax - Families.Where(f => f.HasHorse).Count()));
                 setResource(target, Resource.Horse);                
-                /* int target = Math.Clamp(value, 0, 11);
-                int current = Resources.Where(r => r == Resource.TradeGood).Count();
-                while (target != current)
-                {
-                    if (target > current) Resources.Add(Resource.TradeGood);
-                    if (target < current) Resources.Remove(Resource.TradeGood);
-                    current = Resources.Where(r => r == Resource.TradeGood).Count();
-                } */
             }
         }
         //{ get => horsesHeld; set => horsesHeld = Math.Clamp(value, 0, 8); }
@@ -149,12 +158,13 @@ namespace NavajoWars
         //{ get => firearms; set => firearms = Math.Clamp(value, 0, 5); }
         //[SerializeField] int firearms;
 
-        // number of corn tokens moved to resource box in Passage Step 4
+        // number of corn tokens moved to resource box in Passage Step 4; may not be necessary
         public int CornHarvested
         { get => cornHarvested; set => cornHarvested = value; }
         [SerializeField] int cornHarvested;
 
         public List<Territory> HasDrought;
+        public int[] TerritoryDrought;
         public List<Territory> HasCorn;
         public List<Territory> HasMission;
         public List<Territory> HasRancho;

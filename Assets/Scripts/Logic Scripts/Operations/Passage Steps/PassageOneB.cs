@@ -35,7 +35,7 @@ namespace NavajoWars
                 }
                 else 
                 {
-                    ui.addText("Each Elder may be moved to the left-most box of the Elder Display.");
+                    ui.addText("Each Elder may be moved to the left-most box of the Elder Display (no limit to the number of Elders in any box of the Elder Display).");
                     displayPassageElders();
                 }                
             }
@@ -203,13 +203,13 @@ namespace NavajoWars
             
             if (elderMoveCount > 0)
             {
-                ui.addText($"{elderMoveCount} CP added for Elders moved to the Elder Display.\n");
-                gs.CP += elderMoveCount;
+                gs.CP += elderMoveCount; 
+                ui.addText($"{elderMoveCount} CP added for Elders moved to the Elder Display. There are now {gs.CP} CP.\n");                
             }
 
             if (gs.PersonsInPassage.Count() > 0)
             {
-                ui.addText($"Discard {gs.PersonsInPassage.Count()} counters from the Passage of Time Box to the Out of Play Box.\n");
+                ui.addText($"Discard the remaining {gs.PersonsInPassage.Count()} counters from the Passage of Time Box to the Out of Play Box.\n");
                 foreach (var person in gs.PersonsInPassage)
                 { gs.PersonsInPassage.Remove(person); }
             }
@@ -221,7 +221,7 @@ namespace NavajoWars
         protected override void actionComplete()
         {
             base.actionComplete();
-            //GetComponentInChildren<PassageTwo>().Begin();
+            GetComponentInChildren<PassageTwo>().Begin();
         }
 
         public override void Undo()

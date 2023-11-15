@@ -6,7 +6,7 @@ namespace NavajoWars
 {
     public class PlanningFour : GameStep
     {
-        public override string stepName { get => "PlanningFour"; }
+        public override string stepName => "PlanningFour"; // same as get; read-only
 
         public override void Begin()
         {
@@ -26,7 +26,7 @@ namespace NavajoWars
                 List<ButtonInfo> choices = new();
                 for (int i = 0; i < (toSpend + 1); i++)
                 {
-                    ButtonInfo choiceSpend = new(i.ToString())
+                    ButtonInfo choiceSpend = new($"{i}")
                     {
                         data = i,
                         passBack = spend
@@ -42,7 +42,7 @@ namespace NavajoWars
             int spent = (int)result.data; 
             gs.AP -= spent;
             gs.TradeGoodsHeld += spent;
-            ui.displayText($"Spending {spent} AP leaves {gs.AP} AP.\n{gs.TradeGoodsHeld} Trade Goods Held. Press Next to continue.");
+            ui.displayText($"Spending {spent} AP leaves {gs.AP} AP.\n{gs.TradeGoodsHeld} Trade Goods Held.\nPress Next to continue.");
             ui.OnNextClick = actionComplete;
         }
 
