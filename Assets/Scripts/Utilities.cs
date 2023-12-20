@@ -11,6 +11,9 @@ namespace NavajoWars
 {
     public class Utilities : MonoBehaviour
     {
+
+        public static string Are(int i) => i == 1 ? "is one" : $"are {i}";
+
 #if UNITY_EDITOR
 
         class MyClass

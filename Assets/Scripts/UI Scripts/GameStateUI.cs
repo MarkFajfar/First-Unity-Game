@@ -11,7 +11,8 @@ namespace NavajoWars
 {
     public enum GameStateFunction 
     { 
-        Default, AP, CP, MP, Morale, EnemyAP, EnemyFerocity, 
+        Default, AP, CP, MP, Morale, EnemyAP, EnemyFerocity,
+        Population, Arability,
         Elder0, Elder1, Elder2, Elder3, Elder4, Elder5, Elder6,
         TradeGoodsHeld, SheepHeld, HorsesHeld, CornHarvested, Firearms, 
         HasDrought, DroughtNum, HasCorn, HasMission, HasRancho, HasFort,
@@ -434,6 +435,11 @@ namespace NavajoWars
 
         void Refresh()
         {
+            Label population = (Label)element(Population);
+            population.text = $"Population {gs.Population}";
+            Label arability = (Label)element(Arability);
+            arability.text = $"Arability {gs.Arability}"; 
+
             foreach (var obj in gsfObjects)
             { 
                 if (obj.ve is DropdownField dropdown)

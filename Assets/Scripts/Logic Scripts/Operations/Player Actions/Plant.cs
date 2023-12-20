@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static NavajoWars.Utilities;
 
 namespace NavajoWars
 {
@@ -30,7 +31,6 @@ namespace NavajoWars
                     new("Harvest", harvest),
                     new("Neither", neither)
                 });
-            // TODO: RECORD PLANT OR HARVEST
             // could have multiple entries in HasCorn if planting more than once in a Territory
         }
 
@@ -43,14 +43,15 @@ namespace NavajoWars
 
         void harvest()
         {
-            ui.displayText($"Corn harvested from {territory}.");
+            ui.displayText($"Corn harvested from {territory}; place in Resources box. ");
             gs.HasCorn.Remove(territory);
+            gs.Resources.Add(Resource.Corn);
             if (gs.HasCorn.Contains(territory)) 
             { 
                 int num = gs.HasCorn.Where(t => t == territory).Count();
-                ui.addText($" There {Are(num)} corn remaining in {territory}.");
+                ui.addText($"There {Are(num)} corn remaining in {territory}. ");
             }
-            ui.addText(" Press Next to continue.");
+            ui.addText("Press Next to continue.");
             ui.OnNextClick = actionComplete;
         }
 
@@ -59,8 +60,6 @@ namespace NavajoWars
             ui.displayText("Press Next to continue.");
             ui.OnNextClick = actionComplete;
         }
-
-        string Are(int i) => i == 1 ? "is one" : $"are {i}";
 
         protected override void actionComplete()
         {

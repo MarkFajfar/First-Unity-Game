@@ -16,6 +16,7 @@ namespace NavajoWars
         public bool waiting = false;
         public bool clearPanel = true;
         public bool closeFoldout = true;
+        public bool remove = false; // if true will be deleted when selected
 
         public const string Default = "Default";
         public Family family = new() { Name = Default };

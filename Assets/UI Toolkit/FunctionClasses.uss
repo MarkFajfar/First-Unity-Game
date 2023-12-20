@@ -1,5 +1,7 @@
 .AP { } .CP { } .MP { } .Morale { } .EnemyFerocity { } .EnemyRaid { }
 
+.Population { } .Arability { } 
+
 .Elder0 { } .Elder1 { } .Elder2 { } .Elder3 { } .Elder4 { } .Elder5 { } .Elder6 { }
 
 .TradeGoodsHeld { } .SheepHeld { } .HorsesHeld { } .Firearms { }

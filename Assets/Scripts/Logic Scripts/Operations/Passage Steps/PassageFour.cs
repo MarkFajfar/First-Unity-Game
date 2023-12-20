@@ -18,18 +18,15 @@ namespace NavajoWars
             ui.displayHeadline("Passage of Time\nStep Four");
             foreach (var territory in gs.HasCorn)
             {
-                // var territory = family.IsWhere;
-                // if (gs.HasCorn.Contains(territory) && !hasFamilyAndCorn.Contains(territory)) 
-                if (gs.Families.Where(f => f.IsWhere == territory).Count() > 0)
-                    hasFamilyAndCorn.Add(territory);
+                if (gs.TerritoryFamily[(int)territory]) 
+                hasFamilyAndCorn.Add(territory);                
             }
             if (hasFamilyAndCorn.Count > 0)
             {
                 ui.displayText("If any Family is in an area with a corn counter, do you wish to harvest? (Remember - do not look at counter before deciding!)\n");
-                int a = 0; // work out formula for Arability
-                ui.addText($"Note: Your population is {gs.Population} and your total Arability is {a}. ");
+                ui.addText($"Note: Your population is {gs.Population} and your total arability is {gs.Arability}. ");
                 if (gs.SheepHeld > 0) ui.addText($"Your sheep can feed {gs.SheepHeld * 4} population. "); 
-                int deficit = gs.Population - a - (gs.SheepHeld * 4);
+                int deficit = gs.Population - gs.Arability - (gs.SheepHeld * 4);
                 ui.addText($"So, you {(deficit > 0 ? $"need {deficit} corn" : "do not need any corn")} to feed your population.");
 
                 ui.ShowChoiceButtons(new()
@@ -43,7 +40,6 @@ namespace NavajoWars
                 ui.displayText("No area with a Family and a corn counter.\nPress Next to continue.");
                 ui.OnNextClick = actionComplete;
             }
-            
         }
 
         void yes()
@@ -52,7 +48,11 @@ namespace NavajoWars
             List<ButtonInfo> buttons = new();
             foreach (var territory in hasFamilyAndCorn)
             {
-                buttons.Add(new($"{territory}", (int)territory, recordHarvest));
+                ButtonInfo button = new($"{territory}", recordHarvest);
+                button.data = territory;
+                button.clearPanel = false; // don't clear panel when clicked
+                button.remove = true; // remove when clicked
+                buttons.Add(button);
             }
             ui.ShowChoiceButtons(buttons);
             // or list of bool items to be ticked, then next to complete
@@ -61,9 +61,9 @@ namespace NavajoWars
 
         void recordHarvest(ButtonInfo info)
         {
-            ui.addText($"\nCorn harvested from {info.text}.");
-            gs.HasCorn.Remove((Territory)info.tabIndex);
-            ui.removeVisualElement(info.name);
+            ui.addText($"\nCorn harvested from {info.text}; place it in Resources box.");
+            gs.HasCorn.Remove((Territory)info.data);
+            gs.Resources.Add(Resource.Corn);
         }
 
         void no()

@@ -10,7 +10,22 @@ namespace NavajoWars
     {
         public string Name { get => name; set => name = value; }
         [SerializeField] string name;
-        public bool IsActive { get => isActive; set => isActive = value; }
+        public bool IsActive { 
+            get => isActive; 
+            set 
+            {                 
+                isActive = value;
+                if (value == false)
+                {
+                    HasMan = false;
+                    HasWoman = false;
+                    HasChild = false;
+                    HasHorse = false;
+                    IsWhere = Territory.Default;
+                    Ferocity = 0;
+                } 
+            }
+        }
         [SerializeField] bool isActive = false;
         public bool HasMan { get => hasMan; set => hasMan = value; }
         [SerializeField] bool hasMan = true;

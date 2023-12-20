@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Threading;
 
 namespace NavajoWars
 {
@@ -38,6 +39,7 @@ namespace NavajoWars
         [SerializeField] Card currentCard;
 
         public List<Card> CeremonyCardsInHand;
+
         public List<Card> EventCardsInPlay;
 
         public List<Person> PersonsInPassage;
@@ -61,6 +63,23 @@ namespace NavajoWars
                     if (f.HasChild) population++;
                 }
                 return population;
+            }
+        }
+
+        public int Arability
+        {
+            get
+            {
+                int a = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    if (TerritoryFamily[i]) 
+                    { 
+                        a = a + 3 - TerritoryDrought[i];
+                        if (HasRancho.Contains((Territory)i)) a--;
+                    }
+                }
+                return a;
             }
         }
 
@@ -125,6 +144,9 @@ namespace NavajoWars
         // is tgMax the same in every scenario?
 
         // Game has 8 sheep tokens; each scenario starts with 3
+        /// <summary>
+        /// Returns number of Sheep in Resources box
+        /// </summary> 
         public int SheepHeld
         { get => Resources.Where(r => r == Resource.Sheep).Count();
         set => setResource(Math.Clamp(value, 0, SheepMax), Resource.Sheep); }
@@ -135,6 +157,9 @@ namespace NavajoWars
         [SerializeField] int sheepMax;
 
         // Game has 8 horses tokens; each scenario starts with 3
+        /// <summary>
+        /// Returns number of Horses in Resources box
+        /// </summary>         
         public int HorsesHeld
         {
             get => Resources.Where(r => r == Resource.Horse).Count() +
@@ -165,6 +190,30 @@ namespace NavajoWars
 
         public List<Territory> HasDrought;
         public int[] TerritoryDrought;
+
+        /// <summary>
+        /// Array of 9 bool, true if Family in that Territory
+        /// </summary>
+        public bool[] TerritoryFamily
+        { 
+            get
+            {
+                bool[] refresh = new bool[9];
+                for (int i = 0; i < 9; i++)
+                {
+                    if (Families.Where(f => f.IsWhere == (Territory)i).Count() > 0) refresh[i] = true;
+                }
+                return refresh;
+            }
+        }
+
+        /// <summary>
+        /// Returns number of Territories with a Family
+        /// </summary>
+        public int TerritoriesWithFamily
+        {
+            get => TerritoryFamily.Where(b => b == true).Count();
+        }
         public List<Territory> HasCorn;
         public List<Territory> HasMission;
         public List<Territory> HasRancho;

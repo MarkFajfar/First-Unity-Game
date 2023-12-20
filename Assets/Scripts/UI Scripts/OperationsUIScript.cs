@@ -168,7 +168,7 @@ namespace NavajoWars
         }
 
         public override void showPrev()
-        { prev.visible = false; }
+        { prev.visible = true; }
         
         public override void hidePrev()
         { prev.visible = false; }
@@ -185,6 +185,7 @@ namespace NavajoWars
             {
                 Button choiceButton = info.Make(); // MakeButtonFromInfo(choice);
                 choiceButton.RegisterCallback<ClickEvent>(choiceButtonClicked);
+                if (info.remove) ButtonInfo.RemoveWhenClicked(choiceButton);
                 choicePanel.Add(choiceButton);
                 choiceButton.visible = true;
                 choiceButton.style.display = DisplayStyle.Flex;
@@ -334,12 +335,6 @@ namespace NavajoWars
             //choiceElements.AddRange(choicePanel.Query<RadioButtonGroup>().ToList());
             // instead of removing radio button group, use CloseLocations
             // IEnumerable<VisualElement> choiceElements = new[] { buttons, foldouts, radios };
-        }
-
-        public void removeVisualElement(string name)
-        {
-            VisualElement element = GetComponent<UIDocument>().rootVisualElement.Q<VisualElement>(name);
-            element.RemoveFromHierarchy();
         }
     }
 }

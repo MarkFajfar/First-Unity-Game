@@ -14,7 +14,7 @@ namespace NavajoWars
             ui.displayHeadline("Passage of Time\nStep Two");
             int animalCount = gs.AnimalsInPassage.Count;
             int horseCount = gs.Families.Where(f => f.HasHorse).Count();
-            if (animalCount > 0 || horseCount >0)
+            if (animalCount + horseCount > 0)
             {
                 ui.displayText("Return");
                 if (animalCount > 0 ) ui.addText($" {animalCount} animal(s) from the Passage of Time box{(horseCount > 0 ? " and" : "")}");
