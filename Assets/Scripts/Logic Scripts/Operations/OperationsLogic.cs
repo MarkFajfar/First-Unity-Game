@@ -92,7 +92,7 @@ namespace NavajoWars
                     choices.Add(enemy);
                 } 
                 ui.MakeChoiceButtonsAsync(choices);
-                ButtonInfo result = await IReceive.GetChoiceAsyncParams();
+                ButtonInfo result = await ui.GetChoiceAsyncParams();// IReceive.GetChoiceAsyncParams();
                 // use async where each choice is very short
                 if (result == redo)
                 {

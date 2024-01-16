@@ -29,7 +29,7 @@ namespace NavajoWars
             List<ButtonInfo> choices = new() { yes, no };
             // use async because logic to apply after choice made
             ui.MakeChoiceButtonsAsync(choices);
-            ButtonInfo result = await IReceive.GetChoiceAsyncParams();
+            ButtonInfo result = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
             ui.displayText("");
             if (result == yes)
             {

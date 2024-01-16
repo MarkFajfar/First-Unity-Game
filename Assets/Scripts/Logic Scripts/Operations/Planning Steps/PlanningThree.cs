@@ -41,7 +41,7 @@ namespace NavajoWars
                         ButtonInfo no = new("Roll Failed");
                         List<ButtonInfo> choices = new() { yes, no };
                         ui.MakeChoiceButtonsAsync(choices);
-                        ButtonInfo result = await IReceive.GetChoiceAsyncParams();
+                        ButtonInfo result = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
                         ui.displayText(""); 
                         // if no, will increment j and go to next loop
                         if (result == yes)
@@ -55,7 +55,7 @@ namespace NavajoWars
                             if (gs.CP > gs.MP) elderChoices.Add(addMP);
                             if (gs.MP > gs.CP) elderChoices.Add(addCP);
                             ui.MakeChoiceButtonsAsync(elderChoices);
-                            ButtonInfo elderResult = await IReceive.GetChoiceAsyncParams();
+                            ButtonInfo elderResult = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
                             if (elderResult == addAP) 
                             {
                                 gs.AP++; 
@@ -77,9 +77,9 @@ namespace NavajoWars
                             {
                                 // TODO: fix loop needing to be one long function
                                 ChangeFamilyFerocity1();
-                                ButtonInfo ferocityResult = await IReceive.GetChoiceAsyncParams();
+                                ButtonInfo ferocityResult = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
                                 ChangeFamilyFerocity2(ferocityResult);
-                                ButtonInfo choiceUpDown = await IReceive.GetChoiceAsyncParams();
+                                ButtonInfo choiceUpDown = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
                                 ChangeFamilyFerocity3(choiceUpDown);
                             }
                         }

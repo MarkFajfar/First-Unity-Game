@@ -83,15 +83,12 @@ namespace NavajoWars
 
             gs.AllFamilies = new() { FamilyA, FamilyB, FamilyC, FamilyD, FamilyE, FamilyF };
 
-            foreach (var f in gs.AllFamilies)
+            // activate man woman and child for each active family
+            foreach (var f in gs.Families)
             {
-                if (!f.IsActive)
-                {
-                    f.HasMan = false;
-                    f.HasWoman = false;
-                    f.HasChild = false;
-                    f.IsWhere = Territory.Default;
-                }
+                f.HasMan = true;
+                f.HasWoman = true;
+                f.HasChild = true;   
             }
 
             // horses depend on families so set after families

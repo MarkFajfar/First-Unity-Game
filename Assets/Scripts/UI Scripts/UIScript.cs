@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -60,8 +61,6 @@ namespace NavajoWars
         {
             var clickedButton = evt.target as Button;
 
-            
-
             if (clickedButton.userData is GameStep clickedStep) 
             {
                 ClearChoicePanel(); // would a next step ever need to keep the panel?
@@ -79,9 +78,10 @@ namespace NavajoWars
                 if (info.waiting)
                 // if waiting, send back choice (usually to a loop)
                 {
-                    ChoiceMadeParams choice = new(info);
+                    //ChoiceMadeParams choice = new(info);
                     //ChoiceMadeParams choice = new ChoiceMadeParams((ButtonInfo)clickedButton.userData);
-                    choice.OnChoiceMadeParams(choice);
+                    //choice.OnChoiceMadeParams(choice);
+                    OnChoiceMadeParams(info);
                 }
                 else if (info.passBack != null)
                 // if there is a passBack function, send back the params and stop
@@ -114,6 +114,18 @@ namespace NavajoWars
                 Debug.Log($"No button userdata received. Trying to call {clickedButton.name} on receivers");
                 foreach (var receiver in Receivers) receiver.methodManager(clickedButton.name);
             }
+        }
+
+        Action<ButtonInfo> OnChoiceMadeParams;
+        
+        public async Task<ButtonInfo> GetChoiceAsyncParams()
+        {
+            var result = new TaskCompletionSource<ButtonInfo>();
+            Action<ButtonInfo> eventHandler = (info) => result.SetResult(info);
+            OnChoiceMadeParams += eventHandler;
+            await result.Task;
+            OnChoiceMadeParams -= eventHandler;
+            return result.Task.Result;
         }
 
         protected void foldoutButtonClicked(ClickEvent evt)

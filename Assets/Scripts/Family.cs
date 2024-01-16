@@ -28,11 +28,11 @@ namespace NavajoWars
         }
         [SerializeField] bool isActive = false;
         public bool HasMan { get => hasMan; set => hasMan = value; }
-        [SerializeField] bool hasMan = true;
+        [SerializeField] bool hasMan = false;
         public bool HasWoman { get => hasWoman; set => hasWoman = value; }
-        [SerializeField] bool hasWoman = true;
+        [SerializeField] bool hasWoman = false;
         public bool HasChild { get => hasChild; set => hasChild = value; }
-        [SerializeField] bool hasChild = true;
+        [SerializeField] bool hasChild = false;
         public bool HasHorse { get => hasHorse; set => hasHorse = value; }
         [SerializeField] bool hasHorse = false;
         public Territory IsWhere { get => isWhere; set => isWhere = value; }

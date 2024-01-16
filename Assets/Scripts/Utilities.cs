@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 namespace NavajoWars
 {
@@ -16,16 +17,61 @@ namespace NavajoWars
 
 #if UNITY_EDITOR
 
-        class MyClass
+        public class MyClass
         {
             public string name;
             public int number;
+
+            public Action<int> UtilChoice;
+
+            public async void runAsyncTest()
+            {
+                print("Starting Test");
+                number = 0;
+                //number = await DoTheThingInt();
+                for (int i = 0; i < 5; i++)
+                {
+                    number = await DoTheThingInt();
+                    print($"the number is {i * number}");
+                } 
+                print($"Finished Test, the number is {number}");
+            }
+
+            async Task<int> DoTheThingInt()
+            {
+                print("waiting ...");
+                var result = new TaskCompletionSource<int>();
+                Action<int> eventHandler = (i) => result.SetResult(i);
+                UtilChoice += eventHandler;
+                //print("Finished The Thing");
+                //await Task.Delay(5000);
+                //if (result.Task.Result != 1000) return 0;
+                await result.Task;
+                UtilChoice -= eventHandler;
+                return result.Task.Result;
+            }
         }
 
         static MyClass change(MyClass obj)
         {
             obj.number++;
             return obj;
+        }
+
+        public static MyClass mc;
+
+        [MenuItem("Utilities/Async Test")]
+        public static void AsyncTest()
+        {
+            mc = new MyClass();
+            mc.runAsyncTest();
+        }
+
+        [MenuItem("Utilities/Async Increment")]
+        public static void AsyncIncrement()
+        {
+            int i = 1000;
+            mc.UtilChoice?.Invoke(i);
         }
 
         [MenuItem("Utilities/String Test")]
@@ -95,6 +141,9 @@ namespace NavajoWars
         }
 
         static Family FamilyA = new() { Name = "Family A" };
+
+        //private MyClass Mc { get => mc; set => mc = value; }
+
         [MenuItem("Utilities/FamilyTest")]
         public static void FamilyTest() 
         { 

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NavajoWars
 {
@@ -26,11 +27,12 @@ namespace NavajoWars
             }
             else
             {
+                // do not need await because this is the last step in the method
                 askDipWar();
             }
         }
 
-        async void askDipWar()
+        async Task askDipWar()
         {
             //ui.hideBackNext();
             foreach (var family in gs.Families.Where(f => f.HasMan))
@@ -51,7 +53,7 @@ namespace NavajoWars
                     if (canWar) choices.Add(choiceWar);
                     if (canDip) choices.Add(choiceDip); 
                     ui.MakeChoiceButtonsAsync(choices);
-                    ButtonInfo result = await IReceive.GetChoiceAsyncParams();                    
+                    ButtonInfo result = await ui.GetChoiceAsyncParams();// IReceive.GetChoiceAsyncParams();                    
                     // note - efficient to use async when next step is very simple; also, this is a loop
                     if (result == choiceWar)
                     { gs.AP--; gs.MP--; }

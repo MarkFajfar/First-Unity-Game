@@ -15,14 +15,26 @@ namespace NavajoWars
         {
             gm.SaveUndo(this);
             ui.displayHeadline("Planning\nStep Six");
-            ui.displayText("Reset Cubes"); // add text from glossary
-            ui.addText("Press Next to continue.");
-            ui.OnNextClick = resetCubes;
+            if (gs.Recovery.Count > 0 || gs.Raided.Count > 0) 
+            {
+                ui.displayText("Reset cubes. Return any cubes in the Recovery Bowl to the bag, and move any cubes in the Raided Bowl to the Recovery Bowl. "); 
+                ui.OnNextClick = resetCubes;
+            }
+            else 
+            {
+                ui.displayText("No cubes in Recovery Bowl or Raided Bowl. ");
+                ui.OnNextClick = actionComplete; 
+            }
+            ui.addText("Press Next to continue.");            
         }
 
         void resetCubes() 
         { 
             ui.OnNextClick -= resetCubes;
+            foreach (Cube cube in gs.Recovery)
+            {
+                gs.Recovery.Remove(cube);
+            }
             foreach (Cube cube in gs.Raided)
             {
                 gs.Recovery.Add(cube);

@@ -90,10 +90,12 @@ namespace NavajoWars
                 }
                 // use async because logic to apply to result
                 ui.MakeChoiceButtonsAsync(bFamEligible);
-                ButtonInfo result = await IReceive.GetChoiceAsyncParams();
+                // WHAT IS THIS? ButtonInfo choiceUpDown = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
+                ButtonInfo result = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
 
+                //make sure every other family is not selected?
+                foreach (Family f in gs.Families) f.isSelectedOps = false;
                 result.family.isSelectedOps = true;
-                //result.family.isSelectedOps = true;
                 ui.OnNextClick -= playerOpsDone;
                 chooseAction = GetComponentInChildren<ChooseAction>();
                 // push to stepStack immediately before calling next action
