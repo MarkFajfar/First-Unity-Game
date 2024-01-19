@@ -300,6 +300,7 @@ GameObject:
   - component: {fileID: 1151835582}
   - component: {fileID: 1151835581}
   - component: {fileID: 1151835585}
+  - component: {fileID: 1151835586}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: GameController
@@ -355,6 +356,7 @@ MonoBehaviour:
   CeremonyCardsInHand: []
   EventCardsInPlay: []
   PersonsInPassage: 
+  AnimalsInPassage: 
   Resources: 
   ElderDisplay: 
   ap: 0
@@ -364,15 +366,12 @@ MonoBehaviour:
   enemyFerocity: 0
   enemyAP: 0
   enemyRaid: 0
-  tradeGoodsHeld: 0
   tradeGoodsMax: 0
-  sheepHeld: 0
   sheepMax: 0
-  horsesHeld: 0
   horsesMax: 0
-  firearms: 0
   cornHarvested: 0
   HasDrought: 
+  TerritoryDrought: 
   HasCorn: 
   HasMission: 
   HasRancho: 
@@ -387,6 +386,18 @@ MonoBehaviour:
   ispreempt: 0
   isplayerOpsDone: 0
   isenemyOpsDone: 0
+--- !u!114 &1151835586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151835579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46a657de57dee1b42a26899a3a4c7714, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1920526825
 GameObject:
   m_ObjectHideFlags: 0

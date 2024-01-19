@@ -78,10 +78,7 @@ namespace NavajoWars
                 if (info.waiting)
                 // if waiting, send back choice (usually to a loop)
                 {
-                    //ChoiceMadeParams choice = new(info);
-                    //ChoiceMadeParams choice = new ChoiceMadeParams((ButtonInfo)clickedButton.userData);
-                    //choice.OnChoiceMadeParams(choice);
-                    OnChoiceMadeParams(info);
+                    ChosenButtonInfo(this, info);
                 }
                 else if (info.passBack != null)
                 // if there is a passBack function, send back the params and stop
@@ -116,15 +113,25 @@ namespace NavajoWars
             }
         }
 
-        Action<ButtonInfo> OnChoiceMadeParams;
-        
+        event EventHandler<ButtonInfo> ChosenButtonInfo;
+        /* class ChoiceMadeParams : EventArgs
+        {
+            //public ChoiceMadeParams(ButtonInfo info) => Info = info;
+            public ButtonInfo Info { get; set; }
+        }
+        //delegate void OnChoiceMadeParams(object s, ChoiceMadeParams info);
+        event EventHandler<ChoiceMadeParams> onChoiceMadeParams;  */
+
+        // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-publish-events-that-conform-to-net-framework-guidelines#see-also
+        // not necessary to create a custom data object as event args, because could declare the event as sending ButtonInfo (but custom class is more flexible?)
+
         public async Task<ButtonInfo> GetChoiceAsyncParams()
         {
             var result = new TaskCompletionSource<ButtonInfo>();
-            Action<ButtonInfo> eventHandler = (info) => result.SetResult(info);
-            OnChoiceMadeParams += eventHandler;
+            void setResult(object o, ButtonInfo info) => result.SetResult(info);
+            ChosenButtonInfo += setResult;
             await result.Task;
-            OnChoiceMadeParams -= eventHandler;
+            ChosenButtonInfo -= setResult;
             return result.Task.Result;
         }
 

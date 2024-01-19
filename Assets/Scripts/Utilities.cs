@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using Unity.VisualScripting;
 
 namespace NavajoWars
 {
@@ -22,7 +23,9 @@ namespace NavajoWars
             public string name;
             public int number;
 
-            public Action<int> UtilChoice;
+            public EventHandler<int> UtilChoice;
+
+            public EventHandler<MyClass> onClick;
 
             public async void runAsyncTest()
             {
@@ -41,13 +44,14 @@ namespace NavajoWars
             {
                 print("waiting ...");
                 var result = new TaskCompletionSource<int>();
-                Action<int> eventHandler = (i) => result.SetResult(i);
-                UtilChoice += eventHandler;
+                //Action<object, int> eventHandler = (s, e) => result.SetResult(e);
+                //UtilChoice = null;
+                UtilChoice = (s, e) => result.SetResult(e);
                 //print("Finished The Thing");
                 //await Task.Delay(5000);
                 //if (result.Task.Result != 1000) return 0;
                 await result.Task;
-                UtilChoice -= eventHandler;
+                //UtilChoice -= (s, e) => result.SetResult(e);
                 return result.Task.Result;
             }
         }
@@ -71,8 +75,18 @@ namespace NavajoWars
         public static void AsyncIncrement()
         {
             int i = 1000;
-            mc.UtilChoice?.Invoke(i);
+            mc.UtilChoice?.Invoke(mc, i);
         }
+
+        [MenuItem("Utilities/Action Callback Test")]
+        public static void CallbackTest()
+        {
+            var myc = new MyClass();
+            myc.name = "Callback Test Obj";
+            myc.onClick += (s,e) => Debug.Log(e.name);
+            myc.onClick?.Invoke(myc, myc);
+        }
+
 
         [MenuItem("Utilities/String Test")]
         public static void StringTest() 

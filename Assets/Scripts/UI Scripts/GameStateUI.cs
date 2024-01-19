@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static NavajoWars.GameStateFunction;
@@ -25,12 +24,11 @@ namespace NavajoWars
         Black, White, Brown, Red, Yellow, Green, Blue
     }
 
-    // TODO: add Elder List - foldout of sliders??
-
     public class GameStateUI : MonoBehaviour
     {
         GameManager gm;
         GameState gs;
+        GameStateEvent gse; 
 
         public delegate void Delegate(GameStateFunctionObject obj);
         public delegate int DelegateInt();
@@ -54,11 +52,11 @@ namespace NavajoWars
         public class GameStateFunctionObject
         {
             public GameStateFunction tag;
-            public Delegate callback;
+            public Delegate callback; // not necessary
             public VisualElement ve = null;
-            public DelegateInt getValue = null;
+            public DelegateInt getValue = null; // not necessary
             public int setValue;
-            public DelegateBool getBool = null;
+            public DelegateBool getBool = null; // not necessary
             public bool setBool;
             public Family f = null;
             public Territory t = Territory.Default;
@@ -69,7 +67,9 @@ namespace NavajoWars
             public GameStateFunctionObject() { }
 
             public GameStateFunctionObject(GameStateFunction tag) 
-            { this.tag = tag; }
+            { 
+                this.tag = tag; 
+            }
         }
 
         void Awake()
@@ -77,6 +77,7 @@ namespace NavajoWars
             var gmobj = GameObject.FindWithTag("GameController");
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
+            gse = gmobj.GetComponent<GameStateEvent>();            
 
             Bowls = new List<List<Cube>> { gs.Raided, gs.Recovery, gs.Subjugation };
         }
@@ -88,17 +89,56 @@ namespace NavajoWars
             status = root.Q<Button>("Status");
             status.clicked += Refresh;
 
-            initializeFunctions();
+            initializeObjects();
         }
 
-        /// <summary>
-        /// set the callback function and value for each object
-        /// </summary>
+        void initializeObjects()
+        {
+            GameStateFunction[] toplevelTags = 
+            { 
+                AP, CP, MP, Morale, EnemyFerocity, 
+                Elder0, Elder1, Elder2, Elder3, Elder4, Elder5, Elder6 
+            };
+
+            // create a gsfo for each tag and add to gsfObjects
+            foreach (var tagToAdd in toplevelTags)
+            {
+                gsfObjects.Add(new()
+                {
+                    tag = tagToAdd,
+                    ve = element(tagToAdd)
+                });
+            }
+
+            GameStateFunction[] familyTags =
+            {
+                IsActive, Man, Woman, Child, Horse, IsWhere, Ferocity
+            }; 
+
+            foreach (Family family in gs.AllFamilies)
+            {
+                Foldout foldout = (Foldout)element(family.Name.Replace(" ", ""));
+                foldout.value = false; // start closed
+                foreach (var tagToAdd in familyTags)
+                {
+                    gsfObjects.Add(new()
+                    {
+                        tag = tagToAdd,
+                        f = family,
+                        ve = element(tagToAdd, foldout),
+                        parent = foldout
+                    });
+                }
+
+            }
+        }
+
+            
         void initializeFunctions()
         {
             gsfo[] toplevelObjects =
             {
-                new(AP)
+                /* new(AP)
                 {
                     callback = new((gsfo obj) => gs.AP = obj.setValue),
                     getValue = delegate { return gs.AP; }
@@ -157,14 +197,14 @@ namespace NavajoWars
                 {
                     callback = new((gsfo obj) => gs.ElderDisplay[6] = obj.setValue),
                     getValue = delegate { return gs.ElderDisplay[6]; }
-                }
+                }*/
             };
 
-            foreach (gsfo obj in toplevelObjects)
+            /* foreach (gsfo obj in toplevelObjects)
             {
                 obj.ve = element(obj.tag);
                 gsfObjects.Add(obj);
-            }
+            }  */
 
             foreach (Family family in gs.AllFamilies)
             {
@@ -173,7 +213,7 @@ namespace NavajoWars
 
                 gsfo[] familyObjects =
                 {
-                    new(IsActive)
+                    /* new(IsActive)
                     {
                         callback = new((gsfo obj) => { obj.f.IsActive = obj.setBool;
                             if (obj.setBool) showChildren(obj.parent);
@@ -214,7 +254,7 @@ namespace NavajoWars
                     {
                         callback = new((gsfo obj) => obj.f.Ferocity = obj.setValue),
                         getValue = delegate { return family.Ferocity; }
-                    }
+                    } */
                 };
 
                 foreach (gsfo obj in familyObjects)
@@ -412,25 +452,43 @@ namespace NavajoWars
                 {
                     // dropdown value is a string so use int in index
                     dropdown.RegisterValueChangedCallback((evt) =>
-                    { obj.setValue = dropdown.index; obj.callback(obj); });
+                    { obj.setValue = dropdown.index; OnChange(obj); });
+                    //{ obj.setValue = dropdown.index; obj.callback(obj); });
                 }
                 else if (obj.ve is Button button)
                 {
                     // assumes that userData is an int to be used for setValue
                     button.clickable.clickedWithEventInfo += (EventBase evt) =>
-                    { obj.setValue = (int)button.userData; obj.callback(obj); };
+                    { obj.setValue = (int)button.userData; OnChange(obj); };
                 }
                 else if (obj.ve is INotifyValueChanged<int> veInt)
                 {
                     veInt.RegisterValueChangedCallback((evt) =>
-                    { obj.setValue = evt.newValue; obj.callback(obj); });
+                    { obj.setValue = evt.newValue; OnChange(obj); });
                 }
                 else if (obj.ve is INotifyValueChanged<bool> veBool)
                 {
                     veBool.RegisterValueChangedCallback((evt) =>
-                    { obj.setBool = evt.newValue; obj.callback(obj); });
+                    { obj.setBool = evt.newValue; OnChange(obj); });
                 }
             }
+        }
+
+        /// <summary>
+        /// for any UI action before sending change to GameStateEvent
+        /// </summary>
+        void OnChange(gsfo obj)
+        {
+            if (obj.tag == IsActive)
+            {
+                if (obj.setBool) showChildren(obj.parent);
+                else
+                {
+                    hideChildren(obj.parent);
+                    obj.ve.style.display = DisplayStyle.Flex;
+                }
+            }
+            gse.OnGameStateChanged(obj);
         }
 
         void Refresh()
@@ -443,12 +501,13 @@ namespace NavajoWars
             foreach (var obj in gsfObjects)
             { 
                 if (obj.ve is DropdownField dropdown)
-                { dropdown.index = obj.getValue() - 1; }
+                { dropdown.index = gse.getInt(obj) - 1; }
+                //{ dropdown.index = obj.getValue() - 1; }
                 // cannot use SetValueWithoutNotify on index, only value
                 else if (obj.ve is INotifyValueChanged<int> veInt)
-                { veInt.SetValueWithoutNotify(obj.getValue()); }
+                { veInt.SetValueWithoutNotify(gse.getInt(obj)); }
                 else if (obj.ve is INotifyValueChanged<bool> veBool)
-                { veBool.SetValueWithoutNotify(obj.getBool()); }
+                { veBool.SetValueWithoutNotify(gse.getBool(obj)); }
                 // eInt.value = obj.getValue(); 
                 // will not affect buttons because they are type <string>
             }
@@ -456,7 +515,7 @@ namespace NavajoWars
             // iterate through IsActive on each family
             foreach (var familyObj in familyActiveCheck)
             {
-                if (familyObj.getBool())
+                if ((bool)gse.getBool(familyObj))  //(familyObj.getBool())
                 { showChildren(familyObj.parent); }
                 else
                 {
@@ -589,7 +648,7 @@ namespace NavajoWars
                 return null;
             }
         }
-        
+
         // this searches from element up:
         /*var list = statusPanel.Query(className: $"{tag}").ToList();
         if (list == null || list.Count == 0)
@@ -614,7 +673,6 @@ namespace NavajoWars
             {
                 Debug.LogError($"Class {tag} found, but none found in foldout {parent}");
                 return null;
-            }
-        }*/
+            }*/
     }
 }

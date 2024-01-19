@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEditor;
 
 namespace NavajoWars
 {
@@ -14,7 +13,7 @@ namespace NavajoWars
 
         List<string> locationNames;
         List<string> ferocityNames;
-
+        
         int fNum = 0;
 
         void Awake()
@@ -29,7 +28,7 @@ namespace NavajoWars
         public void SetupNewGame(Scenario scenario)
         {
             // load values from Scenario
-            
+
             gs.ChosenScenario = scenario;
             gs.AP = scenario.AP;
             gs.CP = scenario.CP;
