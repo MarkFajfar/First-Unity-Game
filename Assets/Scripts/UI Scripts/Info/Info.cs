@@ -12,7 +12,7 @@ namespace NavajoWars
         // public GameStep gameStep = UnityEngine.Object.FindObjectOfType<DefaultStep>();
         // assigning GameStep works only if one is instantiated
         public Action call = InvalidMessage;
-        
+        public GameStateFunctionObject gsfo = null;
         public bool waiting = false;
         public bool clearPanel = true;
         public bool closeFoldout = true;

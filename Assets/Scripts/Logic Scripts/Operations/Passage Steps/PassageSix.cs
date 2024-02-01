@@ -14,15 +14,15 @@ namespace NavajoWars
             ui.displayHeadline("Passage of Time\nStep Six");
             if (gs.SheepHeld > 0 || gs.HorsesHeld > 0)
             {
-                ui.displayText($"Your Families occupy {gs.TerritoriesWithFamily} Territories and you have {gs.SheepHeld} Sheep and {gs.HorsesHeld} Horse(s). ");
-                if (gs.SheepHeld <= gs.TerritoriesWithFamily && gs.HorsesHeld <= gs.TerritoriesWithFamily)
+                ui.displayText($"Your Families occupy {gs.NumberTerritoriesWithFamily} Territories and you have {gs.SheepHeld} Sheep and {gs.HorsesHeld} Horse(s). ");
+                if (gs.SheepHeld <= gs.NumberTerritoriesWithFamily && gs.HorsesHeld <= gs.NumberTerritoriesWithFamily)
                 {
                     ui.addText("All animals can be fed. ");
                 }
                 else 
                 {
-                    if (gs.SheepHeld > gs.TerritoriesWithFamily) ui.addText($"Return {gs.SheepHeld - gs.TerritoriesWithFamily} Sheep to the Out of Play box. ");
-                    if (gs.HorsesHeld > gs.TerritoriesWithFamily) ui.addText($"Return {gs.HorsesHeld - gs.TerritoriesWithFamily} Horse(s) to the Out of Play box. ");
+                    if (gs.SheepHeld > gs.NumberTerritoriesWithFamily) ui.addText($"Return {gs.SheepHeld - gs.NumberTerritoriesWithFamily} Sheep to the Out of Play box. ");
+                    if (gs.HorsesHeld > gs.NumberTerritoriesWithFamily) ui.addText($"Return {gs.HorsesHeld - gs.NumberTerritoriesWithFamily} Horse(s) to the Out of Play box. ");
                     ui.addText("Open the Status menu and select the animals lost. ");
                 }
             }

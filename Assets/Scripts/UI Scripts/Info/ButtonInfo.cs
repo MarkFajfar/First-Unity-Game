@@ -27,9 +27,11 @@ namespace NavajoWars
                 userData = this
             };
             button.AddToClassList(style);
+            if (remove) RemoveWhenClicked(button);
             return button;
         }
 
+        // not necessary because called in ButtonClicked
         /// <summary>
         /// make button from info that when clicked 
         /// will invoke callback and pass info to passback

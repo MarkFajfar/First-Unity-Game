@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
-using static NavajoWars.MakeFromInfo;
 
 namespace NavajoWars
 {
@@ -173,6 +172,13 @@ namespace NavajoWars
         public override void hidePrev()
         { prev.visible = false; }
 
+        public override Button makeButton(ButtonInfo info)
+        {
+            Button button = info.Make();
+            button.RegisterCallback<ClickEvent>(ButtonClicked);
+            return button;
+        }
+
         public override void ShowChoiceButtons(List<ButtonInfo> choices)
         {
             ClearChoicePanel();
@@ -183,30 +189,27 @@ namespace NavajoWars
             
             foreach (ButtonInfo info in choices)
             {
-                Button choiceButton = info.Make(); // MakeButtonFromInfo(choice);
-                choiceButton.RegisterCallback<ClickEvent>(choiceButtonClicked);
-                if (info.remove) ButtonInfo.RemoveWhenClicked(choiceButton);
+                Button choiceButton = makeButton(info); // MakeButtonFromInfo(choice);
                 choicePanel.Add(choiceButton);
                 choiceButton.visible = true;
                 choiceButton.style.display = DisplayStyle.Flex;
             }
         }
 
-        public override void showButton(Button button)
+        public override void showChoiceButton(Button button)
         {
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
-            //button.RegisterCallback<ClickEvent>(buttonClicked);
+            button.RegisterCallback<ClickEvent>(ButtonClicked);
             button.style.display = DisplayStyle.Flex;
             choicePanel.Add(button);
         }
         
-        public override void showButton(ButtonInfo bparams)
+        public override void showChoiceButton(ButtonInfo info)
         {
             choicePanel.style.display = DisplayStyle.Flex;
             choicePanel.visible = true;
-            Button button = bparams.Make();
-            button.RegisterCallback<ClickEvent>(buttonClicked);
+            Button button = makeButton(info);
             button.style.display = DisplayStyle.Flex;
             choicePanel.Add(button);
         }
@@ -289,7 +292,7 @@ namespace NavajoWars
         void registerCallbacks(VisualElement ve) 
         {
             foreach (var button in ve.Query<Button>().ToList())
-                button.RegisterCallback<ClickEvent>(buttonClicked);
+                button.RegisterCallback<ClickEvent>(ButtonClicked);
             foreach (var toggle in ve.Query<Toggle>().ToList())
             {
                 // check if toggle is sub-element of a foldout 

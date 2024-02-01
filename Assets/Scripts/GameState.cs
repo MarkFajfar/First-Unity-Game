@@ -209,7 +209,7 @@ namespace NavajoWars
         /// <summary>
         /// Returns number of Territories with a Family
         /// </summary>
-        public int TerritoriesWithFamily
+        public int NumberTerritoriesWithFamily
         {
             get => TerritoryFamily.Where(b => b == true).Count();
         }

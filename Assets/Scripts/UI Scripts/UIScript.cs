@@ -8,10 +8,12 @@ using UnityEngine.UIElements;
 
 namespace NavajoWars
 {
-    public abstract class UIScript : MonoBehaviour
+    public abstract class UIScript : MonoBehaviour, IChangeGameState
     {
         protected GameManager gm;
         protected GameState gs;
+
+        public event EventHandler<GameStateFunctionObject> OnGameStateChanged;
 
         protected List<IReceive> Receivers;
 
@@ -34,6 +36,8 @@ namespace NavajoWars
             }
         }
 
+        public abstract Button makeButton(ButtonInfo info);
+        
         public abstract void ShowChoiceButtons(List<ButtonInfo> choices);
 
         public void MakeChoiceButtonsAsync(List<ButtonInfo> choices)
@@ -44,20 +48,20 @@ namespace NavajoWars
 
         public abstract void ClearChoicePanel();
 
-        protected void choiceButtonClicked(EventBase evtBase)
+        /* protected void choiceButtonClicked(EventBase evtBase)
         {
             // any choice-specific step to add?
             var evt = evtBase as ClickEvent;
             buttonClicked(evt);
         }
-
-        protected void choiceButtonClicked(ClickEvent evt) 
+ */
+        /* protected void choiceButtonClicked(ClickEvent evt) 
         {
             // any choice-specific step to add?
             buttonClicked(evt);
-        }
+        } */
 
-        protected void buttonClicked(ClickEvent evt)
+        public void ButtonClicked(ClickEvent evt)
         {
             var clickedButton = evt.target as Button;
 
@@ -85,6 +89,8 @@ namespace NavajoWars
                 {
                     info.passBack.Invoke(info);
                 }
+                else if (info.gsfo != null) OnGameStateChanged?.Invoke(this, info.gsfo);
+
                 else if (info.call != Info.InvalidMessage && info.gameStep == null)
                 {
                     info.call?.Invoke();
@@ -114,13 +120,14 @@ namespace NavajoWars
         }
 
         event EventHandler<ButtonInfo> ChosenButtonInfo;
+        
         /* class ChoiceMadeParams : EventArgs
-        {
-            //public ChoiceMadeParams(ButtonInfo info) => Info = info;
-            public ButtonInfo Info { get; set; }
-        }
-        //delegate void OnChoiceMadeParams(object s, ChoiceMadeParams info);
-        event EventHandler<ChoiceMadeParams> onChoiceMadeParams;  */
+{
+//public ChoiceMadeParams(ButtonInfo info) => Info = info;
+public ButtonInfo Info { get; set; }
+}
+//delegate void OnChoiceMadeParams(object s, ChoiceMadeParams info);
+event EventHandler<ChoiceMadeParams> onChoiceMadeParams;  */
 
         // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-publish-events-that-conform-to-net-framework-guidelines#see-also
         // not necessary to create a custom data object as event args, because could declare the event as sending ButtonInfo (but custom class is more flexible?)
@@ -155,7 +162,7 @@ namespace NavajoWars
 
             print("Foldout Parent: " + clickedButton.parent);
 
-            buttonClicked(evt);
+            ButtonClicked(evt);
         }
 
         protected void toggleValueChanged(ChangeEvent<bool> evt)
@@ -215,9 +222,9 @@ namespace NavajoWars
         public abstract void showPrev();
         public abstract void hidePrev();
 
-        public abstract void showButton(Button button);
+        public abstract void showChoiceButton(Button button);
         
-        public abstract void showButton(ButtonInfo bparams);
+        public abstract void showChoiceButton(ButtonInfo bparams);
 
         public abstract void ShowChoiceFoldouts(List<FoldoutInfo> foldouts);
     }

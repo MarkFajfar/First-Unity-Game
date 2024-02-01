@@ -4,44 +4,27 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 using static NavajoWars.GameStateFunction;
-using gsfo = NavajoWars.GameStateUI.GameStateFunctionObject;
+using gsfo = NavajoWars.GameStateFunctionObject;
 
 namespace NavajoWars
-{
-    public enum GameStateFunction 
-    { 
-        Default, AP, CP, MP, Morale, EnemyAP, EnemyFerocity,
-        Population, Arability,
-        Elder0, Elder1, Elder2, Elder3, Elder4, Elder5, Elder6,
-        TradeGoodsHeld, SheepHeld, HorsesHeld, CornHarvested, Firearms, 
-        HasDrought, DroughtNum, HasCorn, HasMission, HasRancho, HasFort,
-        IsActive, Man, Woman, Child, Elder, Ferocity, IsWhere,
-        Horse, Sheep, Corn, TradeGood, Firearm,
-        PassageDisplay, ElderDisplay, ResourceDisplay,
-        Raided, Recovery, Subjugation,
-        AddPersonToPassage, AddResource,
-        AddToRaided, AddToRecovery, AddToSubjugation,
-        Black, White, Brown, Red, Yellow, Green, Blue
-    }
-
-    public class GameStateUI : MonoBehaviour
+{    public class GameStateUI : MonoBehaviour, IChangeGameState
     {
         GameManager gm;
         GameState gs;
-        GameStateEvent gse; 
+        GameStateEvent gse;
+        //[SerializeField] OperationsUIScript ui;
 
-        public delegate void Delegate(GameStateFunctionObject obj);
-        public delegate int DelegateInt();
-        public delegate bool DelegateBool();
-        public delegate Territory DelegateTerritory();
-        public delegate List<Territory> DelegateListTerritory();
+        public event EventHandler<GameStateFunctionObject> OnGameStateChanged;
+        //public delegate Territory DelegateTerritory();
+        //public delegate List<Territory> DelegateListTerritory();
 
-        List<GameStateFunctionObject> gsfObjects = new();
-        List<GameStateFunctionObject> familyActiveCheck = new();
+
+        List<GameStateFunctionObject> gsfObjects; 
+        List<GameStateFunctionObject> familyActiveCheck;
         // personStyles may not be correct
-        string[] personStyles = { $"{Man}", $"{Woman}", $"{Child}", $"{Elder}" };
-        string[] resourceStyles = { $"{Horse}",  $"{Sheep}",  $"{Corn}",  $"{TradeGood}",  $"{Firearm}" };
-        string[] cubeStyles = { $"{Black}", $"{White}", $"{Brown}", $"{Red}", $"{Yellow}", $"{Green}", $"{Blue}" };
+        //string[] personStyles = { $"{Man}", $"{Woman}", $"{Child}", $"{Elder}" };
+        //string[] resourceStyles = { $"{Horse}",  $"{Sheep}",  $"{Corn}",  $"{TradeGood}",  $"{Firearm}" };
+        //string[] cubeStyles = { $"{Black}", $"{White}", $"{Brown}", $"{Red}", $"{Yellow}", $"{Green}", $"{Blue}" };
         List<List<Cube>> Bowls; 
 
         VisualElement statusPanel;
@@ -49,36 +32,15 @@ namespace NavajoWars
 
         // string FoldoutClassName = Foldout.toggleUssClassName;
 
-        public class GameStateFunctionObject
-        {
-            public GameStateFunction tag;
-            public Delegate callback; // not necessary
-            public VisualElement ve = null;
-            public DelegateInt getValue = null; // not necessary
-            public int setValue;
-            public DelegateBool getBool = null; // not necessary
-            public bool setBool;
-            public Family f = null;
-            public Territory t = Territory.Default;
-            // public DelegateTerritory getT = null; // necessary?
-            // public DelegateListTerritory getListT = null; // necessary
-            public VisualElement parent = null;
-
-            public GameStateFunctionObject() { }
-
-            public GameStateFunctionObject(GameStateFunction tag) 
-            { 
-                this.tag = tag; 
-            }
-        }
-
         void Awake()
         {
             var gmobj = GameObject.FindWithTag("GameController");
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
-            gse = gmobj.GetComponent<GameStateEvent>();            
+            gse = gmobj.GetComponent<GameStateEvent>(); 
 
+            gsfObjects = new();
+            familyActiveCheck = new();
             Bowls = new List<List<Cube>> { gs.Raided, gs.Recovery, gs.Subjugation };
         }
 
@@ -89,7 +51,14 @@ namespace NavajoWars
             status = root.Q<Button>("Status");
             status.clicked += Refresh;
 
+            OnGameStateChanged += onChange;
+
             initializeObjects();
+        }
+
+        void OnDisable()
+        {
+            OnGameStateChanged -= onChange;
         }
 
         void initializeObjects()
@@ -129,16 +98,102 @@ namespace NavajoWars
                         parent = foldout
                     });
                 }
-
             }
-        }
 
+            // make list of IsActive obj to toggle close/open
+            familyActiveCheck = gsfObjects.Where(obj => obj.tag == IsActive).ToList();
+
+            GameStateFunction[] territoryTags =
+            {
+                DroughtNum, HasCorn, HasMission, HasRancho, HasFort
+            };
+
+            foreach (Territory territory in Enum.GetValues(typeof(Territory)))
+            {
+                if (territory == Territory.Default || territory == Territory.SantaFe) continue;
             
-        void initializeFunctions()
+                Foldout foldout = (Foldout)element($"{territory}");
+                foldout.value = false; // start closed
+                foreach (var tagToAdd in territoryTags)
+                {
+                    gsfObjects.Add(new()
+                    {
+                        tag = tagToAdd,
+                        t = territory,
+                        ve = element(tagToAdd, foldout),
+                        parent = foldout
+                    });
+                }
+            }
+
+            foreach (Person person in Enum.GetValues(typeof(Person)))
+            {
+                if (person == Person.Default) continue;
+
+                gsfo obj = new()
+                {
+                    tag = AddPersonToPassage,
+                    p = person,
+                    ve = statusPanel.Query(className: $"{person}").Where(e => e.ClassListContains($"{AddPersonToPassage}")),
+                };
+
+                if (obj.ve == null)
+                { Debug.Log($"No Add Person Button found for {person}"); }
+                else obj.ve.userData = person;
+
+                gsfObjects.Add(obj);
+            }
+
+            foreach (Resource resource in Enum.GetValues(typeof(Resource)))
+            {
+                if (resource == Resource.Default) continue;
+
+                gsfo obj = new()
+                {
+                    tag = AddResource,
+                    ve = statusPanel.Query(className: $"{resource}").Where(e => e.ClassListContains($"{AddResource}")),
+                };
+
+                if (obj.ve == null)
+                { Debug.Log($"No Add Resource Button found for {resource}"); }
+                else obj.ve.userData = resource;
+
+                gsfObjects.Add(obj);
+            }
+
+            foreach (var bowlToAdd in Bowls)
+            {
+                // tag denotes bowl, userData in each ve denotes cube
+                GameStateFunction tag = Default;
+                if (bowlToAdd == gs.Raided) tag = AddToRaided;
+                if (bowlToAdd == gs.Recovery) tag = AddToRecovery;
+                if (bowlToAdd == gs.Subjugation) tag = AddToSubjugation;
+
+                foreach (Cube cube in Enum.GetValues(typeof(Cube)))
+                {
+                    if (cube == Cube.Default) continue;
+
+                    gsfo obj = new(tag)
+                    {
+                        ve = statusPanel.Query(className: $"{cube}").Where(e => e.ClassListContains($"{tag}")),
+                    };
+
+                    if (obj.ve == null)
+                    { Debug.Log($"No Add Cube Button found for {cube}"); }
+                    else obj.ve.userData = cube;
+
+                    gsfObjects.Add(obj);
+                }
+            }
+
+            assignCallBacks();
+        }
+            
+/*      void initializeFunctions()
         {
             gsfo[] toplevelObjects =
             {
-                /* new(AP)
+                new(AP)
                 {
                     callback = new((gsfo obj) => gs.AP = obj.setValue),
                     getValue = delegate { return gs.AP; }
@@ -197,14 +252,14 @@ namespace NavajoWars
                 {
                     callback = new((gsfo obj) => gs.ElderDisplay[6] = obj.setValue),
                     getValue = delegate { return gs.ElderDisplay[6]; }
-                }*/
+                }
             };
 
-            /* foreach (gsfo obj in toplevelObjects)
+            foreach (gsfo obj in toplevelObjects)
             {
                 obj.ve = element(obj.tag);
                 gsfObjects.Add(obj);
-            }  */
+            }  
 
             foreach (Family family in gs.AllFamilies)
             {
@@ -254,7 +309,7 @@ namespace NavajoWars
                     {
                         callback = new((gsfo obj) => obj.f.Ferocity = obj.setValue),
                         getValue = delegate { return family.Ferocity; }
-                    } */
+                    } 
                 };
 
                 foreach (gsfo obj in familyObjects)
@@ -277,12 +332,12 @@ namespace NavajoWars
 
                 gsfo[] territoryObjects =
                 {
-                    /* new(HasDrought)
+                    new(HasDrought)
                     {
                         callback = new((gsfo obj) =>
                             toggleTerritoryValue(gs.HasDrought, obj.t, obj.setBool)),
                         getBool = delegate { return gs.HasDrought.Contains(territory); }
-                    }, */
+                    }, 
                     new(DroughtNum)
                     {
                         // cast the territory as an int
@@ -410,35 +465,7 @@ namespace NavajoWars
                 }
             }
             assignCallBacks();
-        }
-
-        void addCubeButtonToBowl(Cube cube, List<Cube> bowl)
-        {
-            var info = new ButtonInfo()
-            {
-                name = $"{cube}",
-                text = "",
-                call = delegate { bowl.Remove(cube); },
-                style = cubeStyles[(int)cube]
-            };
-
-            var button = info.MakeWithCall();
-            // adds call directly to .clicked
-            // add callback to remove button when clicked
-            button.RegisterCallback<ClickEvent>(evt =>
-            {
-                var b = evt.target as Button;
-                b.RemoveFromHierarchy();
-            });
-
-            string bowlName = "";
-            if (bowl == gs.Raided) bowlName = $"{Raided}";
-            if (bowl == gs.Recovery) bowlName = $"{Recovery}";
-            if (bowl == gs.Subjugation) bowlName = $"{Subjugation}";
-            element(bowlName).Add(button);
-            button.visible = true;
-            button.style.display = DisplayStyle.Flex;
-        }
+        } */
 
         /// <summary>
         /// so that when clicked: set the value in the object, 
@@ -452,32 +479,32 @@ namespace NavajoWars
                 {
                     // dropdown value is a string so use int in index
                     dropdown.RegisterValueChangedCallback((evt) =>
-                    { obj.setValue = dropdown.index; OnChange(obj); });
+                    { obj.setValue = dropdown.index; print("Calling Dropdown"); OnGameStateChanged?.Invoke(this, obj); });
                     //{ obj.setValue = dropdown.index; obj.callback(obj); });
                 }
                 else if (obj.ve is Button button)
                 {
                     // assumes that userData is an int to be used for setValue
                     button.clickable.clickedWithEventInfo += (EventBase evt) =>
-                    { obj.setValue = (int)button.userData; OnChange(obj); };
+                    { obj.setValue = (int)button.userData; print("Calling Button"); OnGameStateChanged?.Invoke(this, obj); };
                 }
                 else if (obj.ve is INotifyValueChanged<int> veInt)
                 {
                     veInt.RegisterValueChangedCallback((evt) =>
-                    { obj.setValue = evt.newValue; OnChange(obj); });
+                    { obj.setValue = evt.newValue; print("Calling Int"); OnGameStateChanged?.Invoke(this, obj); });
                 }
                 else if (obj.ve is INotifyValueChanged<bool> veBool)
                 {
                     veBool.RegisterValueChangedCallback((evt) =>
-                    { obj.setBool = evt.newValue; OnChange(obj); });
+                    { obj.setBool = evt.newValue; print("Calling Bool"); OnGameStateChanged?.Invoke(this, obj); });
                 }
             }
         }
 
         /// <summary>
-        /// for any UI action before sending change to GameStateEvent
+        /// for any UI action when sending change to GameStateEvent
         /// </summary>
-        void OnChange(gsfo obj)
+        void onChange(object s, gsfo obj)
         {
             if (obj.tag == IsActive)
             {
@@ -488,7 +515,27 @@ namespace NavajoWars
                     obj.ve.style.display = DisplayStyle.Flex;
                 }
             }
-            gse.OnGameStateChanged(obj);
+            if (obj.tag == AddPersonToPassage)
+            {
+                addButtonToPassageDisplay((Person)obj.setValue);
+                // setValue cast to Person allows use of setValue for any enum
+            }
+            if (obj.tag == AddResource)
+            {
+                addButtonToResourceDisplay((Resource)obj.setValue);
+            }
+            if (obj.tag == AddToRaided)
+            {
+                addCubeButtonToBowl((Cube)obj.setValue, gs.Raided);
+            }
+            if (obj.tag == AddToRecovery)
+            {
+                addCubeButtonToBowl((Cube)obj.setValue, gs.Recovery);
+            }
+            if (obj.tag == AddToSubjugation)
+            {
+                addCubeButtonToBowl((Cube)obj.setValue, gs.Subjugation);
+            }
         }
 
         void Refresh()
@@ -496,18 +543,18 @@ namespace NavajoWars
             Label population = (Label)element(Population);
             population.text = $"Population {gs.Population}";
             Label arability = (Label)element(Arability);
-            arability.text = $"Arability {gs.Arability}"; 
+            arability.text = $"Arability {gs.Arability}";
 
-            foreach (var obj in gsfObjects)
+            foreach (gsfo obj in gsfObjects)
             { 
                 if (obj.ve is DropdownField dropdown)
-                { dropdown.index = gse.getInt(obj) - 1; }
+                { dropdown.index = gse.ReturnInt(obj) - 1; }
                 //{ dropdown.index = obj.getValue() - 1; }
                 // cannot use SetValueWithoutNotify on index, only value
                 else if (obj.ve is INotifyValueChanged<int> veInt)
-                { veInt.SetValueWithoutNotify(gse.getInt(obj)); }
+                { veInt.SetValueWithoutNotify(gse.ReturnInt(obj)); }
                 else if (obj.ve is INotifyValueChanged<bool> veBool)
-                { veBool.SetValueWithoutNotify(gse.getBool(obj)); }
+                { veBool.SetValueWithoutNotify(gse.ReturnBool(obj)); }
                 // eInt.value = obj.getValue(); 
                 // will not affect buttons because they are type <string>
             }
@@ -515,7 +562,7 @@ namespace NavajoWars
             // iterate through IsActive on each family
             foreach (var familyObj in familyActiveCheck)
             {
-                if ((bool)gse.getBool(familyObj))  //(familyObj.getBool())
+                if (gse.ReturnBool(familyObj))  //(familyObj.getBool())
                 { showChildren(familyObj.parent); }
                 else
                 {
@@ -550,34 +597,51 @@ namespace NavajoWars
             { addCubeButtonToBowl(cube, gs.Subjugation); }
         }
 
+        void addCubeButtonToBowl(Cube cube, List<Cube> bowl)
+        {
+            var button = makeButton(new ButtonInfo()
+            {
+                name = $"{cube}",
+                text = "",
+                style = $"{cube}",
+                gsfo = new gsfo(ButtonPassage)
+                { setValue = (int)cube, bowl = bowl },
+                remove = true
+            });
+            
+            string bowlName = "";
+            if (bowl == gs.Raided) bowlName = $"{Raided}";
+            if (bowl == gs.Recovery) bowlName = $"{Recovery}";
+            if (bowl == gs.Subjugation) bowlName = $"{Subjugation}";
+            element(bowlName).Add(button);
+            button.visible = true;
+            button.style.display = DisplayStyle.Flex;
+        }
+
         void addButtonToPassageDisplay(Person person)
         {
-            var info = new ButtonInfo()
+            var button = makeButton(new ButtonInfo()
             {
                 name = $"{person}",
                 text = "",
-                call = delegate { gs.PersonsInPassage.Remove(person); },
-                style = personStyles[(int)person]
+                //call = delegate { gs.PersonsInPassage.Remove(person); },
+                style = $"{person}",
                 // this style is added to class list on make
-                /* person switch
+                gsfo = new gsfo(ButtonPassage)
+                { setValue = (int)person },
+                // gsfo just needs tag and data as int in setValue (not otherwise set?)
+                remove = true
+                // will be removed when clicked                
+            });
+            /* person switch
                 {
                     Person.Man => "ButtonMan",
                     Person.Woman => "ButtonWoman",
                     Person.Child => "ButtonChild",
                     Person.Elder => "ButtonElder"
                 }, */
-            };
-
-            var button = info.MakeWithCall();
             // button.AddToClassList("Person");
             // don't need to add style person because Man, Woman etc. made equivalenrt
-            // add callback to remove button when clicked
-            button.RegisterCallback<ClickEvent>(evt =>
-            {
-                var b = evt.target as Button;
-                b.RemoveFromHierarchy();
-            });
-
             element(PassageDisplay).Add(button);
             button.visible = true;
             button.style.display = DisplayStyle.Flex;
@@ -585,32 +649,40 @@ namespace NavajoWars
 
         void addButtonToResourceDisplay(Resource resource)
         {
-            var info = new ButtonInfo()
+            var button = makeButton(new ButtonInfo()
             {
                 name = $"{resource}",
                 text = "",
-                call = delegate { gs.Resources.Remove(resource); },
-                style = resourceStyles[(int)resource]
-            };
-
-            var button = info.MakeWithCall();
+                style = $"{resource}",
+                gsfo = new gsfo(ButtonResource)
+                { setValue = (int)resource },
+                remove = true
+            });
             // adds call directly to .clicked
             button.AddToClassList("Resource");
             // need to also add the style "Resource"
             // add callback to remove button when clicked
-            button.RegisterCallback<ClickEvent>(evt =>
-            {
-                var b = evt.target as Button;
-                b.RemoveFromHierarchy();
-            });
-
+            
             element(ResourceDisplay).Add(button);
             button.visible = true;
             button.style.display = DisplayStyle.Flex;
         }
 
+        Button makeButton(ButtonInfo info)
+        {
+            Button button = info.Make();
+            button.RegisterCallback<ClickEvent>((evt) =>
+            {
+                var clickedButton = evt.target as Button;
+                var clickedInfo = (ButtonInfo)clickedButton.userData;
+                print("makeButton Invoke");
+                OnGameStateChanged?.Invoke(this, clickedInfo.gsfo); 
+            } );
+            return button;
+        }
+
         // each of these returns the First ve found
-        VisualElement element(GameStateFunction tag) => findVisualElement($"{tag}", statusPanel);
+            VisualElement element(GameStateFunction tag) => findVisualElement($"{tag}", statusPanel);
 
         VisualElement element(string s) => findVisualElement($"{s}", statusPanel);
 
