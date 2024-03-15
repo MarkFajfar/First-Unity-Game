@@ -369,7 +369,8 @@ Toggle.ElderDisplay {
     justify-content: flex-start;
 }
 
-.DroughtNum .unity-radio-button-group__container
+.DroughtNum .unity-radio-button-group__container,
+.CornNum .unity-radio-button-group__container
 {
     flex-direction: row;
 }
@@ -378,7 +379,8 @@ Toggle.ElderDisplay {
     flex-direction: row;
 }
 
-.DroughtNum .unity-radio-button__text
+.DroughtNum .unity-radio-button__text,
+.CornNum .unity-radio-button__text
 {
     display: flex;
 }

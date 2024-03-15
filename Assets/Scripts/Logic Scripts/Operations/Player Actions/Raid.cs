@@ -23,7 +23,7 @@ namespace NavajoWars
         void introText()
         {
             selectedFamily = gs.Families.Where(f => f.isSelectedOps).First();
-            fortInTerritory = gs.HasFort.Contains(selectedFamily.IsWhere);
+            fortInTerritory = selectedFamily.IsWhere.HasFort;
             horse = selectedFamily.HasHorse;
             ui.displayHeadline($"{selectedFamily.Name} Raids\nSanta Fe or Outpost");
             if (fortInTerritory) ui.addHeadline(" or Fort");

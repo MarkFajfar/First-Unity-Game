@@ -177,7 +177,7 @@ namespace NavajoWars
                     ui.addText($"{activatedFamilies[i].Name}");
                     if (activatedFamilies.Count > 1 && i != activatedFamilies.Count - 1) ui.addText(",");
                     ui.addText(" ");
-                    activatedFamilies[i].IsWhere = Territory.Canyon;
+                    activatedFamilies[i].IsWhere = gs.Territories[7];
                     activatedFamilies[i].Ferocity = 0;
                     i++;
                 }

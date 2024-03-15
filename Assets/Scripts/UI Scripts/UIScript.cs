@@ -13,7 +13,7 @@ namespace NavajoWars
         protected GameManager gm;
         protected GameState gs;
 
-        public event EventHandler<GameStateFunctionObject> OnGameStateChanged;
+        public event EventHandler<GameStateObject> OnGameStateChanged;
 
         protected List<IReceive> Receivers;
 
@@ -40,26 +40,13 @@ namespace NavajoWars
         
         public abstract void ShowChoiceButtons(List<ButtonInfo> choices);
 
-        public void MakeChoiceButtonsAsync(List<ButtonInfo> choices)
+        public void ShowChoiceButtonsAsync(List<ButtonInfo> choices)
         {
             foreach (var choice in choices) { choice.waiting = true; }
             ShowChoiceButtons(choices);
         }
 
         public abstract void ClearChoicePanel();
-
-        /* protected void choiceButtonClicked(EventBase evtBase)
-        {
-            // any choice-specific step to add?
-            var evt = evtBase as ClickEvent;
-            buttonClicked(evt);
-        }
- */
-        /* protected void choiceButtonClicked(ClickEvent evt) 
-        {
-            // any choice-specific step to add?
-            buttonClicked(evt);
-        } */
 
         public void ButtonClicked(ClickEvent evt)
         {
@@ -74,8 +61,6 @@ namespace NavajoWars
             // clear panel in called action
             else if (clickedButton.userData is ButtonInfo info) 
             {
-                //ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
-
                 if (info.clearPanel) ClearChoicePanel();
                 // set to false to leave panel (eg for foldout)
 
@@ -89,7 +74,10 @@ namespace NavajoWars
                 {
                     info.passBack.Invoke(info);
                 }
-                else if (info.gsfo != null) OnGameStateChanged?.Invoke(this, info.gsfo);
+                else if (info.gso != null) 
+                {
+                    OnGameStateChanged?.Invoke(this, info.gso);
+                }
 
                 else if (info.call != Info.InvalidMessage && info.gameStep == null)
                 {
@@ -122,12 +110,12 @@ namespace NavajoWars
         event EventHandler<ButtonInfo> ChosenButtonInfo;
         
         /* class ChoiceMadeParams : EventArgs
-{
-//public ChoiceMadeParams(ButtonInfo info) => Info = info;
-public ButtonInfo Info { get; set; }
-}
-//delegate void OnChoiceMadeParams(object s, ChoiceMadeParams info);
-event EventHandler<ChoiceMadeParams> onChoiceMadeParams;  */
+        {
+        //public ChoiceMadeParams(ButtonInfo info) => Info = info;
+        public ButtonInfo Info { get; set; }
+        }
+        //delegate void OnChoiceMadeParams(object s, ChoiceMadeParams info);
+        event EventHandler<ChoiceMadeParams> onChoiceMadeParams;  */
 
         // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/events/how-to-publish-events-that-conform-to-net-framework-guidelines#see-also
         // not necessary to create a custom data object as event args, because could declare the event as sending ButtonInfo (but custom class is more flexible?)
@@ -148,8 +136,6 @@ event EventHandler<ChoiceMadeParams> onChoiceMadeParams;  */
 
             if (clickedButton.userData is ButtonInfo info)
             {
-                //ButtonInfo clickedParams = (ButtonInfo)clickedButton.userData;
-
                 if (info.closeFoldout) // can set to false in button
                 { 
                     clickedButton.parent.style.display = DisplayStyle.None;
@@ -159,9 +145,6 @@ event EventHandler<ChoiceMadeParams> onChoiceMadeParams;  */
                     // setting foldout "value=false" would close up foldout but leave it displayed
                 }
             }
-
-            print("Foldout Parent: " + clickedButton.parent);
-
             ButtonClicked(evt);
         }
 
@@ -221,11 +204,8 @@ event EventHandler<ChoiceMadeParams> onChoiceMadeParams;  */
         public abstract void hideBackNext();
         public abstract void showPrev();
         public abstract void hidePrev();
-
-        public abstract void showChoiceButton(Button button);
-        
+        public abstract void showChoiceButton(Button button);        
         public abstract void showChoiceButton(ButtonInfo bparams);
-
         public abstract void ShowChoiceFoldouts(List<FoldoutInfo> foldouts);
     }
 }

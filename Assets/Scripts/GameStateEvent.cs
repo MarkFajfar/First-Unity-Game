@@ -3,24 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static NavajoWars.GameStateFunction;
-using gsfo = NavajoWars.GameStateFunctionObject;
+using static NavajoWars.GameStateTag;
+using gso = NavajoWars.GameStateObject;
 
 namespace NavajoWars
 {
     public class GameStateEvent : MonoBehaviour
     {
-        //PropertyInfo[] Properties;
-        //Type gsType = typeof(GameState);
-
         GameManager gm;
         GameState gs;
-        delegate void delegateObj(gsfo obj); 
-        delegate int returnInt(gsfo obj);
-        delegate bool returnBool(gsfo obj);
-        Dictionary<GameStateFunction, delegateObj> delegates;
-        Dictionary<GameStateFunction, returnInt> returnInts;
-        Dictionary<GameStateFunction, returnBool> returnBools;
+        delegate void delegateObj(gso obj); 
+        delegate int returnInt(gso obj);
+        delegate bool returnBool(gso obj);
+        Dictionary<GameStateTag, delegateObj> delegates;
+        Dictionary<GameStateTag, returnInt> returnInts;
+        Dictionary<GameStateTag, returnBool> returnBools;
 
         List<IChangeGameState> unsubscribe;
 
@@ -30,53 +27,55 @@ namespace NavajoWars
             gm = gmobj.GetComponent<GameManager>();
             gs = gmobj.GetComponent<GameState>();
 
-            //Properties[0] = gsType.GetProperty("AP");
-            //Properties[0].SetValue(null, 3);
-
             delegates = new()
             {
-                {AP, new((gsfo obj) => gs.AP = obj.setValue)},
-                {CP, new((gsfo obj) => gs.CP = obj.setValue)},
-                {MP, new((gsfo obj) => gs.MP = obj.setValue)},
-                {Morale, new((gsfo obj) => gs.Morale = obj.setValue)},
-                {EnemyFerocity, new((gsfo obj) => gs.EnemyFerocity = obj.setValue)},
+                {AP, new((gso obj) => gs.AP = obj.setInt)},
+                {CP, new((gso obj) => gs.CP = obj.setInt)},
+                {MP, new((gso obj) => gs.MP = obj.setInt)},
+                {EnemyAP, new((gso obj) => gs.EnemyAP = obj.setInt)},
+                {Morale, new((gso obj) => gs.Morale = obj.setInt)},
+                {EnemyFerocity, new((gso obj) => gs.EnemyFerocity = obj.setInt)},
 
-                {Elder0, new((gsfo obj) => gs.ElderDisplay[0] = obj.setValue)},
-                {Elder1, new((gsfo obj) => gs.ElderDisplay[1] = obj.setValue)},
-                {Elder2, new((gsfo obj) => gs.ElderDisplay[2] = obj.setValue)},
-                {Elder3, new((gsfo obj) => gs.ElderDisplay[3] = obj.setValue)},
-                {Elder4, new((gsfo obj) => gs.ElderDisplay[4] = obj.setValue)},
-                {Elder5, new((gsfo obj) => gs.ElderDisplay[5] = obj.setValue)},
-                {Elder6, new((gsfo obj) => gs.ElderDisplay[6] = obj.setValue)},
+                {Elder0, new((gso obj) => gs.ElderDisplay[0] = obj.setInt)},
+                {Elder1, new((gso obj) => gs.ElderDisplay[1] = obj.setInt)},
+                {Elder2, new((gso obj) => gs.ElderDisplay[2] = obj.setInt)},
+                {Elder3, new((gso obj) => gs.ElderDisplay[3] = obj.setInt)},
+                {Elder4, new((gso obj) => gs.ElderDisplay[4] = obj.setInt)},
+                {Elder5, new((gso obj) => gs.ElderDisplay[5] = obj.setInt)},
+                {Elder6, new((gso obj) => gs.ElderDisplay[6] = obj.setInt)},
 
-                {IsActive, new((gsfo obj) => obj.f.IsActive = obj.setBool)},
-                {Man, new((gsfo obj) => obj.f.HasMan = obj.setBool)},
-                {Woman, new((gsfo obj) => obj.f.HasWoman = obj.setBool)},
-                {Child, new((gsfo obj) => obj.f.HasChild = obj.setBool)},
-                {Horse, new((gsfo obj) => obj.f.HasHorse = obj.setBool)},
-                {IsWhere, new((gsfo obj) => obj.f.IsWhere = (Territory)obj.setValue + 1)},
-                {Ferocity, new((gsfo obj) => obj.f.Ferocity = obj.setValue)},
+                {IsActive, new((gso obj) => obj.f.IsActive = obj.setBool)},
+                {Man, new((gso obj) => obj.f.HasMan = obj.setBool)},
+                {Woman, new((gso obj) => obj.f.HasWoman = obj.setBool)},
+                {Child, new((gso obj) => obj.f.HasChild = obj.setBool)},
+                {Horse, new((gso obj) => obj.f.HasHorse = obj.setBool)},
+                //{IsWhere, new((gso obj) => obj.f.IsWhere = gs.Territories[obj.setInt + 1])}, // (eTerritory)obj.setInt + 1)},
+                {IsWhere, new((gso obj) =>  obj.f.MoveTo(((eTerritory)obj.setInt + 1).ByTag()) ) }, //(gs.Territories[obj.setInt + 1]))},
+                { Ferocity, new((gso obj) => obj.f.Ferocity = obj.setInt)},
 
-                {HasDrought, new((gsfo obj) => ToggleTerritoryValue(gs.HasDrought, obj.t, obj.setBool))},
-                {DroughtNum, new((gsfo obj) => gs.TerritoryDrought[(int)obj.t] = obj.setValue)},
-                {HasCorn, new((gsfo obj) => ToggleTerritoryValue(gs.HasCorn, obj.t, obj.setBool))},
-                {HasMission, new((gsfo obj) => ToggleTerritoryValue(gs.HasMission, obj.t, obj.setBool))},
-                {HasRancho, new((gsfo obj) => ToggleTerritoryValue(gs.HasRancho, obj.t, obj.setBool))},
-                {HasFort, new((gsfo obj) => ToggleTerritoryValue(gs.HasFort, obj.t, obj.setBool))},
+                //{HasDrought, new((gso obj) => obj.t.HasDrought = obj.setBool)},// ToggleTerritoryValue(gs.HasDrought, obj.t, obj.setBool))},
+                {DroughtNum, new((gso obj) => obj.t.DroughtNum = obj.setInt)},
+                
+                //{HasCorn, new((gso obj) => obj.t.HasCorn = obj.setBool)},
+                {CornNum, new((gso obj) => obj.t.CornNum = obj.setInt)},
+                
+                {HasMission, new((gso obj) => obj.t.HasMission = obj.setBool)},
+                {HasRancho, new((gso obj) => obj.t.HasRancho = obj.setBool)},
+                {HasFort, new((gso obj) => obj.t.HasFort = obj.setBool)},
 
-                {AddPersonToPassage, new((gsfo obj) => gs.PersonsInPassage.Add((Person)obj.setValue))},
+                {AddPersonToPassage, new((gso obj) => gs.PersonsInPassage.Add((Person)obj.setInt))},
 
-                {AddResource, new((gsfo obj) => gs.Resources.Add((Resource)obj.setValue))},
+                {AddResource, new((gso obj) => gs.Resources.Add((Resource)obj.setInt))},
 
-                {AddToRaided, new((gsfo obj) => gs.Raided.Add((Cube)obj.setValue))},
-                {AddToRecovery, new((gsfo obj) => gs.Recovery.Add((Cube)obj.setValue))},
-                {AddToSubjugation, new((gsfo obj) => gs.Subjugation.Add((Cube)obj.setValue))},
+                {AddToRaided, new((gso obj) => gs.Raided.Add((Cube)obj.setInt))},
+                {AddToRecovery, new((gso obj) => gs.Recovery.Add((Cube)obj.setInt))},
+                {AddToSubjugation, new((gso obj) => gs.Subjugation.Add((Cube)obj.setInt))},
 
-                {ButtonPassage, new((gsfo obj) => gs.PersonsInPassage.Remove((Person)obj.setValue))},
-                {CubeButtonToBowl, new((gsfo obj) => obj.bowl.Remove((Cube)obj.setValue))},
-                {ButtonResource, new((gsfo obj) => gs.Resources.Remove((Resource)obj.setValue))},
+                {ButtonPassage, new((gso obj) => gs.PersonsInPassage.Remove((Person)obj.setInt))},
+                {CubeButtonToBowl, new((gso obj) => obj.bowl.Remove((Cube)obj.setInt))},
+                {ButtonResource, new((gso obj) => gs.Resources.Remove((Resource)obj.setInt))},
 
-                {Default, new((gsfo obj) => Debug.Log($"{obj.tag} not found in Game State delegateObj"))}
+                {Default, new((gso obj) => Debug.Log($"{obj.tag} not found in Game State delegateObj"))}
             };
 
             returnInts = new()
@@ -84,6 +83,7 @@ namespace NavajoWars
                 {AP, delegate { return gs.AP; } },
                 {CP, delegate { return gs.CP; } },
                 {MP, delegate { return gs.MP; } },
+                {EnemyAP, delegate {return gs.EnemyAP; } },
                 {Morale, delegate { return gs.Morale; } },
                 {EnemyFerocity, delegate { return gs.EnemyFerocity; } },
 
@@ -95,29 +95,30 @@ namespace NavajoWars
                 {Elder5, delegate { return gs.ElderDisplay[5]; } },
                 {Elder6, delegate { return gs.ElderDisplay[6]; } },
 
-                {IsWhere, new((gsfo obj) =>  { return (int)obj.f.IsWhere; } ) },
-                {Ferocity, new((gsfo obj) =>  { return obj.f.Ferocity; } ) },
+                {IsWhere, new((gso obj) =>  { return (int)obj.f.IsWhere.Number; } ) },
+                {Ferocity, new((gso obj) =>  { return obj.f.Ferocity; } ) },
 
-                {DroughtNum, new((gsfo obj) =>  { return gs.TerritoryDrought[(int)obj.t]; } ) },
+                {DroughtNum, new((gso obj) =>  { return obj.t.DroughtNum; } ) },
+                {CornNum, new((gso obj) =>  { return obj.t.CornNum; } )},
 
-                {Default, new((gsfo obj) => { Debug.Log($"{obj.tag} not found in Game State returnInt"); return 0; } ) }
+                {Default, new((gso obj) => { Debug.Log($"{obj.tag} not found in Game State returnInt"); return 0; } ) }
             };
 
             returnBools = new()
             {
-                {IsActive, new((gsfo obj) =>  { return obj.f.IsActive; } ) },
-                {Man, new((gsfo obj) =>  { return obj.f.HasMan; } ) },
-                {Woman, new((gsfo obj) =>  { return obj.f.HasWoman; } ) },
-                {Child, new((gsfo obj) =>  { return obj.f.HasChild; } ) },
-                {Horse, new((gsfo obj) =>  { return obj.f.HasHorse; } ) },
+                {IsActive, new((gso obj) =>  { return obj.f.IsActive; } ) },
+                {Man, new((gso obj) =>  { return obj.f.HasMan; } ) },
+                {Woman, new((gso obj) =>  { return obj.f.HasWoman; } ) },
+                {Child, new((gso obj) =>  { return obj.f.HasChild; } ) },
+                {Horse, new((gso obj) =>  { return obj.f.HasHorse; } ) },
 
-                {HasDrought, new((gsfo obj) => { return gs.HasDrought.Contains(obj.t); } ) },
-                {HasCorn, new((gsfo obj) => { return gs.HasCorn.Contains(obj.t); } ) },
-                {HasMission, new((gsfo obj) => { return gs.HasMission.Contains(obj.t); } ) },
-                {HasRancho, new((gsfo obj) => { return gs.HasRancho.Contains(obj.t); } ) },
-                {HasFort, new((gsfo obj) => { return gs.HasFort.Contains(obj.t); } ) },
+                {HasDrought, new((gso obj) => { return obj.t.HasDrought; } ) },// gs.HasDrought.Contains(obj.t); } ) },
+                {HasCorn, new((gso obj) => { return obj.t.HasCorn; } ) },
+                {HasMission, new((gso obj) => { return obj.t.HasMission; } ) },
+                {HasRancho, new((gso obj) => { return obj.t.HasRancho; } ) },
+                {HasFort, new((gso obj) => { return obj.t.HasFort; } ) },
 
-                {Default, new((gsfo obj) => { Debug.Log($"{obj.tag} not found in Game State returnBool"); return false; } ) }
+                {Default, new((gso obj) => { Debug.Log($"{obj.tag} not found in Game State returnBool"); return false; } ) }
             };          
         }
 
@@ -129,7 +130,7 @@ namespace NavajoWars
 
         void OnSceneLoad(Scene scene, LoadSceneMode mode)
         {
-            // requires that GameStateUI script be attached to the UI object in the scene
+            //requires that GameStateUI script be attached to the UI object in the scene
             //if (scene.name == "MainMenu") return;
             unsubscribe = new();
             var uiobj = GameObject.FindWithTag("UI");
@@ -150,26 +151,25 @@ namespace NavajoWars
             unsubscribe = null;
         }
 
-        void onGameStateChanged(object s, gsfo obj) 
+        void onGameStateChanged(object s, gso obj) 
         {
-            print("Invoking Delegate");
             delegateObj todo = delegates[obj.tag] ?? delegates[Default];
             todo.Invoke(obj);
         }
 
-        public int ReturnInt(gsfo obj)
+        public int ReturnInt(gso obj)
         {
             returnInt todo = returnInts[obj.tag] ?? returnInts[Default];
             return todo.Invoke(obj);
         }
 
-        public bool ReturnBool(gsfo obj)
+        public bool ReturnBool(gso obj)
         {
             returnBool todo = returnBools[obj.tag] ?? returnBools[Default];
             return todo.Invoke(obj);
         }
 
-        public static void ToggleTerritoryValue(List<Territory> list, Territory t, bool b)
+        public static void ToggleTerritoryValue(List<eTerritory> list, eTerritory t, bool b)
         {
             if (b && !list.Contains(t)) list.Add(t);
             if (!b) list.Remove(t); // "else" would remove whenever list.Contains(t)

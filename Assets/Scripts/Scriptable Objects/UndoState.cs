@@ -101,11 +101,11 @@ public class UndoState : ScriptableObject
         { get => firearms; set => firearms = Math.Clamp(value, 0, 5); }
         [SerializeField] int firearms;
 
-        public List<Territory> HasDrought;
-        public List<Territory> HasCorn;
-        public List<Territory> HasMission;
-        public List<Territory> HasRancho;
-        public List<Territory> HasFort;
+        public List<eTerritory> HasDrought;
+        public List<eTerritory> HasCorn;
+        public List<eTerritory> HasMission;
+        public List<eTerritory> HasRancho;
+        public List<eTerritory> HasFort;
 
         [Serializable]
         public struct raided
@@ -204,8 +204,8 @@ public class UndoState : ScriptableObject
             [SerializeField] bool hasChild = true;
             public bool HasHorse { get => hasHorse; set => hasHorse = value; }
             [SerializeField] bool hasHorse = false;
-            public Territory IsWhere { get => isWhere; set => isWhere = value; }
-            [SerializeField] Territory isWhere = Territory.Splitrock;
+            public eTerritory IsWhere { get => isWhere; set => isWhere = value; }
+            [SerializeField] eTerritory isWhere = eTerritory.Splitrock;
             public int Ferocity { get => ferocity; set => ferocity = value; }
             [SerializeField] int ferocity = 0;
 

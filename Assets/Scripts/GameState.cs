@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
 
 namespace NavajoWars
 {
-    public enum Territory { SantaFe, Splitrock, SanJuan, Zuni, Monument, Hopi, BlackMesa, Canyon, Default }
     public enum Person { Man, Woman, Child, Elder, Default }
     public enum Resource { Horse, Sheep, Corn, TradeGood, Firearm, Default }
     public enum Cube { Black, White, Brown, Red, Yellow, Green, Blue, Default }
@@ -15,6 +15,7 @@ namespace NavajoWars
     [Serializable]
     public class GameState : MonoBehaviour 
     {       
+        #region Scene and Cards
         //public string chosenScenarioName;
         public Scenario ChosenScenario
         { get => chosenScenario; set => chosenScenario = value; }
@@ -41,11 +42,11 @@ namespace NavajoWars
 
         public List<Card> EventCardsInPlay;
 
+        #endregion
+
+        #region Population
+
         public List<Person> PersonsInPassage;
-
-        public List<Resource> AnimalsInPassage;
-
-        public List<Resource> Resources;
 
         public int[] ElderDisplay;
         public readonly int[] ElderTarget = { 0, 1, 2, 2, 3, 4, 5 };
@@ -70,17 +71,21 @@ namespace NavajoWars
             get
             {
                 int a = 0;
-                for (int i = 0; i < 9; i++)
+                foreach (var t in Territories)
                 {
-                    if (TerritoryFamily[i]) 
+                    if (t.Families.Count > 0) 
                     { 
-                        a = a + 3 - TerritoryDrought[i];
-                        if (HasRancho.Contains((Territory)i)) a--;
+                        a = a + 3 - t.DroughtNum;
+                        if (t.HasRancho) a--;
                     }
                 }
                 return a;
             }
         }
+
+        #endregion
+
+        #region Base Stats
 
         public int AP
         { get => ap; set => ap = Math.Clamp(value, 0, 19); }
@@ -103,6 +108,14 @@ namespace NavajoWars
         public int EnemyRaid
         { get => enemyRaid; set => enemyRaid = value; }
         [SerializeField] int enemyRaid;
+
+        #endregion
+
+        #region Resources
+
+        public List<Resource> Resources;
+
+        public List<Resource> AnimalsInPassage;
 
         /// <summary>
         /// sets number of Resource enum in Resources to value
@@ -187,21 +200,22 @@ namespace NavajoWars
         { get => cornHarvested; set => cornHarvested = value; }
         [SerializeField] int cornHarvested;
 
-        public List<Territory> HasDrought;
-        public int[] TerritoryDrought;
+        #endregion
+
+        #region Territories
+
+        public List<Territory> Territories;
 
         /// <summary>
-        /// Array of 9 bool, true if Family in that Territory
+        /// Array of 9 bool, true if a Family in that Territory
         /// </summary>
         public bool[] TerritoryFamily
         { 
             get
             {
                 bool[] refresh = new bool[9];
-                for (int i = 0; i < 9; i++)
-                {
-                    if (Families.Where(f => f.IsWhere == (Territory)i).Count() > 0) refresh[i] = true;
-                }
+                foreach (var t in Territories)
+                { if (t.Families.Count() > 0) refresh[t.Number] = true; }
                 return refresh;
             }
         }
@@ -210,35 +224,58 @@ namespace NavajoWars
         /// Returns number of Territories with a Family
         /// </summary>
         public int NumberTerritoriesWithFamily
-        {
-            get => TerritoryFamily.Where(b => b == true).Count();
-        }
-        public List<Territory> HasCorn;
-        public List<Territory> HasMission;
-        public List<Territory> HasRancho;
-        public List<Territory> HasFort;
+        { get => Territories.Where(t => t.Families.Count > 0 ).Count(); }
+
+        public List<Territory> ListTerrDrought
+        { get => Territories.Where(t => t.HasDrought).ToList(); }
+        //public int[] TerritoryDrought;
+        // array where each int is DroughtNum in that Territory; not necessary?
+        public List<Territory> ListTerrCorn
+        { get => Territories.Where(t => t.HasCorn).ToList(); }
+        public List<Territory> ListTerrMission
+        { get => Territories.Where(t => t.HasMission).ToList(); }
+        public List<Territory> ListTerrRancho
+        { get => Territories.Where(t => t.HasRancho).ToList(); }
+        public List<Territory> ListTerrFort
+        { get => Territories.Where(t => t.HasFort).ToList(); }
+
+        #endregion
+
+        #region Cubes and Bowls
 
         public List<Cube> Raided;
         public List<Cube> Recovery;
         public List<Cube> Subjugation;
 
-        /*public Family FamilyA;
-        public Family FamilyB;
-        public Family FamilyC;
-        public Family FamilyD;
-        public Family FamilyE;
-        public Family FamilyF;
-        [HideInInspector] public Family DefaultFamily;*/
+        #endregion
+
+        #region Families
 
         public List<Family> AllFamilies;
         [NonSerialized] [HideInInspector] public List<Family> Families;
-                
+
         // variables used in Operations script
-        //public Family selectedFamily;
+        public Family SelectedFamily
+        {   
+            get => Families.Where(f => f.isSelectedOps).First(); 
+            set => selectFamily(value);
+        }
+
+        void selectFamily(Family family)
+        { 
+            foreach (var f in Families)
+            { f.isSelectedOps = false; }
+            family.isSelectedOps = true; 
+        }
+        
         //public List<Family> completedFamilies;
         //public List<GameStep> completedActions;
         public int completedFamilies;
         public int completedActions;
+
+        #endregion
+
+        #region Status
         
         public bool canBackToDraw
         { get => canbackToDraw; set => canbackToDraw = value; }
@@ -255,6 +292,8 @@ namespace NavajoWars
         public bool isEnemyOpsDone
         { get => isenemyOpsDone; set => isenemyOpsDone = value; }
         [SerializeField] bool isenemyOpsDone;
+
+        #endregion
     }
 }
  

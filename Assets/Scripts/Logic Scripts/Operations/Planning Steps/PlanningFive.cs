@@ -52,7 +52,7 @@ namespace NavajoWars
                     List<ButtonInfo> choices = new() { no };
                     if (canWar) choices.Add(choiceWar);
                     if (canDip) choices.Add(choiceDip); 
-                    ui.MakeChoiceButtonsAsync(choices);
+                    ui.ShowChoiceButtonsAsync(choices);
                     ButtonInfo result = await ui.GetChoiceAsyncParams();// IReceive.GetChoiceAsyncParams();                    
                     // note - efficient to use async when next step is very simple; also, this is a loop
                     if (result == choiceWar)

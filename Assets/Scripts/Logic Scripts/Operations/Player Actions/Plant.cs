@@ -18,8 +18,8 @@ namespace NavajoWars
             // add?
             selectedFamily = gs.Families.Where(f => f.isSelectedOps).First();
             territory = selectedFamily.IsWhere;
-            bool drought = gs.HasDrought.Contains(territory);
-            bool rancho = gs.HasRancho.Contains(territory);
+            bool drought = territory.HasDrought;
+            bool rancho = territory.HasRancho;
             int missing = OperationsLogic.numMissing(selectedFamily);
             ui.displayHeadline($"{selectedFamily.Name} Plants OR Harvests");
             ui.displayText($"{selectedFamily.Name} has {6 - missing} MP{(gs.completedActions == 0 ? "" : ", minus points already spent")}. Action costs MPs equal to 4 plus value of current Area. Reminder: only 1 Corn counter per Area, and if Family leaves an Area containing Corn, it is immediately returned to draw cup. To plant, draw 1 Corn counter and place it face down in Family's Area. ");
@@ -37,20 +37,16 @@ namespace NavajoWars
         void plant()
         {
             ui.displayText($"Corn planted in {territory}. Press Next to continue.");
-            gs.HasCorn.Add(territory);
+            territory.CornNum ++;
             ui.OnNextClick = actionComplete;
         }
 
         void harvest()
         {
             ui.displayText($"Corn harvested from {territory}; place in Resources box. ");
-            gs.HasCorn.Remove(territory);
+            territory.CornNum --;
             gs.Resources.Add(Resource.Corn);
-            if (gs.HasCorn.Contains(territory)) 
-            { 
-                int num = gs.HasCorn.Where(t => t == territory).Count();
-                ui.addText($"There {Are(num)} corn remaining in {territory}. ");
-            }
+            if (territory.HasCorn) ui.addText($"There {Are(territory.CornNum)} corn remaining in {territory}. ");
             ui.addText("Press Next to continue.");
             ui.OnNextClick = actionComplete;
         }

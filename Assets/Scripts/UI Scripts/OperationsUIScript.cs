@@ -313,13 +313,13 @@ namespace NavajoWars
             ClearChoicePanel();
             List<string> locationNames = new()
             { " Splitrock", " San Juan", " Zuni", " Monument", " Hopi", " Black Mesa", " C. de Chelly" };
-            //choicePanel.Add(locations); // is this necessary?
+            if (!choicePanel.Contains(locations)) choicePanel.Add(locations); // is this necessary?
             locations.visible = true;
             locations.style.display = DisplayStyle.Flex;
             locations.choices = locationNames;
         }
 
-        public Territory ReturnLocation() => (Territory)locations.value + 1;
+        public Territory ReturnLocation() => gs.Territories[locations.value + 1];
 
         public void CloseLocations()
         { locations.style.display = DisplayStyle.None; }

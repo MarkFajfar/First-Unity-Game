@@ -4,6 +4,6 @@ namespace NavajoWars
 {
     public interface IChangeGameState 
     {
-        public event EventHandler<GameStateFunctionObject> OnGameStateChanged;
+        public event EventHandler<GameStateObject> OnGameStateChanged;
     }
 }

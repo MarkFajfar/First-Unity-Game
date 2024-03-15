@@ -16,10 +16,10 @@ namespace NavajoWars
         {
             gm.SaveUndo(this);
             ui.displayHeadline("Passage of Time\nStep Four");
-            foreach (var territory in gs.HasCorn)
+            foreach (var t in gs.Territories)
             {
-                if (gs.TerritoryFamily[(int)territory]) 
-                hasFamilyAndCorn.Add(territory);                
+                if (t.HasCorn && t.Families.Count > 0) 
+                hasFamilyAndCorn.Add(t);                
             }
             if (hasFamilyAndCorn.Count > 0)
             {
@@ -37,7 +37,7 @@ namespace NavajoWars
             }
             else
             {
-                ui.displayText("No area with a Family and a corn counter.\nPress Next to continue.");
+                ui.displayText("No Area with a Family and a corn counter.\nPress Next to continue.");
                 ui.OnNextClick = actionComplete;
             }
         }
@@ -48,10 +48,12 @@ namespace NavajoWars
             List<ButtonInfo> buttons = new();
             foreach (var territory in hasFamilyAndCorn)
             {
-                ButtonInfo button = new($"{territory}", recordHarvest);
-                button.data = territory;
-                button.clearPanel = false; // don't clear panel when clicked
-                button.remove = true; // remove when clicked
+                ButtonInfo button = new($"{territory.Name}", recordHarvest)
+                {
+                    territory = territory,
+                    clearPanel = false, // don't clear panel when clicked
+                    remove = true // remove when clicked
+                };
                 buttons.Add(button);
             }
             ui.ShowChoiceButtons(buttons);
@@ -61,8 +63,9 @@ namespace NavajoWars
 
         void recordHarvest(ButtonInfo info)
         {
+            // TODO: what if more than one corn counter harvested from a Territory?
             ui.addText($"\nCorn harvested from {info.text}; place it in Resources box.");
-            gs.HasCorn.Remove((Territory)info.data);
+            info.territory.CornNum --;
             gs.Resources.Add(Resource.Corn);
         }
 

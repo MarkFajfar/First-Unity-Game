@@ -1,4 +1,4 @@
-.AP { } .CP { } .MP { } .Morale { } .EnemyFerocity { } .EnemyRaid { }
+.AP { } .CP { } .MP { } .Morale { } .EnemyAP { } .EnemyFerocity { } .EnemyRaid { }
 
 .Population { } .Arability { } 
 
@@ -6,7 +6,7 @@
 
 .TradeGoodsHeld { } .SheepHeld { } .HorsesHeld { } .Firearms { }
 
-.HasDrought { } .DroughtNum { } .HasCorn { } .HasMission { } .HasRancho { } .HasFort { }
+.HasDrought { } .DroughtNum { } .HasCorn { } .CornNum { } .HasMission { } .HasRancho { } .HasFort { }
 
 .SantaFe { } .Splitrock { } .SanJuan { } .Zuni { } .Monument { } .Hopi { } .BlackMesa { } .Canyon { } 
 

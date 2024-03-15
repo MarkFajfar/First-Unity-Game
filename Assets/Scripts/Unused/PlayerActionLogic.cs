@@ -22,7 +22,7 @@ namespace NavajoWars
         oldGameSteps backAction;
         List<oldGameSteps> completedActions;
 
-        Territory priorLocation;
+        eTerritory priorLocation;
         int priorTradeGoods;
         int priorFerocity;
         bool isTribalCouncilSuccess;

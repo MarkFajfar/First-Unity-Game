@@ -36,7 +36,7 @@ namespace NavajoWars
                     ui.displayText($"There are {gs.ElderDisplay[i]} Elder(s) in Slot {i + 1}. Roll the die for each one. If a roll is {gs.ElderTarget[i]} or less, that Elder dies and is returned to the Out of Play box. Open the Status menu to remove any Elder that is lost. Press 'Check Next Slot' to continue when all Elder(s) in Slot {i + 1} have been checked.");
                     //ButtonInfo next = new("Check Next Slot");
                     //List<ButtonInfo> choices = new() { next };
-                    ui.MakeChoiceButtonsAsync(new() { new("Check Next Slot") });
+                    ui.ShowChoiceButtonsAsync(new() { new("Check Next Slot") });
                     // ButtonInfo result = await IReceive.GetChoiceAsyncParams();
                     // await will just pause until choice made?
                     await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();

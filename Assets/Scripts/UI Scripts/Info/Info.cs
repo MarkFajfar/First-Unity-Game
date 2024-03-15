@@ -12,7 +12,7 @@ namespace NavajoWars
         // public GameStep gameStep = UnityEngine.Object.FindObjectOfType<DefaultStep>();
         // assigning GameStep works only if one is instantiated
         public Action call = InvalidMessage;
-        public GameStateFunctionObject gsfo = null;
+        public GameStateObject gso = null;
         public bool waiting = false;
         public bool clearPanel = true;
         public bool closeFoldout = true;
@@ -21,7 +21,10 @@ namespace NavajoWars
         public const string Default = "Default";
         public Family family = new() { Name = Default };
         public Person person = Person.Default;
-        public Territory territory = Territory.Default;
+        public Territory territory = null;
+        public Resource resource = Resource.Default;
+        public Cube cube = Cube.Default;
+        public List<Cube> bowl = null; 
         public CardType cardType = CardType.Default;
 
         public GameObject parent = null;

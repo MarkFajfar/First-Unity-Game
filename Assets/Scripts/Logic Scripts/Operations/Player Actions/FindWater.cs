@@ -16,11 +16,12 @@ namespace NavajoWars
         public override void Begin()
         {
             ui.displayHeadline($"{selectedFamily.Name} Finds a New Water Hole");
-            selectedFamily = gs.Families.Where(f => f.isSelectedOps).First();
-            if (!gs.HasDrought.Contains(selectedFamily.IsWhere)) 
+            selectedFamily = gs.SelectedFamily;
+            if (!selectedFamily.IsWhere.HasDrought) 
             {
                 ui.displayText("No Drought where this Family is located. Press Back to choose a different action.");
-                ui.OnNextClick = actionComplete;
+                // pressing Next would not be valid?
+                //ui.OnNextClick = actionComplete;
             }
             else
             {
@@ -39,14 +40,15 @@ namespace NavajoWars
             gm.SaveUndo(this);
             ui.OnNextClick -= removeDrought;
             var territory = selectedFamily.IsWhere;
-            int i = (int)territory;
-            if (gs.TerritoryDrought[i] > 0) gs.TerritoryDrought[i]--;
-            if (gs.TerritoryDrought[i] < 1) gs.HasDrought.Remove(territory);
+            territory.DroughtNum --;
+            //int i = (int)territory;
+            //if (gs.TerritoryDrought[i] > 0) gs.TerritoryDrought[i]--;
+            //if (gs.TerritoryDrought[i] < 1) gs.HasDrought.Remove(territory);
 
-            ui.displayText(gs.TerritoryDrought[i] switch
+            ui.displayText(territory.DroughtNum switch
             {
-                0 => $"Drought in {territory} has been completely removed!",
-                1 => $"One Drought counter remains in {territory}.",
+                0 => $"Drought in {territory.Name} has been completely removed!",
+                1 => $"One Drought counter remains in {territory.Name}.",
                 _ => "Check number of Drought counters."
             });
 

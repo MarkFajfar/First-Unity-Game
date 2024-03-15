@@ -40,7 +40,7 @@ namespace NavajoWars
                         ButtonInfo yes = new("Roll Succeeded");
                         ButtonInfo no = new("Roll Failed");
                         List<ButtonInfo> choices = new() { yes, no };
-                        ui.MakeChoiceButtonsAsync(choices);
+                        ui.ShowChoiceButtonsAsync(choices);
                         ButtonInfo result = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
                         ui.displayText(""); 
                         // if no, will increment j and go to next loop
@@ -54,7 +54,7 @@ namespace NavajoWars
                             List<ButtonInfo> elderChoices = new() { addAP, changeFerocity };
                             if (gs.CP > gs.MP) elderChoices.Add(addMP);
                             if (gs.MP > gs.CP) elderChoices.Add(addCP);
-                            ui.MakeChoiceButtonsAsync(elderChoices);
+                            ui.ShowChoiceButtonsAsync(elderChoices);
                             ButtonInfo elderResult = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
                             if (elderResult == addAP) 
                             {
@@ -106,7 +106,7 @@ namespace NavajoWars
                 { family = family };
                 bFamilies.Add(bFamilyName);
             }
-            ui.MakeChoiceButtonsAsync(bFamilies);
+            ui.ShowChoiceButtonsAsync(bFamilies);
         }
 
         void ChangeFamilyFerocity2(ButtonInfo result)
@@ -141,7 +141,7 @@ namespace NavajoWars
             {
                 ui.addText($"Increase or Decrease Ferocity? " + MPremind + CPremind);
             }
-            ui.MakeChoiceButtonsAsync(UpDown);
+            ui.ShowChoiceButtonsAsync(UpDown);
         }
 
         void ChangeFamilyFerocity3(ButtonInfo result)

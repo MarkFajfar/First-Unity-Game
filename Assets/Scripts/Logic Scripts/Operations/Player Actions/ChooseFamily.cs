@@ -46,7 +46,7 @@ namespace NavajoWars
             ui.displayHeadline("Player Actions");
             numFamilies = gs.Families.Count;
             numElders = gs.ElderDisplay.Sum();
-            numFamInCan = gs.Families.Where(f => f.IsWhere == Territory.Canyon).Count();
+            numFamInCan = gs.Families.Where(f => f.IsWhere == gs.Territories[7]).Count();
             numFamEligible = Math.Min(numFamilies, numElders + Math.Max(numFamInCan, 1));
             numFamEligible -= gs.completedFamilies;
             if (numFamEligible > 0)
@@ -89,7 +89,7 @@ namespace NavajoWars
                     bFamEligible.Add(bFamilyName);
                 }
                 // use async because logic to apply to result
-                ui.MakeChoiceButtonsAsync(bFamEligible);
+                ui.ShowChoiceButtonsAsync(bFamEligible);
                 // WHAT IS THIS? ButtonInfo choiceUpDown = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
                 ButtonInfo result = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
 

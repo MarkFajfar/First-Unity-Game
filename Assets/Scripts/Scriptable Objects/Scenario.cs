@@ -19,7 +19,7 @@ namespace NavajoWars
         public int Horses;
         public int HorsesMax;
 
-        public List<Territory> HasDrought;
+        public List<eTerritory> HasDrought;
 
         public bool IsActiveFamilyA;
         public bool IsActiveFamilyB;

@@ -55,8 +55,12 @@ namespace NavajoWars
             gs.EventCardsInPlay = new();
             gs.PersonsInPassage = new();
             gs.ElderDisplay = new int[7] { 1, 1, 1, 0, 0, 0, 0 };
-            gs.TerritoryDrought = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            //gs.TerritoryDrought = new int[9] { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
+            gs.Territories = new();
+            for (int i = 0; i < 9; i++) 
+            { gs.Territories.Add(new(i)); }
+            
             Family FamilyA = new() { Name = "Family A" };
             Family FamilyB = new() { Name = "Family B" };
             Family FamilyC = new() { Name = "Family C" };
@@ -99,7 +103,9 @@ namespace NavajoWars
             gs.TradeGoodsMax = 3;
             gs.Firearms = 0;
 
-            gs.HasDrought = scenario.HasDrought;
+            //gs.HasDrought = scenario.HasDrought;
+            foreach (var eTerr in scenario.HasDrought)
+            { gs.Territories[(int)eTerr].DroughtNum ++; }
 
             // not necessary because done in set accessor
             /* for (int i = 0; i < gs.HorsesHeld; i++)
@@ -139,9 +145,11 @@ namespace NavajoWars
 
         public void nextFamily()
         {
-            gs.Families[fNum].IsWhere = (Territory)ui.locations.value+1;
+            Territory territory = gs.Territories[ui.locations.value + 1];
+            gs.Families[fNum].IsWhere = territory;
+            territory.Families.Add(gs.Families[fNum].Name);
             gs.Families[fNum].Ferocity = ui.ferocities.value;
-            print($"Location of {gs.Families[fNum].Name} is {gs.Families[fNum].IsWhere}");
+            print($"Location of {gs.Families[fNum].Name} is {gs.Families[fNum].IsWhere.Name}");
             print($"Ferocity of {gs.Families[fNum].Name} is {gs.Families[fNum].Ferocity}");
             fNum++;
             if (fNum < gs.Families.Count) assignFamilyValues();

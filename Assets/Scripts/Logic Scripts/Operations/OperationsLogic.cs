@@ -91,7 +91,7 @@ namespace NavajoWars
                     ui.addText("Click 'Enemy Operations' to continue.");
                     choices.Add(enemy);
                 } 
-                ui.MakeChoiceButtonsAsync(choices);
+                ui.ShowChoiceButtonsAsync(choices);
                 ButtonInfo result = await ui.GetChoiceAsyncParams();// IReceive.GetChoiceAsyncParams();
                 // use async where each choice is very short
                 if (result == redo)

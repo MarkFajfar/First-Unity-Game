@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace NavajoWars
@@ -10,7 +11,8 @@ namespace NavajoWars
     {
         public string Name { get => name; set => name = value; }
         [SerializeField] string name;
-        public bool IsActive { 
+        public bool IsActive 
+        { 
             get => isActive; 
             set 
             {                 
@@ -21,7 +23,7 @@ namespace NavajoWars
                     HasWoman = false;
                     HasChild = false;
                     HasHorse = false;
-                    IsWhere = Territory.Default;
+                    IsWhere = null;
                     Ferocity = 0;
                 } 
             }
@@ -35,8 +37,10 @@ namespace NavajoWars
         [SerializeField] bool hasChild = false;
         public bool HasHorse { get => hasHorse; set => hasHorse = value; }
         [SerializeField] bool hasHorse = false;
+
         public Territory IsWhere { get => isWhere; set => isWhere = value; }
-        [SerializeField] Territory isWhere = Territory.Default;
+        [SerializeField] Territory isWhere;
+
         public int Ferocity { get => ferocity; set => ferocity = value; }
         [SerializeField] int ferocity = 0;
 
@@ -51,5 +55,15 @@ namespace NavajoWars
 
         public bool isCompletedOps { get => iscompletedops; set => iscompletedops = value; }
         [SerializeField] bool iscompletedops = false;
+
+        /// <summary>
+        /// Sets family's .IsWhere to the Territory and adds family's Name to its list; removes family's Name from prior Territory's list
+        /// </summary>
+        public void MoveTo(Territory territory)
+        {
+            if (IsWhere != null) IsWhere.Families.Remove(Name);
+            IsWhere = territory;
+            IsWhere.Families.Add(Name);
+        }
     }
 }

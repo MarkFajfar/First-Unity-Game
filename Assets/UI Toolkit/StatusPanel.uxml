@@ -6,6 +6,7 @@
         <ui:SliderInt label="AP" value="5" high-value="19" show-input-field="true" name="AP" direction="Horizontal" class="SliderPoints AP" />
         <ui:SliderInt label="CP" value="5" high-value="19" show-input-field="true" name="CP" direction="Horizontal" class="SliderPoints CP" />
         <ui:SliderInt label="MP" value="5" high-value="19" show-input-field="true" name="MP" direction="Horizontal" class="SliderPoints MP" />
+        <ui:SliderInt label="Enemy AP" value="5" high-value="19" show-input-field="true" name="EnemyAP" direction="Horizontal" class="SliderPoints EnemyAP" />
         <ui:SliderInt label="Enemy Ferocity" value="5" high-value="19" show-input-field="true" name="EnemyFerocity" direction="Horizontal" class="SliderPoints EnemyFerocity" />
         <ui:SliderInt label="Enemy Morale" value="5" high-value="19" show-input-field="true" name="EnemyMorale" direction="Horizontal" class="SliderPoints Morale" />
         <ui:Label tabindex="-1" text="Population 12" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Population" class="Population" style="width: 80%; left: 10%; font-size: 52px;" />
@@ -90,49 +91,55 @@
         <ui:Foldout text="Territories" name="TerritoryFoldout" class="FoldoutHeading" style="width: 80%;">
             <ui:Foldout text="Splitrock" name="Splitrock" value="false" class="Splitrock FoldoutItem" style="left: 10%; width: 50%;">
                 <ui:RadioButtonGroup label="Drought" value="-1" name="Drought" choices="0, 1, 2" class="Toggle DroughtNum" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="Corn" class="HasCorn" style="font-size: 32px;" />
+                <ui:RadioButtonGroup label="Corn" value="-1" name="Corn" choices="0,1,2,3,4,5,6" class="Toggle CornNum" style="font-size: 32px; min-width: 550px;" />
                 <ui:Toggle label="Mission" name="Mission" class="HasMission" style="font-size: 32px;" />
                 <ui:Toggle label="Rancho" name="Rancho" class="HasRancho" style="font-size: 32px;" />
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />
             </ui:Foldout>
             <ui:Foldout text="San Juan" name="SanJuan" value="false" class="SanJuan FoldoutItem">
                 <ui:RadioButtonGroup label="Drought" value="-1" name="Drought" choices="0, 1, 2" class="Toggle DroughtNum" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="Corn" class="HasCorn" style="font-size: 32px;" />
+                <ui:RadioButtonGroup label="Corn" value="-1" name="Corn" choices="0,1,2,3,4,5,6" class="Toggle CornNum"
+                    style="font-size: 32px; min-width: 550px;" />
                 <ui:Toggle label="Mission" name="Mission" class="HasMission" style="font-size: 32px;" />
                 <ui:Toggle label="Rancho" name="Rancho" class="HasRancho" style="font-size: 32px;" />
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />
             </ui:Foldout>
             <ui:Foldout text="Zuni" name="Zuni" value="false" class="Zuni FoldoutItem" style="left: 10%; width: 50%;">
                 <ui:RadioButtonGroup label="Drought" value="-1" name="Drought" choices="0, 1, 2" class="Toggle DroughtNum" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="Corn" class="HasCorn" style="font-size: 32px;" />
+                <ui:RadioButtonGroup label="Corn" value="-1" name="Corn" choices="0,1,2,3,4,5,6" class="Toggle CornNum"
+                    style="font-size: 32px; min-width: 550px;" />
                 <ui:Toggle label="Mission" name="Mission" class="HasMission" style="font-size: 32px;" />
                 <ui:Toggle label="Rancho" name="Rancho" class="HasRancho" style="font-size: 32px;" />
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />
             </ui:Foldout>
             <ui:Foldout text="Monument" name="Monument" value="false" class="Monument FoldoutItem" style="left: 10%; width: 50%;">
                 <ui:RadioButtonGroup label="Drought" value="-1" name="Drought" choices="0, 1, 2" class="Toggle DroughtNum" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="Corn" class="HasCorn" style="font-size: 32px;" />
+                <ui:RadioButtonGroup label="Corn" value="-1" name="Corn" choices="0,1,2,3,4,5,6" class="Toggle CornNum"
+                    style="font-size: 32px; min-width: 550px;" />
                 <ui:Toggle label="Mission" name="Mission" class="HasMission" style="font-size: 32px;" />
                 <ui:Toggle label="Rancho" name="Rancho" class="HasRancho" style="font-size: 32px;" />
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />
             </ui:Foldout>
             <ui:Foldout text="Hopi" name="Hopi" value="false" class="Hopi FoldoutItem" style="left: 10%; width: 50%;">
                 <ui:RadioButtonGroup label="Drought" value="-1" name="Drought" choices="0, 1, 2" class="Toggle DroughtNum" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="Corn" class="HasCorn" style="font-size: 32px;" />
+                <ui:RadioButtonGroup label="Corn" value="-1" name="Corn" choices="0,1,2,3,4,5,6" class="Toggle CornNum"
+                    style="font-size: 32px; min-width: 550px;" />
                 <ui:Toggle label="Mission" name="Mission" class="HasMission" style="font-size: 32px;" />
                 <ui:Toggle label="Rancho" name="Rancho" class="HasRancho" style="font-size: 32px;" />
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />
             </ui:Foldout>
             <ui:Foldout text="Black Mesa" name="BlackMesa" value="false" class="BlackMesa FoldoutItem" style="left: 10%; width: 50%;">
                 <ui:RadioButtonGroup label="Drought" value="-1" name="Drought" choices="0, 1, 2" class="Toggle DroughtNum" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="Corn" class="HasCorn" style="font-size: 32px;" />
+                <ui:RadioButtonGroup label="Corn" value="-1" name="Corn" choices="0,1,2,3,4,5,6" class="Toggle CornNum"
+                    style="font-size: 32px; min-width: 550px;" />
                 <ui:Toggle label="Mission" name="Mission" class="HasMission" style="font-size: 32px;" />
                 <ui:Toggle label="Rancho" name="Rancho" class="HasRancho" style="font-size: 32px;" />
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />
             </ui:Foldout>
             <ui:Foldout text="Canyon de Chelly" name="Canyon" value="false" class="Canyon FoldoutItem" style="left: 10%; width: 50%;">
                 <ui:RadioButtonGroup label="Drought" value="-1" name="Drought" choices="0, 1, 2" class="Toggle DroughtNum" style="font-size: 32px;" />
-                <ui:Toggle label="Corn" name="Corn" class="HasCorn" style="font-size: 32px;" />
+                <ui:RadioButtonGroup label="Corn" value="-1" name="Corn" choices="0,1,2,3,4,5,6" class="Toggle CornNum"
+                    style="font-size: 32px; min-width: 550px;" />
                 <ui:Toggle label="Mission" name="Mission" class="HasMission" style="font-size: 32px;" />
                 <ui:Toggle label="Rancho" name="Rancho" class="HasRancho" style="font-size: 32px;" />
                 <ui:Toggle label="Fort" name="Fort" class="HasFort" style="font-size: 32px;" />

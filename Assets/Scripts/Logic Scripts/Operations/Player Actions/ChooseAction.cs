@@ -47,7 +47,7 @@ namespace NavajoWars
             
             ui.Initialize();
 
-            selectedFamily = gs.Families.Where(f => f.isSelectedOps).First();
+            selectedFamily = gs.SelectedFamily;
             ui.displayText($"Choose an action for {selectedFamily.Name}");
             if (gs.completedActions > 0)
             {
@@ -71,9 +71,9 @@ namespace NavajoWars
             List<ButtonInfo> validActions = new() { bMove, bPlant };
             if (gs.completedActions == 0) validActions.Add(bTribalCouncil);
             if (selectedFamily.HasMan && gs.MP > 0) validActions.Add(bRaid);
-            if (gs.HasDrought.Contains(selectedFamily.IsWhere)) validActions.Add(bFindWater);
-            if (gs.HasFort.Contains(selectedFamily.IsWhere) && gs.CP > 0 && gs.TradeGoodsMax > gs.TradeGoodsHeld) validActions.Add(bTrade);
-            ui.MakeChoiceButtonsAsync(validActions);
+            if (selectedFamily.IsWhere.HasDrought) validActions.Add(bFindWater);
+            if (selectedFamily.IsWhere.HasFort && gs.CP > 0 && gs.TradeGoodsMax > gs.TradeGoodsHeld) validActions.Add(bTrade);
+            ui.ShowChoiceButtonsAsync(validActions);
             ButtonInfo result = await ui.GetChoiceAsyncParams(); // IReceive.GetChoiceAsyncParams();
             // TODO: could return ButtonInfo and call that nextAction, which would unsubNext and push to stack before calling the GameStep in the ButtonInfo
             // would need to create ButtonInfo with both GameStep and name of nextAction
